@@ -46,7 +46,7 @@ const latestPost = allPosts[0]
 				Hi, I’m André.
 			</h1>
 			<p
-				class="z-10 my-4 max-w-screen-md rounded-xl bg-white/75 py-2 pr-2 text-base backdrop-blur-sm backdrop-brightness-125 max-2xl:max-w-full sm:my-6 sm:text-left sm:text-2xl/relaxed 3xl:max-w-screen-lg 3xl:text-3xl/relaxed"
+				class="intro-text z-10 my-4 max-w-screen-md rounded-xl bg-white/75 py-2 pr-2 text-base backdrop-blur-sm backdrop-brightness-125 max-2xl:max-w-full sm:my-6 sm:text-left sm:text-2xl/relaxed 3xl:max-w-screen-lg 3xl:text-3xl/relaxed"
 			>
 				With a <strong class="font-semibold">strong foundation</strong> in
 				<strong class="font-semibold">design</strong> and
@@ -61,7 +61,7 @@ const latestPost = allPosts[0]
 				ideas to life through
 				<strong class="font-semibold">engaging digital experiences</strong>.
 			</p>
-			<div class="flex justify-center">
+			<div class="cta-button flex justify-center">
 				<a
 					href="#contact"
 					class="shimmer flex items-center rounded-full bg-orange px-10 py-4 text-center font-semibold text-white transition duration-300 ease-[cubic-bezier(0.31,-0.105,0.43,2.4)] hover:scale-105 sm:text-3xl/relaxed"
@@ -105,7 +105,7 @@ const latestPost = allPosts[0]
 
 	<!-- Now Section -->
 	<div
-		class="border-gradient clickable-section flex h-full flex-col justify-between rounded-md bg-white px-4 py-8 text-base shadow-lg sm:rounded-lg sm:p-12 sm:px-12 xl:col-span-1 xl:row-start-2 2xl:col-span-3 2xl:col-start-10 2xl:row-start-1"
+		class="now-container border-gradient clickable-section flex h-full flex-col justify-between rounded-md bg-white px-4 py-8 text-base shadow-lg sm:rounded-lg sm:p-12 sm:px-12 xl:col-span-1 xl:row-start-2 2xl:col-span-3 2xl:col-start-10 2xl:row-start-1"
 	>
 		<div class="mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
@@ -298,7 +298,7 @@ const latestPost = allPosts[0]
 
 	<!-- Spotify Section -->
 	<div
-		class="border-gradient flex h-full flex-col items-center overflow-visible rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-2 xl:row-start-5 2xl:col-span-9 2xl:row-start-3"
+		class="spotify-container border-gradient flex h-full flex-col items-center overflow-visible rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-2 xl:row-start-5 2xl:col-span-9 2xl:row-start-3"
 	>
 		<h2 class="long-transition mb-8 text-center font-header text-xl tracking-wide sm:text-4xl">
 			Spotify Top 10 <span
@@ -310,7 +310,7 @@ const latestPost = allPosts[0]
 			{
 				topTracks.map((track) =>
 					track && track.external_urls && track.album && track.album.images[0] ? (
-						<div key={track.id}>
+						<div key={track.id} class="spotify-track">
 							<a
 								href={track.external_urls.spotify}
 								target="_blank"
@@ -331,7 +331,7 @@ const latestPost = allPosts[0]
 
 	<!-- Tech stack -->
 	<div
-		class="border-gradient h-full rounded-md bg-white from-dark-card to-darker-card pb-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-3 xl:row-start-7 2xl:col-span-9 2xl:row-start-4"
+		class="techstack-container border-gradient h-full rounded-md bg-white from-dark-card to-darker-card pb-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-3 xl:row-start-7 2xl:col-span-9 2xl:row-start-4"
 	>
 		<h2
 			class="long-transition p-6 text-center font-header text-xl tracking-wide sm:p-12 sm:text-4xl"
@@ -360,7 +360,7 @@ const latestPost = allPosts[0]
 
 	<!-- Links Section -->
 	<div
-		class="border-gradient flex h-full flex-col rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-5 2xl:col-span-3 2xl:row-start-4"
+		class="links-container border-gradient flex h-full flex-col rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-5 2xl:col-span-3 2xl:row-start-4"
 	>
 		<h2 class="long-transition mb-4 text-center font-header text-xl tracking-wide sm:text-4xl">
 			Links
@@ -537,6 +537,128 @@ const latestPost = allPosts[0]
 	}
 
 	initEyes()
+</script>
+<script>
+	import { gsap } from 'gsap'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger'
+	gsap.registerPlugin(ScrollTrigger)
+	console.log('using GSAP: ', gsap.version)
+	document.addEventListener('DOMContentLoaded', function (event) {
+		gsap.from('.spotify-track', {
+			scrollTrigger: {
+				trigger: '.spotify-track',
+				start: 'top 80%',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			x: 300,
+			ease: 'expo',
+			duration: 1.2,
+			stagger: 0.1
+		})
+
+		gsap.to('.cta-button', {
+			opacity: 1,
+			x: 0,
+			ease: 'expo',
+			duration: 1,
+			delay: 2
+		})
+
+		gsap.from('.techstack-container', {
+			scrollTrigger: {
+				trigger: '.techstack-container',
+				start: 'top 80%',
+				toggleActions: 'play none none none'
+			},
+			x: -200,
+			ease: 'expo',
+			duration: 1,
+			delay: 0.2
+		})
+
+		gsap.from('.links-container', {
+			scrollTrigger: {
+				trigger: '.links-container',
+				start: 'top 80%',
+				markers: true,
+				toggleActions: 'play none none none'
+			},
+			x: 200,
+			ease: 'expo',
+			duration: 0.7,
+			delay: 0.5
+		})
+
+		const introText = document.querySelector('.intro-text')
+
+		// Function to wrap each character in a span
+		function wrapChars(element) {
+			const text = element.textContent
+			const chars = text.split('')
+
+			// Create spans for each character
+			const wrappedChars = chars
+				.map((char) => {
+					// For spaces, use a non-breaking space to maintain spacing
+					if (char === ' ') {
+						return ' '
+					}
+					return `<span class="char">${char}</span>`
+				})
+				.join('')
+
+			element.innerHTML = wrappedChars
+		}
+
+		// Get all text nodes, including those in strong tags
+		function wrapAllText(element) {
+			const strongTags = element.querySelectorAll('strong')
+
+			// First wrap text in strong tags
+			strongTags.forEach((strong) => {
+				wrapChars(strong)
+			})
+
+			// Then wrap remaining text
+			const textNodes = Array.from(element.childNodes).filter(
+				(node) => node.nodeType === Node.TEXT_NODE
+			)
+
+			textNodes.forEach((textNode) => {
+				const span = document.createElement('span')
+				span.textContent = textNode.textContent
+				textNode.parentNode.replaceChild(span, textNode)
+				wrapChars(span)
+			})
+		}
+
+		// Apply the wrapping
+		wrapAllText(introText)
+
+		// Get all character spans
+		const chars = introText.querySelectorAll('.char')
+
+		// Create the animation
+		const tl = gsap.timeline()
+
+		// Set initial state and random colors
+		tl.set(chars, {
+			opacity: 0
+		})
+
+		// Fade in animation
+		tl.to(
+			chars,
+			{
+				opacity: 1,
+				duration: 0.5,
+				stagger: 0.005,
+				ease: 'power1.inOut'
+			},
+			0
+		)
+	})
 </script>
 
 <style>

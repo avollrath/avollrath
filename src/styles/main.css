@@ -3,6 +3,12 @@
 
 html {
 	scroll-behavior: smooth;
+	overflow-x: hidden;
+}
+
+.cta-button {
+	opacity: 0;
+	transform: translateX(-200px);
 }
 
 body {
