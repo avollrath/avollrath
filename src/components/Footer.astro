@@ -1,17 +1,54 @@
 <footer
-	class="footer-bar > * + * w-full flex-col items-center justify-center divide-y-2 text-center text-sm text-gray-400 sm:text-base"
+	class="footer-bar z-0 w-full flex-col items-center justify-center divide-y-2 text-center text-sm text-gray-400 sm:text-base"
 >
-	<a
-		href="#"
-		class="my-8 block hover:underline"
-		onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-	>
-		Scroll to top ⬆
-	</a>
-	<div class="bg-gray-100 py-16">
+	<a class="my-8 block cursor-pointer hover:underline"> Scroll to top ⬆ </a>
+	<div class="bg-gray-100 py-32">
 		<p>
 			Handmade with ❤️ by <strong class="font-semibold text-dark-text">André Vollrath</strong> © 2025.
 			<br />All rights reserved.
 		</p>
 	</div>
 </footer>
+
+<script>
+	import { gsap } from 'gsap'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger'
+	import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+	// Register plugins
+	gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+
+	console.log('using GSAP: ', gsap.version)
+
+	// Define the scrollToTop function with improved animation
+	function scrollToTop() {
+		gsap.to(window, {
+			duration: 2,
+			scrollTo: {
+				y: 0,
+				autoKill: false
+			},
+			ease: 'power2.inOut'
+		})
+	}
+
+	document.addEventListener('DOMContentLoaded', function (event) {
+		// Add click event listener after DOM is loaded
+		document.querySelector('.footer-bar a').addEventListener('click', scrollToTop)
+
+		let footer = document.querySelector('footer')
+		const getOverlap = () => Math.min(window.innerHeight, footer.offsetHeight)
+		const adjustFooterOverlap = () => (footer.style.marginTop = -getOverlap() + 'px')
+
+		adjustFooterOverlap()
+
+		ScrollTrigger.addEventListener('revert', adjustFooterOverlap)
+
+		ScrollTrigger.create({
+			trigger: footer,
+			start: () => 'top ' + (window.innerHeight - getOverlap()),
+			end: () => '+=' + getOverlap(),
+			pin: true
+		})
+	})
+</script>

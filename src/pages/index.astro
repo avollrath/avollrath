@@ -263,7 +263,7 @@ const latestPost = allPosts[0]
 		<div class="mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
-				class="long-transition text-center font-header text-xl tracking-wide sm:text-left sm:text-4xl"
+				class="latest-render-header long-transition text-center font-header text-xl tracking-wide sm:text-left sm:text-4xl"
 			>
 				Latest Render
 			</h2>
@@ -282,7 +282,7 @@ const latestPost = allPosts[0]
 				</svg>
 			</a>
 		</div>
-		<div class="image-container rounded-md">
+		<div class="latest-render-image image-container rounded-md">
 			<Image
 				src={latestRenderImage}
 				alt="Latest Render"
@@ -413,7 +413,7 @@ const latestPost = allPosts[0]
 
 	<!-- Contact Section -->
 	<div
-		class="border-gradient flex h-full flex-col justify-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-6 2xl:col-span-4 2xl:col-start-1 2xl:row-start-5"
+		class="contact-container border-gradient z-10 flex h-full flex-col justify-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-6 2xl:col-span-4 2xl:col-start-1 2xl:row-start-5"
 	>
 		<h2 class="long-transition mb-6 text-center font-header text-xl tracking-wide sm:text-4xl">
 			Get in touch
@@ -425,7 +425,7 @@ const latestPost = allPosts[0]
 
 	<!-- Based in Section -->
 	<div
-		class="border-gradient flex h-full flex-col rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-1 xl:row-start-6 2xl:col-span-8 2xl:row-start-5"
+		class="based-in-container border-gradient z-10 flex h-full flex-col rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-1 xl:row-start-6 2xl:col-span-8 2xl:row-start-5"
 	>
 		<h2 class="long-transition mb-12 text-center font-header text-xl sm:text-4xl">Based in</h2>
 		<div class="flex flex-col items-center justify-center xl:flex-row 2xl:flex-row">
@@ -447,7 +447,9 @@ const latestPost = allPosts[0]
 					mode="normal"></lottie-player>
 			</div>
 			<div class="grid grid-flow-row gap-2">
-				<h1 class="text-center font-header text-5xl sm:text-8xl lg:text-left 2xl:text-9xl">
+				<h1
+					class="based-in-text text-center font-header text-5xl sm:text-8xl lg:text-left 2xl:text-9xl"
+				>
 					Helsinki<br />Finland<br /><span class="text-gray-400">GMT +2</span>
 				</h1>
 			</div>
@@ -541,13 +543,36 @@ const latestPost = allPosts[0]
 <script>
 	import { gsap } from 'gsap'
 	import { ScrollTrigger } from 'gsap/ScrollTrigger'
+	import SplitType from 'split-type'
+
 	gsap.registerPlugin(ScrollTrigger)
 	console.log('using GSAP: ', gsap.version)
 	document.addEventListener('DOMContentLoaded', function (event) {
+		gsap.set('.latest-render-header', { yPercent: 0 })
+		gsap.set('.latest-render-image', { yPercent: 0 })
+
+		gsap.to('.latest-render-header', {
+			yPercent: -3,
+			ease: 'none',
+			scrollTrigger: {
+				trigger: '.spotify-track',
+				scrub: 1
+			}
+		})
+
+		gsap.to('.latest-render-image', {
+			yPercent: 5,
+			ease: 'none',
+			scrollTrigger: {
+				trigger: '.spotify-track',
+				scrub: 1
+			}
+		})
+
 		gsap.from('.spotify-track', {
 			scrollTrigger: {
 				trigger: '.spotify-track',
-				start: 'top 80%',
+				start: 'top 90%',
 				toggleActions: 'play none none none'
 			},
 			opacity: 0,
@@ -574,6 +599,7 @@ const latestPost = allPosts[0]
 			x: -200,
 			ease: 'expo',
 			duration: 1,
+			opacity: 0,
 			delay: 0.2
 		})
 
@@ -581,12 +607,58 @@ const latestPost = allPosts[0]
 			scrollTrigger: {
 				trigger: '.links-container',
 				start: 'top 80%',
-				markers: true,
 				toggleActions: 'play none none none'
 			},
 			x: 200,
+			opacity: 0,
 			ease: 'expo',
 			duration: 0.7,
+			delay: 0.5
+		})
+
+		gsap.from('.contact-container', {
+			scrollTrigger: {
+				trigger: '.contact-container',
+				start: 'top 90%',
+				toggleActions: 'play none none none'
+			},
+			y: 200,
+			ease: 'expo',
+			duration: 1,
+			opacity: 0,
+			delay: 0.2
+		})
+
+		gsap.from('.based-in-container', {
+			scrollTrigger: {
+				trigger: '.based-in-container',
+				start: 'top 90%',
+				toggleActions: 'play none none none'
+			},
+			y: 200,
+			opacity: 0,
+			ease: 'expo',
+			duration: 0.7,
+			delay: 0.5
+		})
+
+		let typeSplit = new SplitType('.based-in-text', {
+			types: 'lines'
+		})
+
+		const lines = typeSplit.lines
+
+		gsap.from(lines, {
+			scrollTrigger: {
+				trigger: '.based-in-container',
+				start: 'top 80%',
+				toggleActions: 'play none none none'
+			},
+			y: '100%',
+			opacity: 0,
+			duration: 0.5,
+			ease: 'back.out',
+			stagger: 0.3,
 			delay: 0.5
 		})
 
