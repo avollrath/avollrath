@@ -72,14 +72,13 @@ function initFooterAnimations() {
 		scrollTrigger: {
 			trigger: 'footer',
 			start: 'top 90%',
-			end: '-=500',
 			toggleActions: 'play reset play reset'
 		},
 		opacity: 0,
-		y: -50,
-		ease: 'expo',
-		duration: 2,
-		delay: 0.4
+		y: -100,
+		ease: 'back.out',
+		duration: 1,
+		delay: 0.2
 	})
 	animations.push(footerAnim)
 }
@@ -88,14 +87,50 @@ function initFooterAnimations() {
 function initHomeAnimations() {
 	console.log('using GSAP: ', gsap.version)
 
+	const navBar = document.querySelector('.nav-bar')
+	if (navBar) {
+		const navBarAnim = gsap.from(navBar, {
+			opacity: 0,
+			y: -200,
+			ease: 'back.out',
+			duration: 0.4,
+			delay: 0.6
+		})
+		animations.push(navBarAnim)
+	}
+
+	const navItems = document.querySelectorAll('.nav-item, .nav-logo')
+	if (navItems) {
+		const navItemsAnim = gsap.from(navItems, {
+			opacity: 0,
+			y: 50,
+			ease: 'sine',
+			duration: 0.3,
+			delay: 1.2,
+			stagger: 0.2
+		})
+		animations.push(navItemsAnim)
+	}
+
+	const heroContainer = document.querySelector('.hero-container')
+	if (heroContainer) {
+		const heroContainerAnim = gsap.from(heroContainer, {
+			opacity: 0,
+			x: -1000,
+			ease: 'back.out',
+			duration: 0.5
+		})
+		animations.push(heroContainerAnim)
+	}
+
 	const heroBadge = document.querySelector('.hero-badge')
 	if (heroBadge) {
 		const badgeAnim = gsap.from(heroBadge, {
 			opacity: 0,
-			x: -50,
-			ease: 'elastic',
-			duration: 1.2,
-			delay: 1
+			x: -150,
+			ease: 'back.out',
+			duration: 0.4,
+			delay: 0.8
 		})
 		animations.push(badgeAnim)
 	}
@@ -103,12 +138,76 @@ function initHomeAnimations() {
 	const heroHeader = document.querySelector('.hero-header')
 	if (heroHeader) {
 		const heroHeaderAnim = gsap.from(heroHeader, {
+			opacity: 0,
 			y: -100,
-			ease: 'expoScale',
-			duration: 1,
-			delay: 0.2
+			ease: 'back.out',
+			duration: 0.5,
+			delay: 0.5
 		})
 		animations.push(heroHeaderAnim)
+	}
+
+	// Intro text character animation
+	const introText = document.querySelector('.intro-text')
+	if (introText) {
+		// Function to wrap characters in spans
+		function wrapChars(element) {
+			const text = element.textContent
+			const chars = text.split('')
+			const wrappedChars = chars
+				.map((char) => {
+					if (char === ' ') {
+						return ' '
+					}
+					return `<span class="char">${char}</span>`
+				})
+				.join('')
+			element.innerHTML = wrappedChars
+		}
+
+		// Function to wrap all text including strong tags
+		function wrapAllText(element) {
+			const strongTags = element.querySelectorAll('strong')
+			strongTags.forEach((strong) => {
+				wrapChars(strong)
+			})
+
+			const textNodes = Array.from(element.childNodes).filter(
+				(node) => node.nodeType === Node.TEXT_NODE
+			)
+
+			textNodes.forEach((textNode) => {
+				const span = document.createElement('span')
+				span.textContent = textNode.textContent
+				textNode.parentNode.replaceChild(span, textNode)
+				wrapChars(span)
+			})
+		}
+
+		wrapAllText(introText)
+
+		const chars = introText.querySelectorAll('.char')
+		const tl = gsap.timeline()
+
+		tl.set(chars, {
+			opacity: 0
+		})
+
+		const charsAnim = tl.to(
+			chars,
+			{
+				opacity: 1,
+				delay: 0.5,
+				stagger: {
+					amount: 2,
+					from: 'start'
+				},
+				ease: 'power1.inOut'
+			},
+			0
+		)
+
+		animations.push(charsAnim)
 	}
 
 	// CTA button animation
@@ -116,10 +215,10 @@ function initHomeAnimations() {
 	if (ctaButton) {
 		const ctaAnim = gsap.from(ctaButton, {
 			opacity: 0,
-			y: 60,
+			y: 100,
 			ease: 'back.out',
-			duration: 1,
-			delay: 2
+			duration: 0.4,
+			delay: 1.3
 		})
 		animations.push(ctaAnim)
 	}
@@ -127,12 +226,10 @@ function initHomeAnimations() {
 	const avatar = document.querySelector('.avatar-wrapper')
 	if (avatar) {
 		const avatarAnim = gsap.from(avatar, {
-			y: -860,
-			x: -500,
-			rotation: 180,
+			scale: 0,
 			ease: 'back.out',
-			duration: 0.7,
-			delay: 1
+			duration: 0.6,
+			delay: 0.8
 		})
 		animations.push(avatarAnim)
 	}
@@ -144,39 +241,106 @@ function initHomeAnimations() {
 			x: 300,
 			ease: 'back.out',
 			duration: 0.4,
-			delay: 1.5
+			delay: 1
 		})
 		animations.push(nowContainerAnim)
 	}
 
-	// Latest render animations
-	const renderHeader = document.querySelector('.latest-render-header')
-	const renderImage = document.querySelector('.latest-render-image')
-
-	if (renderHeader && renderImage) {
-		gsap.set([renderHeader, renderImage], { yPercent: 0 })
-
-		const headerAnim = gsap.to(renderHeader, {
-			yPercent: -3,
-			ease: 'none',
-			scrollTrigger: {
-				trigger: '.spotify-track',
-				scrub: 1
-			}
+	const nowContent = document.querySelectorAll('.now-content')
+	if (nowContent) {
+		const nowContentAnim = gsap.from(nowContent, {
+			opacity: 0,
+			y: 50,
+			ease: 'back.out',
+			duration: 0.7,
+			delay: 1.2
 		})
-
-		const imageAnim = gsap.to(renderImage, {
-			yPercent: 5,
-			ease: 'none',
-			scrollTrigger: {
-				trigger: '.spotify-track',
-				scrub: 1
-			}
-		})
-
-		animations.push(headerAnim, imageAnim)
+		animations.push(nowContentAnim)
 	}
 
+	const blogContainer = document.querySelector('.blog-container')
+	if (blogContainer) {
+		const blogContainerAnim = gsap.from(blogContainer, {
+			opacity: 0,
+			x: -300,
+			ease: 'back.out',
+			duration: 0.4,
+			delay: 1.3
+		})
+		animations.push(blogContainerAnim)
+	}
+
+	const blogContent = document.querySelectorAll('.blog-content')
+	if (blogContent) {
+		const blogContentAnim = gsap.from(blogContent, {
+			opacity: 0,
+			y: 50,
+			ease: 'back.out',
+			duration: 0.7,
+			delay: 1.2
+		})
+		animations.push(blogContentAnim)
+	}
+
+	const aboutContainer = document.querySelector('.about-container')
+	if (aboutContainer) {
+		const aboutContainerAnim = gsap.from(aboutContainer, {
+			opacity: 0,
+			y: -300,
+			ease: 'back.out',
+			duration: 0.4,
+			delay: 1.5
+		})
+		animations.push(aboutContainerAnim)
+	}
+
+	const aboutContent = document.querySelectorAll('.about-content')
+	if (aboutContent) {
+		const aboutContentAnim = gsap.from(aboutContent, {
+			opacity: 0,
+			y: 50,
+			ease: 'back.out',
+			duration: 0.7,
+			delay: 1.8
+		})
+		animations.push(aboutContentAnim)
+	}
+
+	const renderContainer = document.querySelector('.render-container')
+	if (renderContainer) {
+		const renderContainerAnim = gsap.from(renderContainer, {
+			opacity: 0,
+			x: 300,
+			ease: 'back.out',
+			duration: 0.4,
+			delay: 2.0
+		})
+		animations.push(renderContainerAnim)
+	}
+
+	const renderContent = document.querySelectorAll('.render-content')
+	if (renderContent) {
+		const renderContentAnim = gsap.from(renderContent, {
+			opacity: 0,
+			y: 100,
+			ease: 'back.out',
+			duration: 0.5,
+			delay: 2.4
+		})
+		animations.push(renderContentAnim)
+	}
+
+	const spotifyContainer = document.querySelector('.spotify-container')
+	if (spotifyContainer) {
+		const spotifyContainerAnim = gsap.from(spotifyContainer, {
+			opacity: 0,
+			x: 300,
+			ease: 'back.out',
+			duration: 0.4,
+			delay: 2.8
+		})
+		animations.push(spotifyContainerAnim)
+	}
 	// Spotify tracks animation
 	const spotifyTracks = document.querySelectorAll('.spotify-track')
 	if (spotifyTracks.length) {
@@ -308,66 +472,6 @@ function initHomeAnimations() {
 			animations.push(linesAnim)
 		}
 	}
-
-	// Intro text character animation
-	const introText = document.querySelector('.intro-text')
-	if (introText) {
-		// Function to wrap characters in spans
-		function wrapChars(element) {
-			const text = element.textContent
-			const chars = text.split('')
-			const wrappedChars = chars
-				.map((char) => {
-					if (char === ' ') {
-						return ' '
-					}
-					return `<span class="char">${char}</span>`
-				})
-				.join('')
-			element.innerHTML = wrappedChars
-		}
-
-		// Function to wrap all text including strong tags
-		function wrapAllText(element) {
-			const strongTags = element.querySelectorAll('strong')
-			strongTags.forEach((strong) => {
-				wrapChars(strong)
-			})
-
-			const textNodes = Array.from(element.childNodes).filter(
-				(node) => node.nodeType === Node.TEXT_NODE
-			)
-
-			textNodes.forEach((textNode) => {
-				const span = document.createElement('span')
-				span.textContent = textNode.textContent
-				textNode.parentNode.replaceChild(span, textNode)
-				wrapChars(span)
-			})
-		}
-
-		wrapAllText(introText)
-
-		const chars = introText.querySelectorAll('.char')
-		const tl = gsap.timeline()
-
-		tl.set(chars, {
-			opacity: 0
-		})
-
-		const charsAnim = tl.to(
-			chars,
-			{
-				opacity: 1,
-				duration: 0.5,
-				stagger: 0.005,
-				ease: 'power1.inOut'
-			},
-			0
-		)
-
-		animations.push(charsAnim)
-	}
 }
 
 function initAboutAnimations() {
@@ -385,7 +489,6 @@ function initAboutAnimations() {
 			},
 			opacity: 0,
 			y: 50,
-			duration: 0.8,
 			ease: 'expo.out',
 			stagger: {
 				amount: 1,
@@ -408,11 +511,11 @@ function initAboutAnimations() {
 			},
 			opacity: 0,
 			y: 20,
-			duration: 0.8,
-			ease: 'expo.out',
+			ease: 'back.out',
+			delay: 1,
 			stagger: {
-				amount: 1, // Total time to stagger all animations
-				from: 'center' // Animate icons in random order
+				amount: 1,
+				from: 'end'
 			}
 		})
 

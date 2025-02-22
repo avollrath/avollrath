@@ -32,7 +32,7 @@ const latestPost = allPosts[0]
 <Layout title="André's Portfolio" description="Welcome to André's Portfolio">
 	<!-- Intro Section -->
 	<div
-		class="border-gradient relative flex flex-col items-center rounded-md bg-white px-4 py-8 shadow-lg sm:flex-row sm:rounded-lg sm:px-12 sm:py-24 xl:col-span-3 2xl:col-span-9"
+		class="hero-container border-gradient relative z-10 flex flex-col items-center rounded-md bg-white px-4 py-8 shadow-lg sm:flex-row sm:rounded-lg sm:px-12 sm:py-24 xl:col-span-3 2xl:col-span-9"
 	>
 		<div class="z-10 flex-1">
 			<div
@@ -107,7 +107,7 @@ const latestPost = allPosts[0]
 	<div
 		class="now-container border-gradient clickable-section flex h-full flex-col justify-between rounded-md bg-white px-4 py-8 text-base shadow-lg sm:rounded-lg sm:p-12 sm:px-12 xl:col-span-1 xl:row-start-2 2xl:col-span-3 2xl:col-start-10 2xl:row-start-1"
 	>
-		<div class="mb-6 flex items-center justify-between">
+		<div class="now-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
 				class="long-transition font-header text-xl tracking-wide sm:text-4xl"
@@ -131,7 +131,7 @@ const latestPost = allPosts[0]
 			</a>
 		</div>
 		<ul
-			class="bullets long-transition sm:text-md mb-4 list-disc pl-5 text-base text-gray-400 3xl:text-lg"
+			class="bullets sm:text-md now-content mb-4 list-disc pl-5 text-base text-gray-400 3xl:text-lg"
 		>
 			<li class="sm:text-md mb-4 text-base 3xl:text-lg">
 				Switched my Photography gear to an <strong class="font-semibold text-dark-text"
@@ -157,14 +157,16 @@ const latestPost = allPosts[0]
 			</li>
 		</ul>
 
-		<p class="text-center text-xs text-gray-400 sm:text-sm">Last Updated: January 6, 2025</p>
+		<p class="now-content text-center text-xs text-gray-400 sm:text-sm">
+			Last Updated: January 6, 2025
+		</p>
 	</div>
 
 	<!-- Latest Blog Section -->
 	<div
-		class="border-gradient clickable-section group h-full rounded-md bg-white px-4 py-8 shadow-lg sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-2 xl:row-span-2 2xl:col-span-3 2xl:row-start-2"
+		class="blog-container border-gradient clickable-section group h-full rounded-md bg-white px-4 py-8 shadow-lg sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-2 xl:row-span-2 2xl:col-span-3 2xl:row-start-2"
 	>
-		<div class="mb-6 flex items-center justify-between">
+		<div class="blog-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2 class="long-transition text-center font-header text-xl tracking-wide sm:text-4xl">
 				Blog
@@ -185,7 +187,7 @@ const latestPost = allPosts[0]
 			</a>
 		</div>
 
-		<div>
+		<div class="blog-content">
 			<h3
 				class="long-transition sm:text-md mb-6 text-center font-body text-base font-semibold text-orange 3xl:text-lg"
 			>
@@ -215,9 +217,9 @@ const latestPost = allPosts[0]
 
 	<!-- About Section -->
 	<div
-		class="clickable-section bright-section h-full rounded-md bg-about-gradient px-4 py-8 text-base text-white shadow-lg sm:rounded-lg sm:p-12 xl:col-span-1 xl:row-start-3 2xl:col-span-3 2xl:col-start-4 2xl:row-start-2"
+		class="about-container clickable-section bright-section h-full rounded-md bg-about-gradient px-4 py-8 text-base text-white shadow-lg sm:rounded-lg sm:p-12 xl:col-span-1 xl:row-start-3 2xl:col-span-3 2xl:col-start-4 2xl:row-start-2"
 	>
-		<div class="mb-6 flex items-center justify-between">
+		<div class="about-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
 				class="long-transition font-header text-xl tracking-wide sm:text-4xl"
@@ -240,7 +242,7 @@ const latestPost = allPosts[0]
 				</svg>
 			</a>
 		</div>
-		<p class="sm:text-md text-base 3xl:text-lg">
+		<p class="sm:text-md about-content text-base 3xl:text-lg">
 			Hi there! I'm <strong class="font-semibold">André Vollrath</strong>—a dedicated designer and
 			front-end developer eager to connect and collaborate. I thrive on transforming creative ideas
 			into impactful digital experiences. With more than ten years of hands-on experience, I blend
@@ -248,7 +250,7 @@ const latestPost = allPosts[0]
 			and beyond.
 		</p>
 		<br />
-		<p class="sm:text-md text-base 3xl:text-lg">
+		<p class="sm:text-md about-content text-base 3xl:text-lg">
 			My passion for <strong class="font-semibold">design</strong> drives me to continuously explore
 			and innovate. Whether creating compelling visual content or crafting intuitive user interfaces,
 			I push creative boundaries to deliver visually stunning and user-friendly solutions. I'm excited
@@ -258,9 +260,9 @@ const latestPost = allPosts[0]
 
 	<!-- Latest Render Section -->
 	<div
-		class="border-gradient clickable-section latest-render-section h-full rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-3 xl:row-start-4 2xl:col-span-6 2xl:col-start-7 2xl:row-start-2"
+		class="render-container border-gradient clickable-section latest-render-section h-full rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-3 xl:row-start-4 2xl:col-span-6 2xl:col-start-7 2xl:row-start-2"
 	>
-		<div class="mb-6 flex items-center justify-between">
+		<div class="render-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
 				class="latest-render-header long-transition text-center font-header text-xl tracking-wide sm:text-left sm:text-4xl"
@@ -282,7 +284,7 @@ const latestPost = allPosts[0]
 				</svg>
 			</a>
 		</div>
-		<div class="latest-render-image image-container rounded-md">
+		<div class="latest-render-image image-container render-content rounded-md">
 			<Image
 				src={latestRenderImage}
 				alt="Latest Render"
