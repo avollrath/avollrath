@@ -26,14 +26,13 @@ export function initGSAP() {
 
 	console.log(currentPath)
 
-	if (currentPath === '/') {
-		initHomeAnimations()
-	} else if (currentPath === '/about') {
+	if (currentPath.startsWith('/about')) {
 		initAboutAnimations()
-	} else if (currentPath === '/now') {
+	} else if (currentPath.startsWith('/now')) {
 		initNowAnimations()
+	} else if (currentPath === '/' || currentPath === '') {
+		initHomeAnimations()
 	}
-	// Add other page-specific animations as needed
 }
 
 // Cleanup function to kill existing animations

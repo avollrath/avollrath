@@ -4,26 +4,26 @@ const { logos: selectedLogos } = Astro.props
 // Fetch all logo images
 const allImages = await Astro.glob('/src/images/logos/*.svg')
 
-// Helper function to extract filename from the image src
 const getFilename = (src) => {
-	const parts = src.split('/')
-	return parts[parts.length - 1].split('?')[0] // Remove query params if any
+	// Remove the path and any query parameters
+	const filename = src.split('/').pop()?.split('?')[0] ?? ''
+	// Only remove the hash pattern (like .BgovzQDw) before .svg
+	return filename.replace(/\.[A-Za-z0-9_-]{8}\.svg$/i, '.svg')
 }
 
 // Process and format logos
 const logos = allImages
-	// If selectedLogos is provided, filter the images accordingly
 	.filter((image) => {
 		if (selectedLogos && Array.isArray(selectedLogos) && selectedLogos.length > 0) {
 			const filename = getFilename(image.default.src)
 			return selectedLogos.includes(filename)
 		}
-		return true // If no logos prop is provided, include all logos
+		return true
 	})
 	.map((image) => {
 		const filename = getFilename(image.default.src)
-		const nameWithoutExtension = filename.replace(/\.svg$/i, '')
-		const formattedName = nameWithoutExtension.replace(/-/g, ' ')
+		// Now just remove the .svg extension for display
+		const formattedName = filename.replace(/\.svg$/i, '').replace(/-/g, ' ')
 		return {
 			src: image.default.src,
 			title: formattedName
@@ -31,7 +31,6 @@ const logos = allImages
 	})
 ---
 
-<!-- TechStack.astro -->
 <div class="p-4 text-center">
 	<div class="flex flex-wrap justify-center gap-6">
 		{
