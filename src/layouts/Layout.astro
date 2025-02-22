@@ -47,6 +47,7 @@ import { initializeNavigation } from '../scripts/navigationHandler.js'
 		<script>
 			import { initializeTooltips } from '../scripts/initializeTooltips.js'
 			import { initializeNavigation } from '../scripts/navigationHandler.js'
+			import { initGSAP } from '../scripts/gsapHandler'
 			initializeNavigation()
 			const init = () => {
 				initializeTooltips()
@@ -58,8 +59,15 @@ import { initializeNavigation } from '../scripts/navigationHandler.js'
 				init()
 			}
 
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initGSAP)
+			} else {
+				initGSAP()
+			}
+
 			document.addEventListener('astro:after-swap', () => {
 				init()
+				initGSAP()
 			})
 		</script>
 	</body>

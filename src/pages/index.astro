@@ -36,12 +36,12 @@ const latestPost = allPosts[0]
 	>
 		<div class="z-10 flex-1">
 			<div
-				class="mb-8 hidden w-auto rounded-full border-2 border-gray-200 bg-gray-100 px-3 py-1 lg:inline-block"
+				class="hero-badge mb-8 hidden w-auto rounded-full border-2 border-gray-200 bg-gray-100 px-3 py-1 lg:inline-block"
 			>
 				<span class="text-base text-gray-400">👋 vollrath.dev</span>
 			</div>
 			<h1
-				class="long-transition text-gradient text-center font-header text-5xl sm:text-6xl md:mr-4 lg:text-left lg:text-8xl"
+				class="hero-header text-gradient text-center font-header text-5xl sm:text-6xl md:mr-4 lg:text-left lg:text-8xl"
 			>
 				Hi, I’m André.
 			</h1>
@@ -444,7 +444,8 @@ const latestPost = allPosts[0]
 					loop
 					autoplay
 					direction="1"
-					mode="normal"></lottie-player>
+					mode="normal"
+					id="lottie-player"></lottie-player>
 			</div>
 			<div class="grid grid-flow-row gap-2">
 				<h1
@@ -539,198 +540,6 @@ const latestPost = allPosts[0]
 	}
 
 	initEyes()
-</script>
-<script>
-	import { gsap } from 'gsap'
-	import { ScrollTrigger } from 'gsap/ScrollTrigger'
-	import SplitType from 'split-type'
-
-	gsap.registerPlugin(ScrollTrigger)
-	console.log('using GSAP: ', gsap.version)
-	document.addEventListener('DOMContentLoaded', function (event) {
-		gsap.set('.latest-render-header', { yPercent: 0 })
-		gsap.set('.latest-render-image', { yPercent: 0 })
-
-		gsap.to('.latest-render-header', {
-			yPercent: -3,
-			ease: 'none',
-			scrollTrigger: {
-				trigger: '.spotify-track',
-				scrub: 1
-			}
-		})
-
-		gsap.to('.latest-render-image', {
-			yPercent: 5,
-			ease: 'none',
-			scrollTrigger: {
-				trigger: '.spotify-track',
-				scrub: 1
-			}
-		})
-
-		gsap.from('.spotify-track', {
-			scrollTrigger: {
-				trigger: '.spotify-track',
-				start: 'top 90%',
-				toggleActions: 'play none none none'
-			},
-			opacity: 0,
-			x: 300,
-			ease: 'expo',
-			duration: 1.2,
-			stagger: 0.1
-		})
-
-		gsap.to('.cta-button', {
-			opacity: 1,
-			x: 0,
-			ease: 'expo',
-			duration: 1,
-			delay: 2
-		})
-
-		gsap.from('.techstack-container', {
-			scrollTrigger: {
-				trigger: '.techstack-container',
-				start: 'top 80%',
-				toggleActions: 'play none none none'
-			},
-			x: -200,
-			ease: 'expo',
-			duration: 1,
-			opacity: 0,
-			delay: 0.2
-		})
-
-		gsap.from('.links-container', {
-			scrollTrigger: {
-				trigger: '.links-container',
-				start: 'top 80%',
-				toggleActions: 'play none none none'
-			},
-			x: 200,
-			opacity: 0,
-			ease: 'expo',
-			duration: 0.7,
-			delay: 0.5
-		})
-
-		gsap.from('.contact-container', {
-			scrollTrigger: {
-				trigger: '.contact-container',
-				start: 'top 90%',
-				toggleActions: 'play none none none'
-			},
-			y: 200,
-			ease: 'expo',
-			duration: 1,
-			opacity: 0,
-			delay: 0.2
-		})
-
-		gsap.from('.based-in-container', {
-			scrollTrigger: {
-				trigger: '.based-in-container',
-				start: 'top 90%',
-				toggleActions: 'play none none none'
-			},
-			y: 200,
-			opacity: 0,
-			ease: 'expo',
-			duration: 0.7,
-			delay: 0.5
-		})
-
-		let typeSplit = new SplitType('.based-in-text', {
-			types: 'lines'
-		})
-
-		const lines = typeSplit.lines
-
-		gsap.from(lines, {
-			scrollTrigger: {
-				trigger: '.based-in-container',
-				start: 'top 80%',
-				toggleActions: 'play none none none'
-			},
-			y: '100%',
-			opacity: 0,
-			duration: 0.5,
-			ease: 'back.out',
-			stagger: 0.3,
-			delay: 0.5
-		})
-
-		const introText = document.querySelector('.intro-text')
-
-		// Function to wrap each character in a span
-		function wrapChars(element) {
-			const text = element.textContent
-			const chars = text.split('')
-
-			// Create spans for each character
-			const wrappedChars = chars
-				.map((char) => {
-					// For spaces, use a non-breaking space to maintain spacing
-					if (char === ' ') {
-						return ' '
-					}
-					return `<span class="char">${char}</span>`
-				})
-				.join('')
-
-			element.innerHTML = wrappedChars
-		}
-
-		// Get all text nodes, including those in strong tags
-		function wrapAllText(element) {
-			const strongTags = element.querySelectorAll('strong')
-
-			// First wrap text in strong tags
-			strongTags.forEach((strong) => {
-				wrapChars(strong)
-			})
-
-			// Then wrap remaining text
-			const textNodes = Array.from(element.childNodes).filter(
-				(node) => node.nodeType === Node.TEXT_NODE
-			)
-
-			textNodes.forEach((textNode) => {
-				const span = document.createElement('span')
-				span.textContent = textNode.textContent
-				textNode.parentNode.replaceChild(span, textNode)
-				wrapChars(span)
-			})
-		}
-
-		// Apply the wrapping
-		wrapAllText(introText)
-
-		// Get all character spans
-		const chars = introText.querySelectorAll('.char')
-
-		// Create the animation
-		const tl = gsap.timeline()
-
-		// Set initial state and random colors
-		tl.set(chars, {
-			opacity: 0
-		})
-
-		// Fade in animation
-		tl.to(
-			chars,
-			{
-				opacity: 1,
-				duration: 0.5,
-				stagger: 0.005,
-				ease: 'power1.inOut'
-			},
-			0
-		)
-	})
 </script>
 
 <style>
