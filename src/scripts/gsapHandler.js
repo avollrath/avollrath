@@ -24,6 +24,8 @@ export function initGSAP() {
 	// Initialize page-specific animations based on current path
 	const currentPath = window.location.pathname
 
+	console.log(currentPath)
+
 	if (currentPath === '/') {
 		initHomeAnimations()
 	} else if (currentPath === '/about') {
