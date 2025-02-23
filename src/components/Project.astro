@@ -1,13 +1,21 @@
 ---
-const { title, htmlText, projectImageSrc, transitionName, altProp, iframeSrc, techStackLogos } =
-	Astro.props
+const {
+	title,
+	htmlText,
+	projectImageSrc,
+	transitionName,
+	altProp,
+	iframeSrc,
+	techStackLogos,
+	buttonText
+} = Astro.props
 import { Image } from 'astro:assets'
 import TechStack from '../components/TechStack.astro'
 ---
 
-<div class="z-10 col-span-3 flex flex-col xl:col-span-1 2xl:col-span-4">
+<div class="project-text-container z-10 col-span-3 flex flex-col xl:col-span-1 2xl:col-span-4">
 	<div
-		class="border-gradient sm:text-md flex flex-col rounded-lg bg-white text-gray-400 shadow-lg max-md:rounded-md 3xl:text-lg"
+		class="sm:text-md flex flex-col rounded-lg bg-white text-gray-400 shadow-lg max-md:rounded-md 3xl:text-lg"
 	>
 		<div class="p-6 sm:p-12">
 			<h2
@@ -30,9 +38,11 @@ import TechStack from '../components/TechStack.astro'
 	</div>
 </div>
 <div
-	class="border-gradient sm:text-md wrapper z-10 col-span-3 mb-4 flex flex-col items-center rounded-lg bg-white p-12 text-gray-400 shadow-lg max-md:rounded-md max-md:p-4 max-sm:border-none max-sm:p-0 xl:col-span-2 2xl:col-span-8 3xl:text-lg"
+	class="project-image-container sm:text-md wrapper z-10 col-span-3 mb-4 flex flex-col items-center rounded-lg bg-white p-12 text-gray-400 shadow-lg max-md:rounded-md max-md:p-4 max-sm:border-none max-sm:p-0 xl:col-span-2 2xl:col-span-8 3xl:text-lg"
 >
-	<div class={`image-container rounded-md ${iframeSrc ? 'cursor-pointer iframe-trigger' : ''}`}>
+	<div
+		class={`image-container relative rounded-md ${iframeSrc ? 'cursor-pointer iframe-trigger' : ''}`}
+	>
 		<Image
 			src={projectImageSrc}
 			transition:name={transitionName}
@@ -41,6 +51,13 @@ import TechStack from '../components/TechStack.astro'
 			decoding="async"
 			loading="lazy"
 		/>
+		{
+			buttonText && (
+				<button class="project-button absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange px-24 py-10 text-4xl font-semibold text-white shadow-lg hover:bg-orange/90">
+					{buttonText}
+				</button>
+			)
+		}
 	</div>
 	{
 		iframeSrc && (

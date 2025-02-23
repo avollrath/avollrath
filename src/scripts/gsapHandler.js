@@ -32,6 +32,12 @@ export function initGSAP() {
 		initNowAnimations()
 	} else if (currentPath === '/' || currentPath === '') {
 		initHomeAnimations()
+	} else if (currentPath.startsWith('/projects')) {
+		initProjectAnimations()
+	} else if (currentPath.startsWith('/renders')) {
+		initRenderAnimations()
+	} else if (currentPath.startsWith('/blog')) {
+		initBlogAnimations()
 	}
 }
 
@@ -475,12 +481,25 @@ function initHomeAnimations() {
 }
 
 function initAboutAnimations() {
-	// Tech stack icons animation
+	const aboutImage = document.querySelector('.about-image')
+	if (aboutImage) {
+		const lottieAnim = gsap.from(aboutImage, {
+			scrollTrigger: {
+				trigger: '.about-image',
+				start: 'top 90%',
+				toggleActions: 'play none none none'
+			},
+			x: -300,
+			opacity: 0,
+			ease: 'back.out',
+			duration: 0.6,
+			delay: 0.6
+		})
+		animations.push(lottieAnim)
+	}
+
 	const techStackIcons = document.querySelectorAll('.tech-stack-icon')
-
 	if (techStackIcons.length) {
-		// Set initial state
-
 		const techStackAnim = gsap.from(techStackIcons, {
 			scrollTrigger: {
 				trigger: techStackIcons[0],
@@ -499,20 +518,19 @@ function initAboutAnimations() {
 		animations.push(techStackAnim)
 	}
 
-	// Tech stack icons animation
 	const favBookImages = document.querySelectorAll('.fav-book-image')
 
 	if (favBookImages.length) {
 		const favBookAnim = gsap.from(favBookImages, {
 			scrollTrigger: {
 				trigger: favBookImages[0],
-				start: 'top 80%',
+				start: 'top bottom',
 				toggleActions: 'play none none none'
 			},
 			opacity: 0,
 			y: 20,
 			ease: 'back.out',
-			delay: 1,
+			delay: 0.4,
 			stagger: {
 				amount: 1,
 				from: 'end'
@@ -575,13 +593,150 @@ function initNowAnimations() {
 				toggleActions: 'play none none none'
 			},
 			x: -500,
+			opacity: 0,
 			ease: 'expo',
-			duration: 1.5,
-			delay: 0.4
+			duration: 1.5
 		})
 		animations.push(nowBoxAnim)
 	}
 }
 
-// Export cleanup function for use in component unmounting
+function initProjectAnimations() {
+	const projectTextContainers = document.querySelectorAll('.project-text-container')
+
+	if (projectTextContainers.length) {
+		const projectTextContainersAnim = gsap.from(projectTextContainers, {
+			scrollTrigger: {
+				trigger: projectTextContainers[0],
+				start: 'top bottom 60%',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			x: -300,
+			duration: 1,
+			ease: 'expo.out',
+			delay: 0.1,
+			stagger: 0.3
+		})
+		animations.push(projectTextContainersAnim)
+	}
+
+	const projectImageContainers = document.querySelectorAll('.project-image-container')
+
+	if (projectImageContainers.length) {
+		const projectImageContainersAnim = gsap.from(projectImageContainers, {
+			scrollTrigger: {
+				trigger: projectImageContainers[0],
+				start: 'top bottom 60%',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			x: 300,
+			duration: 1,
+			ease: 'expo.out',
+			delay: 0.3,
+			stagger: 0.3
+		})
+		animations.push(projectImageContainersAnim)
+	}
+
+	const projectButtons = document.querySelectorAll('.project-button')
+
+	if (projectButtons.length) {
+		const projectsBtnAnim = gsap.from(projectButtons, {
+			scrollTrigger: {
+				trigger: projectTextContainers[0],
+				start: 'top bottom 60%',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			scale: 0,
+			duration: 1,
+			ease: 'expo.out',
+			delay: 0.5,
+			stagger: 0.3
+		})
+		animations.push(projectsBtnAnim)
+	}
+}
+
+function initRenderAnimations() {
+	const renderTextContainers = document.querySelectorAll('.render-text-container')
+
+	if (renderTextContainers.length) {
+		const projectTextContainersAnim = gsap.from(renderTextContainers, {
+			scrollTrigger: {
+				trigger: renderTextContainers[0],
+				start: 'top bottom 60%',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			x: -300,
+			duration: 1,
+			ease: 'expo.out',
+			delay: 0.1,
+			stagger: 0.3
+		})
+		animations.push(projectTextContainersAnim)
+	}
+
+	const renderImageContainers = document.querySelectorAll('.render-image-container')
+
+	if (renderImageContainers.length) {
+		const renderImageContainerAnim = gsap.from(renderImageContainers, {
+			scrollTrigger: {
+				trigger: renderImageContainers[0],
+				start: 'top bottom 60%',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			x: 300,
+			duration: 0.6,
+			ease: 'back.out',
+			delay: 0.3,
+			stagger: 0.3
+		})
+		animations.push(renderImageContainerAnim)
+	}
+}
+
+function initBlogAnimations() {
+	const blogTextContainer = document.querySelectorAll('.blog-text-container')
+
+	if (blogTextContainer.length) {
+		const blogTextContainersAnim = gsap.from(blogTextContainer, {
+			scrollTrigger: {
+				trigger: blogTextContainer[0],
+				start: 'top bottom 60%',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			x: -300,
+			duration: 1,
+			ease: 'expo.out',
+			delay: 0.1
+		})
+		animations.push(blogTextContainersAnim)
+	}
+
+	const blogPostContainers = document.querySelectorAll('.blog-post-container')
+
+	if (blogPostContainers.length) {
+		const blogPostContainersAnim = gsap.from(blogPostContainers, {
+			scrollTrigger: {
+				trigger: blogPostContainers[0],
+				start: 'top bottom 60%',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			x: 300,
+			duration: 0.6,
+			ease: 'back.out',
+			delay: 0.3,
+			stagger: 0.2
+		})
+		animations.push(blogPostContainersAnim)
+	}
+}
+
 export { cleanup }
