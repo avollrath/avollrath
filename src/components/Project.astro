@@ -15,15 +15,15 @@ import TechStack from '../components/TechStack.astro'
 
 <div class="project-text-container z-10 col-span-3 flex flex-col xl:col-span-1 2xl:col-span-4">
 	<div
-		class="sm:text-md flex flex-col rounded-lg bg-white text-gray-400 shadow-lg max-md:rounded-md 3xl:text-lg"
+		class="flex flex-col rounded-lg bg-white text-gray-400 shadow-lg max-md:rounded-md sm:text-base 3xl:text-lg"
 	>
 		<div class="p-6 sm:p-12">
 			<h2
-				class="long-transition max-sm:text-md mb-4 text-center font-header text-2xl text-orange max-sm:mb-2 3xl:text-lg"
+				class="long-transition mb-4 text-center font-header text-2xl text-orange max-sm:mb-2 max-sm:text-base 3xl:text-lg"
 			>
 				{title}
 			</h2>
-			<p set:html={htmlText} class="max-sm:text-sm" />
+			<p set:html={htmlText} class="text-xs sm:text-base" />
 		</div>
 		{
 			techStackLogos && techStackLogos.length > 0 ? (
@@ -38,7 +38,7 @@ import TechStack from '../components/TechStack.astro'
 	</div>
 </div>
 <div
-	class="project-image-container sm:text-md wrapper z-10 col-span-3 mb-4 flex flex-col items-center rounded-lg bg-white p-12 text-gray-400 shadow-lg max-md:rounded-md max-md:p-4 max-sm:border-none max-sm:p-0 xl:col-span-2 2xl:col-span-8 3xl:text-lg"
+	class="project-image-container wrapper z-10 col-span-3 mb-4 flex flex-col items-center rounded-lg bg-white p-12 text-gray-400 shadow-lg max-md:rounded-md max-md:p-4 max-sm:border-none max-sm:p-0 sm:text-base xl:col-span-2 2xl:col-span-8 3xl:text-lg"
 >
 	<div
 		class={`image-container relative rounded-md ${iframeSrc ? 'cursor-pointer iframe-trigger' : ''}`}

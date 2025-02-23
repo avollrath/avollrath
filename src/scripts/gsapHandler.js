@@ -216,7 +216,15 @@ function initHomeAnimations() {
 		animations.push(charsAnim)
 	}
 
-	// CTA button animation
+	const scrollToContact = () => {
+		const anim = gsap.to(window, {
+			duration: 1,
+			scrollTo: { y: '#contact', offsetY: 250 },
+			ease: 'power2.inOut'
+		})
+		animations.push(anim)
+	}
+
 	const ctaButton = document.querySelector('.cta-button')
 	if (ctaButton) {
 		const ctaAnim = gsap.from(ctaButton, {
@@ -227,6 +235,7 @@ function initHomeAnimations() {
 			delay: 1.3
 		})
 		animations.push(ctaAnim)
+		ctaButton.addEventListener('click', scrollToContact)
 	}
 
 	const avatar = document.querySelector('.avatar-wrapper')
