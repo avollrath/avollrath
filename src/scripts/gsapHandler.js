@@ -24,8 +24,6 @@ export function initGSAP() {
 	// Initialize page-specific animations based on current path
 	const currentPath = window.location.pathname
 
-	console.log(currentPath)
-
 	if (currentPath.startsWith('/about')) {
 		initAboutAnimations()
 	} else if (currentPath.startsWith('/now')) {
@@ -72,6 +70,25 @@ function initFooterAnimations() {
 	const scrollButton = footer.querySelector('.footer-bar a')
 	if (scrollButton) {
 		scrollButton.addEventListener('click', scrollToTop)
+
+		scrollButton.addEventListener('mouseenter', () => {
+			gsap.killTweensOf(scrollButton)
+			gsap.to(scrollButton, {
+				scale: 1.1,
+				ease: 'expo.out',
+				duration: 0.6
+			})
+
+			scrollButton.addEventListener('mouseleave', () => {
+				gsap.killTweensOf(scrollButton)
+				gsap.to(scrollButton, {
+					scale: 1,
+					ease: 'elastic(0.6)',
+					delay: 0.1,
+					duration: 0.6
+				})
+			})
+		})
 	}
 
 	const footerAnim = gsap.from(footer, {
@@ -91,8 +108,6 @@ function initFooterAnimations() {
 
 // Home page animations
 function initHomeAnimations() {
-	console.log('using GSAP: ', gsap.version)
-
 	const navBar = document.querySelector('.nav-bar')
 	if (navBar) {
 		const navBarAnim = gsap.from(navBar, {
@@ -666,6 +681,26 @@ function initProjectAnimations() {
 			stagger: 0.3
 		})
 		animations.push(projectsBtnAnim)
+
+		projectButtons.forEach((btn) => {
+			btn.addEventListener('mouseenter', () => {
+				gsap.killTweensOf(btn)
+				gsap.to(btn, {
+					scale: 1.1,
+					ease: 'elastic(0.8)',
+					duration: 1
+				})
+			})
+			btn.addEventListener('mouseleave', () => {
+				gsap.killTweensOf(btn)
+				gsap.to(btn, {
+					scale: 1,
+					ease: 'elastic(0.6)',
+					delay: 0.1,
+					duration: 0.6
+				})
+			})
+		})
 	}
 }
 
