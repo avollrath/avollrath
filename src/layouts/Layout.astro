@@ -28,6 +28,30 @@ import { initializeNavigation } from '../scripts/navigationHandler.js'
 		<meta property="og:type" content="website" />
 
 		<ViewTransitions />
+		<style>
+			body {
+				opacity: 0;
+			}
+			body.loaded {
+				opacity: 1;
+				transition: opacity 0.1s;
+			}
+		</style>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				setTimeout(() => {
+					document.body.classList.add('loaded')
+				}, 50)
+			})
+
+			document.addEventListener('astro:after-swap', () => {
+				document.body.classList.remove('loaded')
+				setTimeout(() => {
+					document.body.classList.add('loaded')
+				}, 50)
+			})
+		</script>
 	</head>
 	<body class="bg-gray-50 font-body text-dark-text dark:bg-dark-bg dark:text-white">
 		<div class="sticky top-0 z-10 mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4">
