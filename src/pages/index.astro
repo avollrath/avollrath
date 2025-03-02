@@ -112,7 +112,7 @@ const latestPost = allPosts[0]
 		<div class="now-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
-				class="long-transition font-header text-xl tracking-wide sm:text-4xl"
+				class="long-transition rounded-lg border-2 border-solid border-dark-text px-8 py-3 font-header text-xl tracking-wide sm:text-4xl"
 				transition:name="now-header"
 			>
 				Now
@@ -170,7 +170,9 @@ const latestPost = allPosts[0]
 	>
 		<div class="blog-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
-			<h2 class="long-transition text-center font-header text-xl tracking-wide sm:text-4xl">
+			<h2
+				class="long-transition rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
+			>
 				Blog
 			</h2>
 			<a href={latestPost.url} class="arrow-link">
@@ -224,7 +226,7 @@ const latestPost = allPosts[0]
 		<div class="about-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
-				class="long-transition font-header text-xl tracking-wide sm:text-4xl"
+				class="long-transition rounded-lg border-2 border-solid border-white px-8 py-3 font-header text-xl tracking-wide sm:text-4xl"
 				transition:name="about-header"
 			>
 				About
@@ -267,7 +269,7 @@ const latestPost = allPosts[0]
 		<div class="render-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
-				class="latest-render-header long-transition text-center font-header text-xl tracking-wide sm:text-left sm:text-4xl"
+				class="latest-render-header long-transition rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-left sm:text-4xl"
 			>
 				Latest Render
 			</h2>
@@ -304,7 +306,9 @@ const latestPost = allPosts[0]
 	<div
 		class="spotify-container border-gradient flex h-full flex-col items-center overflow-visible rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-2 xl:row-start-5 2xl:col-span-9 2xl:row-start-3"
 	>
-		<h2 class="long-transition mb-8 text-center font-header text-xl tracking-wide sm:text-4xl">
+		<h2
+			class="long-transition mb-8 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
+		>
 			Spotify Top 10 <span
 				class="whitespace-nowrap text-xs font-semibold tracking-normal text-gray-400 sm:text-2xl"
 				>(last 6 months)</span
@@ -335,10 +339,10 @@ const latestPost = allPosts[0]
 
 	<!-- Tech stack -->
 	<div
-		class="techstack-container border-gradient z-10 h-full overflow-hidden rounded-md bg-white from-dark-card to-darker-card pb-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-3 xl:row-start-7 2xl:col-span-9 2xl:row-start-4"
+		class="techstack-container border-gradient z-10 h-full overflow-hidden rounded-md bg-white from-dark-card to-darker-card pt-12 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-3 xl:row-start-7 2xl:col-span-9 2xl:row-start-4"
 	>
 		<h2
-			class="long-transition p-6 text-center font-header text-xl tracking-wide sm:p-12 sm:text-4xl"
+			class="mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
 		>
 			Tech stack
 		</h2>
@@ -364,9 +368,11 @@ const latestPost = allPosts[0]
 
 	<!-- Links Section -->
 	<div
-		class="links-container border-gradient flex h-full flex-col rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-5 2xl:col-span-3 2xl:row-start-4"
+		class="links-container border-gradient flex h-full flex-col items-center rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-5 2xl:col-span-3 2xl:row-start-4"
 	>
-		<h2 class="long-transition mb-4 text-center font-header text-xl tracking-wide sm:text-4xl">
+		<h2
+			class="long-transition mb-4 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
+		>
 			Links
 		</h2>
 		<div class="flex flex-1 items-center justify-center">
@@ -419,7 +425,9 @@ const latestPost = allPosts[0]
 	<div
 		class="contact-container border-gradient z-10 flex h-full flex-col justify-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-6 2xl:col-span-4 2xl:col-start-1 2xl:row-start-5"
 	>
-		<h2 class="long-transition mb-6 text-center font-header text-xl tracking-wide sm:text-4xl">
+		<h2
+			class="long-transition mx-auto mb-6 w-fit rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
+		>
 			Get in touch
 		</h2>
 		<div id="contact" class="flex flex-1 items-center justify-center">
@@ -429,9 +437,13 @@ const latestPost = allPosts[0]
 
 	<!-- Based in Section -->
 	<div
-		class="based-in-container border-gradient z-10 flex h-full flex-col rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-1 xl:row-start-6 2xl:col-span-8 2xl:row-start-5"
+		class="based-in-container border-gradient z-10 flex h-full flex-col items-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-1 xl:row-start-6 2xl:col-span-8 2xl:row-start-5"
 	>
-		<h2 class="long-transition mb-12 text-center font-header text-xl sm:text-4xl">Based in</h2>
+		<h2
+			class="long-transition mb-12 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl sm:text-4xl"
+		>
+			Based in
+		</h2>
 		<div class="flex flex-col items-center justify-center xl:flex-row 2xl:flex-row">
 			<!-- <img
 				src={`basedin.svg`}

@@ -73,7 +73,7 @@ input[type='reset'],
 	height: 40px;
 	transition: transform 0.3s ease;
 	aspect-ratio: 1;
-	border: 3px solid #ff5ff6;
+	border: 2px solid #ff5ff6;
 }
 
 @media screen and (max-width: 640px) {
@@ -87,7 +87,7 @@ input[type='reset'],
 }
 
 .arrow-link.white {
-	border: 3px solid #ffffff;
+	border: 2px solid #ffffff;
 }
 
 .arrow-link svg {
