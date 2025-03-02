@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro'
 import jurassicJumpImg from '../images/projects/jurassic-jump.jpg'
 import supervimusImg from '../images/projects/supervimus.jpg'
+import pasiLunchImg from '../images/projects/pasilunch.jpg'
 import Project from '../components/Project.astro'
 ---
 
@@ -9,6 +10,26 @@ import Project from '../components/Project.astro'
 	title="Projects by André Vollrath"
 	description="A collection of my frontend and game development projects."
 >
+	<Project
+		title="PasiLunch"
+		htmlText={`
+		<strong class='font-semibold text-dark-text'>PasiLunch</strong> is a practical web service and Slack integration that aggregates daily lunch menus from restaurants near my new office in Pasila, Helsinki. It eliminates the tedious task of checking multiple restaurant websites by presenting all menus in one central location, accessible through either a clean web interface or a convenient Slack command.<br><br>
+		Built with <strong class='font-semibold text-dark-text'>Node.js</strong> and <strong class='font-semibold text-dark-text'>Express</strong>, the application employs web scraping techniques using <strong class='font-semibold text-dark-text'>Cheerio</strong> to extract current menu information from various restaurant websites. The system smartly caches data to minimize unnecessary requests and implements a day-based refresh mechanism to ensure menus stay current.<br><br>
+		The Slack integration brings a touch of personality with randomized humorous messages preceding the menu listings, while the web interface offers a more visual and structured presentation. This project demonstrates practical application of <strong class='font-semibold text-dark-text'>web scraping</strong>, <strong class='font-semibold text-dark-text'>API integration</strong>, and <strong class='font-semibold text-dark-text'>caching strategies</strong> to solve a real-world problem.<br><br>
+		Check out today's lunch options: <a class='font-semibold underline text-orange' href='https://lunchbot-btnu.onrender.com/'>PasiLunch website</a>
+	`}
+		projectImageSrc={pasiLunchImg}
+		altProp="PasiLunch website"
+		techStackLogos={[
+			'HTML5.svg',
+			'JavaScript.svg',
+			'CSS 3.svg',
+			'Node.js.svg',
+			'Cheerio.svg',
+			'Express.js.svg'
+		]}
+	/>
+
 	<Project
 		title="Jurassic Jump"
 		buttonText="Click to load game"
@@ -22,6 +43,7 @@ import Project from '../components/Project.astro'
 		iframeSrc="https://avollrath.github.io/jurassic-jump/"
 		techStackLogos={['Godot.svg']}
 	/>
+
 	<Project
 		title="superVIMus"
 		buttonText="Click to load game"
