@@ -42,7 +42,16 @@ const nowPageBookISBNs = [
 	'9781451627299', // 11/22/63
 	'9781771643764', // Gut
 	'9780062880925', // Don't trust your gut
-	'9781533281852' // Siddhartha
+	'9781533281852', // Siddhartha
+	'9781401938093', // Breaking the Habit of Being Yourself
+	'9781544514215', // The Almanack of Naval Ravikant
+	'9781472294128', // Dopamine Nation
+	'9780385249379', // Awareness
+	'9781952692178', // How to Focus
+	'9780241985854', // The School of Life: An Emotional Education
+	'9780735211292', // Atomic Habits
+	'9780241816264', // Dungeon Crawler Carl
+	'9780553447712' // The Seven Principles for Making Marriage Work
 ]
 
 async function fetchBookDetails(isbn) {

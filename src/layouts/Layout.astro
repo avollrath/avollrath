@@ -5,10 +5,7 @@ import { ViewTransitions } from 'astro:transitions'
 import '../styles/marquee.css'
 import '../styles/main.css'
 const { title, description } = Astro.props
-import { getImage } from 'astro:assets'
 import faviconSrc from '../images/favicon.svg'
-const favIcon = await getImage({ src: faviconSrc, format: 'svg' })
-import { initializeNavigation } from '../scripts/navigationHandler.js'
 ---
 
 <!doctype html>
@@ -28,33 +25,37 @@ import { initializeNavigation } from '../scripts/navigationHandler.js'
 		<meta property="og:type" content="website" />
 
 		<ViewTransitions />
-		<style>
-			body {
+		<script is:inline>
+			const isHome = window.location.pathname === '/'
+			if (isHome && window.__homeIntroSeen !== true) {
+				document.documentElement.classList.add('home-intro-pending')
+			}
+		</script>
+		<style is:global>
+			html.home-intro-pending .nav-bar,
+			html.home-intro-pending .nav-item,
+			html.home-intro-pending .nav-logo,
+			html.home-intro-pending .hero-container,
+			html.home-intro-pending .hero-badge,
+			html.home-intro-pending .hero-header,
+			html.home-intro-pending .intro-text,
+			html.home-intro-pending .cta-button,
+			html.home-intro-pending .avatar-wrapper,
+			html.home-intro-pending .now-container,
+			html.home-intro-pending .now-content,
+			html.home-intro-pending .blog-container,
+			html.home-intro-pending .blog-content,
+			html.home-intro-pending .about-container,
+			html.home-intro-pending .about-content,
+			html.home-intro-pending .render-container,
+			html.home-intro-pending .render-content,
+			html.home-intro-pending .spotify-container {
 				opacity: 0;
 			}
-			body.loaded {
-				opacity: 1;
-				transition: opacity 0.1s;
-			}
 		</style>
-
-		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				setTimeout(() => {
-					document.body.classList.add('loaded')
-				}, 50)
-			})
-
-			document.addEventListener('astro:after-swap', () => {
-				document.body.classList.remove('loaded')
-				setTimeout(() => {
-					document.body.classList.add('loaded')
-				}, 50)
-			})
-		</script>
 	</head>
 	<body class="bg-gray-50 font-body text-dark-text dark:bg-dark-bg dark:text-white">
-		<div class="sticky top-0 z-10 mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4">
+		<div transition:persist class="sticky top-0 z-10 mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4">
 			<NavBar />
 		</div>
 		<div
@@ -68,33 +69,29 @@ import { initializeNavigation } from '../scripts/navigationHandler.js'
 				</div>
 			</main>
 		</div>
-		<Footer />
+		<div transition:persist>
+			<Footer />
+		</div>
 		<script src="../scripts/interactiveSections.js"></script>
 		<script>
 			import { initializeTooltips } from '../scripts/initializeTooltips.js'
 			import { initializeNavigation } from '../scripts/navigationHandler.js'
-			import { initGSAP } from '../scripts/gsapHandler'
-			initializeNavigation()
+			import { initGSAP } from '../scripts/gsapHandler.js'
+
 			const init = () => {
 				initializeTooltips()
-			}
-
-			if (document.readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', init)
-			} else {
-				init()
-			}
-
-			if (document.readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', initGSAP)
-			} else {
 				initGSAP()
 			}
 
-			document.addEventListener('astro:after-swap', () => {
-				init()
-				initGSAP()
-			})
+			if (!window.__navigationInitialized) {
+				initializeNavigation()
+				window.__navigationInitialized = true
+			}
+
+			if (!window.__layoutPageLoadBound) {
+				document.addEventListener('astro:page-load', init)
+				window.__layoutPageLoadBound = true
+			}
 		</script>
 	</body>
 </html>

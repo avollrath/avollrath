@@ -132,35 +132,35 @@ const latestPost = allPosts[0]
 				</svg>
 			</a>
 		</div>
+
 		<ul
 			class="bullets now-content mb-4 list-disc pl-5 text-xs text-gray-400 sm:text-base 3xl:text-lg"
 		>
 			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Switched my Photography gear to an <strong class="font-semibold text-dark-text"
-					>Olympus Micro Four Thirds system</strong
+				Studying the <strong class="font-semibold text-dark-text"
+					>UX Design Institute Diploma</strong
 				>
 			</li>
+
 			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Reading "<strong class="font-semibold text-dark-text">Feel-Good Productivity</strong>" <br
-				/>
-				by Ali Abdaal
+				Building <strong class="font-semibold text-dark-text"
+					>mobile apps with React Native & Expo</strong
+				>
 			</li>
+
 			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Reading "<strong class="font-semibold text-dark-text">11/22/63</strong>" <br />
-				by Stephen King
+				Training for my first <strong class="font-semibold text-dark-text">full marathon</strong> this
+				spring
 			</li>
+
 			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Reading "<strong class="font-semibold text-dark-text">Gut</strong>" <br />
-				by Giulia Enders
-			</li>
-			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Reading "<strong class="font-semibold text-dark-text">Don't Trust Your Gut</strong>" <br />
-				by Seth Stephens-Davidowitz
+				Practicing <strong class="font-semibold text-dark-text">Rocket League</strong> and aiming for
+				the Grand Champion rank
 			</li>
 		</ul>
 
 		<p class="now-content text-center text-xs text-gray-400 sm:text-sm">
-			Last Updated: January 6, 2025
+			Last Updated: March 8, 2026
 		</p>
 	</div>
 
@@ -485,6 +485,7 @@ const latestPost = allPosts[0]
 		let isEyeHovered = false
 		let isButtonHovered = false
 		let removalTimeout = null
+		const globalState = window.__eyesState || (window.__eyesState = {})
 
 		function updateSunglassesVisibility() {
 			if (!sunglasses) return
@@ -505,7 +506,11 @@ const latestPost = allPosts[0]
 			}
 		}
 
-		document.addEventListener('mousemove', (e) => {
+		if (globalState.onMouseMove) {
+			document.removeEventListener('mousemove', globalState.onMouseMove)
+		}
+
+		const onMouseMove = (e) => {
 			eyes.forEach((eye) => {
 				const rect = eye.getBoundingClientRect()
 				const centerX = rect.left + rect.width / 2
@@ -539,20 +544,38 @@ const latestPost = allPosts[0]
 
 			isEyeHovered = overEye
 			updateSunglassesVisibility()
-		})
-
-		if (contactButton) {
-			contactButton.addEventListener('mouseenter', () => {
-				isButtonHovered = true
-				updateSunglassesVisibility()
-			})
-			contactButton.addEventListener('mouseleave', () => {
-				isButtonHovered = false
-				updateSunglassesVisibility()
-			})
 		}
 
-		document.addEventListener('astro:after-swap', initEyes)
+		document.addEventListener('mousemove', onMouseMove)
+		globalState.onMouseMove = onMouseMove
+
+		if (globalState.button && globalState.onButtonEnter && globalState.onButtonLeave) {
+			globalState.button.removeEventListener('mouseenter', globalState.onButtonEnter)
+			globalState.button.removeEventListener('mouseleave', globalState.onButtonLeave)
+		}
+
+		if (contactButton) {
+			const onButtonEnter = () => {
+				isButtonHovered = true
+				updateSunglassesVisibility()
+			}
+
+			const onButtonLeave = () => {
+				isButtonHovered = false
+				updateSunglassesVisibility()
+			}
+
+			contactButton.addEventListener('mouseenter', onButtonEnter)
+			contactButton.addEventListener('mouseleave', onButtonLeave)
+			globalState.button = contactButton
+			globalState.onButtonEnter = onButtonEnter
+			globalState.onButtonLeave = onButtonLeave
+		}
+	}
+
+	if (!window.__eyesPageLoadBound) {
+		document.addEventListener('astro:page-load', initEyes)
+		window.__eyesPageLoadBound = true
 	}
 
 	initEyes()

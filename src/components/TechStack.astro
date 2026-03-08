@@ -2,7 +2,9 @@
 const { logos: selectedLogos } = Astro.props
 
 // Fetch all logo images
-const allImages = await Astro.glob('/src/images/logos/*.svg')
+const allImages = Object.values(
+	import.meta.glob('/src/images/logos/*.svg', { eager: true })
+)
 
 const getFilename = (src) => {
 	// Remove the path and any query parameters

@@ -17,8 +17,9 @@ function makeSectionsClickable() {
 }
 
 function onSectionClick(event) {
-    event.preventDefault(); // Prevent default link behavior
     const arrowLink = event.currentTarget.querySelector('.arrow-link');
+    if (!arrowLink) return;
+    event.preventDefault(); // Prevent default link behavior
     navigate(arrowLink.getAttribute('href'));
 }
 
@@ -50,5 +51,4 @@ function onSectionMouseOut(event) {
 }
 
 
-document.addEventListener('DOMContentLoaded', makeSectionsClickable);
-document.addEventListener('astro:after-swap', makeSectionsClickable);
+document.addEventListener('astro:page-load', makeSectionsClickable);

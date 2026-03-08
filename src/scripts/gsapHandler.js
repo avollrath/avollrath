@@ -108,6 +108,30 @@ function initFooterAnimations() {
 
 // Home page animations
 function initHomeAnimations() {
+	let shouldRunHomeIntro = window.__homeIntroSeen !== true
+
+	if (shouldRunHomeIntro) {
+		window.__homeIntroSeen = true
+	} else {
+		document.documentElement.classList.remove('home-intro-pending')
+	}
+
+	const scrollToContact = () => {
+		const anim = gsap.to(window, {
+			duration: 1,
+			scrollTo: { y: '#contact', offsetY: 250 },
+			ease: 'power2.inOut'
+		})
+		animations.push(anim)
+	}
+
+	const ctaButton = document.querySelector('.cta-button')
+	if (ctaButton && ctaButton.dataset.contactBound !== 'true') {
+		ctaButton.addEventListener('click', scrollToContact)
+		ctaButton.dataset.contactBound = 'true'
+	}
+
+	if (shouldRunHomeIntro) {
 	const navBar = document.querySelector('.nav-bar')
 	if (navBar) {
 		const navBarAnim = gsap.from(navBar, {
@@ -139,7 +163,8 @@ function initHomeAnimations() {
 			opacity: 0,
 			x: -1000,
 			ease: 'back.out',
-			duration: 0.5
+			duration: 0.5,
+			delay: 0.3
 		})
 		animations.push(heroContainerAnim)
 	}
@@ -149,8 +174,8 @@ function initHomeAnimations() {
 		const badgeAnim = gsap.from(heroBadge, {
 			opacity: 0,
 			x: -150,
-			ease: 'back.out',
-			duration: 0.4,
+			ease: 'elastic(0.6)',
+			duration: 1,
 			delay: 0.8
 		})
 		animations.push(badgeAnim)
@@ -231,16 +256,6 @@ function initHomeAnimations() {
 		animations.push(charsAnim)
 	}
 
-	const scrollToContact = () => {
-		const anim = gsap.to(window, {
-			duration: 1,
-			scrollTo: { y: '#contact', offsetY: 250 },
-			ease: 'power2.inOut'
-		})
-		animations.push(anim)
-	}
-
-	const ctaButton = document.querySelector('.cta-button')
 	if (ctaButton) {
 		const ctaAnim = gsap.from(ctaButton, {
 			opacity: 0,
@@ -250,7 +265,6 @@ function initHomeAnimations() {
 			delay: 1.3
 		})
 		animations.push(ctaAnim)
-		ctaButton.addEventListener('click', scrollToContact)
 	}
 
 	const avatar = document.querySelector('.avatar-wrapper')
@@ -371,6 +385,12 @@ function initHomeAnimations() {
 		})
 		animations.push(spotifyContainerAnim)
 	}
+
+	requestAnimationFrame(() => {
+		document.documentElement.classList.remove('home-intro-pending')
+	})
+	}
+
 	// Spotify tracks animation
 	const spotifyTracks = document.querySelectorAll('.spotify-track')
 	if (spotifyTracks.length) {

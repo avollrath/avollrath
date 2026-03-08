@@ -91,5 +91,63 @@
 			"authors": "Seth Stephens-Davidowitz",
 			"coverURL": "http://books.google.com/books/content?id=UdNQzwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		}
+	],
+	"2025-06-14": [
+		{
+			"isbn": "9781401938093",
+			"title": "Breaking The Habit of Being Yourself",
+			"authors": "Dr. Joe Dispenza",
+			"coverURL": "http://books.google.com/books/content?id=LV76DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+		},
+		{
+			"isbn": "9781544514215",
+			"title": "The Almanack of Naval Ravikant",
+			"authors": "Eric Jorgenson",
+			"coverURL": "http://books.google.com/books/content?id=OsO_zQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+		},
+		{
+			"isbn": "9781472294128",
+			"title": "Dopamine Nation",
+			"authors": "Anna Lembke",
+			"coverURL": "http://books.google.com/books/content?id=X1ykzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+		},
+		{
+			"isbn": "9780385249379",
+			"title": "Awareness",
+			"authors": "Anthony De Mello",
+			"coverURL": "http://books.google.com/books/content?id=-Xw6jFD0eocC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+		},
+		{
+			"isbn": "9781952692178",
+			"title": "How to Focus",
+			"authors": "Thich Nhat Hanh",
+			"coverURL": "http://books.google.com/books/content?id=KDSREAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+		},
+		{
+			"isbn": "9780241985854",
+			"title": "The School of Life",
+			"authors": "Alain de Botton",
+			"coverURL": "http://books.google.com/books/content?id=vYSCDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+		},
+		{
+			"isbn": "9780735211292",
+			"title": "Atomic Habits",
+			"authors": "James Clear",
+			"coverURL": "http://books.google.com/books/content?id=XfFvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+		}
+	],
+	"2026-03-08": [
+		{
+			"isbn": "9780241816264",
+			"title": "Dungeon Crawler Carl",
+			"authors": "Matt Dinniman",
+			"coverURL": "http://books.google.com/books/content?id=1fTG0QEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+		},
+		{
+			"isbn": "9780553447712",
+			"title": "The Seven Principles for Making Marriage Work",
+			"authors": "John Gottman, Nan Silver",
+			"coverURL": "http://books.google.com/books/content?id=z-mLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+		}
 	]
 }
