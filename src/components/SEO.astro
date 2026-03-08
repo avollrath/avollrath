@@ -7,12 +7,15 @@ const {
 	ogImage = '/about2.jpg',
 	ogImageAlt = 'Andre Vollrath portfolio preview',
 	twitterCard = 'summary_large_image',
+	twitterSite,
+	twitterCreator,
 	noindex = false,
 	canonical,
 	author,
 	publishedTime,
 	modifiedTime,
-	tags = []
+	tags = [],
+	structuredData = []
 } = Astro.props
 
 const siteUrl = Astro.site
@@ -30,6 +33,63 @@ const resolvedOgImage = ogImage
 
 const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow'
 const locale = 'en_US'
+
+const socialLinks = [
+	'https://github.com/avollrath',
+	'https://www.linkedin.com/in/andrevollrath/',
+	'https://www.instagram.com/charliefeatherlight/'
+]
+
+function formatPathLabel(segment) {
+	if (!segment) return ''
+	const decoded = decodeURIComponent(segment)
+	if (decoded === 'posts') return 'Blog'
+	return decoded
+		.replace(/[-_]/g, ' ')
+		.replace(/\b\w/g, (char) => char.toUpperCase())
+}
+
+const pathSegments = pageUrl.pathname.split('/').filter(Boolean)
+
+const breadcrumbItems = [
+	{
+		'@type': 'ListItem',
+		position: 1,
+		name: 'Home',
+		item: new URL('/', siteUrl ?? pageUrl).toString()
+	},
+	...pathSegments.map((segment, index) => ({
+		'@type': 'ListItem',
+		position: index + 2,
+		name: formatPathLabel(segment),
+		item: new URL(`/${pathSegments.slice(0, index + 1).join('/')}/`, siteUrl ?? pageUrl).toString()
+	}))
+]
+
+const defaultStructuredData = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: siteName,
+		url: new URL('/', siteUrl ?? pageUrl).toString(),
+		inLanguage: 'en'
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: 'André Vollrath',
+		url: new URL('/', siteUrl ?? pageUrl).toString(),
+		jobTitle: 'Frontend Developer',
+		sameAs: socialLinks
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: breadcrumbItems
+	}
+]
+
+const mergedStructuredData = [...defaultStructuredData, ...structuredData]
 ---
 
 <title>{title}</title>
@@ -54,4 +114,12 @@ const locale = 'en_US'
 <meta name="twitter:card" content={twitterCard} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
+{twitterSite && <meta name="twitter:site" content={twitterSite} />}
+{twitterCreator && <meta name="twitter:creator" content={twitterCreator} />}
 {resolvedOgImage && <meta name="twitter:image" content={resolvedOgImage} />}
+
+{
+	mergedStructuredData.map((entry) => (
+		<script type="application/ld+json" set:html={JSON.stringify(entry)} />
+	))
+}

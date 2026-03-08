@@ -48,32 +48,32 @@ const latestPost = allPosts[0]
 			>
 				<span class="text-base text-gray-400">👋 vollrath.dev</span>
 			</div>
+
 			<h1
 				class="hero-header text-gradient text-center font-header text-5xl sm:text-6xl md:mr-4 lg:text-left lg:text-8xl"
 			>
 				Hi, I’m André.
 			</h1>
+			<span class="mt-2 text-lg text-gray-400 lg:text-left"
+				>UI/UX Designer | Front-End Developer</span
+			>
+
 			<p
 				class="intro-text z-10 my-4 max-w-screen-md rounded-xl bg-white/75 py-2 pr-2 text-xs backdrop-blur-sm backdrop-brightness-125 max-2xl:max-w-full sm:my-6 sm:text-left sm:text-2xl/relaxed 3xl:max-w-screen-lg 3xl:text-3xl/relaxed"
 			>
-				With a <strong class="font-semibold">strong foundation</strong> in
-				<strong class="font-semibold">design</strong> and
-				<strong class="font-semibold">front-end development</strong>, I specialize in crafting <strong
-					class="font-semibold">modern</strong
-				>,
-				<strong class="font-semibold">user-centric solutions</strong>. My work combines <strong
-					class="font-semibold">creativity</strong
-				>,
-				<strong class="font-semibold">technology</strong>, and a
-				<strong class="font-semibold">global perspective</strong> to help teams innovate and bring their
-				ideas to life through
-				<strong class="font-semibold">engaging digital experiences</strong>.
+				I’m a <strong class="font-semibold">designer who likes to build things</strong>. With a
+				background in <strong class="font-semibold">visual design</strong> and
+				<strong class="font-semibold">front-end development</strong>, I create
+				<strong class="font-semibold">thoughtful digital products</strong> that turn complex systems
+				into <strong class="font-semibold">clear and intuitive user experiences</strong>.
 			</p>
+
 			<div class="cta-button flex justify-center">
 				<button
 					type="button"
-					class="contact-btn shimmer flex items-center rounded-full bg-magenta px-10 py-4 text-center font-semibold text-white transition duration-300 ease-[cubic-bezier(0.31,-0.105,0.43,2.4)] hover:scale-105 sm:text-3xl/relaxed"
-					>Get in touch
+					class="contact-btn shimmer bg-magenta flex items-center rounded-full px-10 py-4 text-center font-semibold text-white transition duration-300 ease-[cubic-bezier(0.31,-0.105,0.43,2.4)] hover:scale-105 sm:text-3xl/relaxed"
+				>
+					Get in touch
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="float ml-2 h-6 w-6 stroke-white"
@@ -95,7 +95,8 @@ const latestPost = allPosts[0]
 				alt="André's Avatar"
 				class="avatar-image"
 				decoding="async"
-				loading="lazy"
+				loading="eager"
+				fetchpriority="high"
 			/>
 			<div class="eye-container">
 				<Image src={eyeImage} alt="Left Eye" class="eye-left" decoding="async" loading="lazy" />
@@ -199,7 +200,7 @@ const latestPost = allPosts[0]
 
 		<div class="blog-content">
 			<h3
-				class="long-transition mb-6 text-center font-body text-xs font-semibold text-magenta sm:text-base 3xl:text-lg"
+				class="long-transition text-magenta mb-6 text-center font-body text-xs font-semibold sm:text-base 3xl:text-lg"
 			>
 				{latestPost.frontmatter.title}
 			</h3>
@@ -218,7 +219,7 @@ const latestPost = allPosts[0]
 			/>
 			<div class="flex justify-center">
 				<button
-					class="mt-12 rounded-full bg-magenta px-10 py-4 text-lg font-semibold text-white transition-transform hover:scale-105"
+					class="bg-magenta mt-12 rounded-full px-10 py-4 text-lg font-semibold text-white transition-transform hover:scale-105"
 					>Read blog post</button
 				>
 			</div>
@@ -253,18 +254,17 @@ const latestPost = allPosts[0]
 			</a>
 		</div>
 		<p class="about-content text-xs sm:text-base 3xl:text-lg">
-			Hi there! I'm <strong class="font-semibold">André Vollrath</strong>—a dedicated designer and
-			front-end developer eager to connect and collaborate. I thrive on transforming creative ideas
-			into impactful digital experiences. With more than ten years of hands-on experience, I blend
-			creative vision with technical expertise to craft engaging websites, dynamic web applications,
-			and beyond.
+			Hi, I'm <strong class="font-semibold">André Vollrath</strong>, a UI/UX designer and front-end
+			developer based in Helsinki. With a background in digital and print media design and over ten
+			years of experience working in agencies and SaaS teams, I focus on designing clear interfaces
+			for digital products and bringing them to life in the browser.
 		</p>
 		<br />
 		<p class="about-content text-xs sm:text-base 3xl:text-lg">
-			My passion for <strong class="font-semibold">design</strong> drives me to continuously explore
-			and innovate. Whether creating compelling visual content or crafting intuitive user interfaces,
-			I push creative boundaries to deliver visually stunning and user-friendly solutions. I'm excited
-			to bring my enthusiasm, attention to detail, and collaborative approach to new challenges and opportunities.
+			I enjoy simplifying complex systems and turning them into intuitive user experiences. My work
+			combines visual design, UX thinking, and front-end development, allowing me to collaborate
+			closely with engineers and ensure that ideas translate smoothly from concept to working
+			software.
 		</p>
 	</div>
 
@@ -355,20 +355,20 @@ const latestPost = allPosts[0]
 		</h2>
 		<Marquee
 			words={[
+				'UI/UX Design',
+				'Figma',
 				'React',
-				'HTML5',
+				'JavaScript',
+				'HTML & CSS',
 				'Tailwind',
-				'Astro.js',
+				'LESS / SASS',
+				'Astro',
 				'GSAP',
 				'Three.js',
-				'CSS3',
-				'SASS',
-				'LESS',
-				'Git',
-				'Webpack',
-				'Vite',
-				'Node.js',
-				'ES6/ESNext'
+				'Blender',
+				'Design Systems',
+				'Responsive Design',
+				'Git'
 			]}
 		/>
 	</div>
@@ -384,7 +384,12 @@ const latestPost = allPosts[0]
 		</h2>
 		<div class="flex flex-1 items-center justify-center">
 			<div class="grid grid-cols-2 gap-2">
-				<a href="https://github.com/avollrath" target="_blank" rel="noopener noreferrer" title="GitHub">
+				<a
+					href="https://github.com/avollrath"
+					target="_blank"
+					rel="noopener noreferrer"
+					title="GitHub"
+				>
 					<Image
 						src={githubLogo}
 						alt="Github Logo"
@@ -393,7 +398,12 @@ const latestPost = allPosts[0]
 						loading="lazy"
 					/>
 				</a>
-				<a href="https://www.instagram.com/charliefeatherlight/" target="_blank" rel="noopener noreferrer" title="Instagram">
+				<a
+					href="https://www.instagram.com/charliefeatherlight/"
+					target="_blank"
+					rel="noopener noreferrer"
+					title="Instagram"
+				>
 					<Image
 						src={instagramLogo}
 						alt="Instagram Logo"
@@ -402,7 +412,12 @@ const latestPost = allPosts[0]
 						loading="lazy"
 					/>
 				</a>
-				<a href="https://www.linkedin.com/in/andrevollrath/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+				<a
+					href="https://www.linkedin.com/in/andrevollrath/"
+					target="_blank"
+					rel="noopener noreferrer"
+					title="LinkedIn"
+				>
 					<Image
 						src={linkedinLogo}
 						alt="LinkedIn Logo"
@@ -633,5 +648,3 @@ const latestPost = allPosts[0]
 		}
 	}
 </style>
-
-

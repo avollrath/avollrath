@@ -1,14 +1,14 @@
 ---
-// Shuffle the array and ensure adjacent items are not both highlighted
-function shuffleAndDistribute(words) {
-	// Create a deep copy of the words array to avoid mutation
-	const shuffledWords = words.slice()
+import {
+	createSeededRng,
+	hashStringToSeed,
+	shuffleDeterministic
+} from '../scripts/deterministicShuffle.js'
 
-	// Shuffling the array
-	for (let i = shuffledWords.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1))
-		;[shuffledWords[i], shuffledWords[j]] = [shuffledWords[j], shuffledWords[i]]
-	}
+// Shuffle the array and ensure adjacent items are not both highlighted
+function shuffleAndDistribute(words, seed) {
+	const shuffledWords = shuffleDeterministic(words, seed)
+	const colorRng = createSeededRng(seed ^ 0x9e3779b9)
 
 	// Ensuring no adjacent highlighted items
 	for (let i = 0; i < shuffledWords.length - 1; i++) {
@@ -24,11 +24,13 @@ function shuffleAndDistribute(words) {
 	return shuffledWords.map((word, index) => ({
 		text: word,
 		isHighlighted: index % 2 === 0,
-		color: Math.random() < 0.5 ? 'text-magenta' : 'text-dark-text'
+		color: colorRng() < 0.5 ? 'text-magenta' : 'text-dark-text'
 	}))
 }
 
 const { words } = Astro.props
+const buildSeed = import.meta.env.PUBLIC_BUILD_SEED || 'default'
+const baseSeed = hashStringToSeed(`${Astro.url.pathname}|marquee|${buildSeed}`)
 ---
 
 <section
@@ -36,7 +38,7 @@ const { words } = Astro.props
 >
 	{
 		Array.from({ length: 5 }).map((_, index) => {
-			const processedWords = shuffleAndDistribute([...words])
+			const processedWords = shuffleAndDistribute(words, baseSeed + index * 97)
 			return (
 				<div class={`marquee ${index % 2 === 0 ? '' : 'marquee--reverse'}`}>
 					<ul class="marquee__content">

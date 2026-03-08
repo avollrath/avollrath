@@ -323,12 +323,31 @@ input[type='reset'],
 		overflow-y: auto;
 		overscroll-behavior: contain;
 		touch-action: none;
+		opacity: 0;
+		transform: translateY(10px) scale(0.985);
+		transition:
+			opacity 200ms ease-out,
+			transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+		pointer-events: none;
+	}
+
+	#nav-menu.mobile-menu-active.mobile-menu-visible {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+		pointer-events: auto;
 	}
 
 	#nav-menu.mobile-menu-active .nav-item {
 		width: 100%;
 		padding-top: 0.35rem;
 		padding-bottom: 0.35rem;
+		opacity: 0;
+		transform: translateY(14px) scale(0.98);
+	}
+
+	#nav-menu.mobile-menu-active.mobile-menu-visible .nav-item {
+		animation: mobileMenuItemIn 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+		animation-delay: calc(50ms + (var(--menu-index, 0) * 45ms));
 	}
 
 	#nav-menu.mobile-menu-active #menu-close {
@@ -338,5 +357,33 @@ input[type='reset'],
 		right: 1rem;
 		margin: 0;
 		z-index: 1302;
+		opacity: 0;
+		transform: scale(0.85) rotate(-12deg);
+	}
+
+	#nav-menu.mobile-menu-active.mobile-menu-visible #menu-close {
+		animation: mobileMenuCloseIn 260ms cubic-bezier(0.22, 1, 0.36, 1) 30ms both;
+	}
+}
+
+@keyframes mobileMenuItemIn {
+	from {
+		opacity: 0;
+		transform: translateY(14px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes mobileMenuCloseIn {
+	from {
+		opacity: 0;
+		transform: scale(0.85) rotate(-12deg);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1) rotate(0deg);
 	}
 }

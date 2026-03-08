@@ -9,6 +9,30 @@ import { resolveImage } from '../scripts/resolveImage'
 const { frontmatter } = Astro.props
 
 resolveImage(frontmatter)
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()
+const authorName = frontmatter.author || 'André Vollrath'
+const articleStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: frontmatter.title,
+	description: frontmatter.description,
+	datePublished: new Date(frontmatter.pubDate).toISOString(),
+	author: {
+		'@type': 'Person',
+		name: authorName
+	},
+	mainEntityOfPage: canonicalUrl,
+	url: canonicalUrl,
+	image: frontmatter.image?.src
+		? new URL(
+				typeof frontmatter.image.src === 'string'
+					? frontmatter.image.src
+					: frontmatter.image.src.src,
+				Astro.site ?? Astro.url
+			).toString()
+		: undefined
+}
 ---
 
 <Layout
@@ -16,12 +40,13 @@ resolveImage(frontmatter)
 	description={frontmatter.description}
 	seo={{
 		type: 'article',
-		author: frontmatter.author,
+		author: authorName,
 		publishedTime: frontmatter.pubDate,
 		tags: frontmatter.tags ?? [],
 		ogImage: frontmatter.image?.src,
 		ogImageAlt: frontmatter.image?.alt ?? frontmatter.title,
-		siteName: 'Andre Vollrath'
+		siteName: 'Andre Vollrath',
+		structuredData: [articleStructuredData]
 	}}
 >
 	<div
@@ -55,7 +80,8 @@ resolveImage(frontmatter)
 						alt={frontmatter.image.alt || 'Blog Post Image'}
 						class="mb-6 w-full rounded-xl"
 						decoding="async"
-						loading="lazy"
+						loading="eager"
+						fetchpriority="high"
 					/>
 				) : (
 					<p>No image available</p>

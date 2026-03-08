@@ -3,6 +3,27 @@ import { readSpotifyCache, writeSpotifyCache } from './utils.js'
 
 let currentAccessToken = import.meta.env.SPOTIFY_ACCESS_TOKEN
 
+function getPrimaryArtistKey(track) {
+	const primaryArtist = track?.artists?.[0]
+	if (!primaryArtist) return null
+	return primaryArtist.id || primaryArtist.name?.toLowerCase() || null
+}
+
+function getUniqueArtistsTopTracks(tracks, limit = 10) {
+	const seenArtists = new Set()
+	const uniqueTracks = []
+
+	for (const track of tracks) {
+		const artistKey = getPrimaryArtistKey(track)
+		if (!artistKey || seenArtists.has(artistKey)) continue
+		seenArtists.add(artistKey)
+		uniqueTracks.push(track)
+		if (uniqueTracks.length >= limit) break
+	}
+
+	return uniqueTracks
+}
+
 // Function to refresh the access token
 async function refreshAccessToken(refreshToken) {
 	const clientId = import.meta.env.SPOTIFY_CLIENT_ID
@@ -33,7 +54,7 @@ async function refreshAccessToken(refreshToken) {
 async function getTopTracks(refreshToken) {
 	try {
 		let response = await fetch(
-			'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10',
+			'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50',
 			{
 				headers: {
 					Authorization: `Bearer ${currentAccessToken}`
@@ -45,7 +66,7 @@ async function getTopTracks(refreshToken) {
 		if (response.status === 401) {
 			await refreshAccessToken(refreshToken)
 			response = await fetch(
-				'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10',
+				'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50',
 				{
 					headers: { Authorization: `Bearer ${currentAccessToken}` }
 				}
@@ -59,13 +80,14 @@ async function getTopTracks(refreshToken) {
 
 		// Succeeded, parse JSON
 		const data = await response.json()
+		const uniqueArtistTracks = getUniqueArtistsTopTracks(data.items, 10)
 
-		await writeSpotifyCache(data.items)
-		const albumNames = data.items.map((track) => track.album.name).join(', ')
+		await writeSpotifyCache(uniqueArtistTracks)
+		const albumNames = uniqueArtistTracks.map((track) => track.album.name).join(', ')
 
 		console.log(albumNames)
 
-		return data.items
+		return uniqueArtistTracks
 	} catch (err) {
 		console.error('Error fetching top tracks:', err)
 

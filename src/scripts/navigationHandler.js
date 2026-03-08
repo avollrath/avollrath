@@ -22,6 +22,9 @@ export function initializeNavigation() {
 	// Store last underline position
 	let lastUnderlinePosition = { left: 0, width: 0 }
 	let scrollLockY = 0
+	let lastFocusedBeforeMenuOpen = null
+	let mobileMenuKeydownHandler = null
+	let mobileMenuCloseTimer = null
 
 	function normalizePath(pathname) {
 		if (!pathname) return '/'
@@ -107,40 +110,114 @@ export function initializeNavigation() {
 		})
 	}
 
-	function closeMobileMenu() {
+	function closeMobileMenu(immediate = false) {
 		const hamburger = document.getElementById('hamburger')
 		const navMenu = document.getElementById('nav-menu')
 		const body = document.body
 
 		if (!hamburger || !navMenu) return
 
+		if (mobileMenuCloseTimer) {
+			clearTimeout(mobileMenuCloseTimer)
+			mobileMenuCloseTimer = null
+		}
+
 		hamburger.classList.remove('active')
-		navMenu.classList.add('hidden')
-		navMenu.classList.remove('mobile-menu-active')
+		navMenu.classList.remove('mobile-menu-visible')
 		hamburger.setAttribute('aria-expanded', 'false')
+		navMenu.setAttribute('aria-hidden', 'true')
 		body.style.overflow = ''
 		body.style.position = ''
 		body.style.top = ''
 		body.style.width = ''
+		if (mobileMenuKeydownHandler) {
+			document.removeEventListener('keydown', mobileMenuKeydownHandler)
+			mobileMenuKeydownHandler = null
+		}
 		window.scrollTo(0, scrollLockY)
+
+		if (lastFocusedBeforeMenuOpen && typeof lastFocusedBeforeMenuOpen.focus === 'function') {
+			lastFocusedBeforeMenuOpen.focus()
+		} else {
+			hamburger.focus()
+		}
+		lastFocusedBeforeMenuOpen = null
+
+		const finalizeClose = () => {
+			navMenu.classList.add('hidden')
+			navMenu.classList.remove('mobile-menu-active')
+		}
+
+		if (immediate) {
+			finalizeClose()
+		} else {
+			mobileMenuCloseTimer = setTimeout(() => {
+				finalizeClose()
+				mobileMenuCloseTimer = null
+			}, 220)
+		}
 	}
 
 	function openMobileMenu() {
 		const hamburger = document.getElementById('hamburger')
 		const navMenu = document.getElementById('nav-menu')
+		const menuClose = document.getElementById('menu-close')
 		const body = document.body
 
 		if (!hamburger || !navMenu) return
 
+		if (mobileMenuCloseTimer) {
+			clearTimeout(mobileMenuCloseTimer)
+			mobileMenuCloseTimer = null
+		}
+
+		lastFocusedBeforeMenuOpen = document.activeElement
 		scrollLockY = window.scrollY || window.pageYOffset || 0
 		hamburger.classList.add('active')
 		navMenu.classList.remove('hidden')
 		navMenu.classList.add('mobile-menu-active')
 		hamburger.setAttribute('aria-expanded', 'true')
+		navMenu.setAttribute('aria-hidden', 'false')
 		body.style.overflow = 'hidden'
 		body.style.position = 'fixed'
 		body.style.top = `-${scrollLockY}px`
 		body.style.width = '100%'
+		requestAnimationFrame(() => {
+			navMenu.classList.add('mobile-menu-visible')
+		})
+
+		const focusables = navMenu.querySelectorAll(
+			'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+		)
+		const firstFocusable = focusables[0]
+		const lastFocusable = focusables[focusables.length - 1]
+
+		mobileMenuKeydownHandler = (event) => {
+			if (event.key === 'Escape') {
+				event.preventDefault()
+				closeMobileMenu()
+				return
+			}
+
+			if (event.key !== 'Tab' || focusables.length === 0) return
+
+			if (event.shiftKey && document.activeElement === firstFocusable) {
+				event.preventDefault()
+				lastFocusable.focus()
+			} else if (!event.shiftKey && document.activeElement === lastFocusable) {
+				event.preventDefault()
+				firstFocusable.focus()
+			}
+		}
+		document.addEventListener('keydown', mobileMenuKeydownHandler)
+
+		if (menuClose) {
+			menuClose.focus()
+		} else if (firstFocusable) {
+			firstFocusable.focus()
+		} else {
+			navMenu.focus()
+		}
 	}
 
 	// Mobile menu handler
@@ -166,13 +243,13 @@ export function initializeNavigation() {
 		}
 
 		if (menuClose && menuClose.dataset.navBound !== 'true') {
-			addManagedListener(menuClose, 'click', closeMobileMenu)
+			addManagedListener(menuClose, 'click', () => closeMobileMenu())
 			menuClose.dataset.navBound = 'true'
 		}
 
 		if (navMenu.dataset.navLinksBound !== 'true') {
 			navMenu.querySelectorAll('a').forEach((link) => {
-				link.addEventListener('click', closeMobileMenu)
+				addManagedListener(link, 'click', () => closeMobileMenu(true))
 			})
 			navMenu.dataset.navLinksBound = 'true'
 		}
@@ -214,7 +291,7 @@ export function initializeNavigation() {
 	// Event listeners
 	const handleBeforeSwap = () => {
 		saveUnderlinePosition()
-		closeMobileMenu()
+		closeMobileMenu(true)
 	}
 	addManagedListener(document, 'astro:before-swap', handleBeforeSwap)
 	addManagedListener(document, 'astro:after-swap', initializeAll)
