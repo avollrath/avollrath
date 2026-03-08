@@ -43,7 +43,7 @@ export default {
 				'dark-accent': '#959595', // Adjust the hex value to match your design
 				'dark-text': '#038cd0', // Adjust the hex value to match your design
 				white: '#FFF',
-				orange: '#FF5FF6'
+				magenta: '#FF5FF6'
 			},
 
 			fontFamily: {

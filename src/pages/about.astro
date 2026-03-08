@@ -7,6 +7,11 @@ import TechStack from '../components/TechStack.astro'
 <Layout
 	title="About André Vollrath"
 	description="Frontend developer passionate about great user experiences."
+	seo={{
+		ogImage: '/about2.jpg',
+		ogImageAlt: 'Portrait themed preview of the About page',
+		siteName: 'Andre Vollrath'
+	}}
 >
 	<div
 		class="about-image border-gradient col-span-1 hidden flex-col items-center rounded-lg from-dark-card to-darker-card bg-cover bg-center bg-no-repeat shadow-lg dark:bg-gradient-to-r xl:col-span-1 xl:flex 2xl:col-span-4"
@@ -41,8 +46,9 @@ import TechStack from '../components/TechStack.astro'
 				Currently, I am working at
 				<a
 					href="https://talentadore.com"
-					class="font-semibold text-orange underline"
-					target="_blank">TalentAdore</a
+					class="font-semibold text-magenta underline"
+					target="_blank"
+					rel="noopener noreferrer">TalentAdore</a
 				>
 				as a front-end developer, where I continue to apply and enhance my skills in this dynamic field.
 			</p>
@@ -57,7 +63,7 @@ import TechStack from '../components/TechStack.astro'
 
 			<div class="p-2 sm:p-6">
 				<h3
-					class="mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-orange px-6 py-2 text-center text-xl font-semibold text-orange"
+					class="mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-magenta px-6 py-2 text-center text-xl font-semibold text-magenta"
 				>
 					My toolbox
 				</h3>
@@ -81,7 +87,7 @@ import TechStack from '../components/TechStack.astro'
 			</p>
 
 			<p>
-				My <a href="/blog" class="font-semibold text-orange underline">blog</a> is a reflection of my
+				My <a href="/blog" class="font-semibold text-magenta underline">blog</a> is a reflection of my
 				diverse interests and projects in the tech world, covering a range of topics and explorations.
 				It's where I share my insights, learnings, and experiences with a wider audience.
 			</p>
@@ -101,3 +107,5 @@ import TechStack from '../components/TechStack.astro'
 
 	<FavoriteBooks bookWidth="w-20" />
 </Layout>
+
+

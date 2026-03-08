@@ -1,0 +1,57 @@
+---
+const {
+	title,
+	description,
+	siteName = 'Andre Vollrath',
+	type = 'website',
+	ogImage = '/about2.jpg',
+	ogImageAlt = 'Andre Vollrath portfolio preview',
+	twitterCard = 'summary_large_image',
+	noindex = false,
+	canonical,
+	author,
+	publishedTime,
+	modifiedTime,
+	tags = []
+} = Astro.props
+
+const siteUrl = Astro.site
+const pageUrl = Astro.url
+
+const canonicalUrl = canonical
+	? new URL(canonical, siteUrl ?? pageUrl).toString()
+	: siteUrl
+		? new URL(pageUrl.pathname, siteUrl).toString()
+		: pageUrl.toString()
+
+const resolvedOgImage = ogImage
+	? new URL(typeof ogImage === 'string' ? ogImage : ogImage.src, siteUrl ?? pageUrl).toString()
+	: undefined
+
+const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow'
+const locale = 'en_US'
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robotsContent} />
+<meta name="author" content={author ?? siteName} />
+<link rel="canonical" href={canonicalUrl} />
+
+<meta property="og:locale" content={locale} />
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+{resolvedOgImage && <meta property="og:image" content={resolvedOgImage} />}
+{resolvedOgImage && <meta property="og:image:alt" content={ogImageAlt} />}
+{publishedTime && <meta property="article:published_time" content={new Date(publishedTime).toISOString()} />}
+{modifiedTime && <meta property="article:modified_time" content={new Date(modifiedTime).toISOString()} />}
+{author && <meta property="article:author" content={author} />}
+{tags.map((tag) => <meta property="article:tag" content={tag} />)}
+
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{resolvedOgImage && <meta name="twitter:image" content={resolvedOgImage} />}

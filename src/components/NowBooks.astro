@@ -1,8 +1,10 @@
 ---
 // Import the JSON data and the date prop
 import nowBooksData from '../lib/now_books.json'
+import { resolveBookCoverUrl, BOOK_COVER_FALLBACK } from '../scripts/bookCoverUrl.js'
 const booksDate = Astro.props.booksDate
 const booksForSelectedDate = nowBooksData[booksDate] || []
+const fallbackCover = BOOK_COVER_FALLBACK
 
 ---
 
@@ -16,9 +18,13 @@ const booksForSelectedDate = nowBooksData[booksDate] || []
 					booksForSelectedDate.map((book) => (
 						<div key={book.isbn} class="flex items-center mb-12">
 							<img
-								src={book.coverURL}
+								src={resolveBookCoverUrl(book.coverURL, fallbackCover)}
 								alt={`${book.title} Book Cover`}
 								class="w-20 h-auto mr-8 rounded shadow-lg transition duration-300 ease-in-out hover:scale-150"
+								loading="lazy"
+								decoding="async"
+								referrerpolicy="no-referrer"
+								onError={(e) => (e.currentTarget.src = fallbackCover)}
 							/>
 							<div>
 								<p class="text-2xl font-semibold text-dark-text">{book.title}</p>

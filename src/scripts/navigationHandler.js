@@ -1,7 +1,62 @@
 // Create a new file: src/scripts/navigationHandler.js
+let isNavigationInitialized = false
+let navigationCleanupFns = []
+
+function addManagedListener(element, eventName, handler, options) {
+	if (!element) return
+	element.addEventListener(eventName, handler, options)
+	navigationCleanupFns.push(() => {
+		element.removeEventListener(eventName, handler, options)
+	})
+}
+
+function cleanupNavigationListeners() {
+	navigationCleanupFns.forEach((fn) => fn())
+	navigationCleanupFns = []
+}
+
 export function initializeNavigation() {
+	if (isNavigationInitialized) return
+	isNavigationInitialized = true
+
 	// Store last underline position
 	let lastUnderlinePosition = { left: 0, width: 0 }
+	let scrollLockY = 0
+
+	function normalizePath(pathname) {
+		if (!pathname) return '/'
+		const trimmed = pathname.replace(/\/+$/, '')
+		return trimmed === '' ? '/' : trimmed
+	}
+
+	function isActiveLink(link, currentPath) {
+		const href = link.getAttribute('href') || ''
+		const hrefPath = normalizePath(href)
+		if (hrefPath === currentPath) return true
+
+		// Blog section should remain active for individual post pages.
+		if (link.id === 'blog-link' && currentPath.startsWith('/posts')) return true
+
+		return false
+	}
+
+	function updateActiveNavItem() {
+		const currentPath = normalizePath(window.location.pathname)
+		const navItems = document.querySelectorAll('.nav-item')
+
+		navItems.forEach((item) => {
+			const active = isActiveLink(item, currentPath)
+			item.classList.toggle('gradient-underline', active)
+			item.classList.toggle('text-dark-text', active)
+			item.classList.toggle('text-gray-400', !active)
+			item.classList.toggle('hover:text-dark-text', !active)
+			if (active) {
+				item.setAttribute('aria-current', 'page')
+			} else {
+				item.removeAttribute('aria-current')
+			}
+		})
+	}
 
 	function saveUnderlinePosition() {
 		const underline = document.querySelector('#nav-underline')
@@ -15,6 +70,8 @@ export function initializeNavigation() {
 	}
 
 	function updateUnderline() {
+		updateActiveNavItem()
+
 		const underline = document.querySelector('#nav-underline')
 		const activeItem = document.querySelector('.nav-item.gradient-underline')
 
@@ -50,26 +107,74 @@ export function initializeNavigation() {
 		})
 	}
 
+	function closeMobileMenu() {
+		const hamburger = document.getElementById('hamburger')
+		const navMenu = document.getElementById('nav-menu')
+		const body = document.body
+
+		if (!hamburger || !navMenu) return
+
+		hamburger.classList.remove('active')
+		navMenu.classList.add('hidden')
+		navMenu.classList.remove('mobile-menu-active')
+		hamburger.setAttribute('aria-expanded', 'false')
+		body.style.overflow = ''
+		body.style.position = ''
+		body.style.top = ''
+		body.style.width = ''
+		window.scrollTo(0, scrollLockY)
+	}
+
+	function openMobileMenu() {
+		const hamburger = document.getElementById('hamburger')
+		const navMenu = document.getElementById('nav-menu')
+		const body = document.body
+
+		if (!hamburger || !navMenu) return
+
+		scrollLockY = window.scrollY || window.pageYOffset || 0
+		hamburger.classList.add('active')
+		navMenu.classList.remove('hidden')
+		navMenu.classList.add('mobile-menu-active')
+		hamburger.setAttribute('aria-expanded', 'true')
+		body.style.overflow = 'hidden'
+		body.style.position = 'fixed'
+		body.style.top = `-${scrollLockY}px`
+		body.style.width = '100%'
+	}
+
 	// Mobile menu handler
 	// Add this to your initMobileMenu function
 	function initMobileMenu() {
 		const hamburger = document.getElementById('hamburger')
 		const navMenu = document.getElementById('nav-menu')
-		const body = document.body
+		const menuClose = document.getElementById('menu-close')
 
-		if (hamburger && navMenu) {
-			hamburger.addEventListener('click', () => {
-				hamburger.classList.toggle('active')
-				navMenu.classList.toggle('invisible')
-				navMenu.classList.toggle('mobile-menu-active')
+		if (!hamburger || !navMenu) return
 
-				// Update ARIA attributes
+		if (hamburger.dataset.navBound !== 'true') {
+			const handleHamburgerClick = () => {
 				const isExpanded = hamburger.getAttribute('aria-expanded') === 'true'
-				hamburger.setAttribute('aria-expanded', !isExpanded)
+				if (isExpanded) {
+					closeMobileMenu()
+				} else {
+					openMobileMenu()
+				}
+			}
+			addManagedListener(hamburger, 'click', handleHamburgerClick)
+			hamburger.dataset.navBound = 'true'
+		}
 
-				// Toggle body scroll
-				body.style.overflow = isExpanded ? '' : 'hidden'
+		if (menuClose && menuClose.dataset.navBound !== 'true') {
+			addManagedListener(menuClose, 'click', closeMobileMenu)
+			menuClose.dataset.navBound = 'true'
+		}
+
+		if (navMenu.dataset.navLinksBound !== 'true') {
+			navMenu.querySelectorAll('a').forEach((link) => {
+				link.addEventListener('click', closeMobileMenu)
 			})
+			navMenu.dataset.navLinksBound = 'true'
 		}
 	}
 
@@ -92,7 +197,10 @@ export function initializeNavigation() {
 
 		const clickableImages = document.querySelectorAll('.iframe-trigger')
 		clickableImages.forEach((img) => {
-			img.addEventListener('click', () => handleImageClick(img))
+			if (img.dataset.iframeBound === 'true') return
+			const onImageClick = () => handleImageClick(img)
+			addManagedListener(img, 'click', onImageClick)
+			img.dataset.iframeBound = 'true'
 		})
 	}
 
@@ -104,13 +212,18 @@ export function initializeNavigation() {
 	}
 
 	// Event listeners
-	document.addEventListener('astro:before-swap', saveUnderlinePosition)
-	document.addEventListener('astro:after-swap', initializeAll)
-	window.addEventListener('resize', updateUnderline)
+	const handleBeforeSwap = () => {
+		saveUnderlinePosition()
+		closeMobileMenu()
+	}
+	addManagedListener(document, 'astro:before-swap', handleBeforeSwap)
+	addManagedListener(document, 'astro:after-swap', initializeAll)
+	addManagedListener(window, 'resize', updateUnderline)
+	addManagedListener(window, 'pagehide', cleanupNavigationListeners)
 
 	// Initial setup
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initializeAll)
+		addManagedListener(document, 'DOMContentLoaded', initializeAll)
 	} else {
 		initializeAll()
 	}

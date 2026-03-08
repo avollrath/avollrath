@@ -3,9 +3,16 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { getResolvedPosts } from '../scripts/getResolvedPosts';
 const allPosts = await getResolvedPosts();
+const latestPost = allPosts[0];
 ---
 
-<Layout title="Blog by André Vollrath" description="Thoughts on frontend development, game design, creative coding, and everything else.">
+<Layout title="Blog by André Vollrath" description="Thoughts on frontend development, game design, creative coding, and everything else."
+    seo={{
+      ogImage: latestPost?.frontmatter?.image?.src ?? '/about2.jpg',
+      ogImageAlt: latestPost?.frontmatter?.image?.alt ?? 'Blog page preview image',
+      siteName: 'Andre Vollrath'
+    }}
+>
     <div class="flex flex-col col-span-3 blog-text-container xl:col-span-1 2xl:col-span-3">
         <div
             class="flex flex-col items-center p-6 mb-4 text-base text-white rounded-md shadow-lg long-transition sm:rounded-lg bg-about-gradient sm:p-12 sm:text-md 3xl:text-lg"
@@ -50,7 +57,7 @@ const allPosts = await getResolvedPosts();
     <!-- Text Content Container with flex-grow -->
     <div class="flex flex-col items-center justify-center flex-1 w-full p-6 sm:p-12">
       <div>
-        <h2 class="mb-4 text-sm tracking-wide transition duration-500 ease-in-out origin-bottom-left md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-header group-hover:-translate-y-2 group-hover:text-orange">
+        <h2 class="mb-4 text-sm tracking-wide transition duration-500 ease-in-out origin-bottom-left md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-header group-hover:-translate-y-2 group-hover:text-magenta">
           {post.frontmatter.title}
         </h2>
         <p class="text-xs text-gray-400 lg:text-base">
@@ -65,3 +72,5 @@ const allPosts = await getResolvedPosts();
     ))}
     </div>
 </Layout>
+
+

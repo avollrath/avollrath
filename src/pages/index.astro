@@ -32,6 +32,11 @@ const latestPost = allPosts[0]
 <Layout
 	title="André Vollrath – Frontend Developer | React & UI Engineer"
 	description="Experienced frontend developer crafting seamless and scalable web experiences. Specializing in modern UI development."
+	seo={{
+		ogImage: latestRenderImage,
+		ogImageAlt: 'Braun HF3 render from Andre Vollrath portfolio',
+		siteName: 'Andre Vollrath'
+	}}
 >
 	<!-- Intro Section -->
 	<div
@@ -65,8 +70,9 @@ const latestPost = allPosts[0]
 				<strong class="font-semibold">engaging digital experiences</strong>.
 			</p>
 			<div class="cta-button flex justify-center">
-				<a
-					class="contact-btn shimmer flex items-center rounded-full bg-orange px-10 py-4 text-center font-semibold text-white transition duration-300 ease-[cubic-bezier(0.31,-0.105,0.43,2.4)] hover:scale-105 sm:text-3xl/relaxed"
+				<button
+					type="button"
+					class="contact-btn shimmer flex items-center rounded-full bg-magenta px-10 py-4 text-center font-semibold text-white transition duration-300 ease-[cubic-bezier(0.31,-0.105,0.43,2.4)] hover:scale-105 sm:text-3xl/relaxed"
 					>Get in touch
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +86,7 @@ const latestPost = allPosts[0]
 							stroke-width="3"
 							d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
 					</svg>
-				</a>
+				</button>
 			</div>
 		</div>
 		<div class="avatar-wrapper max-lg:hidden" id="face">
@@ -193,7 +199,7 @@ const latestPost = allPosts[0]
 
 		<div class="blog-content">
 			<h3
-				class="long-transition mb-6 text-center font-body text-xs font-semibold text-orange sm:text-base 3xl:text-lg"
+				class="long-transition mb-6 text-center font-body text-xs font-semibold text-magenta sm:text-base 3xl:text-lg"
 			>
 				{latestPost.frontmatter.title}
 			</h3>
@@ -212,7 +218,7 @@ const latestPost = allPosts[0]
 			/>
 			<div class="flex justify-center">
 				<button
-					class="mt-12 rounded-full bg-orange px-10 py-4 text-lg font-semibold text-white transition-transform hover:scale-105"
+					class="mt-12 rounded-full bg-magenta px-10 py-4 text-lg font-semibold text-white transition-transform hover:scale-105"
 					>Read blog post</button
 				>
 			</div>
@@ -322,6 +328,7 @@ const latestPost = allPosts[0]
 							<a
 								href={track.external_urls.spotify}
 								target="_blank"
+								rel="noopener noreferrer"
 								title={`<strong class="font-semibold">${track.name}</strong> - ${track.artists.map((artist) => artist.name).join(', ')}`}
 							>
 								<img
@@ -377,7 +384,7 @@ const latestPost = allPosts[0]
 		</h2>
 		<div class="flex flex-1 items-center justify-center">
 			<div class="grid grid-cols-2 gap-2">
-				<a href="https://github.com/avollrath" target="_blank" title="GitHub">
+				<a href="https://github.com/avollrath" target="_blank" rel="noopener noreferrer" title="GitHub">
 					<Image
 						src={githubLogo}
 						alt="Github Logo"
@@ -386,7 +393,7 @@ const latestPost = allPosts[0]
 						loading="lazy"
 					/>
 				</a>
-				<a href="https://www.instagram.com/charliefeatherlight/" target="_blank" title="Instagram">
+				<a href="https://www.instagram.com/charliefeatherlight/" target="_blank" rel="noopener noreferrer" title="Instagram">
 					<Image
 						src={instagramLogo}
 						alt="Instagram Logo"
@@ -395,7 +402,7 @@ const latestPost = allPosts[0]
 						loading="lazy"
 					/>
 				</a>
-				<a href="https://www.linkedin.com/in/andrevollrath/" target="_blank" title="LinkedIn">
+				<a href="https://www.linkedin.com/in/andrevollrath/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
 					<Image
 						src={linkedinLogo}
 						alt="LinkedIn Logo"
@@ -407,6 +414,7 @@ const latestPost = allPosts[0]
 				<a
 					href="https://open.spotify.com/playlist/37i9dQZF1Fa1IIVtEpGUcU?si=0d61932237bf4497"
 					target="_blank"
+					rel="noopener noreferrer"
 					title="Spotify"
 				>
 					<Image
@@ -454,7 +462,7 @@ const latestPost = allPosts[0]
 				<script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js"
 				></script><lottie-player
 					src="https://lottie.host/e08917be-738c-4d39-b834-a4302a5a93c0/5zKSJTrRJ7.json"
-					background="##FFFFFF"
+					background="#FFFFFF"
 					speed="1"
 					style="width: 100%; height: 100%"
 					loop
@@ -625,3 +633,5 @@ const latestPost = allPosts[0]
 		}
 	}
 </style>
+
+

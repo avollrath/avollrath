@@ -11,7 +11,6 @@ export function initializeTooltips() {
         allowHTML: true,
         duration: 20,
         maxWidth: 500,
-        allowHTML: true,
         theme: 'custom',
         ignoreAttributes: true,
         content: function(reference) {

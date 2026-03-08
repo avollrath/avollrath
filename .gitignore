@@ -17,5 +17,7 @@ pnpm-debug.log*
 .env
 .env.production
 
+/to-do.txt
+
 # macOS-specific files
 .DS_Store

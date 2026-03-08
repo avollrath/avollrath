@@ -1,6 +1,7 @@
 ---
 import favoriteBooks from '../lib/books.json'
-const fallbackCover = '/images/book_placeholder.jpeg'
+import { resolveBookCoverUrl, BOOK_COVER_FALLBACK } from '../scripts/bookCoverUrl.js'
+const fallbackCover = BOOK_COVER_FALLBACK
 const colSpan = Astro.props.colSpan || '2xl:col-span-12' // Default value if colSpan prop is not passed
 const bookWidth = Astro.props.bookWidth || 'w-32' // Default width if bookWidth prop is not passed
 
@@ -33,9 +34,12 @@ shuffleArray(favoriteBooks)
 						title={`<strong class='font-semibold'>${book.title}</strong> - ${book.authors}`}
 					>
 						<img
-							src={book.coverURL || fallbackCover}
+							src={resolveBookCoverUrl(book.coverURL, fallbackCover)}
 							alt={`Cover of ${book.title}`}
 							class={`${bookWidth} h-auto w-20 rounded shadow-lg transition-transform duration-300 ease-in-out hover:scale-110`}
+							loading="lazy"
+							decoding="async"
+							referrerpolicy="no-referrer"
 							onError={(e) => (e.currentTarget.src = fallbackCover)}
 						/>
 					</div>

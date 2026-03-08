@@ -5,7 +5,7 @@
 			"isbn": "9780451529701",
 			"title": "The Count of Monte Cristo",
 			"authors": "Alexandre Dumas",
-			"coverURL": "http://books.google.com/books/content?id=EhqNGA9gM94C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=EhqNGA9gM94C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9781984862075",
@@ -17,25 +17,25 @@
 			"isbn": "9780063251922",
 			"title": "Demon Copperhead",
 			"authors": "Barbara Kingsolver",
-			"coverURL": "http://books.google.com/books/content?id=w7ntzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=w7ntzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9780374104092",
 			"title": "Annihilation",
 			"authors": "Jeff VanderMeer",
-			"coverURL": "http://books.google.com/books/content?id=2cl7AgAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=2cl7AgAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9780671690090",
 			"title": "Anne Frank",
 			"authors": "Anne Frank",
-			"coverURL": "http://books.google.com/books/content?id=1OmDuE5bXZsC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=1OmDuE5bXZsC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9780671211356",
 			"title": "LOGICAL CHESS",
 			"authors": "Irving Chernev",
-			"coverURL": "http://books.google.com/books/content?id=6RrNAQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=6RrNAQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9780525541424",
@@ -47,56 +47,57 @@
 			"isbn": "9780735213616",
 			"title": "Breath",
 			"authors": "James Nestor",
-			"coverURL": "http://books.google.com/books/content?id=MryOEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=MryOEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9783641053420",
 			"title": "The Green Mile",
 			"authors": "Stephen King",
-			"coverURL": "http://books.google.com/books/content?id=b2l6DZRKW_cC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=b2l6DZRKW_cC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
 		},
 		{
 			"isbn": "9781250865038",
 			"title": "Feel-Good Productivity",
 			"authors": "Ali Abdaal",
-			"coverURL": "http://books.google.com/books/content?id=ScHLEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=ScHLEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9781451627299",
 			"title": "11/22/63",
 			"authors": "Stephen King",
-			"coverURL": "http://books.google.com/books/content?id=SQCxEHEXBykC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=SQCxEHEXBykC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
 		},
 		{
 			"isbn": "9781771643764",
 			"title": "Gut",
 			"authors": "Giulia Enders",
-			"coverURL": "http://books.google.com/books/content?id=2xPMtAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=2xPMtAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9780062880925",
 			"title": "Don't Trust Your Gut",
 			"authors": "Seth Stephens-Davidowitz",
-			"coverURL": "http://books.google.com/books/content?id=UdNQzwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=UdNQzwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9781533281852",
 			"title": "Siddhartha",
 			"authors": "Hermann Hesse",
-			"coverURL": "http://books.google.com/books/content?id=VQbBjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=VQbBjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 
 		{
 			"isbn": "9780241816264",
 			"title": "Dungeon Crawler Carl",
 			"authors": "Matt Dinniman",
-			"coverURL": "http://books.google.com/books/content?id=1fTG0QEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=1fTG0QEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		},
 		{
 			"isbn": "9780553447712",
 			"title": "The Seven Principles for Making Marriage Work",
 			"authors": "John Gottman, PhD, Nan Silver",
-			"coverURL": "http://books.google.com/books/content?id=z-mLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+			"coverURL": "https://books.google.com/books/content?id=z-mLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
 		}
 	]
 }
+

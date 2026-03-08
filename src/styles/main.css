@@ -304,20 +304,39 @@ input[type='reset'],
 }
 
 @media screen and (max-width: 1024px) {
-	#nav-menu {
+	#nav-menu.mobile-menu-active {
 		flex-direction: column;
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100vw;
-		height: 100vh;
-		border-radius: 2rem;
-		padding: 16rem 2rem;
-		z-index: 50;
-		font-size: 4rem;
+		height: 100dvh;
+		border-radius: 0;
+		padding: 5.5rem 2rem 2rem;
+		z-index: 1300;
+		font-size: clamp(1.9rem, 8vw, 3rem);
 		text-align: center;
-		justify-content: space-between;
+		justify-content: flex-start;
+		gap: 1.1rem;
 		align-items: center;
 		background-color: #fff;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		touch-action: none;
+	}
+
+	#nav-menu.mobile-menu-active .nav-item {
+		width: 100%;
+		padding-top: 0.35rem;
+		padding-bottom: 0.35rem;
+	}
+
+	#nav-menu.mobile-menu-active #menu-close {
+		display: inline-flex;
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		margin: 0;
+		z-index: 1302;
 	}
 }

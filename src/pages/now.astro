@@ -19,7 +19,13 @@ import amelieCover from '../images/now/amelie.jpeg'
 import { Image } from 'astro:assets'
 ---
 
-<Layout title="What I'm Doing Now" description="An update on my current projects and focus.">
+<Layout title="What I'm Doing Now" description="An update on my current projects and focus."
+	seo={{
+		ogImage: enyaCover,
+		ogImageAlt: 'Now page preview image',
+		siteName: 'Andre Vollrath'
+	}}
+>
 	<div class="col-span-3 flex flex-col xl:col-span-1 2xl:col-span-3">
 		<div
 			class="now-box mb-4 flex flex-col items-center rounded-md bg-about-gradient p-6 text-xs text-white shadow-lg sm:rounded-lg sm:p-12 sm:text-base 3xl:text-lg"
@@ -301,3 +307,5 @@ import { Image } from 'astro:assets'
 		<FavoriteBooks bookWidth="w-20" />
 	</div>
 </Layout>
+
+

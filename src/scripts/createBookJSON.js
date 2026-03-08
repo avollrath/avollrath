@@ -3,6 +3,7 @@ import fs from 'fs'
 import dotenv from 'dotenv'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { normalizeBookCoverUrl } from './bookCoverUrl.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -65,13 +66,14 @@ async function fetchBookDetails(isbn) {
 		if (response.ok && data.items && data.items.length > 0) {
 			const book = data.items[0].volumeInfo
 			const imageLinks = book.imageLinks || {}
-			const coverURL =
+			const rawCoverURL =
 				imageLinks.extraLarge ||
 				imageLinks.large ||
 				imageLinks.medium ||
 				imageLinks.small ||
 				imageLinks.thumbnail ||
 				''
+			const coverURL = normalizeBookCoverUrl(rawCoverURL)
 			return {
 				isbn,
 				title: book.title,

@@ -1,10 +1,11 @@
 ---
 import NavBar from '../components/NavBar.astro'
 import Footer from '../components/Footer.astro'
+import SEO from '../components/SEO.astro'
 import { ViewTransitions } from 'astro:transitions'
 import '../styles/marquee.css'
 import '../styles/main.css'
-const { title, description } = Astro.props
+const { title, description, seo = {} } = Astro.props
 import faviconSrc from '../images/favicon.svg'
 ---
 
@@ -13,16 +14,12 @@ import faviconSrc from '../images/favicon.svg'
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{title}</title>
 		<link rel="icon" href={faviconSrc.src} type="image/svg+xml" />
-		<meta name="description" content={description} />
+		<SEO title={title} description={description} {...seo} />
 		<script
 			data-goatcounter="https://vollrath.goatcounter.com/count"
 			async
 			src="//gc.zgo.at/count.js"></script>
-
-		<meta property="og:title" content="André Vollrath's tech space" />
-		<meta property="og:type" content="website" />
 
 		<ViewTransitions />
 		<script is:inline>
@@ -55,7 +52,7 @@ import faviconSrc from '../images/favicon.svg'
 		</style>
 	</head>
 	<body class="bg-gray-50 font-body text-dark-text dark:bg-dark-bg dark:text-white">
-		<div transition:persist class="sticky top-0 z-10 mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4">
+		<div transition:persist class="sticky top-0 z-[1200] mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4">
 			<NavBar />
 		</div>
 		<div

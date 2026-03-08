@@ -9,6 +9,15 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // Store animation instances for cleanup
 let animations = []
+let domCleanupFns = []
+
+function addManagedListener(element, eventName, handler, options) {
+	if (!element) return
+	element.addEventListener(eventName, handler, options)
+	domCleanupFns.push(() => {
+		element.removeEventListener(eventName, handler, options)
+	})
+}
 
 // Initialize all GSAP animations
 export function initGSAP() {
@@ -41,6 +50,10 @@ export function initGSAP() {
 
 // Cleanup function to kill existing animations
 function cleanup() {
+	// Remove DOM listeners registered during previous init cycle.
+	domCleanupFns.forEach((fn) => fn())
+	domCleanupFns = []
+
 	// Kill all ScrollTrigger instances
 	ScrollTrigger.getAll().forEach((st) => st.kill())
 
@@ -67,28 +80,30 @@ function initFooterAnimations() {
 	}
 
 	// Add click listener
-	const scrollButton = footer.querySelector('.footer-bar a')
+	const scrollButton = footer.querySelector('.footer-bar .scroll-top-btn')
 	if (scrollButton) {
-		scrollButton.addEventListener('click', scrollToTop)
-
-		scrollButton.addEventListener('mouseenter', () => {
+		const handleMouseEnter = () => {
 			gsap.killTweensOf(scrollButton)
 			gsap.to(scrollButton, {
 				scale: 1.1,
 				ease: 'expo.out',
 				duration: 0.6
 			})
+		}
 
-			scrollButton.addEventListener('mouseleave', () => {
-				gsap.killTweensOf(scrollButton)
-				gsap.to(scrollButton, {
-					scale: 1,
-					ease: 'elastic(0.6)',
-					delay: 0.1,
-					duration: 0.6
-				})
+		const handleMouseLeave = () => {
+			gsap.killTweensOf(scrollButton)
+			gsap.to(scrollButton, {
+				scale: 1,
+				ease: 'elastic(0.6)',
+				delay: 0.1,
+				duration: 0.6
 			})
-		})
+		}
+
+		addManagedListener(scrollButton, 'click', scrollToTop)
+		addManagedListener(scrollButton, 'mouseenter', handleMouseEnter)
+		addManagedListener(scrollButton, 'mouseleave', handleMouseLeave)
 	}
 
 	const footerAnim = gsap.from(footer, {
@@ -126,9 +141,8 @@ function initHomeAnimations() {
 	}
 
 	const ctaButton = document.querySelector('.cta-button')
-	if (ctaButton && ctaButton.dataset.contactBound !== 'true') {
-		ctaButton.addEventListener('click', scrollToContact)
-		ctaButton.dataset.contactBound = 'true'
+	if (ctaButton) {
+		addManagedListener(ctaButton, 'click', scrollToContact)
 	}
 
 	if (shouldRunHomeIntro) {
@@ -703,15 +717,15 @@ function initProjectAnimations() {
 		animations.push(projectsBtnAnim)
 
 		projectButtons.forEach((btn) => {
-			btn.addEventListener('mouseenter', () => {
+			const handleMouseEnter = () => {
 				gsap.killTweensOf(btn)
 				gsap.to(btn, {
 					scale: 1.1,
 					ease: 'elastic(0.8)',
 					duration: 1
 				})
-			})
-			btn.addEventListener('mouseleave', () => {
+			}
+			const handleMouseLeave = () => {
 				gsap.killTweensOf(btn)
 				gsap.to(btn, {
 					scale: 1,
@@ -719,7 +733,9 @@ function initProjectAnimations() {
 					delay: 0.1,
 					duration: 0.6
 				})
-			})
+			}
+			addManagedListener(btn, 'mouseenter', handleMouseEnter)
+			addManagedListener(btn, 'mouseleave', handleMouseLeave)
 		})
 	}
 }

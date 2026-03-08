@@ -29,7 +29,7 @@ try {
     {topTracks.map((track) => (
       track && track.external_urls && track.album && track.album.images[0] ? (
         <div key={track.id} class={`${coverWidth}`}>
-          <a href={track.external_urls.spotify} target="_blank" title={`${track.name} - ${track.artists.map((artist) => artist.name).join(", ")}`}>
+          <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer" title={`${track.name} - ${track.artists.map((artist) => artist.name).join(", ")}`}>
             <img src={track.album.images[0].url} alt={`Cover art for ${track.name}`} class="w-full h-auto rounded-md shadow-lg transition-transform duration-300 hover:scale-105" />
           </a>
         </div>
@@ -38,7 +38,7 @@ try {
   </div>
   {currentPlayingTrack && currentPlayingTrack.is_playing && currentPlayingTrack.item && currentPlayingTrack.item.external_urls ? (
     <div class="currently-playing self-start mt-8">
-      <a href={currentPlayingTrack.item.external_urls.spotify} target="_blank" class="flex items-center">
+      <a href={currentPlayingTrack.item.external_urls.spotify} target="_blank" rel="noopener noreferrer" class="flex items-center">
         <span class="mr-4 text-gray-500 dark:text-white">Playing right now: <strong class="text-dark-text">{currentPlayingTrack.item.name}</strong> by {currentPlayingTrack.item.artists.map(artist => artist.name).join(", ")}</span>  <AudioWave />
       </a>
     </div>

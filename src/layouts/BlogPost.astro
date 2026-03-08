@@ -11,7 +11,19 @@ const { frontmatter } = Astro.props
 resolveImage(frontmatter)
 ---
 
-<Layout title={frontmatter.title} description={frontmatter.description}>
+<Layout
+	title={frontmatter.title}
+	description={frontmatter.description}
+	seo={{
+		type: 'article',
+		author: frontmatter.author,
+		publishedTime: frontmatter.pubDate,
+		tags: frontmatter.tags ?? [],
+		ogImage: frontmatter.image?.src,
+		ogImageAlt: frontmatter.image?.alt ?? frontmatter.title,
+		siteName: 'Andre Vollrath'
+	}}
+>
 	<div
 		class="border-gradient flex flex-col items-center rounded-lg bg-white px-4 py-12 dark:bg-gradient-to-r sm:px-56 sm:py-24 lg:col-span-9"
 	>
@@ -27,7 +39,7 @@ resolveImage(frontmatter)
 							{frontmatter.tags.map((tag) => (
 								<span
 									key={tag}
-									class="rounded bg-orange px-2 py-1 text-xs font-semibold text-white lg:text-xs"
+									class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"
 								>
 									{tag}
 								</span>
