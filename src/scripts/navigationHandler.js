@@ -116,6 +116,10 @@ export function initializeNavigation() {
 		const body = document.body
 
 		if (!hamburger || !navMenu) return
+		const wasMenuOpen =
+			navMenu.classList.contains('mobile-menu-active') ||
+			hamburger.getAttribute('aria-expanded') === 'true'
+		if (!wasMenuOpen) return
 
 		if (mobileMenuCloseTimer) {
 			clearTimeout(mobileMenuCloseTimer)
@@ -249,7 +253,11 @@ export function initializeNavigation() {
 
 		if (navMenu.dataset.navLinksBound !== 'true') {
 			navMenu.querySelectorAll('a').forEach((link) => {
-				addManagedListener(link, 'click', () => closeMobileMenu(true))
+				addManagedListener(link, 'click', () => {
+					if (navMenu.classList.contains('mobile-menu-active')) {
+						closeMobileMenu(true)
+					}
+				})
 			})
 			navMenu.dataset.navLinksBound = 'true'
 		}

@@ -1,64 +1,117 @@
 ---
-title: 'Building a Lunch Menu Bot for Slack'
+title: 'Building LunchBot: A Simple Slack Bot for Lunch Menus'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2024-03-30'
-description: 'Join me on a journey of building LunchBot, a real-time lunch menu bot for Slack, using Node.js, Cheerio, and Slack API.'
+description: 'A small Node.js project that scrapes restaurant menus and posts them to Slack so our team can quickly see what’s available for lunch.'
 author: 'André Vollrath'
 image:
   src: '../images/blog/lunchbot.jpg'
   alt: 'Illustration of a lunch table with various dishes, representing LunchBot project.'
 tags: ['node.js', 'cheerio', 'slack', 'bot', 'project', 'workplace']
-teaser: 'Embark on an exciting adventure as we delve into the creation of LunchBot, a real-time lunch menu bot designed to streamline workplace communication. Learn about the technologies behind LunchBot, the challenges encountered during development, and the lessons learned along the way. Get ready to revolutionize lunchtime at your workplace with LunchBot!'
+teaser: 'A small side project that scrapes restaurant menus and posts them to Slack. <strong class="font-semibold text-dark-text">LunchBot</strong> was built with <strong class="font-semibold text-dark-text">Node.js</strong>, <strong class="font-semibold text-dark-text">Cheerio</strong>, and the <strong class="font-semibold text-dark-text">Slack API</strong> to make the daily lunch decision a little easier.'
 ---
 
-Welcome to the LunchBot project, where we explore the development of a real-time lunch menu bot designed to enhance workplace communication. Join us on this journey as we delve into the technologies, challenges, and insights behind building LunchBot.
+# Building LunchBot: A Simple Slack Bot for Lunch Menus
 
-## Introduction
+Lunch is a surprisingly frequent topic in office Slack channels.
 
-Lunch breaks are an essential part of the workday, providing employees with much-needed sustenance and relaxation. However, deciding what to eat can sometimes be a daunting task, leading to indecision and wasted time. LunchBot aims to solve this problem by providing employees with real-time access to the daily lunch menu, facilitating informed dining choices and streamlining workplace communication.
+Someone asks where to eat, someone else checks a restaurant website, and a few minutes later the whole discussion starts again the next day.
 
-## Technologies Used
+I thought it would be fun to automate that process.
+
+So I built **LunchBot**, a small Slack bot that fetches lunch menus from nearby restaurants and posts them directly into Slack.
+
+---
+
+## The Idea
+
+The idea was simple:
+
+1. Fetch lunch menus from restaurant websites.
+2. Extract the relevant menu information.
+3. Post the results into Slack.
+
+Instead of opening multiple websites every day, the whole team could just type a command and instantly see the available options.
+
+---
+
+## Tech Stack
+
+The project is intentionally lightweight and built with just a few tools.
 
 ### Node.js
 
-Node.js serves as the foundation of LunchBot, providing a runtime environment for executing JavaScript code on the server-side. Its event-driven, non-blocking I/O model makes it well-suited for handling asynchronous operations, such as web scraping and API requests.
+The bot runs on **Node.js**, which makes it easy to handle asynchronous tasks like HTTP requests and scraping.
 
 ### Cheerio
 
-Cheerio is a fast, flexible, and lightweight library for parsing and manipulating HTML documents using jQuery-style syntax. It plays a crucial role in LunchBot's web scraping functionality, allowing us to extract menu data from restaurant websites with ease.
+To extract menu data from restaurant websites, I used **Cheerio**.
+
+It provides a jQuery-like API for parsing HTML, which makes scraping structured data much easier.
 
 ### Slack API
 
-The Slack API enables seamless integration with Slack, a popular messaging platform used by many workplaces for internal communication. By leveraging the Slack API, LunchBot can deliver real-time menu updates directly to designated Slack channels, keeping employees informed and engaged.
+The **Slack API** allows the bot to send messages directly to a Slack channel. Once the menus are collected and formatted, the bot posts them as a message.
 
-## Building LunchBot
+---
 
-### Web Scraping
+## How It Works
 
-LunchBot fetches daily lunch menus from restaurant websites using web scraping techniques. It utilizes Cheerio to parse HTML content, extract relevant menu information, and format it for display.
+### Fetching Menus
 
-### Slack Integration
+LunchBot requests the restaurant websites and downloads the HTML content.
 
-Once the menu data is obtained, LunchBot posts it to designated Slack channels using the Slack API. This integration allows employees to access the daily menu without leaving the Slack environment, promoting efficiency and convenience.
+Each restaurant page has its own structure, so I wrote small parsing functions that extract the relevant menu items.
 
-## Challenges and Learnings
+### Parsing the Data
 
-Throughout the development process, I encountered various challenges and gained valuable insights:
+Using Cheerio, the bot selects the elements containing the menu text and converts them into a cleaner format.
 
-1. **Web Scraping**: Extracting menu data from restaurant websites posed challenges due to variations in website structures and content formatting. Implementing robust error handling and data parsing techniques was crucial in ensuring reliable data extraction.
+### Posting to Slack
 
-2. **Slack Integration**: Integrating LunchBot with Slack required understanding the Slack API and implementing message formatting according to Slack's guidelines. Experimentation and documentation referencing helped overcome integration hurdles and achieve seamless communication with Slack.
+Once the menu data is prepared, the bot sends a formatted message to Slack so the team can see the options immediately.
 
-3. **Asynchronous Operations**: Handling asynchronous operations, such as web scraping and API requests, required careful management of callbacks and promises. Leveraging Node.js's asynchronous programming features, including async/await, improved code readability and maintainability.
+---
 
-4. **Error Handling**: Implementing comprehensive error handling mechanisms was essential, especially when dealing with external dependencies and network operations. Proper error logging and exception handling facilitated effective debugging and troubleshooting.
+## Challenges
 
-## Conclusion
+Even for a small project, a few things turned out to be trickier than expected.
 
-The development of LunchBot was an enriching experience that allowed me to explore the intersection of technology and workplace communication. By leveraging Node.js, Cheerio, and the Slack API, I was able to create a versatile and efficient solution for providing real-time lunch menu updates to employees.
+**Different website structures**  
+Each restaurant page was structured differently, so the scraper logic had to be adapted for each one.
 
-Moving forward, I plan to continue refining LunchBot's features, adding support for additional restaurants, and enhancing its user interface. With LunchBot, I aim to revolutionize lunchtime at workplaces, making dining decisions easier and more enjoyable for employees.
+**Formatting messages for Slack**  
+Slack messages have their own formatting rules, so getting the menus to display nicely required a bit of experimentation.
 
-Stay tuned for updates on LunchBot's development journey, and feel free to reach out with any questions or feedback. Happy lunching!
+**Handling async requests**  
+Fetching multiple websites at once means dealing with asynchronous code. Using `async/await` helped keep things readable.
+
+---
+
+## What I Learned
+
+LunchBot was a great small project for experimenting with:
+
+- web scraping
+- Slack integrations
+- Node.js automation scripts
+
+More importantly, it turned out to be genuinely useful. Once it was running, it quickly became part of the daily workflow in our office.
+
+---
+
+## What Came Next
+
+Over time I started thinking about improving the project with things like:
+
+- caching menus
+- a web interface
+- better formatting and error handling
+
+That eventually led to a rebuilt version of the project called **PasiLunch**, which I wrote about in a later post.
+
+---
+
 ![LunchBot](../../images/blog/lunchbot.jpg)
-_The LunchBot project aims to streamline workplace communication and dining decisions._
+
+_The original LunchBot fetching daily menus and posting them to Slack._

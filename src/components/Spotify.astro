@@ -1,15 +1,41 @@
 ---
-import { getTopTracksAllTime, getCurrentPlayingTrack } from "../scripts/getTopTracks.js";
-import { shuffleArray } from '../scripts/utils.js';
+import { getTopTracks, getCurrentPlayingTrack } from "../scripts/getTopTracks.js";
 import AudioWave from '../components/AudioWave.astro';
 const refreshToken = import.meta.env.SPOTIFY_REFRESH_TOKEN;
 const colSpan = Astro.props.colSpan || '2xl:col-span-12 col-span-3'; // Default value if colSpan prop is not passed
 const coverWidth = Astro.props.coverWidth || 'w-32'; // Default cover width
 
+function getPrimaryArtistKey(track) {
+  const primaryArtist = track?.artists?.[0];
+  if (!primaryArtist) return null;
+  return primaryArtist.id || primaryArtist.name?.toLowerCase() || null;
+}
+
+function prioritizeUniqueArtists(tracks, limit = 10) {
+  const seen = new Set();
+  const uniqueFirst = [];
+  const leftovers = [];
+
+  tracks.forEach((track) => {
+    const artistKey = getPrimaryArtistKey(track);
+    if (!artistKey || seen.has(artistKey)) {
+      leftovers.push(track);
+      return;
+    }
+
+    seen.add(artistKey);
+    uniqueFirst.push(track);
+  });
+
+  if (uniqueFirst.length >= limit) return uniqueFirst.slice(0, limit);
+
+  return uniqueFirst.concat(leftovers).slice(0, limit);
+}
+
 let topTracks = [];
 try {
-  topTracks = await getTopTracksAllTime(refreshToken);
-  shuffleArray(topTracks); // Shuffle the array after fetching
+  topTracks = await getTopTracks(refreshToken);
+  topTracks = prioritizeUniqueArtists(topTracks, 10);
 } catch (error) {
   console.error("Error fetching top tracks:", error);
 }
@@ -24,7 +50,7 @@ try {
 
 <!-- Spotify Section -->
 <div class={`${colSpan} dark:bg-gradient-to-r from-dark-card to-darker-card bg-white p-12 rounded-lg border-gradient h-full flex flex-col items-center overflow-visible`}>
-  <h2 class="font-header tracking-wide self-start mb-8 text-4xl long-transition">Spotify Top 50 <span class="text-gray-500 text-2xl whitespace-nowrap">All time</span></h2>
+  <h2 class="font-header tracking-wide self-start mb-8 text-4xl long-transition">Spotify Top 10 <span class="text-gray-500 text-2xl whitespace-nowrap">last 6 months</span></h2>
   <div class="flex flex-wrap justify-center gap-4 w-full">
     {topTracks.map((track) => (
       track && track.external_urls && track.album && track.album.images[0] ? (

@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro'
 import Sidebar from '../components/Sidebar.astro'
 import { formatDate } from '../scripts/utils.js'
 import Prose from '../components/Prose.astro'
+import FavoriteBooks from '../components/FavoriteBooks.astro'
+import Spotify from '../components/Spotify.astro'
 import { Image } from 'astro:assets'
 import { resolveImage } from '../scripts/resolveImage'
 
@@ -11,7 +13,9 @@ const { frontmatter } = Astro.props
 resolveImage(frontmatter)
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()
-const authorName = frontmatter.author || 'André Vollrath'
+const authorName = frontmatter.author || 'Andre Vollrath'
+const showFavoriteBooks = frontmatter.showFavoriteBooks === true
+const showSpotifyComponent = frontmatter.showSpotifyComponent === true
 const articleStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'BlogPosting',
@@ -93,6 +97,20 @@ const articleStructuredData = {
 				<slot />
 			</Prose>
 		</article>
+		{
+			showFavoriteBooks && (
+				<div class="mt-12 w-full">
+					<FavoriteBooks colSpan="" bookWidth="w-20" />
+				</div>
+			)
+		}
+		{
+			showSpotifyComponent && (
+				<div class="mt-12 w-full">
+					<Spotify colSpan="" coverWidth="w-20" />
+				</div>
+			)
+		}
 	</div>
 
 	<div class="lg:col-span-3">

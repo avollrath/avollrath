@@ -19,6 +19,23 @@ function addManagedListener(element, eventName, handler, options) {
 	})
 }
 
+function isLiteMotionMode() {
+	return document.documentElement.classList.contains('reduced-motion')
+}
+
+function applyLiteModeStyles() {
+	document.documentElement.classList.remove('home-intro-pending')
+
+	const keySections = document.querySelectorAll(
+		'.nav-bar, .nav-item, .nav-logo, .hero-container, .hero-badge, .hero-header, .intro-text, .cta-button, .avatar-wrapper, .now-container, .now-content, .blog-container, .blog-content, .about-container, .about-content, .render-container, .render-content, .spotify-container'
+	)
+
+	keySections.forEach((element) => {
+		element.style.opacity = '1'
+		element.style.transform = 'none'
+	})
+}
+
 // Initialize all GSAP animations
 export function initGSAP() {
 	// Clean up existing animations
@@ -26,9 +43,15 @@ export function initGSAP() {
 
 	// Re-register plugins after navigation
 	gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+	const reducedMotion = isLiteMotionMode()
 
 	// Initialize footer animations
-	initFooterAnimations()
+	initFooterAnimations(reducedMotion)
+
+	if (reducedMotion) {
+		applyLiteModeStyles()
+		return
+	}
 
 	// Initialize page-specific animations based on current path
 	const currentPath = window.location.pathname
@@ -63,7 +86,7 @@ function cleanup() {
 }
 
 // Footer-specific animations
-function initFooterAnimations() {
+function initFooterAnimations(reducedMotion = false) {
 	const footer = document.querySelector('footer')
 	if (!footer) return
 
@@ -82,35 +105,41 @@ function initFooterAnimations() {
 	// Add click listener
 	const scrollButton = footer.querySelector('.footer-bar .scroll-top-btn')
 	if (scrollButton) {
-		const handleMouseEnter = () => {
-			gsap.killTweensOf(scrollButton)
-			gsap.to(scrollButton, {
-				scale: 1.1,
-				ease: 'expo.out',
-				duration: 0.6
-			})
-		}
-
-		const handleMouseLeave = () => {
-			gsap.killTweensOf(scrollButton)
-			gsap.to(scrollButton, {
-				scale: 1,
-				ease: 'elastic(0.6)',
-				delay: 0.1,
-				duration: 0.6
-			})
-		}
-
 		addManagedListener(scrollButton, 'click', scrollToTop)
-		addManagedListener(scrollButton, 'mouseenter', handleMouseEnter)
-		addManagedListener(scrollButton, 'mouseleave', handleMouseLeave)
+
+		if (!reducedMotion) {
+			const handleMouseEnter = () => {
+				gsap.killTweensOf(scrollButton)
+				gsap.to(scrollButton, {
+					scale: 1.1,
+					ease: 'expo.out',
+					duration: 0.6
+				})
+			}
+
+			const handleMouseLeave = () => {
+				gsap.killTweensOf(scrollButton)
+				gsap.to(scrollButton, {
+					scale: 1,
+					ease: 'elastic(0.6)',
+					delay: 0.1,
+					duration: 0.6
+				})
+			}
+
+			addManagedListener(scrollButton, 'mouseenter', handleMouseEnter)
+			addManagedListener(scrollButton, 'mouseleave', handleMouseLeave)
+		}
 	}
+
+	if (reducedMotion) return
 
 	const footerAnim = gsap.from(footer, {
 		scrollTrigger: {
 			trigger: 'footer',
 			start: 'top 90%',
-			toggleActions: 'play reset play reset'
+			toggleActions: 'play none none none',
+			once: true
 		},
 		opacity: 0,
 		y: -100,
@@ -123,6 +152,11 @@ function initFooterAnimations() {
 
 // Home page animations
 function initHomeAnimations() {
+	const isMobileViewport = window.matchMedia('(max-width: 1024px)').matches
+	const spotifyStart = isMobileViewport ? 'top 108%' : 'top 90%'
+	const sectionStart = isMobileViewport ? 'top 105%' : 'top 80%'
+	const lowerSectionStart = isMobileViewport ? 'top 102%' : 'top 90%'
+
 	let shouldRunHomeIntro = window.__homeIntroSeen !== true
 
 	if (shouldRunHomeIntro) {
@@ -410,8 +444,8 @@ function initHomeAnimations() {
 	if (spotifyTracks.length) {
 		const trackAnim = gsap.from(spotifyTracks, {
 			scrollTrigger: {
-				trigger: '.spotify-track',
-				start: 'top 90%',
+				trigger: '.spotify-container',
+				start: spotifyStart,
 				toggleActions: 'play none none none'
 			},
 			opacity: 0,
@@ -429,7 +463,7 @@ function initHomeAnimations() {
 		const techAnim = gsap.from(techStack, {
 			scrollTrigger: {
 				trigger: '.techstack-container',
-				start: 'top 80%',
+				start: sectionStart,
 				toggleActions: 'play none none none'
 			},
 			x: -200,
@@ -447,7 +481,7 @@ function initHomeAnimations() {
 		const linksAnim = gsap.from(linksContainer, {
 			scrollTrigger: {
 				trigger: '.links-container',
-				start: 'top 80%',
+				start: sectionStart,
 				toggleActions: 'play none none none'
 			},
 			x: 200,
@@ -465,7 +499,7 @@ function initHomeAnimations() {
 		const contactAnim = gsap.from(contactContainer, {
 			scrollTrigger: {
 				trigger: '.contact-container',
-				start: 'top 90%',
+				start: lowerSectionStart,
 				toggleActions: 'play none none none'
 			},
 			y: 200,
@@ -483,7 +517,7 @@ function initHomeAnimations() {
 		const basedInAnim = gsap.from(basedInContainer, {
 			scrollTrigger: {
 				trigger: '.based-in-container',
-				start: 'top 90%',
+				start: lowerSectionStart,
 				toggleActions: 'play none none none'
 			},
 			y: 200,
@@ -500,7 +534,7 @@ function initHomeAnimations() {
 		const lottieAnim = gsap.from(lottieAnimationContainer, {
 			scrollTrigger: {
 				trigger: '.based-in-container',
-				start: 'top 90%',
+				start: lowerSectionStart,
 				toggleActions: 'play none none none'
 			},
 			scale: 0,
@@ -523,7 +557,7 @@ function initHomeAnimations() {
 			const linesAnim = gsap.from(lines, {
 				scrollTrigger: {
 					trigger: '.based-in-container',
-					start: 'top 80%',
+					start: sectionStart,
 					toggleActions: 'play none none none'
 				},
 				y: '100%',

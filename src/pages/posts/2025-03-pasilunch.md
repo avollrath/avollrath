@@ -1,67 +1,101 @@
 ---
-title: 'PasiLunch - the Next-Gen Lunch Menu Bot for Slack & Web'
+title: 'PasiLunch – A Lunch Menu Bot for Slack and the Web'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2025-03-02'
-description: 'Join me as I rebuild and enhance my old LunchBot, transforming it into a real-time lunch menu bot with a web interface, caching, and seamless Slack integration.'
+description: 'Rebuilding my old LunchBot into a small service that fetches local restaurant menus, adds caching, and exposes them through both Slack and a simple web interface.'
 author: 'André Vollrath'
 image:
   src: '../images/blog/pasilunch.jpg'
   alt: 'Illustration of LunchBot fetching and displaying menus on Slack and a web dashboard.'
 tags: ['node.js', 'express', 'cheerio', 'slack', 'bot', 'project', 'workplace', 'web']
-teaser: 'Follow along as I take my original <strong class="font-semibold text-dark-text">LunchBot</strong> to the next level! With improved <strong class="font-semibold text-dark-text">scraping</strong>, <strong class="font-semibold text-dark-text">caching</strong>, and a sleek <strong class="font-semibold text-dark-text">web interface</strong>, PasiLunch LunchBot now makes checking daily lunch menus even easier. <br /><br /> Discover the <strong class="font-semibold text-dark-text">updated tech stack</strong>, challenges faced, and why this project is more fun than ever!'
+teaser: 'A small side project that turned into a daily office tool. <strong class="font-semibold text-dark-text">PasiLunch</strong> fetches restaurant menus, caches them, and makes them available through a <strong class="font-semibold text-dark-text">Slack command</strong> and a simple <strong class="font-semibold text-dark-text">web dashboard</strong>.'
 ---
 
-# Building a Next-Gen LunchBot for Slack & Web
+# Building PasiLunch – A Lunch Menu Bot for Slack and the Web
 
 ## Introduction
 
-A few years ago, I built a Slack bot to fetch and display lunch menus from restaurants near my office. It worked well, but it was a simple script. Over time, I wanted more: a real-time web interface, better caching, and a smoother Slack integration. So, I revamped the whole project. Meet the new **PasiLunch LunchBot** – a powerful, fun, and efficient way to check what's for lunch!
+A few years ago I built a small Slack bot that fetched lunch menus from restaurants near my office. It worked, but it was basically just a quick script.
+
+Over time I wanted a bit more from it: better performance, caching so it wouldn’t scrape the same pages repeatedly, and a simple web interface so the menus could also be viewed outside Slack.
+
+So I decided to rebuild the project from scratch. The result is **PasiLunch**, a small service that collects local lunch menus and makes them available both in Slack and through a web dashboard.
 
 ## Features
 
-- 🏢 **Slack Command** (`/lunch`) – Fetches the daily lunch menus and posts them in Slack with a witty message.
-- 🌐 **Web Dashboard** – A sleek, auto-updating website that displays all available menus.
-- ⚡ **Fast Caching** – Stores menus locally to prevent unnecessary scrapes and API requests.
-- 🤖 **Fun & Engaging** – The bot serves its menus with humorous messages to lighten up your day.
-- 🔄 **Keep-Alive Mechanism** – Prevents the bot from sleeping on free hosting platforms.
+- 🏢 **Slack command (`/lunch`)**  
+  Fetches the daily menus and posts them directly in Slack.
+
+- 🌐 **Web dashboard**  
+  A simple page that displays all available menus in one place.
+
+- ⚡ **Caching**  
+  Menus are stored locally so the bot doesn't repeatedly scrape the same sites.
+
+- 🤖 **A bit of personality**  
+  The bot posts menus with random humorous messages.
+
+- 🔄 **Keep-alive mechanism**  
+  Prevents the bot from going to sleep on free hosting platforms.
 
 ## Tech Stack
 
-- **Node.js** – The backbone of the bot.
-- **Express.js** – Powers the web dashboard.
-- **Cheerio.js** – Scrapes menus from restaurant websites.
-- **Slack API** – Handles the `/lunch` command responses.
-- **Axios** – Fetches data from APIs and restaurant pages.
-- **JSON File Storage** – Caches menus locally for quick responses.
+The project is intentionally simple and lightweight:
+
+- **Node.js** – core runtime
+- **Express.js** – serves the web dashboard
+- **Cheerio** – parses and scrapes restaurant websites
+- **Slack API** – handles the `/lunch` command
+- **Axios** – requests external pages and APIs
+- **JSON storage** – caches menus locally
 
 ## How It Works
 
-### 1️⃣ Fetching Menus
+### Fetching Menus
 
-LunchBot scrapes menus from various restaurants using custom-built scrapers. Some menus are in HTML, some in JSON, and some even in XML. Each restaurant has a dedicated function to extract data.
+Each restaurant has its own small scraper. Some sites expose menus as HTML, some as JSON, and others even as XML.
 
-### 2️⃣ Caching Mechanism
+The scrapers normalize everything into a consistent format so the bot can present the results cleanly.
 
-The bot saves each menu to a JSON file along with the current date. If a request comes in on the same day, it serves the cached menu instead of re-fetching it. This improves performance and prevents overloading restaurant websites.
+### Caching
 
-### 3️⃣ Slack Integration
+To avoid unnecessary scraping, the bot stores menus together with the current date in a JSON file.
 
-Users in our Slack workspace can simply type `/lunch`, and LunchBot responds with the day’s menu options in a neatly formatted message. The bot also keeps track of how many Slack requests it has handled!
+If the same menu is requested again during the day, the cached version is returned instead of scraping the site again. This keeps the responses fast and avoids hitting restaurant websites too often.
 
-### 4️⃣ Web Dashboard
+### Slack Integration
 
-LunchBot also serves a web page that displays all the menus in a beautiful, structured way. It updates automatically and includes a fun animated header.
+Inside Slack, users simply type: /lunch
+
+The bot responds with the day’s available menus in a formatted message.
+
+### Web Dashboard
+
+Besides Slack, the project also serves a small web interface where all menus can be viewed at once.
+
+It updates automatically and presents the information in a more visual format than the Slack response.
 
 ## Challenges & Learnings
 
-- **Scraping Complexity** 🏗️ – Each restaurant’s website had a different structure, requiring unique parsing logic.
-- **Keeping It Fresh** 🔄 – Some sites changed frequently, breaking the scrapers. Error handling and fallbacks were crucial.
-- **Slack Formatting** 💬 – Slack’s markdown-like syntax needed careful formatting to ensure menus displayed correctly.
+A few things turned out to be more interesting than expected:
 
-## Try It Out!
+**Scraping different sites**  
+Each restaurant site had its own structure, so every scraper needed slightly different parsing logic.
 
-- Visit **[LunchBot Web Dashboard](https://lunchbot-btnu.onrender.com/)** 🌐
+**Fragile HTML structures**  
+When restaurants update their websites, scrapers can break. Adding error handling and fallbacks helped keep things stable.
 
-This project has been a blast to build, and it’s now a daily essential for our office. Let me know if you want to build something similar – always happy to share insights! 🚀
+**Formatting for Slack**  
+Slack's markdown-style formatting has its quirks, so getting the menu output to look clean required a bit of experimentation.
+
+## Try It Out
+
+You can see the project here:
+
+👉 **[LunchBot Web Dashboard](https://lunchbot-btnu.onrender.com/)**
+
+This started as a small side project but quickly became a daily tool in our office. It’s also a fun reminder that simple ideas can turn into genuinely useful tools.
+
 ![LunchBot](../../images/blog/pasilunch.jpg)
-_The LunchBot project aims to streamline workplace communication and dining decisions._
+
+_The PasiLunch bot collects restaurant menus and makes them easily accessible for the whole team._

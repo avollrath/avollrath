@@ -1,66 +1,86 @@
 ---
-title: Creating a VSCode-Inspired Watch Face for Garmin Forerunner 55 Music
+title: 'A VS Code–Inspired Watch Face for Garmin Forerunner 55'
 pubDate: 2022-08-08
-author: Your Name
+author: 'André Vollrath'
 layout: ../../layouts/BlogPost.astro
 image:
   src: '../images/blog/garmin.jpg'
-  alt: 'A creative representation of watchface.'
-teaser: "Get ready to merge your love for coding with your passion for fitness! In our upcoming blog post, we're diving into the exciting world of custom watch face development. Join us as we unveil our latest project: a Visual Studio Code-inspired watch face for the Garmin Forerunner 55 Music. Discover how we blend the aesthetics of your favorite code editor with the functionality of a fitness wearable. Stay tuned for an exclusive look behind the scenes and get ready to elevate your wrist game!"
-description: "In this project, we'll embark on a creative journey to design and develop a custom watch face for the Garmin Forerunner 55, drawing inspiration from the popular code editor, Visual Studio Code (VS Code)."
+  alt: 'Garmin watch face inspired by the VS Code editor interface.'
+teaser: 'A small experiment combining two hobbies: coding and running. This custom Garmin watch face displays fitness data using a layout inspired by the <strong class="font-semibold text-dark-text">Visual Studio Code editor</strong>.'
+description: 'Designing a custom Garmin watch face inspired by the Visual Studio Code interface using the Connect IQ SDK.'
 ---
 
-# Creating a Visual Studio Code-Inspired Watch Face for Garmin Forerunner 55 Music
+# A VS Code–Inspired Watch Face for Garmin Forerunner 55
 
-In this project, we'll embark on a creative journey to design and develop a custom watch face for the Garmin Forerunner 55 Music, drawing inspiration from the popular code editor, Visual Studio Code (VS Code). Our goal is to create a visually appealing watch face that mimics the aesthetics of VS Code while providing essential information at a glance.
+Sometimes the most fun projects come from combining unrelated interests.
 
-## Conceptualization
+In this case it was **running and coding**.
 
-Our watch face will resemble the interface of VS Code, featuring a familiar color scheme, font, and layout. The watch information such as time, date, steps, heart rate, sunrise, and sunset will be displayed as if they are properties of a code object, enhancing the user experience with a unique and engaging design.
+I wanted to build a custom watch face for my **Garmin Forerunner 55** that looked like a code editor. The idea was simple: display fitness data as if it were properties inside a JavaScript object.
 
-## Design Elements
+The result is a watch face that feels a bit like having **VS Code running on your wrist**.
 
-### Background
+---
 
-The background of our watch face will replicate the soothing color palette and subtle texture found in the editor of VS Code, ensuring a cohesive and visually pleasing experience.
+## The Idea
 
-### Font
+Instead of the usual watch layout with large numbers and icons, the interface mimics a small code snippet.
 
-To evoke the essence of coding, we'll utilize a monospaced font such as Consolas or Courier New, synonymous with programming environments like VS Code.
+Things like time, steps, and heart rate are displayed as fields inside a structured object.
+
+Example layout:
+
+<pre><code class="language-javascript">WatchInfo {
+  time: "10:30",
+  date: "2024-01-31",
+  steps: 4500,
+  heartRate: "75 bpm",
+  sunrise: "06:45",
+  sunset: "17:30"
+}</code></pre>
+
+The layout uses a **monospaced font** and color styling similar to the VS Code editor to create the illusion of syntax highlighting.
+
+---
+
+## Design Choices
+
+### Monospaced Font
+
+Using a monospaced font helps sell the “code editor” illusion. It also keeps the layout predictable and easy to align on a small screen.
 
 ### Syntax Highlighting
 
-Applying syntax highlighting to different elements of the 'code' will enhance readability and visual appeal. We'll use colors strategically to differentiate between various pieces of information.
+Different pieces of information use slightly different colors, similar to how variables and values are highlighted in a code editor.
 
-### Example Layout
+### Minimal Layout
 
-```javascript
-WatchInfo {
-    time: "10:30 AM",
-    date: "2024-01-31",
-    steps: 4500,
-    heartRate: "75 bpm",
-    sunrise: "06:45 AM",
-    sunset: "05:30 PM"
-}
-```
+Garmin watches have limited screen space, so the design had to stay simple. The goal was to keep the coding theme while still making the information easy to read during a run.
 
-## Development Process
+---
 
-1. **Design Watch Face Layout:** Sketch out the layout of the watch face, paying close attention to text alignment and readability.
+## Implementation
 
-2. **Implement Design in Monkey C:** Utilize the Connect IQ SDK to translate our design into a functional watch face. This involves coding the layout, applying syntax highlighting, and ensuring real-time data updates.
+The watch face was built using **Garmin’s Connect IQ SDK** and written in **Monkey C**, Garmin’s programming language for wearable apps.
 
-3. **Testing:** Thoroughly test the watch face on the simulator and actual device to validate readability and performance.
+The main tasks were:
 
-4. **Optimization:** Optimize the watch face for battery life and performance, ensuring a seamless user experience.
+- designing the layout for a small display
+- updating data fields in real time
+- keeping the rendering efficient to preserve battery life
+
+Testing was done both in the **Garmin simulator** and on the actual device.
+
+---
 
 ## Final Thoughts
 
-Creating a custom watch face inspired by Visual Studio Code for the Garmin Forerunner 55 Music is an exciting endeavor that combines creativity with technical skill. By blending the aesthetics of a beloved code editor with the functionality of a fitness wearable, we're able to deliver a unique and engaging experience to users.
+This was a small but fun side project that combines two things I spend a lot of time with: writing code and going for runs.
 
-Stay tuned for updates on the progress of this project as we bring our vision to life!
+It’s also a nice reminder that not every project needs to be serious or complicated. Sometimes it’s enough to build something that simply makes you smile when you look at your watch.
+
+---
 
 ![Watch Face Preview](https://amazfitwatchfaces.com/storage/gts/img/1608500422_32288f7055.gif)
 
-_Watch Face Preview: Placeholder image for illustration purposes only._
+_Watch face preview._

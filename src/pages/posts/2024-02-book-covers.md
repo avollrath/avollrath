@@ -1,80 +1,128 @@
 ---
-title: 'Fetching and Displaying Book Covers Using Google Books API'
+title: 'Fetching Book Covers with the Google Books API'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2024-02-08'
-description: 'Learn how to fetch and display book covers from the Google Books API in your web project, enhancing user experience with rich, dynamic content.'
-author: 'Book Lover and Web Developer'
+description: 'Using the Google Books API to dynamically fetch book covers for my personal website.'
+author: 'André Vollrath'
 image:
   src: '../images/blog/books.jpg'
   alt: 'A collection of book covers displayed on a digital screen.'
-tags: ['web development', 'API', 'Google Books', 'JavaScript', 'project']
-teaser: "Embark on a fascinating journey through the world of web development as we explore how to fetch and display book covers using the Google Books API. Whether you're a seasoned developer or just starting out, this blog post will guide you through the steps of enhancing your web project with dynamic content from one of the largest book databases. Get ready to dive into code snippets, API integration, and practical insights to bring your digital bookshelf to life!"
+tags: ['web development', 'api', 'google books', 'javascript', 'project']
+showFavoriteBooks: true
+teaser: 'A small feature for my website that fetches <strong class="font-semibold text-dark-text">book cover images</strong> using the <strong class="font-semibold text-dark-text">Google Books API</strong> to power my <strong class="font-semibold text-dark-text">Favorite Books</strong> section and reading lists.'
 ---
 
-Welcome to an exciting guide on how to fetch and display book covers using the Google Books API. This post will take you through the steps of integrating the API into a web project, adding a touch of visual flair with book covers.
+# Fetching Book Covers with the Google Books API
 
-## Setting the Scene
+While working on my personal website, I wanted to add a section showing some of my **favorite books** and the books I’m currently reading.
 
-### The Idea
+Instead of manually downloading and storing cover images, I decided to fetch them dynamically using the **Google Books API**.
 
-As a book lover and web developer, I wanted to showcase my favorite books on my personal website. What better way to do this than displaying their covers dynamically? This led me to the Google Books API, a treasure trove of book information, including cover images.
+This keeps the implementation simple while still producing a clean visual result.
 
-### The Objective
+---
 
-The goal was straightforward: to retrieve book covers from the Google Books API and display them on my website, creating a visually appealing digital bookshelf.
+## The Goal
 
-## Technical Implementation
+The feature is used in two places on my website:
 
-### Obtaining API Access
+- the **Favorite Books** section on the homepage
+- the **Now page**, where I list books I'm currently reading
 
-#### Setting up Google Books API
+Both sections display a row of book covers, creating a small digital bookshelf.
 
-To use the Google Books API, you first need to obtain an API key. This involves creating a project in the Google Cloud Console and enabling the Books API for that project. Once done, the API key is generated, which will be used in API requests.
+Rather than managing the images myself, the site simply looks up each book through the API and retrieves the cover image automatically.
 
-### Fetching Book Covers
+---
 
-#### Crafting the API Request
+## Using the Google Books API
 
-The main task was to construct a request to the Google Books API that searches for a specific book title and retrieves its cover image. Here's a simplified version of the code used:
+Google provides a public API that allows searching their book database.
 
-```javascript
-import fetch from 'node-fetch'
+For this feature, I search by **book title** and extract the cover image from the response.
 
-const apiKey = 'Your_Google_API_Key'
-const bookTitle = 'Example Book Title'
+Example request:
 
-async function fetchBookCover(title) {
-	const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(title)}&key=${apiKey}`
-	const response = await fetch(url)
-	const data = await response.json()
-	return data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail || ''
-}
-```
+    https://www.googleapis.com/books/v1/volumes?q=intitle:Project%20Hail%20Mary
 
-### Integrating the Function
+The API returns metadata including:
 
-This function was integrated into my web project, where it's called for each book title I wanted to display. The function returns the URL of the book cover image, which is then used in an HTML `img` tag.
+- title
+- author
+- description
+- thumbnail images
 
-### Displaying the Covers
+The thumbnail URL is what I use for the cover display.
 
-With the URLs of the book covers at hand, the next step was to display them on the website. This was done using a simple HTML structure and a bit of styling for a neat presentation.
+---
 
-## Overcoming Challenges
+## Fetching Covers with JavaScript
 
-The journey wasn't without its hurdles. Here are some challenges I faced:
+The core logic is a small function that requests the API and extracts the cover image.
 
-1. **API Key Management**: Keeping the API key secure while ensuring it's accessible for the requests was crucial. I used environment variables to store the key securely.
+Example:
 
-2. **Handling API Limitations**: The Google Books API has rate limits and quotas. I had to ensure that my requests were efficient and didn't exceed these limits.
+    import fetch from 'node-fetch'
 
-3. **Data Inconsistency**: Sometimes the API didn't return a cover image for a book. I had to implement a fallback mechanism to handle such cases gracefully.
-   ![Digital Bookshelf](../../images/blog/books.jpg)
-   _My website featuring a dynamic display of book covers fetched from the Google Books API._
+    const apiKey = process.env.GOOGLE_BOOKS_API_KEY
 
-## Conclusion
+    async function fetchBookCover(title) {
+        const url =
+            `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(title)}&key=${apiKey}`
 
-Integrating the Google Books API to fetch and display book covers added a dynamic and visually appealing element to my website. It was a rewarding process that combined my love for books with my web development skills.
+        const response = await fetch(url)
+        const data = await response.json()
 
-For those looking to enhance their web projects with external data, APIs like Google Books offer a world of possibilities. With some creativity and coding, you can bring a wealth of information and visuals to your digital creations.
+        return data.items?.[0]?.volumeInfo?.imageLinks?.thumbnail || ''
+    }
 
-Feel free to reach out if you have questions or need tips on your API integration journey. Happy coding and happy reading!
+The function searches for the book title and returns the first available thumbnail image.
+
+---
+
+## Displaying the Covers
+
+Once the image URLs are fetched, they are rendered in a simple grid or row layout on the page.
+
+Because the covers come directly from the API, adding a new book only requires adding the title to the list. The cover image is fetched automatically.
+
+This keeps the content management extremely simple.
+
+---
+
+## Handling Missing Covers
+
+One small challenge was that not every book entry includes a cover image.
+
+To handle this, the function returns an empty string when no thumbnail exists. The UI can then either:
+
+- display a placeholder image
+- skip the entry entirely
+
+This keeps the interface clean even when the API data is incomplete.
+
+---
+
+## Why I Like This Approach
+
+Using the API instead of storing images locally has a few advantages:
+
+- no need to manage image files
+- adding books is extremely easy
+- the covers always come from a consistent source
+
+It also keeps the website code lightweight while still providing a visually rich section.
+
+---
+
+## Final Thoughts
+
+This feature is small, but it adds a nice personal touch to the website.
+
+Combining external APIs with simple UI components is one of the easiest ways to make a site feel more dynamic and alive.
+
+Sometimes the smallest details, like a row of book covers, make a page feel much more personal.
+
+---
+
+_The book cover section on my website, powered by the Google Books API:_

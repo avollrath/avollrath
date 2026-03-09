@@ -1,76 +1,87 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import { getResolvedPosts } from '../scripts/getResolvedPosts';
-const allPosts = await getResolvedPosts();
-const latestPost = allPosts[0];
+import Layout from '../layouts/Layout.astro'
+import { Image } from 'astro:assets'
+import { getResolvedPosts } from '../scripts/getResolvedPosts'
+const allPosts = await getResolvedPosts()
+const latestPost = allPosts[0]
 ---
 
-<Layout title="Blog by André Vollrath" description="Thoughts on frontend development, game design, creative coding, and everything else."
-    seo={{
-      ogImage: latestPost?.frontmatter?.image?.src ?? '/about2.jpg',
-      ogImageAlt: latestPost?.frontmatter?.image?.alt ?? 'Blog page preview image',
-      siteName: 'Andre Vollrath'
-    }}
+<Layout
+	title="Blog by André Vollrath"
+	description="Thoughts on design, frontend development, creative projects, and the things I'm currently exploring."
+	seo={{
+		ogImage: latestPost?.frontmatter?.image?.src ?? '/about2.jpg',
+		ogImageAlt: latestPost?.frontmatter?.image?.alt ?? 'Blog page preview image',
+		siteName: 'Andre Vollrath'
+	}}
 >
-    <div class="flex flex-col col-span-3 blog-text-container xl:col-span-1 2xl:col-span-3">
-        <div
-            class="flex flex-col items-center p-6 mb-4 text-base text-white rounded-md shadow-lg long-transition sm:rounded-lg bg-about-gradient sm:p-12 sm:text-md 3xl:text-lg"
-        >
-            <h2 class="px-8 py-3 mx-auto mb-8 text-4xl tracking-wide border-2 border-white border-solid rounded-lg w-fit long-transition font-header" transition:name="blog-header">Blog</h2>
-            <p class="my-3 leading-relaxed">
-                Welcome to my <strong class="font-semibold">Blog</strong>, a curated collection of my thoughts, experiences, and projects. Here, I dive into a wide range of topics that capture my curiosity and passion.
-            </p>
-            <p class="my-3 leading-relaxed">
-                Whether you're interested in <strong class="font-semibold">tech explorations</strong>, creative endeavors, or deep dives into interesting challenges, this is the space where I share it all. Every post is a glimpse into my journey of learning, creating, and experimenting.
-            </p>
-            <p class="my-3 leading-relaxed">
-                You'll find posts about my latest <strong class="font-semibold">projects</strong>, <strong class="font-semibold">insights</strong>, and <strong class="font-semibold">discoveries</strong>, all written with the hope of inspiring or helping others in their own pursuits.
-            </p>
-            <p class="my-3 leading-relaxed">
-                Thank you for visiting and joining me on this journey.
-            </p>
-        </div>
-    </div>
-    
-    <div class="col-span-3 xl:col-span-2 2xl:col-span-9">
-    {allPosts.map((post) => (
-        <div class="block col-span-12 mb-4 bg-white rounded-md shadow-xl cursor-pointer blog-post-container sm:rounded-lg border-gradient group hover:shadow-2xl">
-  <!-- Wrapping the entire post in an <a> tag -->
-  <a href={post.url} class="flex items-stretch overflow-hidden rounded-t-md sm:rounded-t-lg md:rounded-l-lg">
-    
-    <!-- Image Container with overflow-hidden, full height, and flex-grow -->
-    <div class="flex-1 w-full overflow-hidden max-w-7xl">
-      {post.frontmatter.image.src ? (
-        <Image
-          src={post.frontmatter.image.src}
-          alt={post.frontmatter.image.alt || 'Default Alt Text'}
-          class="object-cover w-full h-full transition duration-500 ease-out transform group-hover:scale-110"
-          loading="lazy"
-          decoding="async"
-        />
-      ) : (
-        <p>No image available</p>
-      )}
-    </div>
-    
-    <!-- Text Content Container with flex-grow -->
-    <div class="flex flex-col items-center justify-center flex-1 w-full p-6 sm:p-12">
-      <div>
-        <h2 class="mb-4 text-sm tracking-wide transition duration-500 ease-in-out origin-bottom-left md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-header group-hover:-translate-y-2 group-hover:text-magenta">
-          {post.frontmatter.title}
-        </h2>
-        <p class="text-xs text-gray-400 lg:text-base">
-          {post.frontmatter.description}
-        </p>
-      </div>
-    </div>
-  </a>
-</div>
+	<div class="blog-text-container col-span-3 flex flex-col xl:col-span-1 2xl:col-span-3">
+		<div
+			class="long-transition sm:text-md flex flex-col items-center rounded-md bg-about-gradient p-6 text-base text-white shadow-lg sm:rounded-lg sm:p-12 3xl:text-lg"
+		>
+			<h2
+				class="long-transition mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-white px-8 py-3 font-header text-4xl tracking-wide"
+				transition:name="blog-header"
+			>
+				Blog
+			</h2>
 
+			<p class="my-3 leading-relaxed">
+				Welcome to my <strong class="font-semibold">blog</strong>, a place where I write about the
+				things I’m building, learning, and figuring out along the way.
+			</p>
 
-    ))}
-    </div>
+			<p class="my-3 leading-relaxed">
+				Most posts revolve around <strong class="font-semibold">frontend development</strong>,
+				<strong class="font-semibold">design</strong>, creative side projects, and the occasional
+				technical rabbit hole that feels too interesting not to document.
+			</p>
+
+			<p class="my-3 leading-relaxed">
+				Some entries are practical write-ups, others are more like project journals, notes from
+				experiments, or things I wish I had found in one place when I started.
+			</p>
+
+			<p class="my-3 leading-relaxed">
+				If any of it helps, inspires, or simply makes you curious to try something yourself, even
+				better.
+			</p>
+		</div>
+	</div>
+
+	<div class="col-span-3 xl:col-span-2 2xl:col-span-9">
+		{
+			allPosts.map((post) => (
+				<div class="blog-post-container border-gradient group mb-4 block cursor-pointer rounded-md bg-white shadow-xl hover:shadow-2xl sm:rounded-lg">
+					<a
+						href={post.url}
+						class="flex items-stretch overflow-hidden rounded-t-md sm:rounded-t-lg md:rounded-l-lg"
+					>
+						<div class="w-full max-w-7xl flex-1 overflow-hidden">
+							{post.frontmatter.image.src ? (
+								<Image
+									src={post.frontmatter.image.src}
+									alt={post.frontmatter.image.alt || 'Default Alt Text'}
+									class="h-full w-full transform object-cover transition duration-500 ease-out group-hover:scale-110"
+									loading="lazy"
+									decoding="async"
+								/>
+							) : (
+								<p>No image available</p>
+							)}
+						</div>
+
+						<div class="flex w-full flex-1 flex-col items-center justify-center p-6 sm:p-12">
+							<div>
+								<h2 class="md:text-md mb-4 origin-bottom-left font-header text-sm tracking-wide transition duration-500 ease-in-out group-hover:-translate-y-2 group-hover:text-magenta lg:text-lg xl:text-xl 2xl:text-2xl">
+									{post.frontmatter.title}
+								</h2>
+								<p class="text-xs text-gray-400 lg:text-base">{post.frontmatter.description}</p>
+							</div>
+						</div>
+					</a>
+				</div>
+			))
+		}
+	</div>
 </Layout>
-
-

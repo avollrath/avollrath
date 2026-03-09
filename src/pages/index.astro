@@ -48,15 +48,15 @@ const latestPost = allPosts[0]
 			>
 				<span class="text-base text-gray-400">👋 vollrath.dev</span>
 			</div>
+			<p class="mb-6 text-center text-xs text-gray-400 sm:text-base lg:text-left 3xl:text-lg">
+				UI/UX Designer | Front-End Developer
+			</p>
 
 			<h1
 				class="hero-header text-gradient text-center font-header text-5xl sm:text-6xl md:mr-4 lg:text-left lg:text-8xl"
 			>
 				Hi, I’m André.
 			</h1>
-			<span class="mt-2 text-lg text-gray-400 lg:text-left"
-				>UI/UX Designer | Front-End Developer</span
-			>
 
 			<p
 				class="intro-text z-10 my-4 max-w-screen-md rounded-xl bg-white/75 py-2 pr-2 text-xs backdrop-blur-sm backdrop-brightness-125 max-2xl:max-w-full sm:my-6 sm:text-left sm:text-2xl/relaxed 3xl:max-w-screen-lg 3xl:text-3xl/relaxed"
@@ -71,7 +71,7 @@ const latestPost = allPosts[0]
 			<div class="cta-button flex justify-center">
 				<button
 					type="button"
-					class="contact-btn shimmer bg-magenta flex items-center rounded-full px-10 py-4 text-center font-semibold text-white transition duration-300 ease-[cubic-bezier(0.31,-0.105,0.43,2.4)] hover:scale-105 sm:text-3xl/relaxed"
+					class="contact-btn shimmer flex items-center rounded-full bg-magenta px-10 py-4 text-center font-semibold text-white transition duration-300 ease-[cubic-bezier(0.31,-0.105,0.43,2.4)] hover:scale-105 sm:text-3xl/relaxed"
 				>
 					Get in touch
 					<svg
@@ -200,7 +200,7 @@ const latestPost = allPosts[0]
 
 		<div class="blog-content">
 			<h3
-				class="long-transition text-magenta mb-6 text-center font-body text-xs font-semibold sm:text-base 3xl:text-lg"
+				class="long-transition mb-6 text-center font-body text-xs font-semibold text-magenta sm:text-base 3xl:text-lg"
 			>
 				{latestPost.frontmatter.title}
 			</h3>
@@ -219,7 +219,7 @@ const latestPost = allPosts[0]
 			/>
 			<div class="flex justify-center">
 				<button
-					class="bg-magenta mt-12 rounded-full px-10 py-4 text-lg font-semibold text-white transition-transform hover:scale-105"
+					class="mt-12 rounded-full bg-magenta px-10 py-4 text-lg font-semibold text-white transition-transform hover:scale-105"
 					>Read blog post</button
 				>
 			</div>
@@ -499,6 +499,10 @@ const latestPost = allPosts[0]
 
 <script is:inline>
 	function initEyes() {
+		if (document.documentElement.classList.contains('reduced-motion')) {
+			return
+		}
+
 		const eyes = document.querySelectorAll('.eye-left, .eye-right')
 		const sunglasses = document.querySelector('.sunglasses')
 		const contactButton = document.querySelector('.contact-btn')

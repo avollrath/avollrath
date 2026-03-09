@@ -7,6 +7,31 @@ html {
 	overflow-x: hidden;
 }
 
+html.reduced-motion body {
+	background: #edf2f6;
+}
+
+html.reduced-motion .long-transition,
+html.reduced-motion .float,
+html.reduced-motion .shimmer:before,
+html.reduced-motion .sunglasses,
+html.reduced-motion .eye-left,
+html.reduced-motion .eye-right,
+html.reduced-motion .nav-underline {
+	animation: none !important;
+	transition: none !important;
+}
+
+html.reduced-motion .intro-text {
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+}
+
+html.reduced-motion .marquee__content {
+	animation: none !important;
+	transform: none !important;
+}
+
 
 body {
 	--dot-bg: #edf2f6;
