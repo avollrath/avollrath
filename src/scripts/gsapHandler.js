@@ -180,263 +180,275 @@ function initHomeAnimations() {
 	}
 
 	if (shouldRunHomeIntro) {
-	const navBar = document.querySelector('.nav-bar')
-	if (navBar) {
-		const navBarAnim = gsap.from(navBar, {
-			opacity: 0,
-			y: -200,
-			ease: 'back.out',
-			duration: 0.4,
-			delay: 0.6
-		})
-		animations.push(navBarAnim)
-	}
-
-	const navItems = document.querySelectorAll('.nav-item, .nav-logo')
-	if (navItems) {
-		const navItemsAnim = gsap.from(navItems, {
-			opacity: 0,
-			y: 50,
-			ease: 'sine',
-			duration: 0.3,
-			delay: 1.2,
-			stagger: 0.2
-		})
-		animations.push(navItemsAnim)
-	}
-
-	const heroContainer = document.querySelector('.hero-container')
-	if (heroContainer) {
-		const heroContainerAnim = gsap.from(heroContainer, {
-			opacity: 0,
-			x: -1000,
-			ease: 'back.out',
-			duration: 0.5,
-			delay: 0.3
-		})
-		animations.push(heroContainerAnim)
-	}
-
-	const heroBadge = document.querySelector('.hero-badge')
-	if (heroBadge) {
-		const badgeAnim = gsap.from(heroBadge, {
-			opacity: 0,
-			x: -150,
-			ease: 'elastic(0.6)',
-			duration: 1,
-			delay: 0.8
-		})
-		animations.push(badgeAnim)
-	}
-
-	const heroHeader = document.querySelector('.hero-header')
-	if (heroHeader) {
-		const heroHeaderAnim = gsap.from(heroHeader, {
-			opacity: 0,
-			y: -100,
-			ease: 'back.out',
-			duration: 0.5,
-			delay: 0.5
-		})
-		animations.push(heroHeaderAnim)
-	}
-
-	// Intro text character animation
-	const introText = document.querySelector('.intro-text')
-	if (introText) {
-		// Function to wrap characters in spans
-		function wrapChars(element) {
-			const text = element.textContent
-			const chars = text.split('')
-			const wrappedChars = chars
-				.map((char) => {
-					if (char === ' ') {
-						return ' '
-					}
-					return `<span class="char">${char}</span>`
-				})
-				.join('')
-			element.innerHTML = wrappedChars
+		const navBar = document.querySelector('.nav-bar')
+		if (navBar) {
+			const navBarAnim = gsap.from(navBar, {
+				opacity: 0,
+				y: -200,
+				ease: 'back.out',
+				duration: 0.4,
+				delay: 0.6
+			})
+			animations.push(navBarAnim)
 		}
 
-		// Function to wrap all text including strong tags
-		function wrapAllText(element) {
-			const strongTags = element.querySelectorAll('strong')
-			strongTags.forEach((strong) => {
-				wrapChars(strong)
+		const navItems = document.querySelectorAll('.nav-item, .nav-logo')
+		if (navItems) {
+			const navItemsAnim = gsap.from(navItems, {
+				opacity: 0,
+				y: 50,
+				ease: 'sine',
+				duration: 0.3,
+				delay: 1.2,
+				stagger: 0.2
+			})
+			animations.push(navItemsAnim)
+		}
+
+		const heroContainer = document.querySelector('.hero-container')
+		if (heroContainer) {
+			const heroContainerAnim = gsap.from(heroContainer, {
+				opacity: 0,
+				x: -1000,
+				ease: 'back.out',
+				duration: 0.5,
+				delay: 0.3
+			})
+			animations.push(heroContainerAnim)
+		}
+
+		const heroBadge = document.querySelector('.hero-badge')
+		if (heroBadge) {
+			const badgeAnim = gsap.from(heroBadge, {
+				opacity: 0,
+				x: -150,
+				ease: 'elastic(0.6)',
+				duration: 1,
+				delay: 0.8
+			})
+			animations.push(badgeAnim)
+		}
+
+		const heroHeader = document.querySelector('.hero-header')
+		if (heroHeader) {
+			const heroHeaderAnim = gsap.from(heroHeader, {
+				opacity: 0,
+				y: -100,
+				ease: 'back.out',
+				duration: 0.5,
+				delay: 0.5
+			})
+			animations.push(heroHeaderAnim)
+		}
+
+		// Intro text character animation
+		const introText = document.querySelector('.intro-text')
+		if (introText) {
+			// Function to wrap characters in spans
+			function wrapChars(element) {
+				const text = element.textContent
+				const chars = text.split('')
+				const wrappedChars = chars
+					.map((char) => {
+						if (char === ' ') {
+							return ' '
+						}
+						return `<span class="char">${char}</span>`
+					})
+					.join('')
+				element.innerHTML = wrappedChars
+			}
+
+			// Function to wrap all text including strong tags
+			function wrapAllText(element) {
+				const strongTags = element.querySelectorAll('strong')
+				strongTags.forEach((strong) => {
+					wrapChars(strong)
+				})
+
+				const textNodes = Array.from(element.childNodes).filter(
+					(node) => node.nodeType === Node.TEXT_NODE
+				)
+
+				textNodes.forEach((textNode) => {
+					const span = document.createElement('span')
+					span.textContent = textNode.textContent
+					textNode.parentNode.replaceChild(span, textNode)
+					wrapChars(span)
+				})
+			}
+
+			wrapAllText(introText)
+
+			const chars = introText.querySelectorAll('.char')
+			const tl = gsap.timeline()
+
+			tl.set(chars, {
+				opacity: 0
 			})
 
-			const textNodes = Array.from(element.childNodes).filter(
-				(node) => node.nodeType === Node.TEXT_NODE
+			const charsAnim = tl.to(
+				chars,
+				{
+					opacity: 1,
+					delay: 0.5,
+					stagger: {
+						amount: 2,
+						from: 'start'
+					},
+					ease: 'power1.inOut'
+				},
+				0
 			)
 
-			textNodes.forEach((textNode) => {
-				const span = document.createElement('span')
-				span.textContent = textNode.textContent
-				textNode.parentNode.replaceChild(span, textNode)
-				wrapChars(span)
-			})
+			animations.push(charsAnim)
 		}
 
-		wrapAllText(introText)
+		if (ctaButton) {
+			const ctaAnim = gsap.from(ctaButton, {
+				opacity: 0,
+				y: 100,
+				ease: 'back.out',
+				duration: 0.4,
+				delay: 1.3
+			})
+			animations.push(ctaAnim)
+		}
 
-		const chars = introText.querySelectorAll('.char')
-		const tl = gsap.timeline()
+		const avatar = document.querySelector('.avatar-wrapper')
+		if (avatar) {
+			const avatarAnim = gsap.from(avatar, {
+				scale: 0,
+				ease: 'back.out',
+				duration: 0.6,
+				delay: 0.8
+			})
+			animations.push(avatarAnim)
+		}
 
-		tl.set(chars, {
-			opacity: 0
+		const nowContainer = document.querySelector('.now-container')
+		if (nowContainer) {
+			const nowContainerAnim = gsap.from(nowContainer, {
+				opacity: 0,
+				x: 300,
+				ease: 'back.out',
+				duration: 0.4,
+				delay: 1
+			})
+			animations.push(nowContainerAnim)
+		}
+
+		const clientLogosContainer = document.querySelector('.client-logos-container')
+		if (clientLogosContainer) {
+			const clientLogosAnim = gsap.from(clientLogosContainer, {
+				opacity: 0,
+				y: 400,
+				ease: 'back.out',
+				duration: 0.4,
+				delay: 0.8
+			})
+			animations.push(clientLogosAnim)
+		}
+
+		const nowContent = document.querySelectorAll('.now-content')
+		if (nowContent) {
+			const nowContentAnim = gsap.from(nowContent, {
+				opacity: 0,
+				y: 50,
+				ease: 'back.out',
+				duration: 0.7,
+				delay: 1.2
+			})
+			animations.push(nowContentAnim)
+		}
+
+		const blogContainer = document.querySelector('.blog-container')
+		if (blogContainer) {
+			const blogContainerAnim = gsap.from(blogContainer, {
+				opacity: 0,
+				x: -300,
+				ease: 'back.out',
+				duration: 0.4,
+				delay: 1.3
+			})
+			animations.push(blogContainerAnim)
+		}
+
+		const blogContent = document.querySelectorAll('.blog-content')
+		if (blogContent) {
+			const blogContentAnim = gsap.from(blogContent, {
+				opacity: 0,
+				y: 50,
+				ease: 'back.out',
+				duration: 0.7,
+				delay: 1.2
+			})
+			animations.push(blogContentAnim)
+		}
+
+		const aboutContainer = document.querySelector('.about-container')
+		if (aboutContainer) {
+			const aboutContainerAnim = gsap.from(aboutContainer, {
+				opacity: 0,
+				y: -300,
+				ease: 'back.out',
+				duration: 0.4,
+				delay: 1.5
+			})
+			animations.push(aboutContainerAnim)
+		}
+
+		const aboutContent = document.querySelectorAll('.about-content')
+		if (aboutContent) {
+			const aboutContentAnim = gsap.from(aboutContent, {
+				opacity: 0,
+				y: 50,
+				ease: 'back.out',
+				duration: 0.7,
+				delay: 1.8
+			})
+			animations.push(aboutContentAnim)
+		}
+
+		const renderContainer = document.querySelector('.render-container')
+		if (renderContainer) {
+			const renderContainerAnim = gsap.from(renderContainer, {
+				opacity: 0,
+				x: 300,
+				ease: 'back.out',
+				duration: 0.4,
+				delay: 2.0
+			})
+			animations.push(renderContainerAnim)
+		}
+
+		const renderContent = document.querySelectorAll('.render-content')
+		if (renderContent) {
+			const renderContentAnim = gsap.from(renderContent, {
+				opacity: 0,
+				y: 100,
+				ease: 'back.out',
+				duration: 0.5,
+				delay: 2.4
+			})
+			animations.push(renderContentAnim)
+		}
+
+		const spotifyContainer = document.querySelector('.spotify-container')
+		if (spotifyContainer) {
+			const spotifyContainerAnim = gsap.from(spotifyContainer, {
+				opacity: 0,
+				x: 300,
+				ease: 'back.out',
+				duration: 0.4,
+				delay: 2.8
+			})
+			animations.push(spotifyContainerAnim)
+		}
+
+		requestAnimationFrame(() => {
+			document.documentElement.classList.remove('home-intro-pending')
 		})
-
-		const charsAnim = tl.to(
-			chars,
-			{
-				opacity: 1,
-				delay: 0.5,
-				stagger: {
-					amount: 2,
-					from: 'start'
-				},
-				ease: 'power1.inOut'
-			},
-			0
-		)
-
-		animations.push(charsAnim)
-	}
-
-	if (ctaButton) {
-		const ctaAnim = gsap.from(ctaButton, {
-			opacity: 0,
-			y: 100,
-			ease: 'back.out',
-			duration: 0.4,
-			delay: 1.3
-		})
-		animations.push(ctaAnim)
-	}
-
-	const avatar = document.querySelector('.avatar-wrapper')
-	if (avatar) {
-		const avatarAnim = gsap.from(avatar, {
-			scale: 0,
-			ease: 'back.out',
-			duration: 0.6,
-			delay: 0.8
-		})
-		animations.push(avatarAnim)
-	}
-
-	const nowContainer = document.querySelector('.now-container')
-	if (nowContainer) {
-		const nowContainerAnim = gsap.from(nowContainer, {
-			opacity: 0,
-			x: 300,
-			ease: 'back.out',
-			duration: 0.4,
-			delay: 1
-		})
-		animations.push(nowContainerAnim)
-	}
-
-	const nowContent = document.querySelectorAll('.now-content')
-	if (nowContent) {
-		const nowContentAnim = gsap.from(nowContent, {
-			opacity: 0,
-			y: 50,
-			ease: 'back.out',
-			duration: 0.7,
-			delay: 1.2
-		})
-		animations.push(nowContentAnim)
-	}
-
-	const blogContainer = document.querySelector('.blog-container')
-	if (blogContainer) {
-		const blogContainerAnim = gsap.from(blogContainer, {
-			opacity: 0,
-			x: -300,
-			ease: 'back.out',
-			duration: 0.4,
-			delay: 1.3
-		})
-		animations.push(blogContainerAnim)
-	}
-
-	const blogContent = document.querySelectorAll('.blog-content')
-	if (blogContent) {
-		const blogContentAnim = gsap.from(blogContent, {
-			opacity: 0,
-			y: 50,
-			ease: 'back.out',
-			duration: 0.7,
-			delay: 1.2
-		})
-		animations.push(blogContentAnim)
-	}
-
-	const aboutContainer = document.querySelector('.about-container')
-	if (aboutContainer) {
-		const aboutContainerAnim = gsap.from(aboutContainer, {
-			opacity: 0,
-			y: -300,
-			ease: 'back.out',
-			duration: 0.4,
-			delay: 1.5
-		})
-		animations.push(aboutContainerAnim)
-	}
-
-	const aboutContent = document.querySelectorAll('.about-content')
-	if (aboutContent) {
-		const aboutContentAnim = gsap.from(aboutContent, {
-			opacity: 0,
-			y: 50,
-			ease: 'back.out',
-			duration: 0.7,
-			delay: 1.8
-		})
-		animations.push(aboutContentAnim)
-	}
-
-	const renderContainer = document.querySelector('.render-container')
-	if (renderContainer) {
-		const renderContainerAnim = gsap.from(renderContainer, {
-			opacity: 0,
-			x: 300,
-			ease: 'back.out',
-			duration: 0.4,
-			delay: 2.0
-		})
-		animations.push(renderContainerAnim)
-	}
-
-	const renderContent = document.querySelectorAll('.render-content')
-	if (renderContent) {
-		const renderContentAnim = gsap.from(renderContent, {
-			opacity: 0,
-			y: 100,
-			ease: 'back.out',
-			duration: 0.5,
-			delay: 2.4
-		})
-		animations.push(renderContentAnim)
-	}
-
-	const spotifyContainer = document.querySelector('.spotify-container')
-	if (spotifyContainer) {
-		const spotifyContainerAnim = gsap.from(spotifyContainer, {
-			opacity: 0,
-			x: 300,
-			ease: 'back.out',
-			duration: 0.4,
-			delay: 2.8
-		})
-		animations.push(spotifyContainerAnim)
-	}
-
-	requestAnimationFrame(() => {
-		document.documentElement.classList.remove('home-intro-pending')
-	})
 	}
 
 	// Spotify tracks animation
