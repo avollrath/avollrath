@@ -44,7 +44,7 @@ Some of the things you'll find in my repositories:
 ## 🌐 Find me elsewhere
 
 - Website: https://vollrath.dev
-- LinkedIn: https://linkedin.com/andrevollrath
+- LinkedIn: https://linkedin.com/in/andrevollrath
 
 ---
 
