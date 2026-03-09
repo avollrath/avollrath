@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets'
+import { hashStringToSeed, shuffleDeterministic } from '../scripts/deterministicShuffle.js'
+
+const { logos = [], speed = '42s' } = Astro.props
+const buildSeed = import.meta.env.PUBLIC_BUILD_SEED || 'default'
+const baseSeed = hashStringToSeed(`${Astro.url.pathname}|client-logos|${buildSeed}`)
+const shuffledLogos = shuffleDeterministic(logos, baseSeed)
+---
+
+<section class="enable-animation client-marquee-wrapper" style={`--client-marquee-speed:${speed};`}>
+	<div class="marquee">
+		<ul class="marquee__content">
+			{
+				shuffledLogos.map((logo, index) => (
+					<li class="client-logo-item" key={`logo-a-${index}`}>
+						<Image
+							src={logo.src}
+							alt={logo.alt}
+							class="client-logo"
+							loading="lazy"
+							decoding="async"
+						/>
+					</li>
+				))
+			}
+		</ul>
+		<ul class="marquee__content">
+			{
+				shuffledLogos.map((logo, index) => (
+					<li class="client-logo-item" key={`logo-b-${index}`}>
+						<Image
+							src={logo.src}
+							alt={logo.alt}
+							class="client-logo"
+							loading="lazy"
+							decoding="async"
+						/>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+
+<style>
+	.client-marquee-wrapper {
+		--gap: 0;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.client-marquee-wrapper .marquee {
+		align-items: center;
+	}
+
+	.client-marquee-wrapper .marquee__content {
+		justify-content: flex-start;
+		align-items: center;
+		animation-duration: var(--client-marquee-speed, 42s);
+	}
+
+	.client-logo-item {
+		flex: 0 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 2rem;
+	}
+
+	.client-logo {
+		align-self: center;
+		width: 120px;
+		height: auto;
+		opacity: 0.9;
+		filter: grayscale(20%);
+		transition: transform 250ms ease, opacity 250ms ease;
+		display: block;
+	}
+
+	.client-logo:hover {
+		opacity: 1;
+		transform: translateY(-2px);
+	}
+
+	@media (min-width: 640px) {
+	}
+
+	@media (max-width: 640px) {
+		.client-logo-item {
+			margin: 0 1rem;
+		}
+
+		.client-logo {
+			width: 70px;
+		}
+	}
+</style>

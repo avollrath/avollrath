@@ -2,6 +2,7 @@
 import { getTopTracks } from '../scripts/getTopTracks.js'
 import Layout from '../layouts/Layout.astro'
 import Marquee from '../components/Marquee.astro'
+import ClientLogoMarquee from '../components/ClientLogoMarquee.astro'
 import ContactForm from '../components/ContactForm.astro'
 import latestRenderImage from '../images/renders/braunHF3.jpg'
 import latestRenderImageClay from '../images/renders/braunHF3-clay.jpg'
@@ -27,6 +28,23 @@ try {
 const allPosts = await getResolvedPosts()
 
 const latestPost = allPosts[0]
+
+const clientLogoModules = import.meta.glob('../images/client-logos/*.{png,jpg,jpeg,webp,svg}', {
+	eager: true
+})
+
+const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
+	const fileName = filePath.split('/').pop() || 'Client'
+	const cleanName = fileName
+		.replace(/\.[^/.]+$/, '')
+		.replace(/-logo-?\d*$/i, '')
+		.replace(/[-_]/g, ' ')
+		.replace(/\b\w/g, (char) => char.toUpperCase())
+	return {
+		src: mod.default,
+		alt: `${cleanName} logo`
+	}
+})
 ---
 
 <Layout
@@ -112,9 +130,21 @@ const latestPost = allPosts[0]
 		</div>
 	</div>
 
+	<!-- Client logos marquee -->
+	<div
+		class="client-logos-container border-gradient h-full rounded-md bg-white py-6 shadow-lg sm:rounded-lg sm:py-8 xl:col-span-3 xl:row-start-2 2xl:col-span-12 2xl:row-start-2"
+	>
+		<h2
+			class="mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
+		>
+			Worked with
+		</h2>
+		<ClientLogoMarquee logos={clientLogos} speed="32s" />
+	</div>
+
 	<!-- Now Section -->
 	<div
-		class="now-container border-gradient clickable-section flex h-full flex-col justify-between rounded-md bg-white px-4 py-8 text-xs shadow-lg sm:rounded-lg sm:p-12 sm:px-12 sm:text-base xl:col-span-1 xl:row-start-2 2xl:col-span-3 2xl:col-start-10 2xl:row-start-1"
+		class="now-container border-gradient clickable-section flex h-full flex-col justify-between rounded-md bg-white px-4 py-8 text-xs shadow-lg sm:rounded-lg sm:p-12 sm:px-12 sm:text-base xl:col-span-1 xl:row-start-3 2xl:col-span-3 2xl:col-start-10 2xl:row-start-1"
 	>
 		<div class="now-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
@@ -173,7 +203,7 @@ const latestPost = allPosts[0]
 
 	<!-- Latest Blog Section -->
 	<div
-		class="blog-container border-gradient clickable-section group h-full rounded-md bg-white px-4 py-8 shadow-lg sm:rounded-lg sm:p-12 sm:text-base xl:col-span-2 xl:col-start-2 xl:row-span-2 2xl:col-span-3 2xl:row-start-2"
+		class="blog-container border-gradient clickable-section group h-full rounded-md bg-white px-4 py-8 shadow-lg sm:rounded-lg sm:p-12 sm:text-base xl:col-span-2 xl:col-start-2 xl:row-span-2 xl:row-start-3 2xl:col-span-3 2xl:row-start-3"
 	>
 		<div class="blog-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
@@ -228,7 +258,7 @@ const latestPost = allPosts[0]
 
 	<!-- About Section -->
 	<div
-		class="about-container clickable-section bright-section h-full rounded-md bg-about-gradient px-4 py-8 text-xs text-white shadow-lg sm:rounded-lg sm:p-12 xl:col-span-1 xl:row-start-3 2xl:col-span-3 2xl:col-start-4 2xl:row-start-2"
+		class="about-container clickable-section bright-section h-full rounded-md bg-about-gradient px-4 py-8 text-xs text-white shadow-lg sm:rounded-lg sm:p-12 xl:col-span-1 xl:row-start-4 2xl:col-span-3 2xl:col-start-4 2xl:row-start-3"
 	>
 		<div class="about-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
@@ -270,14 +300,14 @@ const latestPost = allPosts[0]
 
 	<!-- Latest Render Section -->
 	<div
-		class="render-container border-gradient clickable-section latest-render-section h-full rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-3 xl:row-start-4 2xl:col-span-6 2xl:col-start-7 2xl:row-start-2"
+		class="render-container border-gradient clickable-section latest-render-section h-full rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-3 xl:row-start-5 2xl:col-span-6 2xl:col-start-7 2xl:row-start-3"
 	>
 		<div class="render-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
 				class="latest-render-header long-transition rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-left sm:text-4xl"
 			>
-				Latest Render
+				Latest render
 			</h2>
 			<a href="/renders" class="arrow-link">
 				<svg
@@ -310,7 +340,7 @@ const latestPost = allPosts[0]
 
 	<!-- Spotify Section -->
 	<div
-		class="spotify-container border-gradient flex h-full flex-col items-center overflow-visible rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-2 xl:row-start-5 2xl:col-span-9 2xl:row-start-3"
+		class="spotify-container border-gradient flex h-full flex-col items-center overflow-visible rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-2 xl:row-start-6 2xl:col-span-9 2xl:row-start-4"
 	>
 		<h2
 			class="long-transition mb-8 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
@@ -346,7 +376,7 @@ const latestPost = allPosts[0]
 
 	<!-- Tech stack -->
 	<div
-		class="techstack-container border-gradient z-10 h-full overflow-hidden rounded-md bg-white from-dark-card to-darker-card pt-12 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-3 xl:row-start-7 2xl:col-span-9 2xl:row-start-4"
+		class="techstack-container border-gradient z-10 h-full overflow-hidden rounded-md bg-white from-dark-card to-darker-card pt-12 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-3 xl:row-start-8 2xl:col-span-9 2xl:row-start-5"
 	>
 		<h2
 			class="mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
@@ -375,7 +405,7 @@ const latestPost = allPosts[0]
 
 	<!-- Links Section -->
 	<div
-		class="links-container border-gradient flex h-full flex-col items-center rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-5 2xl:col-span-3 2xl:row-start-4"
+		class="links-container border-gradient flex h-full flex-col items-center rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-6 2xl:col-span-3 2xl:row-start-5"
 	>
 		<h2
 			class="long-transition mb-4 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
@@ -446,7 +476,7 @@ const latestPost = allPosts[0]
 
 	<!-- Contact Section -->
 	<div
-		class="contact-container border-gradient z-10 flex h-full flex-col justify-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-6 2xl:col-span-4 2xl:col-start-1 2xl:row-start-5"
+		class="contact-container border-gradient z-10 flex h-full flex-col justify-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-7 2xl:col-span-4 2xl:col-start-1 2xl:row-start-6"
 	>
 		<h2
 			class="long-transition mx-auto mb-6 w-fit rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
@@ -460,7 +490,7 @@ const latestPost = allPosts[0]
 
 	<!-- Based in Section -->
 	<div
-		class="based-in-container border-gradient z-10 flex h-full flex-col items-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-1 xl:row-start-6 2xl:col-span-8 2xl:row-start-5"
+		class="based-in-container border-gradient z-10 flex h-full flex-col items-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-1 xl:row-start-7 2xl:col-span-8 2xl:row-start-6"
 	>
 		<h2
 			class="long-transition mb-12 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl sm:text-4xl"
