@@ -21,16 +21,18 @@ import Project from '../components/Project.astro'
 	<Project
 		title="PasiLunch"
 		htmlText={`
-		<strong class='font-semibold text-dark-text'>PasiLunch</strong> is a small web service and Slack integration that aggregates daily lunch menus from restaurants near my office in Pasila, Helsinki.<br><br>
+	<strong class='font-semibold text-dark-text'>PasiLunch</strong> is a small web service and Slack integration that aggregates daily lunch menus from restaurants in Pasila, Helsinki.<br><br>
 
-		Instead of checking multiple restaurant websites every day, PasiLunch collects the menus automatically and presents them in one place, either through a simple web interface or a Slack command.<br><br>
+	Instead of checking multiple restaurant websites every day, PasiLunch collects the menus automatically and presents them in one place through a simple web interface or a Slack command.<br><br>
 
-		The application is built with <strong class='font-semibold text-dark-text'>Node.js</strong> and <strong class='font-semibold text-dark-text'>Express</strong>, using <strong class='font-semibold text-dark-text'>Cheerio</strong> to scrape menu data from restaurant websites. Results are cached and refreshed daily to keep the menus up to date while minimizing unnecessary requests.<br><br>
+	The application is built with <strong class='font-semibold text-dark-text'>Node.js</strong> and <strong class='font-semibold text-dark-text'>Express</strong>, using <strong class='font-semibold text-dark-text'>Cheerio</strong> to scrape menu data from restaurant websites. Because every restaurant formats their menu differently, the raw data is then translated and normalized into a consistent structure using the <strong class='font-semibold text-dark-text'>Gemini API</strong>.<br><br>
 
-		The Slack integration adds a bit of personality with randomized humorous messages before displaying the menu results.<br><br>
+	Menus are cached and processed once per day to minimize scraping and API usage while keeping the information up to date. The normalized output powers both the web dashboard and the Slack command, ensuring a clean and consistent menu format across sources.<br><br>
 
-		Check out today's lunch options: <a class='font-semibold underline text-magenta' href='https://lunchbot-btnu.onrender.com/'>PasiLunch website</a>
-	`}
+	The Slack integration adds a bit of personality with randomized humorous messages before displaying the menu results.<br><br>
+
+	Check out today's lunch options: <a class='font-semibold underline text-magenta' href='https://lunchbot-btnu.onrender.com/'>PasiLunch website</a>
+`}
 		projectImageSrc={pasiLunchImg}
 		altProp="PasiLunch website"
 		techStackLogos={[

@@ -1,101 +1,132 @@
 ---
-title: 'PasiLunch – A Lunch Menu Bot for Slack and the Web'
+title: 'PasiLunch – AI-Normalized Lunch Menus for Slack and the Web'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2025-03-02'
-description: 'Rebuilding my old LunchBot into a small service that fetches local restaurant menus, adds caching, and exposes them through both Slack and a simple web interface.'
+description: 'A lunch menu service for Pasila that scrapes local restaurant menus, translates and normalizes them with Gemini, caches the result once per day, and serves it through both Slack and a web dashboard.'
 author: 'André Vollrath'
 image:
   src: '../images/blog/pasilunch.jpg'
-  alt: 'Illustration of LunchBot fetching and displaying menus on Slack and a web dashboard.'
-tags: ['node.js', 'express', 'cheerio', 'slack', 'bot', 'project', 'workplace', 'web']
-teaser: 'A small side project that turned into a daily office tool. <strong class="font-semibold text-dark-text">PasiLunch</strong> fetches restaurant menus, caches them, and makes them available through a <strong class="font-semibold text-dark-text">Slack command</strong> and a simple <strong class="font-semibold text-dark-text">web dashboard</strong>.'
+  alt: 'Illustration of PasiLunch fetching and displaying restaurant menus in Slack and on a web dashboard.'
+tags: ['node.js', 'express', 'slack', 'gemini', 'web scraping', 'seo', 'automation', 'project']
+teaser: 'What started as a small Slack lunch bot turned into a smarter daily service. <strong class="font-semibold text-dark-text">PasiLunch</strong> scrapes restaurant menus in Pasila, translates and normalizes them with <strong class="font-semibold text-dark-text">Gemini</strong>, caches the result once per day, and serves it through both a <strong class="font-semibold text-dark-text">Slack command</strong> and a clean <strong class="font-semibold text-dark-text">web dashboard</strong>.'
 ---
 
-# Building PasiLunch – A Lunch Menu Bot for Slack and the Web
+# Building PasiLunch, AI-Normalized Lunch Menus for Slack and the Web
 
 ## Introduction
 
 A few years ago I built a small Slack bot that fetched lunch menus from restaurants near my office. It worked, but it was basically just a quick script.
 
-Over time I wanted a bit more from it: better performance, caching so it wouldn’t scrape the same pages repeatedly, and a simple web interface so the menus could also be viewed outside Slack.
+Over time I wanted more from it. I wanted the menus to load faster, I wanted a simple web interface outside Slack, and I wanted a cleaner and more consistent result across restaurants whose menu formats were all over the place.
 
-So I decided to rebuild the project from scratch. The result is **PasiLunch**, a small service that collects local lunch menus and makes them available both in Slack and through a web dashboard.
+So I rebuilt the project into **PasiLunch**, a small service that collects lunch menus from restaurants in Pasila, normalizes and translates them into consistent English with **Gemini**, and makes them available both in Slack and through a web dashboard.
 
 ## Features
 
 - 🏢 **Slack command (`/lunch`)**  
-  Fetches the daily menus and posts them directly in Slack.
+  Fetches the day’s menus and posts them directly into Slack in a readable, unified format.
 
 - 🌐 **Web dashboard**  
-  A simple page that displays all available menus in one place.
+  Displays all available lunch menus in one place with a more visual presentation than Slack.
 
-- ⚡ **Caching**  
-  Menus are stored locally so the bot doesn't repeatedly scrape the same sites.
+- 🤖 **AI normalization and translation**  
+  Restaurant menus come in wildly different formats and often in Finnish. Gemini translates, cleans, and restructures them into one consistent JSON format.
 
-- 🤖 **A bit of personality**  
-  The bot posts menus with random humorous messages.
+- ⚡ **Daily caching**  
+  Menus are scraped and normalized only once per day, which keeps the app fast and avoids unnecessary requests to restaurant websites and the LLM API.
 
-- 🔄 **Keep-alive mechanism**  
-  Prevents the bot from going to sleep on free hosting platforms.
+- 🧩 **Multi-source scraping**  
+  Different restaurants expose their menus in HTML, JSON, or custom formats, so each source needs its own scraper logic.
+
+- 🔄 **Lazy refresh architecture**  
+  The app is deployed on free hosting, so it regenerates data only when needed and safely reuses the cached output for the rest of the day.
+
+- 📈 **SEO improvements**  
+  The web dashboard includes proper metadata, sitemap, robots.txt, and structured data so the site can be indexed more effectively.
 
 ## Tech Stack
 
-The project is intentionally simple and lightweight:
+The project stays intentionally lightweight, but the pipeline is more sophisticated than the UI suggests:
 
-- **Node.js** – core runtime
-- **Express.js** – serves the web dashboard
-- **Cheerio** – parses and scrapes restaurant websites
-- **Slack API** – handles the `/lunch` command
-- **Axios** – requests external pages and APIs
-- **JSON storage** – caches menus locally
+- **Node.js** for the backend runtime
+- **Express.js** for the web server and dashboard rendering
+- **Cheerio** for parsing HTML menus
+- **Slack API** for the `/lunch` command
+- **Gemini API** for menu translation and normalization
+- **JSON files** for menu caching and normalized output
+- **Render** for deployment
 
 ## How It Works
 
-### Fetching Menus
+### Scraping menus from different sources
 
-Each restaurant has its own small scraper. Some sites expose menus as HTML, some as JSON, and others even as XML.
+Each restaurant has its own scraper. Some menus are available as simple HTML, some come from JSON endpoints, and some need custom parsing.
 
-The scrapers normalize everything into a consistent format so the bot can present the results cleanly.
+The raw menu data is first cached locally per restaurant.
 
-### Caching
+### Normalizing menus with Gemini
 
-To avoid unnecessary scraping, the bot stores menus together with the current date in a JSON file.
+The biggest challenge was that every restaurant formats its menu differently. Some include prices inline, some add extra fluff, some use inconsistent structure, and many menus are only available in Finnish.
 
-If the same menu is requested again during the day, the cached version is returned instead of scraping the site again. This keeps the responses fast and avoids hitting restaurant websites too often.
+To solve that, I added a normalization step using **Gemini**. The model takes the raw menu data and transforms it into a consistent structured JSON format that preserves things like:
 
-### Slack Integration
+- translated dish names
+- prices
+- notes
+- dietary markers
+- item descriptions
 
-Inside Slack, users simply type: /lunch
+That normalized output is then used as the single source of truth for both Slack and the website.
 
-The bot responds with the day’s available menus in a formatted message.
+### Daily caching and refresh logic
 
-### Web Dashboard
+To avoid unnecessary scraping and LLM calls, the menus are generated only once per day.
 
-Besides Slack, the project also serves a small web interface where all menus can be viewed at once.
+If the cached normalized menu for the current day already exists, the app simply serves it. If not, it fetches fresh source data, runs the normalization step, and writes a new daily cache.
 
-It updates automatically and presents the information in a more visual format than the Slack response.
+This keeps the project cheap to run and makes it work well even on a free Render instance.
+
+### Slack integration
+
+Inside Slack, users simply type `/lunch`.
+
+The bot responds with a clean, readable version of the current lunch menus, using the same normalized data that powers the website.
+
+### Web dashboard
+
+The web dashboard reads from the normalized daily JSON and renders the menus server-side into a simple template.
+
+That means the page stays lightweight, fast, and crawlable by search engines while still showing structured, translated menu content.
 
 ## Challenges & Learnings
 
-A few things turned out to be more interesting than expected:
+A few parts of the rebuild turned out to be more interesting than expected.
 
-**Scraping different sites**  
-Each restaurant site had its own structure, so every scraper needed slightly different parsing logic.
+**Scraping fragile restaurant websites**  
+Every restaurant has its own structure, and small website updates can break scrapers. Good error handling and fallbacks became essential.
 
-**Fragile HTML structures**  
-When restaurants update their websites, scrapers can break. Adding error handling and fallbacks helped keep things stable.
+**Using AI for structured cleanup, not just translation**  
+The most valuable part of the Gemini integration was not just translating Finnish to English, but unifying inconsistent menu formats into one predictable structure.
 
-**Formatting for Slack**  
-Slack's markdown-style formatting has its quirks, so getting the menu output to look clean required a bit of experimentation.
+**Preserving the important details**  
+Prices, dietary tags, and buffet notes are easy to lose when normalizing messy source text. Getting those details preserved consistently required both prompt tuning and post-processing safeguards.
+
+**Deploying on free infrastructure**  
+Because Render free instances can spin down and use ephemeral storage, the app needed a lazy daily refresh strategy rather than assuming files would always be there.
+
+**Keeping the UI simple**  
+Even though the backend became more sophisticated, I wanted the final experience to stay lightweight and straightforward.
 
 ## Try It Out
 
 You can see the project here:
 
-👉 **[LunchBot Web Dashboard](https://lunchbot-btnu.onrender.com/)**
+👉 **[PasiLunch Web Dashboard](https://lunchbot-btnu.onrender.com/)**
 
-This started as a small side project but quickly became a daily tool in our office. It’s also a fun reminder that simple ideas can turn into genuinely useful tools.
+What started as a tiny office utility turned into a fun exercise in scraping, normalization, caching, deployment constraints, and practical AI integration.
+
+It is still a small project, but it now feels much closer to a real product than a quick script.
 
 ![LunchBot](../../images/blog/pasilunch.jpg)
 
-_The PasiLunch bot collects restaurant menus and makes them easily accessible for the whole team._
+_The PasiLunch dashboard aggregates, translates, and normalizes daily lunch menus for restaurants in Pasila._
