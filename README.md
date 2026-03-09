@@ -1,32 +1,58 @@
-## Hi there 👋 I'm André.
+## Hi 👋 I'm André
 
-**I'm a front-end developer and designer**, currently working at Talentadore. My journey in tech started with a Commodore 64 and has led me through over two decades in graphic design and web development.
+I'm a **frontend developer with a background in design**, currently building interfaces for a recruitment SaaS platform at TalentAdore.
 
-### 🖥️ My top tech skills:
+I enjoy working at the intersection of **design and implementation** — turning product ideas into clean, usable interfaces.
 
-- **Web Development**
-  - HTML5, CSS3, JavaScript
-  - React, Node.js, MongoDB
-  - Astro.js, Tailwind CSS
-  - GSAP, Bodymovin, Lottie
-- **Design**
-  - Adobe Creative Suite
-  - Figma
-  - 3D Modeling with Blender
-  - Web Graphics with Three.js
-- **Photography**
-  - Professional retouching and complex image editing
-  - Advertising and freelance experience
+Before moving fully into development I worked in **graphic design and advertising**, which heavily influences how I approach UI and product design today.
 
-### 🔨 Stuff I've built includes:
+---
 
-- A variety of web applications, using modern web technologies
-- Dynamic and user-centric websites
-- Engaging (digital) products in both web and print
-- Explorations in 3D modeling and web graphics
+## 🧰 Tech I work with
 
-### 📖 A bit more about me:
+**Frontend**
+- React
+- JavaScript / TypeScript
+- HTML / CSS
+- Tailwind CSS
+- Astro
 
-- 💬 **Ask me about**: Web development, design, photography, or anything tech-related. I love to discuss and help with creative and technical topics.
-- 📫 **How to reach me:**: Reach me via the email in my profile.
-- ⚡ **Fun fact:**: I'm an avid player of Rocket League and enjoy challenging myself with piano, chess, and sports like badminton, biking, and table tennis.
+**UI & Interaction**
+- GSAP
+- Three.js
+- Design systems
+- UI architecture
+
+**Design**
+- Figma
+- Adobe Creative Suite
+
+---
+
+## 🚀 Things I build
+
+Some of the things you'll find in my repositories:
+
+- frontend applications and UI components
+- small tools and experiments
+- interactive web graphics
+- game prototypes
+- side projects exploring APIs and hardware
+
+---
+
+## 🌐 Find me elsewhere
+
+- Website: https://vollrath.dev
+- LinkedIn: https://linkedin.com
+
+---
+
+## ⚡ Outside of coding
+
+When I'm not coding you'll usually find me:
+
+- running or in the gym
+- playing Rocket League
+- learning piano
+- reading
