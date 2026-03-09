@@ -85,15 +85,28 @@ import faviconSrc from '../images/favicon.svg'
 		</div>
 		<script src="../scripts/interactiveSections.js"></script>
 		<script>
-			import { initializeTooltips } from '../scripts/initializeTooltips.js'
 			import { initializeNavigation } from '../scripts/navigationHandler.js'
-			import { initGSAP } from '../scripts/gsapHandler.js'
 
 			const init = () => {
-				if (!document.documentElement.classList.contains('reduced-motion')) {
-					initializeTooltips()
+				const reducedMotion = document.documentElement.classList.contains('reduced-motion')
+
+				if (!reducedMotion && document.querySelector('[title]')) {
+					import('../scripts/initializeTooltips.js').then(({ initializeTooltips }) => {
+						initializeTooltips()
+					})
 				}
-				initGSAP()
+
+				const initAnimations = () => {
+					import('../scripts/gsapHandler.js').then(({ initGSAP }) => {
+						initGSAP()
+					})
+				}
+
+				if ('requestIdleCallback' in window) {
+					requestIdleCallback(initAnimations, { timeout: 700 })
+				} else {
+					setTimeout(initAnimations, 0)
+				}
 			}
 
 			if (!window.__navigationInitialized) {

@@ -251,13 +251,58 @@ Based in
 				src={`basedin.svg`}
 				alt="Globe"
 				class="mb-12 mr-0 h-auto w-72 invert-[.5] md:py-12 xl:mr-12 2xl:w-96"
-			/> --> <div class="mb-12 mr-0 h-auto w-72 opacity-60 xl:mb-0 xl:mr-12 2xl:w-96" data-astro-cid-j7pv25f6> <script type="module" src="/astro/index.astro_astro_type_script_index_0_lang.Dioa7RO2.js"></script><lottie-player src="https://lottie.host/e08917be-738c-4d39-b834-a4302a5a93c0/5zKSJTrRJ7.json" background="#FFFFFF" speed="1" style="width: 100%; height: 100%" loop="true" autoplay="true" direction="1" mode="normal" id="lottie-player" data-astro-cid-j7pv25f6="true"></lottie-player> </div> <div class="grid grid-flow-row gap-2" data-astro-cid-j7pv25f6> <h1 class="based-in-text text-center font-header text-5xl sm:text-8xl lg:text-left 2xl:text-9xl" data-astro-cid-j7pv25f6>
+			/> --> <div class="mb-12 mr-0 h-auto w-72 opacity-60 xl:mb-0 xl:mr-12 2xl:w-96" data-astro-cid-j7pv25f6> <lottie-player src="https://lottie.host/e08917be-738c-4d39-b834-a4302a5a93c0/5zKSJTrRJ7.json" background="#FFFFFF" speed="1" style="width: 100%; height: 100%" loop="true" autoplay="true" direction="1" mode="normal" id="lottie-player" data-astro-cid-j7pv25f6="true"></lottie-player> </div> <div class="grid grid-flow-row gap-2" data-astro-cid-j7pv25f6> <h1 class="based-in-text text-center font-header text-5xl sm:text-8xl lg:text-left 2xl:text-9xl" data-astro-cid-j7pv25f6>
 Helsinki<br data-astro-cid-j7pv25f6>Finland<br data-astro-cid-j7pv25f6><span class="text-gray-400" data-astro-cid-j7pv25f6>GMT +2</span> </h1> </div> </div> </div>  <!-- Slot for page-specific content --> </div> </main> </div> <div data-astro-transition-persist="astro-6ynojplz-5"> <footer class="footer-bar z-0 w-full flex-col items-center justify-center divide-y-2 text-center text-sm text-gray-400 sm:text-base"> <button type="button" class="scroll-top-btn m-auto mx-auto my-8 mb-8 block w-fit cursor-pointer rounded-full border-2 border-solid border-magenta bg-white px-6 py-2 text-center text-base font-semibold text-magenta shadow-lg">
 Scroll to top &uarr;
 </button> <div class="bg-gray-100 py-32"> <p>
 Handmade with ❤️ by <strong class="font-semibold text-dark-text">André Vollrath</strong> &copy; 2026.
 <br>All rights reserved.
-</p> </div> </footer> </div> <script type="module" src="/astro/Layout.astro_astro_type_script_index_0_lang.BhXWWBc6.js"></script> <script type="module" src="/astro/Layout.astro_astro_type_script_index_1_lang.gUjPaYGf.js"></script> </body> </html> <script>
+</p> </div> </footer> </div> <script type="module" src="/astro/Layout.astro_astro_type_script_index_0_lang.2KMO3H00.js"></script> <script type="module" src="/astro/Layout.astro_astro_type_script_index_1_lang.gUjPaYGf.js"></script> </body> </html> <script>
+	function loadLottiePlayerWhenVisible() {
+		const lottiePlayer = document.getElementById('lottie-player')
+		if (!lottiePlayer) return
+
+		if (window.customElements && window.customElements.get('lottie-player')) return
+
+		const addScript = () => {
+			if (window.__lottiePlayerScriptPromise) return window.__lottiePlayerScriptPromise
+
+			window.__lottiePlayerScriptPromise = new Promise((resolve, reject) => {
+				const script = document.createElement('script')
+				script.src = 'https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js'
+				script.async = true
+				script.onload = resolve
+				script.onerror = reject
+				document.head.appendChild(script)
+			})
+
+			return window.__lottiePlayerScriptPromise
+		}
+
+		const loadOnIdle = () => {
+			if ('requestIdleCallback' in window) {
+				requestIdleCallback(addScript, { timeout: 1200 })
+			} else {
+				setTimeout(addScript, 0)
+			}
+		}
+
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((entry) => entry.isIntersecting)) {
+						loadOnIdle()
+						observer.disconnect()
+					}
+				},
+				{ rootMargin: '300px 0px' }
+			)
+			observer.observe(lottiePlayer)
+		} else {
+			loadOnIdle()
+		}
+	}
+
 	function initEyes() {
 		if (document.documentElement.classList.contains('reduced-motion')) {
 			return
@@ -366,4 +411,5 @@ Handmade with ❤️ by <strong class="font-semibold text-dark-text">André Voll
 	}
 
 	initEyes()
+	loadLottiePlayerWhenVisible()
 </script> 

@@ -6,6 +6,7 @@ import pasiLunchImg from '../images/projects/pasilunch.jpg'
 import janneImg from '../images/projects/janne.jpg'
 import sushiImg from '../images/projects/sushi.jpg'
 import taMobileImg from '../images/projects/ta-mobile.jpg'
+import drumMachineImg from '../images/projects/drum-machine.jpg'
 import Project from '../components/Project.astro'
 ---
 
@@ -21,15 +22,13 @@ import Project from '../components/Project.astro'
 	<Project
 		title="PasiLunch"
 		htmlText={`
-	<strong class='font-semibold text-dark-text'>PasiLunch</strong> is a small web service and Slack integration that aggregates daily lunch menus from restaurants in Pasila, Helsinki.<br><br>
+	<strong class='font-semibold text-dark-text'>PasiLunch</strong> is a small web service and Slack integration that collects daily lunch menus from restaurants in Pasila, Helsinki.<br><br>
 
-	Instead of checking multiple restaurant websites every day, PasiLunch collects the menus automatically and presents them in one place through a simple web interface or a Slack command.<br><br>
+	Instead of checking multiple restaurant websites every day, it brings everything together in one place through a simple web interface and a Slack command.<br><br>
 
-	The application is built with <strong class='font-semibold text-dark-text'>Node.js</strong> and <strong class='font-semibold text-dark-text'>Express</strong>, using <strong class='font-semibold text-dark-text'>Cheerio</strong> to scrape menu data from restaurant websites. Because every restaurant formats their menu differently, the raw data is then translated and normalized into a consistent structure using the <strong class='font-semibold text-dark-text'>Gemini API</strong>.<br><br>
+	Built with <strong class='font-semibold text-dark-text'>Node.js</strong>, <strong class='font-semibold text-dark-text'>Express</strong>, and <strong class='font-semibold text-dark-text'>Cheerio</strong>, the project scrapes menu data and uses the <strong class='font-semibold text-dark-text'>Gemini API</strong> to normalize different menu formats into one consistent structure.<br><br>
 
-	Menus are cached and processed once per day to minimize scraping and API usage while keeping the information up to date. The normalized output powers both the web dashboard and the Slack command, ensuring a clean and consistent menu format across sources.<br><br>
-
-	The Slack integration adds a bit of personality with randomized humorous messages before displaying the menu results.<br><br>
+	Menus are cached and processed once per day to keep the data fresh while minimizing scraping and API usage. The Slack integration adds a bit of personality with randomized humorous messages.<br><br>
 
 	Check out today's lunch options: <a class='font-semibold underline text-magenta' href='https://lunchbot-btnu.onrender.com/'>PasiLunch website</a>
 `}
@@ -51,11 +50,11 @@ import Project from '../components/Project.astro'
 		htmlText={`
 			<strong class='font-semibold text-dark-text'>Jurassic Jump</strong> is a small jump-and-run game I built while exploring game development.<br><br>
 
-			The project originally started as an experiment in <strong class='font-semibold text-dark-text'>vanilla JavaScript</strong>, but as the game grew more complex I rebuilt it using the <strong class='font-semibold text-dark-text'>Godot engine</strong> and <strong class='font-semibold text-dark-text'>GDScript</strong>.<br><br>
+			It started as an experiment in <strong class='font-semibold text-dark-text'>vanilla JavaScript</strong>, but as the project grew more complex I rebuilt it in the <strong class='font-semibold text-dark-text'>Godot engine</strong> using <strong class='font-semibold text-dark-text'>GDScript</strong>.<br><br>
 
-			For the visuals I experimented with an AI-assisted workflow, creating reference images and transforming them into a Claymation-inspired style using <strong class='font-semibold text-dark-text'>Affinity Photo</strong> and <strong class='font-semibold text-dark-text'>ComfyUI</strong>.<br><br>
+			For the visuals I experimented with an AI-assisted workflow, creating reference images and turning them into a Claymation-inspired style with <strong class='font-semibold text-dark-text'>Affinity Photo</strong> and <strong class='font-semibold text-dark-text'>ComfyUI</strong>.<br><br>
 
-			Building Jurassic Jump introduced me to core game development concepts such as <strong class='font-semibold text-dark-text'>level design</strong>, <strong class='font-semibold text-dark-text'>sprite sheets</strong>, <strong class='font-semibold text-dark-text'>particle systems</strong>, and <strong class='font-semibold text-dark-text'>game state management</strong>.<br><br>
+			The project helped me explore <strong class='font-semibold text-dark-text'>level design</strong>, <strong class='font-semibold text-dark-text'>sprite sheets</strong>, <strong class='font-semibold text-dark-text'>particle systems</strong>, and <strong class='font-semibold text-dark-text'>game state management</strong>.<br><br>
 
 			You can also play it in full screen: <a class='font-semibold underline text-magenta' href='https://avollrath.github.io/WebGL-test/'>here</a>
 		  `}
@@ -66,33 +65,13 @@ import Project from '../components/Project.astro'
 	/>
 
 	<Project
-		title="superVIMus"
-		buttonText="Click to load game"
-		htmlText={`
-			<strong class='font-semibold text-dark-text'>superVIMus</strong> is a small puzzle game designed to build muscle memory for the <strong class='font-semibold text-dark-text'>hjkl</strong> movement keys used in Vim.<br><br>
-
-			The game combines simple box-pushing mechanics with playful pixel graphics and a slightly absurd twist, making it a fun way to practice keyboard navigation.<br><br>
-
-			It was built with the <strong class='font-semibold text-dark-text'>Godot engine</strong> using <strong class='font-semibold text-dark-text'>GDScript</strong>, and explores concepts such as <strong class='font-semibold text-dark-text'>grid-based movement</strong>, <strong class='font-semibold text-dark-text'>level design</strong>, and <strong class='font-semibold text-dark-text'>puzzle mechanics</strong>.<br><br>
-
-			Try it out and sharpen your navigation skills: <a class='font-semibold underline text-magenta' href='https://avollrath.github.io/superVIMus/'>Play now</a>
-		  `}
-		projectImageSrc={supervimusImg}
-		altProp="superVIMus Game"
-		iframeSrc="https://avollrath.github.io/superVIMus/"
-		techStackLogos={['Godot.svg']}
-	/>
-
-	<Project
 		title="TalentAdore Mobile App"
 		htmlText={`
 		<strong class='font-semibold text-dark-text'>TalentAdore Mobile App</strong> is a mobile interface concept I designed for TalentAdore’s recruitment platform.<br><br>
 
-		The goal was to translate a complex SaaS product into a clear and intuitive mobile experience. I designed the complete interface from scratch and created an interactive prototype in <strong class='font-semibold text-dark-text'>Adobe XD</strong> to define navigation, user flows, and screen interactions.<br><br>
+		The goal was to translate a complex SaaS product into a clear and intuitive mobile experience. I designed the interface from scratch and created an interactive prototype in <strong class='font-semibold text-dark-text'>Adobe XD</strong> to define navigation, flows, and screen interactions.<br><br>
 
-		The prototype served as the foundation for development. During implementation I worked closely with the engineering team to ensure the final product stayed aligned with the design vision and user experience goals.<br><br>
-
-		This project highlights my approach to <strong class='font-semibold text-dark-text'>UI design</strong>, <strong class='font-semibold text-dark-text'>prototyping</strong>, and translating product requirements into intuitive mobile interfaces.
+		The prototype served as the foundation for development, and I later supported the engineering team to help keep the final product aligned with the original design vision.
 	`}
 		projectImageSrc={taMobileImg}
 		altProp="TalentAdore Mobile App UI"
@@ -100,13 +79,33 @@ import Project from '../components/Project.astro'
 	/>
 
 	<Project
+		title="Vollrath Drum Machine"
+		htmlText={`
+	<strong class='font-semibold text-dark-text'>Vollrath Drum Machine</strong> is a browser-based step sequencer inspired by classic hardware drum machines.<br><br>
+
+	The interface features a <strong class='font-semibold text-dark-text'>16-step sequencer</strong>, five instrument channels, per-channel volume controls, playback speed settings, and preset patterns.<br><br>
+
+	Built with <strong class='font-semibold text-dark-text'>pure JavaScript and CSS</strong>, the project explores sequencing logic, timing control, and browser-based audio playback without relying on frameworks.<br><br>
+
+	Patterns can be saved with <strong class='font-semibold text-dark-text'>localStorage</strong>, while <strong class='font-semibold text-dark-text'>GSAP animations</strong> and custom CSS styling give the interface a tactile, hardware-inspired feel.<br><br>
+
+	Try it out: <a class='font-semibold underline text-magenta' href='https://avollrath.github.io/drum-machine/'>Live Demo</a>
+`}
+		projectImageSrc={drumMachineImg}
+		altProp="Vollrath Drum Machine browser sequencer"
+		iframeSrc="https://avollrath.github.io/drum-machine/"
+		buttonText="Launch drum machine"
+		techStackLogos={['HTML5.svg', 'JavaScript.svg', 'CSS 3.svg', 'GSAP.svg']}
+	/>
+
+	<Project
 		title="Janne Heikkinen Website"
 		htmlText={`
-		The <strong class='font-semibold text-dark-text'>Janne Heikkinen Website</strong> was created for a Finnish member of parliament as part of a small team of three.<br><br>
+		The <strong class='font-semibold text-dark-text'>Janne Heikkinen Website</strong> was created for a Finnish member of parliament as part of a team of three.<br><br>
 
-		I was responsible for the visual design of the site, defining the layout, structure, and overall user experience. After the design prototype was completed, I also joined the development phase and contributed to the frontend implementation.<br><br>
+		I was responsible for the visual design of the site, shaping the layout, structure, and overall user experience. After the prototype was completed, I also joined the development phase and contributed to the frontend implementation.<br><br>
 
-		The project was built using an agile workflow and gave me the opportunity to combine <strong class='font-semibold text-dark-text'>design ownership</strong> with hands-on <strong class='font-semibold text-dark-text'>frontend development</strong> in a real client project.<br><br>
+		The project gave me the chance to combine <strong class='font-semibold text-dark-text'>design ownership</strong> with hands-on <strong class='font-semibold text-dark-text'>frontend development</strong> in a real client project.<br><br>
 
 		Visit the live site: <a class='font-semibold underline text-magenta' href='https://janneheikkinen.fi/'>janneheikkinen.fi</a>
 	`}
@@ -120,15 +119,30 @@ import Project from '../components/Project.astro'
 		htmlText={`
 		The <strong class='font-semibold text-dark-text'>Sushi-san Website</strong> is a website I designed and developed for a sushi restaurant in Helsinki.<br><br>
 
-		The goal was to create a clean and visually appealing online presence that reflects the restaurant’s brand while making it easy for visitors to explore the menu and essential information.<br><br>
+		The goal was to create a clean online presence that reflects the restaurant’s brand while making key information easy to explore.<br><br>
 
-		I handled both the <strong class='font-semibold text-dark-text'>visual design</strong> and the <strong class='font-semibold text-dark-text'>frontend implementation</strong>, building the site from scratch based on the restaurant’s logo and color palette.<br><br>
-
-		The result is a simple, responsive website that focuses on clarity, usability, and a strong visual presentation.<br><br>
-
+		I handled both the <strong class='font-semibold text-dark-text'>visual design</strong> and the <strong class='font-semibold text-dark-text'>frontend implementation</strong>, building the site from scratch based on the restaurant’s logo and color palette.
 	`}
 		projectImageSrc={sushiImg}
 		altProp="Sushi-san Website"
 		techStackLogos={['HTML5.svg', 'CSS 3.svg']}
+	/>
+
+	<Project
+		title="superVIMus"
+		buttonText="Click to load game"
+		htmlText={`
+			<strong class='font-semibold text-dark-text'>superVIMus</strong> is a small puzzle game designed to build muscle memory for the <strong class='font-semibold text-dark-text'>hjkl</strong> movement keys used in Vim.<br><br>
+
+			The game combines simple box-pushing mechanics with playful pixel graphics and a slightly absurd twist, making it a fun way to practice keyboard navigation.<br><br>
+
+			Built with the <strong class='font-semibold text-dark-text'>Godot engine</strong> using <strong class='font-semibold text-dark-text'>GDScript</strong>, it explores <strong class='font-semibold text-dark-text'>grid-based movement</strong>, <strong class='font-semibold text-dark-text'>level design</strong>, and <strong class='font-semibold text-dark-text'>puzzle mechanics</strong>.<br><br>
+
+			Try it out and sharpen your navigation skills: <a class='font-semibold underline text-magenta' href='https://avollrath.github.io/superVIMus/'>Play now</a>
+		  `}
+		projectImageSrc={supervimusImg}
+		altProp="superVIMus Game"
+		iframeSrc="https://avollrath.github.io/superVIMus/"
+		techStackLogos={['Godot.svg']}
 	/>
 </Layout>
