@@ -1,5 +1,5 @@
 ---
-const { logos: selectedLogos } = Astro.props
+const { logos: selectedLogos, excludeLogos = [] } = Astro.props
 
 // Fetch all logo images
 const allImages = Object.values(
@@ -16,8 +16,12 @@ const getFilename = (src) => {
 // Process and format logos
 const logos = allImages
 	.filter((image) => {
+		const filename = getFilename(image.default.src)
+		if (Array.isArray(excludeLogos) && excludeLogos.includes(filename)) {
+			return false
+		}
+
 		if (selectedLogos && Array.isArray(selectedLogos) && selectedLogos.length > 0) {
-			const filename = getFilename(image.default.src)
 			return selectedLogos.includes(filename)
 		}
 		return true
@@ -41,7 +45,7 @@ const logos = allImages
 					<img
 						src={logo.src}
 						title={logo.title}
-						class="h-10 w-10 rounded sm:h-14 sm:w-14"
+						class="tech-stack-logo h-7 w-7 rounded sm:h-10 sm:w-10"
 						alt={logo.title}
 					/>
 				</div>
@@ -49,3 +53,14 @@ const logos = allImages
 		}
 	</div>
 </div>
+
+<style>
+	.tech-stack-logo {
+		transition: transform 250ms ease, opacity 250ms ease;
+	}
+
+	.tech-stack-logo:hover {
+		opacity: 1;
+		transform: translateY(-2px);
+	}
+</style>
