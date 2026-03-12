@@ -7,6 +7,7 @@ import janneImg from '../images/projects/janne.jpg'
 import sushiImg from '../images/projects/sushi.jpg'
 import taMobileImg from '../images/projects/ta-mobile.jpg'
 import drumMachineImg from '../images/projects/drum-machine.jpg'
+import ctcImg from '../images/projects/ctc.jpg'
 import Project from '../components/Project.astro'
 ---
 
@@ -19,6 +20,21 @@ import Project from '../components/Project.astro'
 		siteName: 'Andre Vollrath'
 	}}
 >
+	<Project
+		title="CTC - Chess.com Trading Card"
+		htmlText={`
+		<strong class='font-semibold text-dark-text'>CTC - Chess.com Trading Card</strong> turns a Chess.com player profile into a collectible fantasy card.<br><br>
+
+		The app fetches public player data from the <strong class='font-semibold text-dark-text'>Chess.com API</strong>, derives gameplay attributes like rarity, tactics, speed, and prestige, and generates a themed card identity including name, lore, and artwork.<br><br>
+
+		The result is presented as an animated card with 3D tilt, shine effects, and download/share functionality. AI generation is used for card text and artwork, with deterministic fallbacks to ensure the card always renders cleanly.<br><br>
+
+		Try it here: <a class='font-semibold underline text-magenta' href='https://chess-trading-card.vercel.app/'>CTC live demo</a>
+	`}
+		projectImageSrc={ctcImg}
+		altProp="CTC Chess.com Trading Card app"
+		techStackLogos={['Next.js.svg', 'TypeScript.svg', 'Tailwind.svg']}
+	/>
 	<Project
 		title="PasiLunch"
 		htmlText={`
