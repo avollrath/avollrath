@@ -2274,7 +2274,7 @@
     "is_local": false,
     "is_playable": true,
     "name": "BOXES",
-    "popularity": 9,
+    "popularity": 11,
     "preview_url": null,
     "track_number": 2,
     "type": "track",
@@ -3196,7 +3196,7 @@
     "is_local": false,
     "is_playable": true,
     "name": "Do You Think of Me",
-    "popularity": 31,
+    "popularity": 32,
     "preview_url": null,
     "track_number": 2,
     "type": "track",
@@ -4106,17 +4106,27 @@
   },
   {
     "album": {
-      "album_type": "album",
+      "album_type": "single",
       "artists": [
         {
           "external_urls": {
-            "spotify": "https://open.spotify.com/artist/0bIvvfPnM3YeHeORD57sAE"
+            "spotify": "https://open.spotify.com/artist/1YkHCcMgZ6fTQMeEQyYKTf"
           },
-          "href": "https://api.spotify.com/v1/artists/0bIvvfPnM3YeHeORD57sAE",
-          "id": "0bIvvfPnM3YeHeORD57sAE",
-          "name": "Westbam/ML",
+          "href": "https://api.spotify.com/v1/artists/1YkHCcMgZ6fTQMeEQyYKTf",
+          "id": "1YkHCcMgZ6fTQMeEQyYKTf",
+          "name": "Moonbootica",
           "type": "artist",
-          "uri": "spotify:artist:0bIvvfPnM3YeHeORD57sAE"
+          "uri": "spotify:artist:1YkHCcMgZ6fTQMeEQyYKTf"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0ZPxafqcgMv07OtNWFapKk"
+          },
+          "href": "https://api.spotify.com/v1/artists/0ZPxafqcgMv07OtNWFapKk",
+          "id": "0ZPxafqcgMv07OtNWFapKk",
+          "name": "Bondi",
+          "type": "artist",
+          "uri": "spotify:artist:0ZPxafqcgMv07OtNWFapKk"
         }
       ],
       "available_markets": [
@@ -4127,6 +4137,7 @@
         "BO",
         "BR",
         "BG",
+        "CA",
         "CL",
         "CO",
         "CR",
@@ -4172,6 +4183,7 @@
         "TW",
         "TR",
         "UY",
+        "US",
         "GB",
         "AD",
         "LI",
@@ -4305,45 +4317,55 @@
         "XK"
       ],
       "external_urls": {
-        "spotify": "https://open.spotify.com/album/7HcisVBVsMyGHSgQjyke8A"
+        "spotify": "https://open.spotify.com/album/51heqKZI9Rt10G7MWORWJD"
       },
-      "href": "https://api.spotify.com/v1/albums/7HcisVBVsMyGHSgQjyke8A",
-      "id": "7HcisVBVsMyGHSgQjyke8A",
+      "href": "https://api.spotify.com/v1/albums/51heqKZI9Rt10G7MWORWJD",
+      "id": "51heqKZI9Rt10G7MWORWJD",
       "images": [
         {
           "height": 640,
-          "url": "https://i.scdn.co/image/ab67616d0000b27365afc32938911048d908f81f",
+          "url": "https://i.scdn.co/image/ab67616d0000b27372073bf9f3420f9f526003ae",
           "width": 640
         },
         {
           "height": 300,
-          "url": "https://i.scdn.co/image/ab67616d00001e0265afc32938911048d908f81f",
+          "url": "https://i.scdn.co/image/ab67616d00001e0272073bf9f3420f9f526003ae",
           "width": 300
         },
         {
           "height": 64,
-          "url": "https://i.scdn.co/image/ab67616d0000485165afc32938911048d908f81f",
+          "url": "https://i.scdn.co/image/ab67616d0000485172073bf9f3420f9f526003ae",
           "width": 64
         }
       ],
       "is_playable": true,
-      "name": "The Risky Sets",
-      "release_date": "2019-02-22",
+      "name": "Lost & Found",
+      "release_date": "2018-04-06",
       "release_date_precision": "day",
-      "total_tracks": 22,
+      "total_tracks": 2,
       "type": "album",
-      "uri": "spotify:album:7HcisVBVsMyGHSgQjyke8A"
+      "uri": "spotify:album:51heqKZI9Rt10G7MWORWJD"
     },
     "artists": [
       {
         "external_urls": {
-          "spotify": "https://open.spotify.com/artist/0bIvvfPnM3YeHeORD57sAE"
+          "spotify": "https://open.spotify.com/artist/1YkHCcMgZ6fTQMeEQyYKTf"
         },
-        "href": "https://api.spotify.com/v1/artists/0bIvvfPnM3YeHeORD57sAE",
-        "id": "0bIvvfPnM3YeHeORD57sAE",
-        "name": "Westbam/ML",
+        "href": "https://api.spotify.com/v1/artists/1YkHCcMgZ6fTQMeEQyYKTf",
+        "id": "1YkHCcMgZ6fTQMeEQyYKTf",
+        "name": "Moonbootica",
         "type": "artist",
-        "uri": "spotify:artist:0bIvvfPnM3YeHeORD57sAE"
+        "uri": "spotify:artist:1YkHCcMgZ6fTQMeEQyYKTf"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0ZPxafqcgMv07OtNWFapKk"
+        },
+        "href": "https://api.spotify.com/v1/artists/0ZPxafqcgMv07OtNWFapKk",
+        "id": "0ZPxafqcgMv07OtNWFapKk",
+        "name": "Bondi",
+        "type": "artist",
+        "uri": "spotify:artist:0ZPxafqcgMv07OtNWFapKk"
       }
     ],
     "available_markets": [
@@ -4354,6 +4376,7 @@
       "BO",
       "BR",
       "BG",
+      "CA",
       "CL",
       "CO",
       "CR",
@@ -4399,6 +4422,7 @@
       "TW",
       "TR",
       "UY",
+      "US",
       "GB",
       "AD",
       "LI",
@@ -4532,23 +4556,23 @@
       "XK"
     ],
     "disc_number": 1,
-    "duration_ms": 236128,
-    "explicit": true,
+    "duration_ms": 210498,
+    "explicit": false,
     "external_ids": {
-      "isrc": "DEA451805560"
+      "isrc": "DETO31800114"
     },
     "external_urls": {
-      "spotify": "https://open.spotify.com/track/4NrHRIRmfqWvrQlitxC678"
+      "spotify": "https://open.spotify.com/track/5IFx1Hy0Z4r8cyT9SX03Tq"
     },
-    "href": "https://api.spotify.com/v1/tracks/4NrHRIRmfqWvrQlitxC678",
-    "id": "4NrHRIRmfqWvrQlitxC678",
+    "href": "https://api.spotify.com/v1/tracks/5IFx1Hy0Z4r8cyT9SX03Tq",
+    "id": "5IFx1Hy0Z4r8cyT9SX03Tq",
     "is_local": false,
     "is_playable": true,
-    "name": "Way Up (feat. Drake)",
-    "popularity": 32,
+    "name": "Lost & Found - Edit",
+    "popularity": 37,
     "preview_url": null,
-    "track_number": 4,
+    "track_number": 1,
     "type": "track",
-    "uri": "spotify:track:4NrHRIRmfqWvrQlitxC678"
+    "uri": "spotify:track:5IFx1Hy0Z4r8cyT9SX03Tq"
   }
 ]
