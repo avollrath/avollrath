@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro'
 import Marquee from '../components/Marquee.astro'
 import ClientLogoMarquee from '../components/ClientLogoMarquee.astro'
 import ContactForm from '../components/ContactForm.astro'
-import latestRenderImage from '../images/renders/braunHF3.jpg'
+import latestRenderImage from '../images/renders/key-animation.mp4'
 import latestRenderImageClay from '../images/renders/braunHF3-clay.jpg'
 import profileImage from '../images/profile.png'
 import eyeImage from '../images/eye.png'
@@ -28,6 +28,11 @@ try {
 const allPosts = await getResolvedPosts()
 
 const latestPost = allPosts[0]
+const latestRenderMediaSrc =
+	typeof latestRenderImage === 'string' ? latestRenderImage : latestRenderImage?.src
+const latestRenderIsVideo = /\.mp4($|\?)/i.test(latestRenderMediaSrc ?? '')
+const latestRenderPosterSrc =
+	typeof latestRenderImageClay === 'string' ? latestRenderImageClay : latestRenderImageClay?.src
 
 const clientLogoModules = import.meta.glob('../images/client-logos/*.{png,jpg,jpeg,webp,svg}', {
 	eager: true
@@ -51,8 +56,8 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 	title="André Vollrath – Frontend Developer | React & UI Engineer"
 	description="Experienced frontend developer crafting seamless and scalable web experiences. Specializing in modern UI development."
 	seo={{
-		ogImage: latestRenderImage,
-		ogImageAlt: 'Braun HF3 render from Andre Vollrath portfolio',
+		ogImage: latestRenderImageClay,
+		ogImageAlt: 'Latest render preview from Andre Vollrath portfolio',
 		siteName: 'Andre Vollrath'
 	}}
 >
@@ -325,16 +330,35 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 			</a>
 		</div>
 		<div class="latest-render-image image-container render-content rounded-md">
-			<Image
-				src={latestRenderImage}
-				alt="Latest Render"
-				transition:name="latest-render"
-				class="rounded-md"
-				densities={[1, 1.5, 2]}
-				decoding="async"
-				loading="lazy"
-			/>
-			<Image src={latestRenderImageClay} alt="Wireframe Render" class="wireframe-image" />
+			{
+				latestRenderIsVideo ? (
+					<video
+						data-video-src={latestRenderMediaSrc}
+						transition:name="latest-render"
+						class="js-lazy-render-video render-video rounded-md"
+						autoplay
+						muted
+						loop
+						playsinline
+						controls
+						preload="none"
+						aria-label="Latest Render"
+					/>
+				) : (
+					<>
+						<Image
+							src={latestRenderImage}
+							alt="Latest Render"
+							transition:name="latest-render"
+							class="render-image rounded-md"
+							densities={[1, 1.5, 2]}
+							decoding="async"
+							loading="lazy"
+						/>
+						<Image src={latestRenderImageClay} alt="Wireframe Render" class="wireframe-image" />
+					</>
+				)
+			}
 		</div>
 	</div>
 
@@ -527,6 +551,49 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 </Layout>
 
 <script is:inline>
+	function initLazyRenderVideos() {
+		const videos = document.querySelectorAll('.js-lazy-render-video')
+		if (!videos.length) return
+
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+		const activateVideo = (video) => {
+			if (!(video instanceof HTMLVideoElement)) return
+			if (!video.dataset.videoSrc || video.src) return
+
+			video.src = video.dataset.videoSrc
+			video.load()
+
+			if (prefersReducedMotion) {
+				video.removeAttribute('autoplay')
+				return
+			}
+
+			const playAttempt = video.play()
+			if (playAttempt && typeof playAttempt.catch === 'function') {
+				playAttempt.catch(() => {})
+			}
+		}
+
+		if (!('IntersectionObserver' in window)) {
+			videos.forEach(activateVideo)
+			return
+		}
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (!entry.isIntersecting) return
+					activateVideo(entry.target)
+					observer.unobserve(entry.target)
+				})
+			},
+			{ rootMargin: '300px 0px' }
+		)
+
+		videos.forEach((video) => observer.observe(video))
+	}
+
 	function loadLottiePlayerWhenVisible() {
 		const lottiePlayer = document.getElementById('lottie-player')
 		if (!lottiePlayer) return
@@ -679,7 +746,13 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 		window.__eyesPageLoadBound = true
 	}
 
+	if (!window.__lazyRenderVideosPageLoadBound) {
+		document.addEventListener('astro:page-load', initLazyRenderVideos)
+		window.__lazyRenderVideosPageLoadBound = true
+	}
+
 	initEyes()
+	initLazyRenderVideos()
 	loadLottiePlayerWhenVisible()
 </script>
 
@@ -693,9 +766,14 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 	}
 
 	.render-image,
+	.render-video,
 	.wireframe-image {
 		max-width: 100%;
 		transition: 0.5s ease-in-out;
+	}
+
+	.render-video {
+		display: block;
 	}
 
 	.wireframe-image {

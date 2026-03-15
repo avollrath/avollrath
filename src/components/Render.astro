@@ -1,6 +1,9 @@
 ---
 const { title, htmlText, renderImageSrc, clayRenderImageSrc, transitionName, altProp } = Astro.props
 import { Image } from 'astro:assets'
+
+const renderMediaSrc = typeof renderImageSrc === 'string' ? renderImageSrc : renderImageSrc?.src
+const isVideo = /\.mp4($|\?)/i.test(renderMediaSrc ?? '')
 ---
 
 <div class="render-text-container z-10 col-span-3 flex flex-col xl:col-span-1 2xl:col-span-3">
@@ -21,22 +24,43 @@ import { Image } from 'astro:assets'
 	class="render-image-container border-gradient z-10 col-span-3 mb-4 flex flex-col items-center rounded-lg bg-white p-12 text-gray-400 shadow-lg max-md:rounded-md max-md:p-4 max-sm:border-none max-sm:p-0 sm:text-base xl:col-span-2 2xl:col-span-9 3xl:text-lg"
 >
 	<div class="image-container rounded-md">
-		<Image
-			src={renderImageSrc}
-			transition:name={transitionName}
-			alt={altProp}
-			class="rounded-md"
-			densities={[1, 1.5, 2]}
-			decoding="async"
-			loading="lazy"
-		/>
-		<Image
-			src={clayRenderImageSrc}
-			alt="Wireframe Render"
-			class="wireframe-image"
-			decoding="async"
-			loading="lazy"
-		/>
+		{
+			isVideo ? (
+				<video
+					src={renderMediaSrc}
+					transition:name={transitionName}
+					class="render-video rounded-md"
+					autoplay
+					muted
+					loop
+					playsinline
+					controls
+					preload="metadata"
+					aria-label={altProp}
+				/>
+			) : (
+				<>
+					<Image
+						src={renderImageSrc}
+						transition:name={transitionName}
+						alt={altProp}
+						class="rounded-md render-image"
+						densities={[1, 1.5, 2]}
+						decoding="async"
+						loading="lazy"
+					/>
+					{clayRenderImageSrc && (
+						<Image
+							src={clayRenderImageSrc}
+							alt="Wireframe Render"
+							class="wireframe-image"
+							decoding="async"
+							loading="lazy"
+						/>
+					)}
+				</>
+			)
+		}
 	</div>
 </div>
 
@@ -50,9 +74,14 @@ import { Image } from 'astro:assets'
 	}
 
 	.render-image,
+	.render-video,
 	.wireframe-image {
 		max-width: 100%;
 		transition: opacity 0.9s ease;
+	}
+
+	.render-video {
+		display: block;
 	}
 
 	.wireframe-image {
