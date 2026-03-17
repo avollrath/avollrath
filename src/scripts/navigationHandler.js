@@ -19,8 +19,6 @@ export function initializeNavigation() {
 	if (isNavigationInitialized) return
 	isNavigationInitialized = true
 
-	// Store last underline position
-	let lastUnderlinePosition = { left: 0, width: 0 }
 	let scrollLockY = 0
 	let lastFocusedBeforeMenuOpen = null
 	let mobileMenuKeydownHandler = null
@@ -49,7 +47,7 @@ export function initializeNavigation() {
 
 		navItems.forEach((item) => {
 			const active = isActiveLink(item, currentPath)
-			item.classList.toggle('gradient-underline', active)
+			item.classList.toggle('active-nav-item', active)
 			item.classList.toggle('text-dark-text', active)
 			item.classList.toggle('text-gray-400', !active)
 			item.classList.toggle('hover:text-dark-text', !active)
@@ -58,55 +56,6 @@ export function initializeNavigation() {
 			} else {
 				item.removeAttribute('aria-current')
 			}
-		})
-	}
-
-	function saveUnderlinePosition() {
-		const underline = document.querySelector('#nav-underline')
-		if (underline) {
-			const style = window.getComputedStyle(underline)
-			lastUnderlinePosition = {
-				left: parseFloat(style.left),
-				width: parseFloat(style.width)
-			}
-		}
-	}
-
-	function updateUnderline() {
-		updateActiveNavItem()
-
-		const underline = document.querySelector('#nav-underline')
-		const activeItem = document.querySelector('.nav-item.gradient-underline')
-
-		if (!underline || !activeItem) return
-
-		const navMenu = document.querySelector('#nav-menu')
-		if (!navMenu) return
-
-		const navMenuRect = navMenu.getBoundingClientRect()
-		const activeItemRect = activeItem.getBoundingClientRect()
-
-		// Calculate new position relative to nav menu
-		const newLeft = activeItemRect.left - navMenuRect.left + 10 // Add padding
-		const newWidth = activeItemRect.width - 20 // Subtract padding
-
-		// Determine animation direction
-		const movingRight = newLeft > lastUnderlinePosition.left
-
-		// Set initial position for animation
-		if (movingRight) {
-			underline.style.left = `${lastUnderlinePosition.left}px`
-			underline.style.width = `${lastUnderlinePosition.width}px`
-		} else {
-			underline.style.left = `${lastUnderlinePosition.left + lastUnderlinePosition.width - newWidth}px`
-			underline.style.width = `${lastUnderlinePosition.width}px`
-		}
-
-		// Trigger animation
-		requestAnimationFrame(() => {
-			underline.style.transition = 'left 0.3s ease-out, width 0.3s ease-out'
-			underline.style.left = `${newLeft}px`
-			underline.style.width = `${newWidth}px`
 		})
 	}
 
@@ -291,19 +240,18 @@ export function initializeNavigation() {
 
 	// Initialize all handlers
 	function initializeAll() {
-		updateUnderline()
+		updateActiveNavItem()
 		initMobileMenu()
 		initializeProjectIframes()
 	}
 
 	// Event listeners
 	const handleBeforeSwap = () => {
-		saveUnderlinePosition()
 		closeMobileMenu(true)
 	}
 	addManagedListener(document, 'astro:before-swap', handleBeforeSwap)
 	addManagedListener(document, 'astro:after-swap', initializeAll)
-	addManagedListener(window, 'resize', updateUnderline)
+	addManagedListener(window, 'resize', updateActiveNavItem)
 	addManagedListener(window, 'pagehide', cleanupNavigationListeners)
 
 	// Initial setup

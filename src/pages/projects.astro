@@ -8,6 +8,7 @@ import sushiImg from '../images/projects/sushi.jpg'
 import taMobileImg from '../images/projects/ta-mobile.jpg'
 import drumMachineImg from '../images/projects/drum-machine.jpg'
 import ctcImg from '../images/projects/ctc.jpg'
+import hypertypeImg from '../images/projects/hypertype.jpg'
 import Project from '../components/Project.astro'
 ---
 
@@ -20,6 +21,25 @@ import Project from '../components/Project.astro'
 		siteName: 'Andre Vollrath'
 	}}
 >
+	<Project
+		title="HyperType"
+		buttonText="Play the game"
+		htmlText={`
+			<strong class='font-semibold text-dark-text'>HyperType</strong> is a neon arcade typing game I built to make practicing touch typing actually enjoyable.<br><br>
+
+			I wanted something that feels fast, responsive, and satisfying, where every correct keypress has clear visual and audio feedback. The game turns typing into a simple combat loop, words come in, you type them, and they disappear in a burst of light and sound.<br><br>
+
+			Along the way I explored <strong class='font-semibold text-dark-text'>game feel</strong>, <strong class='font-semibold text-dark-text'>timing and feedback</strong>, and how small details like sound effects, particles, and UI responsiveness can make a big difference.<br><br>
+
+			The game includes multiple difficulty modes, achievements, and score tracking to make it something you can come back to and gradually improve at.<br><br>
+
+			Try it here: <a class='font-semibold underline text-magenta' href='https://avollrath.github.io/HyperType/'>Play HyperType</a>
+		`}
+		projectImageSrc={hypertypeImg}
+		altProp="HyperType neon arcade typing game"
+		iframeSrc="https://avollrath.github.io/HyperType/"
+		techStackLogos={['Godot.svg']}
+	/>
 	<Project
 		title="CTC - Chess.com Trading Card"
 		htmlText={`

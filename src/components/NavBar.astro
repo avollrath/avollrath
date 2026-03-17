@@ -23,7 +23,7 @@ function isPathActive(itemPath, additionalPaths = []) {
 <nav
 	class="nav-bar border-gradient z-40 flex items-center justify-between bg-white px-4 shadow-lg sm:rounded-lg sm:px-12"
 >
-	<a href="/" class="z-50">
+	<a href="/" class="nav-logo-link z-50">
 		<Image
 			src={vollrathLogo}
 			class="nav-logo mr-2 h-auto w-10 py-2 sm:w-16 sm:py-3"
@@ -46,7 +46,7 @@ function isPathActive(itemPath, additionalPaths = []) {
 
 	<!-- Navigation Menu -->
 	<div
-		class="hidden fixed inset-0 z-[1300] flex select-none flex-col items-center justify-center bg-white font-header text-xl lg:relative lg:flex lg:flex-row lg:bg-transparent"
+		class="hidden fixed inset-0 z-[1300] flex select-none flex-col items-center justify-center bg-white font-header text-xl lg:relative lg:flex lg:flex-row lg:items-center lg:gap-3 lg:bg-transparent"
 		id="nav-menu"
 		role="dialog"
 		aria-modal="true"
@@ -67,9 +67,9 @@ function isPathActive(itemPath, additionalPaths = []) {
 				<a
 					href={item.path}
 					data-astro-prefetch
-					class={`nav-item relative px-3 py-2 font-body transition-colors duration-300 lg:py-4 ${
+					class={`nav-item relative font-body transition-colors duration-300 ${
 						isPathActive(item.path, item.additionalPaths)
-							? 'gradient-underline text-dark-text'
+							? 'active-nav-item text-dark-text'
 							: 'text-gray-400 hover:text-dark-text'
 					}`}
 					id={item.id}
@@ -79,6 +79,5 @@ function isPathActive(itemPath, additionalPaths = []) {
 				</a>
 			))
 		}
-		<div id="nav-underline" class="nav-underline invisible lg:visible"></div>
 	</div>
 </nav>

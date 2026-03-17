@@ -17,7 +17,7 @@ html.reduced-motion .shimmer:before,
 html.reduced-motion .sunglasses,
 html.reduced-motion .eye-left,
 html.reduced-motion .eye-right,
-html.reduced-motion .nav-underline {
+html.reduced-motion .active-nav-item {
 	animation: none !important;
 	transition: none !important;
 }
@@ -312,16 +312,36 @@ input[type='reset'],
 	position: relative;
 }
 
-.nav-underline {
-	position: absolute;
-	bottom: 4px;
-	height: 3px;
-	width: 0px;
-	background-color: #ff5ff6;
-	transition:
-		left 0.5s ease-out,
-		width 0.5s ease-out;
-	border-radius: 3px;
+.nav-logo-link {
+	display: inline-flex;
+	align-items: center;
+	border-radius: 9999px;
+	transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.nav-logo {
+	transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
+	transform-origin: center;
+}
+
+.nav-logo-link:hover .nav-logo,
+.nav-logo-link:focus-visible .nav-logo {
+	transform: translateY(-2px) rotate(-4deg) scale(1.06);
+	filter: drop-shadow(0 10px 18px rgba(255, 95, 246, 0.22));
+}
+
+.nav-item {
+	line-height: 1;
+	border: 2px solid transparent;
+	border-radius: 9999px;
+	padding-top: 0.45rem;
+	padding-bottom: 0.45rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.active-nav-item {
+	border-color: #ff5ff6;
 }
 
 .long-transition {
