@@ -549,27 +549,20 @@ function initHomeAnimations() {
 	}
 
 	const lottieAnimationContainer = basedInContainer?.querySelector('lottie-player')
-	if (lottieAnimationContainer) {
+	const revealLottieWithHelsinki = () => {
+		if (!lottieAnimationContainer || lottieAnimationContainer.dataset.revealed === 'true') return
+
+		lottieAnimationContainer.dataset.revealed = 'true'
 		const lottieAnim = gsap.fromTo(
 			lottieAnimationContainer,
+			{ scale: 0.85, autoAlpha: 0 },
 			{
-				scale: 0,
-				autoAlpha: 0
-			},
-			{
-				scrollTrigger: {
-					trigger: '.based-in-container',
-					start: lowerSectionStart,
-					toggleActions: 'play none none none',
-					once: true,
-					invalidateOnRefresh: true
-				},
 				scale: 1,
 				autoAlpha: 1,
 				ease: 'expo.out',
 				duration: 0.7,
-				delay: 0.2,
-				immediateRender: false
+				immediateRender: false,
+				clearProps: 'opacity,visibility,transform'
 			}
 		)
 		animations.push(lottieAnim)
@@ -588,7 +581,9 @@ function initHomeAnimations() {
 				scrollTrigger: {
 					trigger: '.based-in-container',
 					start: sectionStart,
-					toggleActions: 'play none none none'
+					toggleActions: 'play none none none',
+					once: true,
+					onEnter: revealLottieWithHelsinki
 				},
 				y: '100%',
 				opacity: 0,
@@ -599,6 +594,11 @@ function initHomeAnimations() {
 			})
 			animations.push(linesAnim)
 		}
+	}
+
+	// Fallback when the text block is unavailable for any reason.
+	if (!basedInText) {
+		revealLottieWithHelsinki()
 	}
 
 	// Recalculate trigger positions after dynamic content/layout settles.
