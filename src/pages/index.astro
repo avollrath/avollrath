@@ -607,7 +607,12 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 				const script = document.createElement('script')
 				script.src = 'https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js'
 				script.async = true
-				script.onload = resolve
+				script.onload = () => {
+					if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+						window.ScrollTrigger.refresh()
+					}
+					resolve()
+				}
 				script.onerror = reject
 				document.head.appendChild(script)
 			})

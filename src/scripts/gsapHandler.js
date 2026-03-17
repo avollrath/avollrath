@@ -180,6 +180,11 @@ function initHomeAnimations() {
 	}
 
 	if (shouldRunHomeIntro) {
+		const navLogo = document.querySelector('.nav-logo')
+		if (navLogo) {
+			gsap.set(navLogo, { clearProps: 'transform,opacity' })
+		}
+
 		const navBar = document.querySelector('.nav-bar')
 		if (navBar) {
 			const navBarAnim = gsap.from(navBar, {
@@ -192,15 +197,17 @@ function initHomeAnimations() {
 			animations.push(navBarAnim)
 		}
 
-		const navItems = document.querySelectorAll('.nav-item, .nav-logo')
-		if (navItems) {
+		const navItems = document.querySelectorAll('.nav-item')
+		if (navItems.length) {
 			const navItemsAnim = gsap.from(navItems, {
 				opacity: 0,
 				y: 50,
 				ease: 'sine',
 				duration: 0.3,
 				delay: 1.2,
-				stagger: 0.2
+				stagger: 0.2,
+				immediateRender: false,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(navItemsAnim)
 		}
@@ -541,19 +548,30 @@ function initHomeAnimations() {
 		animations.push(basedInAnim)
 	}
 
-	const lottieAnimationContainer = document.querySelector('#lottie-player')
+	const lottieAnimationContainer = basedInContainer?.querySelector('lottie-player')
 	if (lottieAnimationContainer) {
-		const lottieAnim = gsap.from(lottieAnimationContainer, {
-			scrollTrigger: {
-				trigger: '.based-in-container',
-				start: lowerSectionStart,
-				toggleActions: 'play none none none'
+		const lottieAnim = gsap.fromTo(
+			lottieAnimationContainer,
+			{
+				scale: 0,
+				autoAlpha: 0
 			},
-			scale: 0,
-			ease: 'expo',
-			duration: 0.7,
-			delay: 2
-		})
+			{
+				scrollTrigger: {
+					trigger: '.based-in-container',
+					start: lowerSectionStart,
+					toggleActions: 'play none none none',
+					once: true,
+					invalidateOnRefresh: true
+				},
+				scale: 1,
+				autoAlpha: 1,
+				ease: 'expo.out',
+				duration: 0.7,
+				delay: 0.2,
+				immediateRender: false
+			}
+		)
 		animations.push(lottieAnim)
 	}
 
@@ -582,6 +600,11 @@ function initHomeAnimations() {
 			animations.push(linesAnim)
 		}
 	}
+
+	// Recalculate trigger positions after dynamic content/layout settles.
+	requestAnimationFrame(() => {
+		ScrollTrigger.refresh()
+	})
 }
 
 function initAboutAnimations() {

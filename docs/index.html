@@ -257,7 +257,7 @@ Scroll to top &uarr;
 </button> <div class="bg-gray-100 py-32"> <p>
 Handmade with ❤️ by <strong class="font-semibold text-dark-text">André Vollrath</strong> &copy; 2026.
 <br>All rights reserved.
-</p> </div> </footer> </div> <script type="module" src="/astro/Layout.astro_astro_type_script_index_0_lang.BazOCjj6.js"></script> <script type="module" src="/astro/Layout.astro_astro_type_script_index_1_lang.gUjPaYGf.js"></script> </body> </html> <script>
+</p> </div> </footer> </div> <script type="module" src="/astro/Layout.astro_astro_type_script_index_0_lang.-CI0j5Va.js"></script> <script type="module" src="/astro/Layout.astro_astro_type_script_index_1_lang.gUjPaYGf.js"></script> </body> </html> <script>
 	function initLazyRenderVideos() {
 		const videos = document.querySelectorAll('.js-lazy-render-video')
 		if (!videos.length) return
@@ -314,7 +314,12 @@ Handmade with ❤️ by <strong class="font-semibold text-dark-text">André Voll
 				const script = document.createElement('script')
 				script.src = 'https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js'
 				script.async = true
-				script.onload = resolve
+				script.onload = () => {
+					if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+						window.ScrollTrigger.refresh()
+					}
+					resolve()
+				}
 				script.onerror = reject
 				document.head.appendChild(script)
 			})
