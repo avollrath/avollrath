@@ -22,6 +22,7 @@ import moonClay from '../images/renders/moon-clay.jpg'
 import santa from '../images/renders/xmas.jpg'
 import santaClay from '../images/renders/xmas-clay.jpg'
 
+import gridMotion from '../images/renders/grid-animation.mp4'
 import keys from '../images/renders/key-animation.mp4'
 ---
 
@@ -35,10 +36,10 @@ import keys from '../images/renders/key-animation.mp4'
 	}}
 >
 	<Render
-		title="Key Animation"
-		htmlText="A short <strong class='font-semibold text-dark-text'>looping key study</strong> focused on smooth motion and clean timing in Blender.<br><br>I wanted the spin to feel <strong class='font-semibold text-dark-text'>satisfying</strong>, a little <strong class='font-semibold text-dark-text'>hypnotic</strong>, and polished without overcomplicating the scene."
-		renderImageSrc={keys}
-		altProp="Key Animation Render"
+		title="Procedural Grid Motion"
+		htmlText="This animation is based on a tutorial by <strong class='font-semibold text-dark-text'>Ducky 3D</strong>, which I used as a starting point to explore smooth, randomized motion in a simple grid setup.<br><br>I liked how the blocks drift slightly out of sync while still feeling cohesive. I tweaked the layout, colors, and added my logo into the floor to make it fit my portfolio style."
+		renderImageSrc={gridMotion}
+		altProp="Procedural Grid Motion Render"
 		transitionName="latest-render"
 	/>
 
@@ -76,6 +77,14 @@ import keys from '../images/renders/key-animation.mp4'
 		clayRenderImageSrc={santaClay}
 		altProp="Hovering Santa Render"
 		transitionName="hoveringSanta"
+	/>
+
+	<Render
+		title="Key Animation"
+		htmlText="A short <strong class='font-semibold text-dark-text'>looping key study</strong> focused on smooth motion and clean timing in Blender.<br><br>I wanted the spin to feel <strong class='font-semibold text-dark-text'>satisfying</strong>, a little <strong class='font-semibold text-dark-text'>hypnotic</strong>, and polished without overcomplicating the scene."
+		renderImageSrc={keys}
+		altProp="Key Animation Render"
+		transitionName="keyAnimation"
 	/>
 
 	<Render

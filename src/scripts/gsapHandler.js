@@ -199,14 +199,19 @@ function initHomeAnimations() {
 
 		const navItems = document.querySelectorAll('.nav-item')
 		if (navItems.length) {
-			const navItemsAnim = gsap.from(navItems, {
+			gsap.set(navItems, {
 				opacity: 0,
-				y: 50,
+				scale: 0,
+				transformOrigin: 'center center'
+			})
+
+			const navItemsAnim = gsap.to(navItems, {
+				opacity: 1,
+				scale: 1,
 				ease: 'sine',
 				duration: 0.3,
 				delay: 1.2,
 				stagger: 0.2,
-				immediateRender: false,
 				clearProps: 'transform,opacity'
 			})
 			animations.push(navItemsAnim)
