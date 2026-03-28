@@ -25,6 +25,7 @@ function isLiteMotionMode() {
 
 function applyLiteModeStyles() {
 	document.documentElement.classList.remove('home-intro-pending')
+	document.documentElement.classList.remove('about-intro-pending')
 
 	const keySections = document.querySelectorAll(
 		'.nav-bar, .nav-item, .nav-logo, .hero-container, .hero-badge, .hero-header, .intro-text, .cta-button, .avatar-wrapper, .now-container, .now-content, .blog-container, .blog-content, .about-container, .about-content, .render-container, .render-content, .spotify-container'
@@ -187,12 +188,14 @@ function initHomeAnimations() {
 
 		const navBar = document.querySelector('.nav-bar')
 		if (navBar) {
-			const navBarAnim = gsap.from(navBar, {
-				opacity: 0,
-				y: -200,
+			gsap.set(navBar, { opacity: 0, y: -200 })
+			const navBarAnim = gsap.to(navBar, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.4,
-				delay: 0.6
+				delay: 0.6,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(navBarAnim)
 		}
@@ -219,36 +222,42 @@ function initHomeAnimations() {
 
 		const heroContainer = document.querySelector('.hero-container')
 		if (heroContainer) {
-			const heroContainerAnim = gsap.from(heroContainer, {
-				opacity: 0,
-				x: -1000,
+			gsap.set(heroContainer, { opacity: 0, x: -1000 })
+			const heroContainerAnim = gsap.to(heroContainer, {
+				opacity: 1,
+				x: 0,
 				ease: 'back.out',
 				duration: 0.5,
-				delay: 0.3
+				delay: 0.3,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(heroContainerAnim)
 		}
 
 		const heroBadge = document.querySelector('.hero-badge')
 		if (heroBadge) {
-			const badgeAnim = gsap.from(heroBadge, {
-				opacity: 0,
-				x: -150,
+			gsap.set(heroBadge, { opacity: 0, x: -150 })
+			const badgeAnim = gsap.to(heroBadge, {
+				opacity: 1,
+				x: 0,
 				ease: 'elastic(0.6)',
 				duration: 1,
-				delay: 0.8
+				delay: 0.8,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(badgeAnim)
 		}
 
 		const heroHeader = document.querySelector('.hero-header')
 		if (heroHeader) {
-			const heroHeaderAnim = gsap.from(heroHeader, {
-				opacity: 0,
-				y: -100,
+			gsap.set(heroHeader, { opacity: 0, y: -100 })
+			const heroHeaderAnim = gsap.to(heroHeader, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.5,
-				delay: 0.5
+				delay: 0.5,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(heroHeaderAnim)
 		}
@@ -317,143 +326,167 @@ function initHomeAnimations() {
 		}
 
 		if (ctaButton) {
-			const ctaAnim = gsap.from(ctaButton, {
-				opacity: 0,
-				y: 100,
+			gsap.set(ctaButton, { opacity: 0, y: 100 })
+			const ctaAnim = gsap.to(ctaButton, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.4,
-				delay: 1.3
+				delay: 1.3,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(ctaAnim)
 		}
 
 		const avatar = document.querySelector('.avatar-wrapper')
 		if (avatar) {
-			const avatarAnim = gsap.from(avatar, {
-				scale: 0,
+			gsap.set(avatar, { scale: 0 })
+			const avatarAnim = gsap.to(avatar, {
+				scale: 1,
 				ease: 'back.out',
 				duration: 0.6,
-				delay: 0.8
+				delay: 0.8,
+				clearProps: 'transform'
 			})
 			animations.push(avatarAnim)
 		}
 
 		const nowContainer = document.querySelector('.now-container')
 		if (nowContainer) {
-			const nowContainerAnim = gsap.from(nowContainer, {
-				opacity: 0,
-				x: 300,
+			gsap.set(nowContainer, { opacity: 0, x: 300 })
+			const nowContainerAnim = gsap.to(nowContainer, {
+				opacity: 1,
+				x: 0,
 				ease: 'back.out',
 				duration: 0.4,
-				delay: 1
+				delay: 1,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(nowContainerAnim)
 		}
 
 		const clientLogosContainer = document.querySelector('.client-logos-container')
 		if (clientLogosContainer) {
-			const clientLogosAnim = gsap.from(clientLogosContainer, {
-				opacity: 0,
-				y: 400,
+			gsap.set(clientLogosContainer, { opacity: 0, y: 400 })
+			const clientLogosAnim = gsap.to(clientLogosContainer, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.4,
-				delay: 0.8
+				delay: 0.8,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(clientLogosAnim)
 		}
 
 		const nowContent = document.querySelectorAll('.now-content')
 		if (nowContent) {
-			const nowContentAnim = gsap.from(nowContent, {
-				opacity: 0,
-				y: 50,
+			gsap.set(nowContent, { opacity: 0, y: 50 })
+			const nowContentAnim = gsap.to(nowContent, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.7,
-				delay: 1.2
+				delay: 1.2,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(nowContentAnim)
 		}
 
 		const blogContainer = document.querySelector('.blog-container')
 		if (blogContainer) {
-			const blogContainerAnim = gsap.from(blogContainer, {
-				opacity: 0,
-				x: -300,
+			gsap.set(blogContainer, { opacity: 0, x: -300 })
+			const blogContainerAnim = gsap.to(blogContainer, {
+				opacity: 1,
+				x: 0,
 				ease: 'back.out',
 				duration: 0.4,
-				delay: 1.3
+				delay: 1.3,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(blogContainerAnim)
 		}
 
 		const blogContent = document.querySelectorAll('.blog-content')
 		if (blogContent) {
-			const blogContentAnim = gsap.from(blogContent, {
-				opacity: 0,
-				y: 50,
+			gsap.set(blogContent, { opacity: 0, y: 50 })
+			const blogContentAnim = gsap.to(blogContent, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.7,
-				delay: 1.2
+				delay: 1.2,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(blogContentAnim)
 		}
 
 		const aboutContainer = document.querySelector('.about-container')
 		if (aboutContainer) {
-			const aboutContainerAnim = gsap.from(aboutContainer, {
-				opacity: 0,
-				y: -300,
+			gsap.set(aboutContainer, { opacity: 0, y: -300 })
+			const aboutContainerAnim = gsap.to(aboutContainer, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.4,
-				delay: 1.5
+				delay: 1.5,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(aboutContainerAnim)
 		}
 
 		const aboutContent = document.querySelectorAll('.about-content')
 		if (aboutContent) {
-			const aboutContentAnim = gsap.from(aboutContent, {
-				opacity: 0,
-				y: 50,
+			gsap.set(aboutContent, { opacity: 0, y: 50 })
+			const aboutContentAnim = gsap.to(aboutContent, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.7,
-				delay: 1.8
+				delay: 1.8,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(aboutContentAnim)
 		}
 
 		const renderContainer = document.querySelector('.render-container')
 		if (renderContainer) {
-			const renderContainerAnim = gsap.from(renderContainer, {
-				opacity: 0,
-				x: 300,
+			gsap.set(renderContainer, { opacity: 0, x: 300 })
+			const renderContainerAnim = gsap.to(renderContainer, {
+				opacity: 1,
+				x: 0,
 				ease: 'back.out',
 				duration: 0.4,
-				delay: 2.0
+				delay: 2.0,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(renderContainerAnim)
 		}
 
 		const renderContent = document.querySelectorAll('.render-content')
 		if (renderContent) {
-			const renderContentAnim = gsap.from(renderContent, {
-				opacity: 0,
-				y: 100,
+			gsap.set(renderContent, { opacity: 0, y: 100 })
+			const renderContentAnim = gsap.to(renderContent, {
+				opacity: 1,
+				y: 0,
 				ease: 'back.out',
 				duration: 0.5,
-				delay: 2.4
+				delay: 2.4,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(renderContentAnim)
 		}
 
 		const spotifyContainer = document.querySelector('.spotify-container')
 		if (spotifyContainer) {
-			const spotifyContainerAnim = gsap.from(spotifyContainer, {
-				opacity: 0,
-				x: 300,
+			gsap.set(spotifyContainer, { opacity: 0, x: 300 })
+			const spotifyContainerAnim = gsap.to(spotifyContainer, {
+				opacity: 1,
+				x: 0,
 				ease: 'back.out',
 				duration: 0.4,
-				delay: 2.8
+				delay: 2.8,
+				clearProps: 'transform,opacity'
 			})
 			animations.push(spotifyContainerAnim)
 		}
@@ -613,21 +646,37 @@ function initHomeAnimations() {
 }
 
 function initAboutAnimations() {
+	let shouldRunAboutIntro = window.__aboutIntroSeen !== true
+
+	if (shouldRunAboutIntro) {
+		window.__aboutIntroSeen = true
+	} else {
+		document.documentElement.classList.remove('about-intro-pending')
+	}
+
 	const aboutImage = document.querySelector('.about-image')
 	if (aboutImage) {
-		const lottieAnim = gsap.from(aboutImage, {
+		gsap.set(aboutImage, { opacity: 0, x: -300 })
+		const lottieAnim = gsap.to(aboutImage, {
 			scrollTrigger: {
 				trigger: '.about-image',
 				start: 'top 90%',
 				toggleActions: 'play none none none'
 			},
-			x: -300,
-			opacity: 0,
+			x: 0,
+			opacity: 1,
 			ease: 'back.out',
 			duration: 0.6,
-			delay: 0.6
+			delay: 0.6,
+			clearProps: 'transform,opacity'
 		})
 		animations.push(lottieAnim)
+	}
+
+	if (shouldRunAboutIntro) {
+		requestAnimationFrame(() => {
+			document.documentElement.classList.remove('about-intro-pending')
+		})
 	}
 
 	const techStackIcons = document.querySelectorAll('.tech-stack-icon')

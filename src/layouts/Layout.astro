@@ -2,15 +2,24 @@
 import NavBar from '../components/NavBar.astro'
 import Footer from '../components/Footer.astro'
 import SEO from '../components/SEO.astro'
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 import '../styles/marquee.css'
 import '../styles/main.css'
 const { title, description, seo = {} } = Astro.props
 import faviconSrc from '../images/favicon.svg'
+const pathname = Astro.url.pathname
+const initialHomeIntro = pathname === '/'
+const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+	lang="en"
+	class:list={[
+		initialHomeIntro && 'home-intro-pending',
+		initialAboutIntro && 'about-intro-pending'
+	]}
+>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,8 +29,6 @@ import faviconSrc from '../images/favicon.svg'
 			data-goatcounter="https://vollrath.goatcounter.com/count"
 			async
 			src="//gc.zgo.at/count.js"></script>
-
-		<ViewTransitions />
 		<script is:inline>
 			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 			const lowCpu =
@@ -34,11 +41,6 @@ import faviconSrc from '../images/favicon.svg'
 				navigator.deviceMemory <= 4
 			if (prefersReducedMotion || lowCpu || lowMemory) {
 				document.documentElement.classList.add('reduced-motion')
-			}
-
-			const isHome = window.location.pathname === '/'
-			if (isHome && window.__homeIntroSeen !== true) {
-				document.documentElement.classList.add('home-intro-pending')
 			}
 		</script>
 		<style is:global>
@@ -62,8 +64,15 @@ import faviconSrc from '../images/favicon.svg'
 			html.home-intro-pending .client-logos-container,
 			html.home-intro-pending .spotify-container {
 				opacity: 0;
+				visibility: hidden;
+			}
+
+			html.about-intro-pending .about-image {
+				opacity: 0;
+				visibility: hidden;
 			}
 		</style>
+		<ClientRouter />
 	</head>
 	<body class="bg-gray-50 font-body text-dark-text dark:bg-dark-bg dark:text-white">
 		<div transition:persist class="sticky top-0 z-[1200] mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4">
@@ -88,7 +97,11 @@ import faviconSrc from '../images/favicon.svg'
 			import { initializeNavigation } from '../scripts/navigationHandler.js'
 
 			const init = () => {
-				const reducedMotion = document.documentElement.classList.contains('reduced-motion')
+				const documentElement = document.documentElement
+				const reducedMotion = documentElement.classList.contains('reduced-motion')
+				const hasPendingIntro =
+					documentElement.classList.contains('home-intro-pending') ||
+					documentElement.classList.contains('about-intro-pending')
 
 				if (!reducedMotion && document.querySelector('[title]')) {
 					import('../scripts/initializeTooltips.js').then(({ initializeTooltips }) => {
@@ -102,7 +115,9 @@ import faviconSrc from '../images/favicon.svg'
 					})
 				}
 
-				if ('requestIdleCallback' in window) {
+				if (hasPendingIntro) {
+					initAnimations()
+				} else if ('requestIdleCallback' in window) {
 					requestIdleCallback(initAnimations, { timeout: 700 })
 				} else {
 					setTimeout(initAnimations, 0)
