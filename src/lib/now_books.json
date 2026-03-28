@@ -1,154 +1,175 @@
 {
-	"2024-02-06": [
-		{
-			"isbn": "9780451529701",
-			"title": "The Count of Monte Cristo",
-			"authors": "Alexandre Dumas",
-			"coverURL": "https://books.google.com/books/content?id=EhqNGA9gM94C&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9781984862075",
-			"title": "How to Win at Chess",
-			"authors": "Levy Rozman",
-			"coverURL": "https://books.google.com/books/content?id=r3W4EAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9780063251922",
-			"title": "Demon Copperhead",
-			"authors": "Barbara Kingsolver",
-			"coverURL": "https://books.google.com/books/content?id=w7ntzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		}
-	],
-	"2024-03-31": [
-		{
-			"isbn": "9780374104092",
-			"title": "Annihilation",
-			"authors": "Jeff VanderMeer",
-			"coverURL": "https://books.google.com/books/content?id=2cl7AgAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9780671690090",
-			"title": "The Diary of a Young Girl",
-			"authors": "Anne Frank",
-			"coverURL": "https://books.google.com/books/content?id=1OmDuE5bXZsC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9780671211356",
-			"title": "Logical Chess: Move By Move",
-			"authors": "Irving Chernev",
-			"coverURL": "https://books.google.com/books/content?id=6RrNAQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		}
-	],
-
-	"2024-09-28": [
-		{
-			"isbn": "9780143131083",
-			"title": "Believe it to Achieve it",
-			"authors": "Brian Tracy, Christina Tracy Stein",
-			"coverURL": "https://books.google.com/books/content?id=qpFADwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9780735213616",
-			"title": "Breath",
-			"authors": "James Nestor",
-			"coverURL": "https://books.google.com/books/content?id=3_LsDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9783641053420",
-			"title": "The Green Mile",
-			"authors": "Stephen King",
-			"coverURL": "https://books.google.com/books/content?id=b2l6DZRKW_cC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-		},
-		{
-			"isbn": "9781533281852",
-			"title": "Siddhartha",
-			"authors": "Hermann Hesse",
-			"coverURL": "https://books.google.com/books/content?id=VQbBjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		}
-	],
-	"2025-01-06": [
-		{
-			"isbn": "9781250865038",
-			"title": "Feel-Good Productivity",
-			"authors": "Ali Abdaal",
-			"coverURL": "https://books.google.com/books/content?id=ScHLEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9781451627299",
-			"title": "11/22/63",
-			"authors": "Stephen King",
-			"coverURL": "https://books.google.com/books/content?id=SQCxEHEXBykC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-		},
-		{
-			"isbn": "9781771643764",
-			"title": "Gut",
-			"authors": "Giulia Enders",
-			"coverURL": "https://books.google.com/books/content?id=2xPMtAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9780062880925",
-			"title": "Don't Trust Your Gut",
-			"authors": "Seth Stephens-Davidowitz",
-			"coverURL": "https://books.google.com/books/content?id=UdNQzwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		}
-	],
-	"2025-06-14": [
-		{
-			"isbn": "9781401938093",
-			"title": "Breaking The Habit of Being Yourself",
-			"authors": "Dr. Joe Dispenza",
-			"coverURL": "https://books.google.com/books/content?id=LV76DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-		},
-		{
-			"isbn": "9781544514215",
-			"title": "The Almanack of Naval Ravikant",
-			"authors": "Eric Jorgenson",
-			"coverURL": "https://books.google.com/books/content?id=OsO_zQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9781472294128",
-			"title": "Dopamine Nation",
-			"authors": "Anna Lembke",
-			"coverURL": "https://books.google.com/books/content?id=X1ykzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9780385249379",
-			"title": "Awareness",
-			"authors": "Anthony De Mello",
-			"coverURL": "https://books.google.com/books/content?id=-Xw6jFD0eocC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9781952692178",
-			"title": "How to Focus",
-			"authors": "Thich Nhat Hanh",
-			"coverURL": "https://books.google.com/books/content?id=KDSREAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9780241985854",
-			"title": "The School of Life",
-			"authors": "Alain de Botton",
-			"coverURL": "https://books.google.com/books/content?id=vYSCDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-		},
-		{
-			"isbn": "9780735211292",
-			"title": "Atomic Habits",
-			"authors": "James Clear",
-			"coverURL": "https://books.google.com/books/content?id=XfFvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		}
-	],
-	"2026-03-08": [
-		{
-			"isbn": "9780241816264",
-			"title": "Dungeon Crawler Carl",
-			"authors": "Matt Dinniman",
-			"coverURL": "https://books.google.com/books/content?id=1fTG0QEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		},
-		{
-			"isbn": "9780553447712",
-			"title": "The Seven Principles for Making Marriage Work",
-			"authors": "John Gottman, Nan Silver",
-			"coverURL": "https://books.google.com/books/content?id=z-mLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-		}
-	]
+  "2024-02-06": [
+    {
+      "isbn": "9780451529701",
+      "title": "The Count of Monte Cristo",
+      "authors": "Alexandre Dumas",
+      "coverURL": "https://books.google.com/books/content?id=EhqNGA9gM94C&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780451529701.jpg"
+    },
+    {
+      "isbn": "9781984862075",
+      "title": "How to Win at Chess",
+      "authors": "Levy Rozman",
+      "coverURL": "https://books.google.com/books/content?id=r3W4EAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781984862075.jpg"
+    },
+    {
+      "isbn": "9780063251922",
+      "title": "Demon Copperhead",
+      "authors": "Barbara Kingsolver",
+      "coverURL": "https://books.google.com/books/content?id=w7ntzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780063251922.jpg"
+    }
+  ],
+  "2024-03-31": [
+    {
+      "isbn": "9780374104092",
+      "title": "Annihilation",
+      "authors": "Jeff VanderMeer",
+      "coverURL": "https://books.google.com/books/content?id=2cl7AgAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780374104092.jpg"
+    },
+    {
+      "isbn": "9780671690090",
+      "title": "The Diary of a Young Girl",
+      "authors": "Anne Frank",
+      "coverURL": "https://books.google.com/books/content?id=1OmDuE5bXZsC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780671690090.jpg"
+    },
+    {
+      "isbn": "9780671211356",
+      "title": "Logical Chess: Move By Move",
+      "authors": "Irving Chernev",
+      "coverURL": "https://books.google.com/books/content?id=6RrNAQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780671211356.jpg"
+    }
+  ],
+  "2024-09-28": [
+    {
+      "isbn": "9780143131083",
+      "title": "Believe it to Achieve it",
+      "authors": "Brian Tracy, Christina Tracy Stein",
+      "coverURL": "https://books.google.com/books/content?id=qpFADwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780143131083.jpg"
+    },
+    {
+      "isbn": "9780735213616",
+      "title": "Breath",
+      "authors": "James Nestor",
+      "coverURL": "https://books.google.com/books/content?id=3_LsDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780735213616.jpg"
+    },
+    {
+      "isbn": "9783641053420",
+      "title": "The Green Mile",
+      "authors": "Stephen King",
+      "coverURL": "https://books.google.com/books/content?id=b2l6DZRKW_cC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "localCover": "/src/images/book-covers/9783641053420.jpg"
+    },
+    {
+      "isbn": "9781533281852",
+      "title": "Siddhartha",
+      "authors": "Hermann Hesse",
+      "coverURL": "https://books.google.com/books/content?id=VQbBjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781533281852.jpg"
+    }
+  ],
+  "2025-01-06": [
+    {
+      "isbn": "9781250865038",
+      "title": "Feel-Good Productivity",
+      "authors": "Ali Abdaal",
+      "coverURL": "https://books.google.com/books/content?id=ScHLEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781250865038.jpg"
+    },
+    {
+      "isbn": "9781451627299",
+      "title": "11/22/63",
+      "authors": "Stephen King",
+      "coverURL": "https://books.google.com/books/content?id=SQCxEHEXBykC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781451627299.jpg"
+    },
+    {
+      "isbn": "9781771643764",
+      "title": "Gut",
+      "authors": "Giulia Enders",
+      "coverURL": "https://books.google.com/books/content?id=2xPMtAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781771643764.jpg"
+    },
+    {
+      "isbn": "9780062880925",
+      "title": "Don't Trust Your Gut",
+      "authors": "Seth Stephens-Davidowitz",
+      "coverURL": "https://books.google.com/books/content?id=UdNQzwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780062880925.jpg"
+    }
+  ],
+  "2025-06-14": [
+    {
+      "isbn": "9781401938093",
+      "title": "Breaking The Habit of Being Yourself",
+      "authors": "Dr. Joe Dispenza",
+      "coverURL": "https://books.google.com/books/content?id=LV76DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781401938093.jpg"
+    },
+    {
+      "isbn": "9781544514215",
+      "title": "The Almanack of Naval Ravikant",
+      "authors": "Eric Jorgenson",
+      "coverURL": "https://books.google.com/books/content?id=OsO_zQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781544514215.jpg"
+    },
+    {
+      "isbn": "9781472294128",
+      "title": "Dopamine Nation",
+      "authors": "Anna Lembke",
+      "coverURL": "https://books.google.com/books/content?id=X1ykzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781472294128.jpg"
+    },
+    {
+      "isbn": "9780385249379",
+      "title": "Awareness",
+      "authors": "Anthony De Mello",
+      "coverURL": "https://books.google.com/books/content?id=-Xw6jFD0eocC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780385249379.jpg"
+    },
+    {
+      "isbn": "9781952692178",
+      "title": "How to Focus",
+      "authors": "Thich Nhat Hanh",
+      "coverURL": "https://books.google.com/books/content?id=KDSREAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9781952692178.jpg"
+    },
+    {
+      "isbn": "9780241985854",
+      "title": "The School of Life",
+      "authors": "Alain de Botton",
+      "coverURL": "https://books.google.com/books/content?id=vYSCDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780241985854.jpg"
+    },
+    {
+      "isbn": "9780735211292",
+      "title": "Atomic Habits",
+      "authors": "James Clear",
+      "coverURL": "https://books.google.com/books/content?id=XfFvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780735211292.jpg"
+    }
+  ],
+  "2026-03-08": [
+    {
+      "isbn": "9780241816264",
+      "title": "Dungeon Crawler Carl",
+      "authors": "Matt Dinniman",
+      "coverURL": "https://books.google.com/books/content?id=1fTG0QEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780241816264.jpg"
+    },
+    {
+      "isbn": "9780553447712",
+      "title": "The Seven Principles for Making Marriage Work",
+      "authors": "John Gottman, Nan Silver",
+      "coverURL": "https://books.google.com/books/content?id=z-mLDQAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "localCover": "/src/images/book-covers/9780553447712.jpg"
+    }
+  ]
 }
-

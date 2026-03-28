@@ -1,6 +1,8 @@
 ---
 import favoriteBooks from '../lib/books.json'
+import { Image } from 'astro:assets'
 import { resolveBookCoverUrl, BOOK_COVER_FALLBACK } from '../scripts/bookCoverUrl.js'
+import { getLocalBookCover, placeholderCover } from '../scripts/bookCoverAssets.js'
 import { hashStringToSeed, shuffleDeterministic } from '../scripts/deterministicShuffle.js'
 const fallbackCover = BOOK_COVER_FALLBACK
 const colSpan = Astro.props.colSpan || '2xl:col-span-12' // Default value if colSpan prop is not passed
@@ -21,24 +23,39 @@ const shuffledFavoriteBooks = shuffleDeterministic(favoriteBooks, shuffleSeed)
 	</h2>
 	<div class="flex w-full flex-row flex-wrap justify-center">
 		{
-			shuffledFavoriteBooks.map((book, index) => (
-				<div key={index} class="p-2 2xl:p-4">
-					<div
-						class="fav-book-image"
-						title={`<strong class='font-semibold'>${book.title}</strong> - ${book.authors}`}
-					>
-						<img
-							src={resolveBookCoverUrl(book.coverURL, fallbackCover)}
-							alt={`Cover of ${book.title}`}
-							class={`${bookWidth} h-auto w-20 rounded shadow-lg transition-transform duration-300 ease-in-out hover:scale-110`}
-							loading="lazy"
-							decoding="async"
-							referrerpolicy="no-referrer"
-							onError={(e) => (e.currentTarget.src = fallbackCover)}
-						/>
+			shuffledFavoriteBooks.map((book, index) => {
+				const localCover = getLocalBookCover(book)
+
+				return (
+					<div key={index} class="p-2 2xl:p-4">
+						<div
+							class="fav-book-image"
+							title={`<strong class='font-semibold'>${book.title}</strong> - ${book.authors}`}
+						>
+							{localCover ? (
+								<Image
+									src={localCover}
+									alt={`Cover of ${book.title}`}
+									class={`${bookWidth} h-auto w-20 rounded shadow-lg transition-transform duration-300 ease-in-out hover:scale-110`}
+									loading="lazy"
+									width={160}
+									format="webp"
+								/>
+							) : (
+								<img
+									src={resolveBookCoverUrl(book.coverURL, fallbackCover)}
+									alt={`Cover of ${book.title}`}
+									class={`${bookWidth} h-auto w-20 rounded shadow-lg transition-transform duration-300 ease-in-out hover:scale-110`}
+									loading="lazy"
+									decoding="async"
+									referrerpolicy="no-referrer"
+									onError={(e) => (e.currentTarget.src = placeholderCover.src)}
+								/>
+							)}
+						</div>
 					</div>
-				</div>
-			))
+				)
+			})
 		}
 	</div>
 </div>

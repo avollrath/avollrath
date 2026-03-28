@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" href="/astro/favicon.DdVGadsO.svg" type="image/svg+xml"><title>How I Built My Frontend Developer Portfolio with Astro</title><meta name="description" content="A walkthrough of how I built my frontend developer portfolio with Astro, combining static performance, reusable content sections, image optimization, and a design-led UI."><meta name="robots" content="index, follow"><meta name="author" content="Andre Vollrath"><link rel="canonical" href="https://vollrath.dev/posts/2026-03-10-astro-portfolio/"><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="og:site_name" content="Andre Vollrath"><meta property="og:title" content="How I Built My Frontend Developer Portfolio with Astro"><meta property="og:description" content="A walkthrough of how I built my frontend developer portfolio with Astro, combining static performance, reusable content sections, image optimization, and a design-led UI."><meta property="og:url" content="https://vollrath.dev/posts/2026-03-10-astro-portfolio/"><meta property="og:image" content="https://vollrath.dev/astro/portfolio.CRZIOLBb.jpg"><meta property="og:image:alt" content="A screenshot of my frontend developer portfolio homepage built with Astro."><meta property="article:published_time" content="2026-03-10T00:00:00.000Z"><meta property="article:author" content="Andre Vollrath"><meta property="article:tag" content="astro"><meta property="article:tag" content="portfolio"><meta property="article:tag" content="frontend developer"><meta property="article:tag" content="personal website"><meta property="article:tag" content="web performance"><meta property="article:tag" content="ui design"><meta property="article:tag" content="static site"><meta property="article:tag" content="project"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How I Built My Frontend Developer Portfolio with Astro"><meta name="twitter:description" content="A walkthrough of how I built my frontend developer portfolio with Astro, combining static performance, reusable content sections, image optimization, and a design-led UI."><meta name="twitter:image" content="https://vollrath.dev/astro/portfolio.CRZIOLBb.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Andre Vollrath","url":"https://vollrath.dev/","inLanguage":"en"}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"André Vollrath","url":"https://vollrath.dev/","jobTitle":"Frontend Developer","sameAs":["https://github.com/avollrath","https://www.linkedin.com/in/andrevollrath/","https://www.instagram.com/charliefeatherlight/"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://vollrath.dev/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://vollrath.dev/posts/"},{"@type":"ListItem","position":3,"name":"2026 03 10 Astro Portfolio","item":"https://vollrath.dev/posts/2026-03-10-astro-portfolio/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How I Built My Frontend Developer Portfolio with Astro","description":"A walkthrough of how I built my frontend developer portfolio with Astro, combining static performance, reusable content sections, image optimization, and a design-led UI.","datePublished":"2026-03-10T00:00:00.000Z","author":{"@type":"Person","name":"Andre Vollrath"},"mainEntityOfPage":"https://vollrath.dev/posts/2026-03-10-astro-portfolio/","url":"https://vollrath.dev/posts/2026-03-10-astro-portfolio/","image":"https://vollrath.dev/astro/portfolio.CRZIOLBb.jpg"}</script><script data-goatcounter="https://vollrath.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/astro/ClientRouter.astro_astro_type_script_index_0_lang.DcSP9LZ1.js"></script><script>
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+			const lowCpu =
+				typeof navigator.hardwareConcurrency === 'number' &&
+				navigator.hardwareConcurrency > 0 &&
+				navigator.hardwareConcurrency <= 4
+			const lowMemory =
+				typeof navigator.deviceMemory === 'number' &&
+				navigator.deviceMemory > 0 &&
+				navigator.deviceMemory <= 4
+			if (prefersReducedMotion || lowCpu || lowMemory) {
+				document.documentElement.classList.add('reduced-motion')
+			}
+
+			const isHome = window.location.pathname === '/'
+			if (isHome && window.__homeIntroSeen !== true) {
+				document.documentElement.classList.add('home-intro-pending')
+			}
+		</script><link rel="stylesheet" href="/astro/2024-02-book-covers.By31WeEK.css">
+<style>.loader[data-astro-cid-vosfxngp]{display:flex;align-items:center;justify-content:center;height:100%}#wave[data-astro-cid-vosfxngp]{height:40px;width:40px;fill:#f6723a}#Line_1[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:.15s}#Line_2[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:.3s}#Line_3[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:.45s}#Line_4[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:.6s}#Line_5[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:.75s}#Line_6[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:.9s}#Line_7[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:1.05s}#Line_8[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:1.2s}#Line_9[data-astro-cid-vosfxngp]{animation:pulse 1s infinite;animation-delay:1.35s}@keyframes pulse{0%,to{transform:scaleY(1);transform-origin:50% 50%}50%{transform:scaleY(.7);transform-origin:50% 50%}}
+@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media(prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+</style>
+<link rel="stylesheet" href="/astro/about.CQse06mB.css"></head> <body class="bg-gray-50 font-body text-dark-text dark:bg-dark-bg dark:text-white"> <div class="sticky top-0 z-[1200] mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4" data-astro-transition-persist="astro-j4akag7t-1"> <nav class="nav-bar border-gradient z-40 flex items-center justify-between bg-white px-4 shadow-lg sm:rounded-lg sm:px-12"> <a href="/" class="nav-logo-link z-50"> <img src="/astro/vollrath_logo.BoR0YlKe_1uOybF.svg" alt="Vollrath Logo" loading="lazy" decoding="async" fetchpriority="auto" width="32" height="32" class="nav-logo mr-2 h-auto w-10 py-2 sm:w-16 sm:py-3"> </a> <!-- Hamburger Menu --> <button class="z-[1301] flex cursor-pointer flex-col space-y-1 sm:space-y-2 lg:hidden" id="hamburger" aria-label="Menu" aria-controls="nav-menu" aria-expanded="false"> <span class="block h-0.5 w-5 bg-dark-text transition-all duration-300 sm:w-8"></span> <span class="block h-0.5 w-5 bg-dark-text transition-all duration-300 sm:w-8"></span> <span class="block h-0.5 w-5 bg-dark-text transition-all duration-300 sm:w-8"></span> </button> <!-- Navigation Menu --> <div class="hidden fixed inset-0 z-[1300] flex select-none flex-col items-center justify-center bg-white font-header text-xl lg:relative lg:flex lg:flex-row lg:items-center lg:gap-3 lg:bg-transparent" id="nav-menu" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Mobile navigation menu" tabindex="-1"> <button id="menu-close" type="button" aria-label="Close menu" class="menu-close-btn absolute right-6 top-6 hidden h-12 w-12 items-center justify-center rounded-full border-2 border-dark-text text-3xl leading-none text-dark-text lg:hidden">
+&times;
+</button> <a href="/" data-astro-prefetch class="nav-item relative font-body transition-colors duration-300 text-gray-400 hover:text-dark-text" id="home-link" style="--menu-index:0;"> Home </a><a href="/about" data-astro-prefetch class="nav-item relative font-body transition-colors duration-300 text-gray-400 hover:text-dark-text" id="about-link" style="--menu-index:1;"> About </a><a href="/projects" data-astro-prefetch class="nav-item relative font-body transition-colors duration-300 text-gray-400 hover:text-dark-text" id="projects-link" style="--menu-index:2;"> Projects </a><a href="/now" data-astro-prefetch class="nav-item relative font-body transition-colors duration-300 text-gray-400 hover:text-dark-text" id="now-link" style="--menu-index:3;"> Now </a><a href="/renders" data-astro-prefetch class="nav-item relative font-body transition-colors duration-300 text-gray-400 hover:text-dark-text" id="renders-link" style="--menu-index:4;"> Renders </a><a href="/blog" data-astro-prefetch class="nav-item relative font-body transition-colors duration-300 active-nav-item text-dark-text" id="blog-link" style="--menu-index:5;"> Blog </a> </div> </nav> </div> <div class="container mx-auto flex min-h-screen w-full max-w-1970 flex-col py-1 sm:px-4 sm:py-4"> <!-- Main content area with 12-column grid layout --> <main class="flex-grow"> <div class="grid grid-cols-1 gap-4 xl:grid-cols-3 2xl:grid-cols-12">  <div class="border-gradient flex flex-col items-center rounded-lg bg-white px-4 py-12 dark:bg-gradient-to-r sm:px-56 sm:py-24 lg:col-span-9"> <header class="blog-header text-center"> <h1 class="long-transition mb-4 font-header leading-snug tracking-wide sm:text-4xl"> How I Built My Frontend Developer Portfolio with Astro </h1> <div class="metadata mb-4 flex flex-col"> <span class="mb-4 text-lg">10.03.2026</span> <div class="mt-2 inline-flex flex-wrap justify-center gap-2"> <span key="astro" class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"> astro </span><span key="portfolio" class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"> portfolio </span><span key="frontend developer" class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"> frontend developer </span><span key="personal website" class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"> personal website </span><span key="web performance" class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"> web performance </span><span key="ui design" class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"> ui design </span><span key="static site" class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"> static site </span><span key="project" class="rounded bg-magenta px-2 py-1 text-xs font-semibold text-white lg:text-xs"> project </span> </div> </div> <img src="/astro/portfolio.CRZIOLBb_Z1m3idQ.webp" alt="A screenshot of my frontend developer portfolio homepage built with Astro." decoding="async" loading="eager" fetchpriority="high" width="2179" height="1023" class="mb-6 w-full rounded-xl"> </header> <article class="blog-content max-w-full text-left text-xl leading-relaxed"> <div class="prose max-w-full
+	 text-gray-400
+	  prose-headings:text-dark-text
+	  prose-h1:text-xl
+	  prose-h1:font-bold
+	  prose-h2:rounded
+	  prose-h2:py-6
+	  prose-h2:font-header
+	  prose-h2:text-3xl
+	  prose-h2:font-semibold
+	  prose-p:text-justify
+	  prose-a:font-bold
+	  prose-a:text-dark-text
+	   prose-strong:text-dark-text
+	   prose-img:rounded-xl">  <h1 id="how-i-built-my-frontend-developer-portfolio-with-astro">How I Built My Frontend Developer Portfolio with Astro</h1>
+<p>At some point every frontend developer ends up rebuilding their portfolio.</p>
+<p>That was definitely true for me.</p>
+<p>I wanted a site that could do a few things at once:</p>
+<ul>
+<li>present my work clearly</li>
+<li>feel personal rather than template-driven</li>
+<li>stay fast and lightweight</li>
+<li>give me room to experiment with small dynamic features</li>
+<li>be easy to maintain without turning into a full CMS project</li>
+</ul>
+<p>I also wanted the site to feel <strong>visually playful and immediately recognizable</strong>.</p>
+<p>Not just fast.<br>
+Not just clean.<br>
+Not just “professional” in the generic portfolio-template sense.</p>
+<p>For this version of my site, <strong>Astro</strong> ended up being the right fit.</p>
+<p>It gives me the simplicity of a static site, but still leaves room for interactive sections, reusable components, and content-driven pages like the blog, projects page, reading lists, and Now page.</p>
+<p>This post is a walkthrough of how I approached the portfolio and why Astro works so well for this kind of frontend developer website.</p>
+<hr>
+<h2 id="why-i-chose-astro-for-my-portfolio">Why I chose Astro for my portfolio</h2>
+<p>I did not need a heavy application framework for a portfolio.</p>
+<p>Most of the site is content-first:</p>
+<ul>
+<li>homepage sections</li>
+<li>project writeups</li>
+<li>blog posts</li>
+<li>an About page</li>
+<li>a Now page</li>
+<li>image-heavy presentation</li>
+</ul>
+<p>That makes Astro a very natural choice.</p>
+<h3 id="what-i-wanted-from-the-stack">What I wanted from the stack</h3>
+<ul>
+<li>static output for speed and simple hosting</li>
+<li>component-based structure for reuse</li>
+<li>good image handling</li>
+<li>the ability to sprinkle in JavaScript only where needed</li>
+<li>enough flexibility for custom layouts and interaction design</li>
+</ul>
+<p>Astro checked all of those boxes.</p>
+<p>For a portfolio, that matters because the site should spend most of its energy presenting the work, not shipping unnecessary client-side code.</p>
+<hr>
+<h2 id="the-overall-structure-of-the-site">The overall structure of the site</h2>
+<p>The portfolio is split into a few main content areas:</p>
+<ul>
+<li>a modular homepage</li>
+<li>a dedicated projects page</li>
+<li>a blog</li>
+<li>a personal About page</li>
+<li>a Now page for current interests and experiments</li>
+<li>a renders page for visual work</li>
+</ul>
+<p>Instead of building the whole homepage as one giant block, I broke it into reusable Astro components and section-level content blocks.</p>
+<p>That made it easier to evolve the layout over time without losing control of the design.</p>
+<p>The homepage itself is built around a <strong>bento-grid-like layout</strong>, where each section acts like its own card with a clear role, but still contributes to one larger composition.</p>
+<p>That structure turned out to be a really good fit for a portfolio, because it let me show multiple sides of my work at once without making the page feel cluttered.</p>
+<hr>
+<h2 id="building-the-homepage-as-a-system-of-sections">Building the homepage as a system of sections</h2>
+<p>The homepage is not just a static hero plus a list of links.</p>
+<p>I wanted it to feel like a compact overview of who I am, what I build, and what I am currently exploring.</p>
+<p>So I structured it as a collection of focused sections:</p>
+<ul>
+<li>intro / hero</li>
+<li>client logos</li>
+<li>Now section</li>
+<li>latest blog post</li>
+<li>About section</li>
+<li>latest render</li>
+<li>Spotify top tracks</li>
+<li>tech stack</li>
+<li>links</li>
+<li>contact</li>
+<li>location</li>
+</ul>
+<p>That gives the page a more editorial feel than a standard portfolio template, and it lets different parts of my work and personality show up without forcing everything into one paragraph.</p>
+<p>Because each section is componentized, I can tune or replace individual parts without redesigning the whole site from scratch.</p>
+<p>Visually, the homepage is intentionally arranged like a <strong>playful bento board</strong>:</p>
+<ul>
+<li>large rounded cards</li>
+<li>strong whitespace between blocks</li>
+<li>a soft, light background</li>
+<li>bold blue typography</li>
+<li>pink accent buttons and highlights</li>
+<li>outlined section headers that repeat across the layout</li>
+</ul>
+<p>That repeated card language helps the page feel cohesive, even though the content blocks are quite different from one another.</p>
+<hr>
+<h2 id="making-the-landing-page-feel-playful-instead-of-generic">Making the landing page feel playful instead of generic</h2>
+<p>This was one of the most important design goals.</p>
+<p>A lot of portfolio sites are technically fine, but visually forgettable. I wanted the homepage to feel more alive at first glance.</p>
+<p>A few choices helped push it in that direction:</p>
+<ul>
+<li>a large hero headline with a lot of personality</li>
+<li>a stylized 3D avatar instead of a standard headshot</li>
+<li>bright accent colors used sparingly for emphasis</li>
+<li>a mix of text cards, image cards, media cards, and utility cards</li>
+<li>subtle interaction design that makes the page feel responsive without becoming noisy</li>
+</ul>
+<p>The result is much closer to a <strong>designed interface</strong> than a simple portfolio landing page.</p>
+<p>That distinction matters to me because my work sits between frontend development and visual design. The homepage should reflect both.</p>
+<hr>
+<h2 id="mixing-static-content-with-small-dynamic-features">Mixing static content with small dynamic features</h2>
+<p>One of the things I like most about Astro is that it lets me keep the site mostly static while still adding selective dynamic features where they add personality.</p>
+<p>A few examples from my site:</p>
+<ul>
+<li>a <strong>Spotify Top 10</strong> section fed by API data and cached locally</li>
+<li><strong>Favorite Books</strong> and <strong>Now reading</strong> sections driven by JSON data</li>
+<li>a <strong>latest blog post</strong> block that resolves post metadata automatically</li>
+<li>interactive homepage details like hover states, lazy-loaded media, and animated elements</li>
+</ul>
+<p>This is the kind of balance I wanted.</p>
+<p>The core content is stable and fast, but the site still feels alive.</p>
+<hr>
+<h2 id="keeping-performance-in-mind-from-the-start">Keeping performance in mind from the start</h2>
+<p>Performance matters a lot for a portfolio site.</p>
+<p>It affects first impressions, mobile usability, and how polished the whole experience feels.</p>
+<p>Astro helps by default because it ships less JavaScript than many app-first frameworks, but I still tried to be deliberate about the details.</p>
+<h3 id="a-few-choices-that-helped">A few choices that helped</h3>
+<ul>
+<li>static generation instead of runtime rendering</li>
+<li>image optimization through <code>astro:assets</code></li>
+<li>lazy loading where appropriate</li>
+<li>local caching for some external data and media</li>
+<li>only loading interactive scripts where the experience actually benefits from them</li>
+</ul>
+<p>That approach keeps the site visually rich without making it feel heavy.</p>
+<hr>
+<h2 id="using-astro-components-to-keep-the-design-maintainable">Using Astro components to keep the design maintainable</h2>
+<p>The visual side of a portfolio usually changes a lot over time.</p>
+<p>That is another reason I wanted a component-based structure.</p>
+<p>Sections like:</p>
+<ul>
+<li><code>FavoriteBooks</code></li>
+<li><code>NowBooks</code></li>
+<li><code>Project</code></li>
+<li><code>Render</code></li>
+<li><code>Sidebar</code></li>
+<li><code>SEO</code></li>
+</ul>
+<p>can all evolve independently.</p>
+<p>That makes the codebase easier to work with because visual experiments do not automatically turn into layout chaos.</p>
+<p>It also means I can reuse content patterns across the site instead of duplicating markup every time I want to present a project or media block.</p>
+<hr>
+<h2 id="designing-the-site-to-feel-personal">Designing the site to feel personal</h2>
+<p>A lot of developer portfolios feel interchangeable.</p>
+<p>They often have:</p>
+<ul>
+<li>the same headline structure</li>
+<li>the same grayscale palette</li>
+<li>the same cards</li>
+<li>the same “about / projects / contact” rhythm</li>
+</ul>
+<p>I wanted mine to feel more personal and slightly more playful.</p>
+<p>That came through in a few ways:</p>
+<ul>
+<li>a bento-grid homepage that feels curated instead of linear</li>
+<li>stronger visual contrast between sections</li>
+<li>a homepage that feels more like a curated board than a landing page template</li>
+<li>repeated rounded card shapes and outlined headers that tie the whole page together</li>
+<li>large typography paired with softer secondary text</li>
+<li>animated and interactive details that support the personality of the site</li>
+<li>content blocks that reflect real interests like books, music, running, and 3D work</li>
+</ul>
+<p>Since my background sits between <strong>design and frontend development</strong>, it was important that the portfolio reflected both sides instead of reading like a pure engineering resume.</p>
+<p>The screenshot of the landing page makes that easier to explain than words alone: it is intentionally structured, but it is also intentionally playful.</p>
+<hr>
+<h2 id="why-astro-works-well-for-frontend-developer-portfolios">Why Astro works well for frontend developer portfolios</h2>
+<p>I think Astro is especially good for portfolios when:</p>
+<ul>
+<li>most pages are content-driven</li>
+<li>performance matters</li>
+<li>you want full control over markup and styling</li>
+<li>you want some dynamic pieces, but not a full client-rendered app</li>
+</ul>
+<p>That is exactly the shape of my site.</p>
+<p>I can write regular Markdown posts, render project pages with custom components, optimize images at build time, and still add custom scripts for interactions when I want them.</p>
+<p>It feels lightweight in the right places and flexible in the places that matter.</p>
+<hr>
+<h2 id="what-i-would-recommend-if-you-are-building-one-yourself">What I would recommend if you are building one yourself</h2>
+<p>If you are building a frontend developer portfolio with Astro, I would keep a few things in mind:</p>
+<h3 id="start-with-content-structure-before-visual-polish">Start with content structure before visual polish</h3>
+<p>Figure out the main sections first:</p>
+<ul>
+<li>what should the homepage prove</li>
+<li>what belongs on dedicated pages</li>
+<li>what should be evergreen</li>
+<li>what should be easy to update</li>
+</ul>
+<p>That makes the design decisions much easier later.</p>
+<h3 id="build-around-reusable-content-blocks">Build around reusable content blocks</h3>
+<p>Even if the site is small, repetition appears quickly.</p>
+<p>Reusable components make it much easier to keep the site coherent while still evolving the look over time.</p>
+<h3 id="use-dynamic-features-sparingly">Use dynamic features sparingly</h3>
+<p>A few thoughtful dynamic touches can make a portfolio feel memorable.</p>
+<p>Too many can make it feel unfocused.</p>
+<p>I found it better to keep most of the site static and use interactivity as an accent.</p>
+<h3 id="treat-performance-as-part-of-the-design">Treat performance as part of the design</h3>
+<p>Fast loading, optimized images, and a clear structure are not just technical wins. They shape how polished the site feels.</p>
+<h3 id="give-the-layout-a-strong-visual-system">Give the layout a strong visual system</h3>
+<p>One thing that helped a lot on my own site was committing to a recognizable visual system early:</p>
+<ul>
+<li>rounded card containers</li>
+<li>repeated section labels</li>
+<li>a small set of accent colors</li>
+<li>one clear typography direction</li>
+<li>consistent spacing between modules</li>
+</ul>
+<p>That gave me room to make the homepage expressive without making it feel chaotic.</p>
+<hr>
+<h2 id="what-i-like-most-about-the-result">What I like most about the result</h2>
+<p>The thing I like most is that the site feels close to how I work.</p>
+<p>It is structured, but not sterile.
+It is personal, but still professional.
+It gives me room to write, experiment, showcase work, and keep improving the experience in small increments.</p>
+<p>That is exactly what I wanted from a portfolio.</p>
+<p>Astro did not design the site for me, but it gave me a very good foundation for building something that feels fast, flexible, and distinctly my own.</p>
+<hr>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>If you are building a <strong>frontend developer portfolio with Astro</strong>, I think the framework is a strong choice.</p>
+<p>It is especially good when your site sits somewhere between:</p>
+<ul>
+<li>portfolio</li>
+<li>blog</li>
+<li>project archive</li>
+<li>personal playground</li>
+</ul>
+<p>That combination describes my site pretty well.</p>
+<p>For me, Astro made it easy to keep the portfolio fast and maintainable while still leaving enough space for design, experimentation, and small personality-driven features.</p>
+<p>And for a personal website, that balance matters a lot.</p>  </div> </article>   </div> <div class="lg:col-span-3"> <aside class="sidebar border-gradient flex flex-col items-start rounded-lg bg-white from-dark-card to-darker-card px-12 py-24 dark:bg-gradient-to-r"> <h2 class="mb-12 font-header text-4xl tracking-wide">Other Posts</h2> <ul class="space-y-4"> <li key="/posts/2026-03-codex-hue" class="mb-12 flex flex-col"> <a href="/posts/2026-03-codex-hue" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/codex-hue.Cs_p4pGF_Z4wDXa.webp" alt="A desk setup with VS Code and a Philips Hue lamp flashing as a status indicator for Codex." decoding="async" loading="lazy" fetchpriority="auto" width="1600" height="908" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">Codex Hue Notifier – Turning My Desk Lamp into an AI Status Light</span> </a> <span class="text-xl text-gray-500">12.03.2026</span> </li><li key="/posts/2026-03-10-astro-portfolio" class="mb-12 flex flex-col"> <a href="/posts/2026-03-10-astro-portfolio" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/portfolio.CRZIOLBb_Z1m3idQ.webp" alt="A screenshot of my frontend developer portfolio homepage built with Astro." decoding="async" loading="lazy" fetchpriority="auto" width="2179" height="1023" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">How I Built My Frontend Developer Portfolio with Astro</span> </a> <span class="text-xl text-gray-500">10.03.2026</span> </li><li key="/posts/2025-03-pasilunch" class="mb-12 flex flex-col"> <a href="/posts/2025-03-pasilunch" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/pasilunch.Cy7WYR9D_2l9enQ.webp" alt="Illustration of PasiLunch fetching and displaying restaurant menus in Slack and on a web dashboard." decoding="async" loading="lazy" fetchpriority="auto" width="1200" height="675" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">PasiLunch – AI-Normalized Lunch Menus for Slack and the Web</span> </a> <span class="text-xl text-gray-500">02.03.2025</span> </li><li key="/posts/2025-01-nas" class="mb-12 flex flex-col"> <a href="/posts/2025-01-nas" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/nas_build.DI96jrSB_Z21ONQU.webp" alt="A sleek, modern NAS setup in a white Jonsbo N2 case." decoding="async" loading="lazy" fetchpriority="auto" width="1200" height="675" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">Building a Home NAS with Unraid</span> </a> <span class="text-xl text-gray-500">03.01.2025</span> </li><li key="/posts/2024-03-lunchbot" class="mb-12 flex flex-col"> <a href="/posts/2024-03-lunchbot" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/lunchbot.CLbi_SrM_2486gA.webp" alt="Illustration of a lunch table with various dishes, representing LunchBot project." decoding="async" loading="lazy" fetchpriority="auto" width="1200" height="675" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">Building LunchBot: A Simple Slack Bot for Lunch Menus</span> </a> <span class="text-xl text-gray-500">30.03.2024</span> </li><li key="/posts/2024-02-book-covers" class="mb-12 flex flex-col"> <a href="/posts/2024-02-book-covers" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/books.DkGe8UJV_VAvnt.webp" alt="A collection of book covers displayed on a digital screen." decoding="async" loading="lazy" fetchpriority="auto" width="1200" height="675" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">Using the Google Books API for Book Covers in Astro</span> </a> <span class="text-xl text-gray-500">08.02.2024</span> </li><li key="/posts/2024-02-pixoo" class="mb-12 flex flex-col"> <a href="/posts/2024-02-pixoo" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/pixoo.CJ62aILV_1vfdWI.webp" alt="Pixoo display showing a chess rating." decoding="async" loading="lazy" fetchpriority="auto" width="1200" height="675" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">Displaying My Chess.com Rating on a Pixoo Display</span> </a> <span class="text-xl text-gray-500">30.01.2024</span> </li><li key="/posts/2024-02-spotify" class="mb-12 flex flex-col"> <a href="/posts/2024-02-spotify" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/spotify.BrWw5BED_Z2qbdpt.webp" alt="Spotify top tracks section displayed on a website" decoding="async" loading="lazy" fetchpriority="auto" width="1200" height="675" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">Building a Spotify Top Tracks Section for My Website</span> </a> <span class="text-xl text-gray-500">08.08.2022</span> </li><li key="/posts/2024-02-watchface" class="mb-12 flex flex-col"> <a href="/posts/2024-02-watchface" class="group"> <div class="image-container overflow-hidden rounded-md"> <img src="/astro/garmin.C1IhUXzm_2lq9Qj.webp" alt="Garmin watch face inspired by the VS Code editor interface." decoding="async" loading="lazy" fetchpriority="auto" width="1200" height="675" class="mb-2 aspect-video w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"> </div> <span class="font-header text-lg tracking-wide">A VS Code–Inspired Watch Face for Garmin Forerunner 55</span> </a> <span class="text-xl text-gray-500">08.08.2022</span> </li> </ul> </aside> </div>  <!-- Slot for page-specific content --> </div> </main> </div> <div data-astro-transition-persist="astro-6ynojplz-2"> <footer class="footer-bar z-0 w-full flex-col items-center justify-center divide-y-2 text-center text-sm text-gray-400 sm:text-base"> <button type="button" class="scroll-top-btn m-auto mx-auto my-8 mb-8 block w-fit cursor-pointer rounded-full border-2 border-solid border-magenta bg-white px-6 py-2 text-center text-base font-semibold text-magenta shadow-lg">
+Scroll to top &uarr;
+</button> <div class="bg-gray-100 py-32"> <p>
+Handmade with ❤️ by <strong class="font-semibold text-dark-text">André Vollrath</strong> &copy; 2026.
+<br>All rights reserved.
+</p> </div> </footer> </div> <script type="module" src="/astro/Layout.astro_astro_type_script_index_0_lang.DW5uRb2L.js"></script> <script type="module" src="/astro/Layout.astro_astro_type_script_index_1_lang.gUjPaYGf.js"></script> </body> </html>

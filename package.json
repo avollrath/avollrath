@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check:encoding": "node scripts/check-encoding.js"
+    "check:encoding": "node scripts/check-encoding.js",
+    "sync:book-covers": "node scripts/sync-book-covers.js"
   },
   "dependencies": {
     "astro": "^5.18.0",

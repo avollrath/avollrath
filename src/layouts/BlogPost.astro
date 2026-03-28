@@ -46,6 +46,7 @@ const articleStructuredData = {
 		type: 'article',
 		author: authorName,
 		publishedTime: frontmatter.pubDate,
+		modifiedTime: frontmatter.updatedDate,
 		tags: frontmatter.tags ?? [],
 		ogImage: frontmatter.image?.src,
 		ogImageAlt: frontmatter.image?.alt ?? frontmatter.title,

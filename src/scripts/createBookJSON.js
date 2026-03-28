@@ -7,6 +7,7 @@ import { normalizeBookCoverUrl } from './bookCoverUrl.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+const localBookCoverDir = path.resolve(__dirname, '../images/book-covers')
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
@@ -55,6 +56,21 @@ const nowPageBookISBNs = [
 	'9780553447712' // The Seven Principles for Making Marriage Work
 ]
 
+function resolveLocalCoverPath(isbn) {
+	const extensions = ['.jpg', '.jpeg', '.png', '.webp', '.avif']
+
+	for (const extension of extensions) {
+		const fileName = `${isbn}${extension}`
+		const filePath = path.join(localBookCoverDir, fileName)
+
+		if (fs.existsSync(filePath)) {
+			return `/src/images/book-covers/${fileName}`
+		}
+	}
+
+	return ''
+}
+
 async function fetchBookDetails(isbn) {
 	const url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=${apiKey}`
 	try {
@@ -78,17 +94,30 @@ async function fetchBookDetails(isbn) {
 				isbn,
 				title: book.title,
 				authors: book.authors ? book.authors.join(', ') : 'Unknown author',
-				coverURL
+				coverURL,
+				localCover: resolveLocalCoverPath(isbn)
 			}
 		} else {
 			// Log when no data is found for an ISBN or response is not OK
 			console.log(`No data found for ISBN ${isbn}, Response Status: ${response.status}`)
-			return { isbn, title: 'No title available', authors: 'Unknown author', coverURL: '' }
+			return {
+				isbn,
+				title: 'No title available',
+				authors: 'Unknown author',
+				coverURL: '',
+				localCover: resolveLocalCoverPath(isbn)
+			}
 		}
 	} catch (error) {
 		// Log any network or other errors
 		console.error(`Error fetching data for ISBN ${isbn}:`, error)
-		return { isbn, title: 'No title available', authors: 'Unknown author', coverURL: '' }
+		return {
+			isbn,
+			title: 'No title available',
+			authors: 'Unknown author',
+			coverURL: '',
+			localCover: resolveLocalCoverPath(isbn)
+		}
 	}
 }
 
