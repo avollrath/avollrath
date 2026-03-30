@@ -128,6 +128,22 @@ input[type='reset'],
 	cursor: pointer;
 }
 
+.clickable-section:is(:hover, :focus-within) .arrow-link svg {
+	transform: rotate(360deg);
+}
+
+.clickable-section:is(:hover, :focus-within) h2 {
+	color: #005a9f;
+}
+
+.clickable-section.bright-section:is(:hover, :focus-within) h2 {
+	color: rgb(0, 247, 255);
+}
+
+.clickable-section:is(:hover, :focus-within) img {
+	transform: scale(1.1);
+}
+
 .image-container {
 	width: 100%;
 	overflow: hidden;

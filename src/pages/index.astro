@@ -649,7 +649,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 			return
 		}
 
-		const eyes = document.querySelectorAll('.eye-left, .eye-right')
+		const eyes = Array.from(document.querySelectorAll('.eye-left, .eye-right'))
 		const sunglasses = document.querySelector('.sunglasses')
 		const contactButton = document.querySelector('.contact-btn')
 		const MAX_DISTANCE = 10
@@ -659,6 +659,13 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 		let isButtonHovered = false
 		let removalTimeout = null
 		const globalState = window.__eyesState || (window.__eyesState = {})
+		let eyeBounds = []
+		let queuedPointerEvent = null
+		let frameId = null
+
+		const refreshEyeBounds = () => {
+			eyeBounds = eyes.map((eye) => eye.getBoundingClientRect())
+		}
 
 		function updateSunglassesVisibility() {
 			if (!sunglasses) return
@@ -680,12 +687,24 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 		}
 
 		if (globalState.onMouseMove) {
-			document.removeEventListener('mousemove', globalState.onMouseMove)
+			document.removeEventListener('pointermove', globalState.onMouseMove)
 		}
 
-		const onMouseMove = (e) => {
-			eyes.forEach((eye) => {
-				const rect = eye.getBoundingClientRect()
+		if (globalState.onResize) {
+			window.removeEventListener('resize', globalState.onResize)
+		}
+
+		if (globalState.onScroll) {
+			window.removeEventListener('scroll', globalState.onScroll, true)
+		}
+
+		const applyEyeTracking = () => {
+			frameId = null
+			const e = queuedPointerEvent
+			if (!e || !eyeBounds.length) return
+
+			eyes.forEach((eye, index) => {
+				const rect = eyeBounds[index]
 				const centerX = rect.left + rect.width / 2
 				const centerY = rect.top + rect.height / 2
 				const dx = e.clientX - centerX
@@ -699,8 +718,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 			})
 
 			let overEye = false
-			eyes.forEach((eye) => {
-				const rect = eye.getBoundingClientRect()
+			eyeBounds.forEach((rect) => {
 				const paddedLeft = rect.left - padding
 				const paddedRight = rect.right + padding
 				const paddedTop = rect.top - padding
@@ -719,8 +737,27 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 			updateSunglassesVisibility()
 		}
 
-		document.addEventListener('mousemove', onMouseMove)
+		const onMouseMove = (event) => {
+			queuedPointerEvent = event
+			if (frameId !== null) return
+			frameId = requestAnimationFrame(applyEyeTracking)
+		}
+
+		const onResize = () => {
+			refreshEyeBounds()
+		}
+
+		const onScroll = () => {
+			refreshEyeBounds()
+		}
+
+		refreshEyeBounds()
+		document.addEventListener('pointermove', onMouseMove, { passive: true })
+		window.addEventListener('resize', onResize, { passive: true })
+		window.addEventListener('scroll', onScroll, { passive: true, capture: true })
 		globalState.onMouseMove = onMouseMove
+		globalState.onResize = onResize
+		globalState.onScroll = onScroll
 
 		if (globalState.button && globalState.onButtonEnter && globalState.onButtonLeave) {
 			globalState.button.removeEventListener('mouseenter', globalState.onButtonEnter)

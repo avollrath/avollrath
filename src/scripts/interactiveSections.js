@@ -1,54 +1,44 @@
-import { navigate } from 'astro:transitions/client';
+import { navigate } from 'astro:transitions/client'
 
-function makeSectionsClickable() {
-    const clickableSections = document.querySelectorAll('.clickable-section');
+const INTERACTIVE_CHILD_SELECTOR =
+	'a, button, input, textarea, select, option, label, summary, [role="button"]'
 
-    clickableSections.forEach(section => {
-        // Remove existing event listeners to prevent duplication
-        section.removeEventListener('click', onSectionClick);
-        section.removeEventListener('mouseover', onSectionMouseOver);
-        section.removeEventListener('mouseout', onSectionMouseOut);
-
-        // Attach new event listeners
-        section.addEventListener('click', onSectionClick);
-        section.addEventListener('mouseover', onSectionMouseOver);
-        section.addEventListener('mouseout', onSectionMouseOut);
-    });
+function isModifiedClick(event) {
+	return event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
 }
 
-function onSectionClick(event) {
-    const arrowLink = event.currentTarget.querySelector('.arrow-link');
-    if (!arrowLink) return;
-    event.preventDefault(); // Prevent default link behavior
-    navigate(arrowLink.getAttribute('href'));
+function getClickableSection(target) {
+	return target instanceof Element ? target.closest('.clickable-section') : null
 }
 
-function onSectionMouseOver(event) {
-    const arrowSvg = event.currentTarget.querySelector('.arrow-link svg');
-    const heading = event.currentTarget.querySelector('h2');
-    const img = event.currentTarget.querySelectorAll('img');
+function handleSectionClick(event) {
+	if (isModifiedClick(event)) return
 
+	const section = getClickableSection(event.target)
+	if (!section) return
 
-    arrowSvg.style.transform = 'rotate(360deg)';
-    if (img[0]) img[0].style.transform = 'scale(1.1)';
-    if (img[1]) img[1].style.transform = 'scale(1.1)';
-    if (event.currentTarget.classList.contains('bright-section')) {
-        heading.classList.add('cool-contrast-gradient');
-    } else {
-        heading.classList.add('gradient-text');
-    }
+	const interactiveChild = event.target instanceof Element
+		? event.target.closest(INTERACTIVE_CHILD_SELECTOR)
+		: null
+
+	if (interactiveChild) {
+		const arrowLink = section.querySelector('.arrow-link')
+		if (!arrowLink || interactiveChild !== arrowLink) {
+			return
+		}
+	}
+
+	const arrowLink = section.querySelector('.arrow-link')
+	const href = arrowLink?.getAttribute('href')
+	if (!href) return
+
+	event.preventDefault()
+	navigate(href)
 }
 
-function onSectionMouseOut(event) {
-    const arrowSvg = event.currentTarget.querySelector('.arrow-link svg');
-    const heading = event.currentTarget.querySelector('h2');
-    const img = event.currentTarget.querySelectorAll('img');
+export function initializeInteractiveSections() {
+	if (window.__interactiveSectionsInitialized) return
 
-    arrowSvg.style.transform = 'rotate(-45deg)';
-    if (img[0]) img[0].style.transform = 'scale(1.0)';
-    if (img[1]) img[1].style.transform = 'scale(1.0)';
-    heading.classList.remove('gradient-text', 'cool-contrast-gradient');
+	document.addEventListener('click', handleSectionClick)
+	window.__interactiveSectionsInitialized = true
 }
-
-
-document.addEventListener('astro:page-load', makeSectionsClickable);

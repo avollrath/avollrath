@@ -2,14 +2,15 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
-import SplitType from 'split-type'
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+window.ScrollTrigger = ScrollTrigger
 
 // Store animation instances for cleanup
 let animations = []
 let domCleanupFns = []
+let initRunId = 0
 
 function addManagedListener(element, eventName, handler, options) {
 	if (!element) return
@@ -39,11 +40,17 @@ function applyLiteModeStyles() {
 
 // Initialize all GSAP animations
 export function initGSAP() {
+	return initializeGSAP()
+}
+
+async function initializeGSAP() {
 	// Clean up existing animations
 	cleanup()
+	const runId = ++initRunId
 
 	// Re-register plugins after navigation
 	gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+	window.ScrollTrigger = ScrollTrigger
 	const reducedMotion = isLiteMotionMode()
 
 	// Initialize footer animations
@@ -62,7 +69,7 @@ export function initGSAP() {
 	} else if (currentPath.startsWith('/now')) {
 		initNowAnimations()
 	} else if (currentPath === '/' || currentPath === '') {
-		initHomeAnimations()
+		await initHomeAnimations(runId)
 	} else if (currentPath.startsWith('/projects')) {
 		initProjectAnimations()
 	} else if (currentPath.startsWith('/renders')) {
@@ -74,6 +81,8 @@ export function initGSAP() {
 
 // Cleanup function to kill existing animations
 function cleanup() {
+	initRunId += 1
+
 	// Remove DOM listeners registered during previous init cycle.
 	domCleanupFns.forEach((fn) => fn())
 	domCleanupFns = []
@@ -84,6 +93,21 @@ function cleanup() {
 	// Kill all tracked animations
 	animations.forEach((anim) => anim.kill())
 	animations = []
+}
+
+function scheduleScrollTriggerRefresh() {
+	const refresh = () => {
+		requestAnimationFrame(() => {
+			ScrollTrigger.refresh()
+		})
+	}
+
+	if ('requestIdleCallback' in window) {
+		requestIdleCallback(refresh, { timeout: 400 })
+		return
+	}
+
+	setTimeout(refresh, 0)
 }
 
 // Footer-specific animations
@@ -152,7 +176,7 @@ function initFooterAnimations(reducedMotion = false) {
 }
 
 // Home page animations
-function initHomeAnimations() {
+async function initHomeAnimations(runId) {
 	const isMobileViewport = window.matchMedia('(max-width: 1024px)').matches
 	const spotifyStart = isMobileViewport ? 'top 108%' : 'top 90%'
 	const sectionStart = isMobileViewport ? 'top 105%' : 'top 80%'
@@ -609,6 +633,9 @@ function initHomeAnimations() {
 	// Based in text animation with SplitType
 	const basedInText = document.querySelector('.based-in-text')
 	if (basedInText) {
+		const { default: SplitType } = await import('split-type')
+		if (runId !== initRunId) return
+
 		let typeSplit = new SplitType('.based-in-text', {
 			types: 'lines'
 		})
@@ -640,9 +667,7 @@ function initHomeAnimations() {
 	}
 
 	// Recalculate trigger positions after dynamic content/layout settles.
-	requestAnimationFrame(() => {
-		ScrollTrigger.refresh()
-	})
+	scheduleScrollTriggerRefresh()
 }
 
 function initAboutAnimations() {
