@@ -1,3 +1,7 @@
+---
+import RunTracker from './RunTracker.astro'
+---
+
 <footer
 	class="footer-bar z-0 w-full flex-col items-center justify-center divide-y-2 text-center text-sm text-gray-400 sm:text-base"
 >
@@ -7,9 +11,13 @@
 	>
 		Scroll to top &uarr;
 	</button>
-	<div class="bg-gray-100 py-32">
+	<div class="bg-gray-100 px-4 pb-32 pt-6 sm:px-8">
+		<div class="mb-20">
+			<RunTracker />
+		</div>
 		<p>
-			Handmade with ❤️ by <strong class="font-semibold text-dark-text">André Vollrath</strong> &copy; 2026.
+			Handmade with ❤️ by <strong class="font-semibold text-dark-text">André Vollrath</strong> &copy;
+			2026.
 			<br />All rights reserved.
 		</p>
 	</div>

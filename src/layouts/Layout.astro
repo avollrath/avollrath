@@ -75,7 +75,10 @@ const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 		<ClientRouter />
 	</head>
 	<body class="bg-gray-50 font-body text-dark-text dark:bg-dark-bg dark:text-white">
-		<div transition:persist class="sticky top-0 z-[1200] mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4">
+		<div
+			transition:persist
+			class="sticky top-0 z-[1200] mx-auto max-w-1970 sm:static sm:z-0 sm:px-4 sm:pt-4"
+		>
 			<NavBar />
 		</div>
 		<div
@@ -160,8 +163,10 @@ const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 			initializeInteractiveSections()
 			warmInteractionModules()
 
-			if (document.documentElement.classList.contains('home-intro-pending') ||
-				document.documentElement.classList.contains('about-intro-pending')) {
+			if (
+				document.documentElement.classList.contains('home-intro-pending') ||
+				document.documentElement.classList.contains('about-intro-pending')
+			) {
 				preloadAnimationModule()
 			} else if ('requestIdleCallback' in window) {
 				requestIdleCallback(preloadAnimationModule, { timeout: 1800 })

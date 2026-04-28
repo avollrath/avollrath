@@ -1,0 +1,405 @@
+---
+const goalKm = 2000
+
+const annualDistances = {
+	2020: 35.77,
+	2021: 36.36,
+	2022: 3.25,
+	2023: 43.53,
+	2024: 379.45,
+	2025: 944.47,
+	2026: 88.98
+}
+
+const hiddenYears = new Set(['2021', '2022'])
+const formatKm = (value) => `${Math.round(value)} km`
+
+let cumulativeDistance = 0
+const years = Object.entries(annualDistances).map(([year, distance], index) => {
+	cumulativeDistance += distance
+
+	return {
+		year,
+		label: Number(year) + 1,
+		distance,
+		cumulative: Number(cumulativeDistance.toFixed(2)),
+		position: (cumulativeDistance / goalKm) * 100
+	}
+})
+
+const currentTotal = years.at(-1)?.cumulative ?? 0
+const currentPosition = ((currentTotal / goalKm) * 100).toFixed(4)
+const visibleYears = years.filter((item) => !hiddenYears.has(item.year))
+const currentYear = years.at(-1)?.year
+---
+
+<section
+	class="run-tracker"
+	aria-label={`Running progress timeline. Current total ${currentTotal.toFixed(2)} kilometers toward ${goalKm} kilometers.`}
+	style={`--current-position:${currentPosition};`}
+>
+	<div class="run-tracker__inner" aria-hidden="true">
+		<span class="run-tracker__edge run-tracker__edge--start">0 km</span>
+		<span class="run-tracker__edge run-tracker__edge--end">2.000 km</span>
+
+		<div class="run-tracker__track">
+			<span class="run-tracker__track-endcap run-tracker__track-endcap--start"></span>
+			<div class="run-tracker__line"></div>
+			<div class="run-tracker__line-progress"></div>
+			<span class="run-tracker__track-endcap run-tracker__track-endcap--end"></span>
+
+			{
+				visibleYears.map((item) => (
+					<div
+						class:list={[
+							'run-tracker__year',
+							(item.year === '2020' || item.year === '2025') && 'run-tracker__year--narrow-hidden'
+						]}
+						style={`--position:${item.position};`}
+					>
+						<span class="run-tracker__label run-tracker__label--year">
+							{item.year === currentYear ? 'today' : item.label}
+						</span>
+						<span class="run-tracker__dot" />
+						<span class="run-tracker__label run-tracker__label--km">
+							{formatKm(item.cumulative)}
+						</span>
+					</div>
+				))
+			}
+
+			<span class="run-tracker__runner" role="img" aria-label="Current running total">
+				<span class="run-tracker__runner-icon">🏃</span>
+			</span>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from 'gsap'
+
+	const globalWindow = /** @type {Window & {
+		__runTrackerContexts?: Array<{ revert: () => void }>
+		__runTrackerBeforeSwapBound?: boolean
+		__runTrackerPageLoadBound?: boolean
+	}} */ (window)
+
+	const getRunTrackerCleanupStore = () => {
+		globalWindow.__runTrackerContexts = globalWindow.__runTrackerContexts || []
+		return globalWindow.__runTrackerContexts
+	}
+
+	const cleanupRunTrackers = () => {
+		const contexts = getRunTrackerCleanupStore()
+		contexts.forEach((context) => context.revert())
+		contexts.length = 0
+	}
+
+	const initRunTracker = () => {
+		const reducedMotion =
+			document.documentElement.classList.contains('reduced-motion') ||
+			window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+		document.querySelectorAll('.run-tracker').forEach((tracker) => {
+			if (tracker.dataset.runTrackerInitialized === 'true') return
+			tracker.dataset.runTrackerInitialized = 'true'
+
+			const currentPosition = Number.parseFloat(
+				tracker.style.getPropertyValue('--current-position') || '0'
+			)
+			const runner = tracker.querySelector('.run-tracker__runner')
+
+			if (reducedMotion) {
+				gsap.set(runner, {
+					opacity: 1,
+					left: `${currentPosition}%`,
+					xPercent: -50,
+					yPercent: -50,
+					y: 0
+				})
+				return
+			}
+
+			const context = gsap.context(() => {
+				gsap.set(runner, { opacity: 0, left: '0%', xPercent: -50, yPercent: -50, y: 0 })
+
+				const animateRunner = () => {
+					if (tracker.dataset.runTrackerAnimated === 'true') return
+					tracker.dataset.runTrackerAnimated = 'true'
+
+					const timeline = gsap.timeline()
+
+					timeline
+						.to(runner, {
+							opacity: 1,
+							duration: 0.2,
+							ease: 'back.out(1.8)'
+						})
+						.to(runner, {
+							left: `${currentPosition}%`,
+							duration: 1.7,
+							ease: 'power2.inOut'
+						})
+						.to(
+							runner,
+							{
+								y: -5,
+								duration: 0.17,
+								ease: 'sine.inOut',
+								repeat: 9,
+								yoyo: true
+							},
+							'<'
+						)
+						.to(runner, {
+							y: 0,
+							duration: 0.18,
+							ease: 'power2.out'
+						})
+				}
+
+				const observer = new IntersectionObserver(
+					(entries) => {
+						if (!entries.some((entry) => entry.isIntersecting)) return
+						animateRunner()
+						observer.disconnect()
+					},
+					{ threshold: 0.35 }
+				)
+
+				observer.observe(tracker)
+
+				return () => observer.disconnect()
+			}, tracker)
+
+			getRunTrackerCleanupStore().push(context)
+		})
+	}
+
+	if (!globalWindow.__runTrackerBeforeSwapBound) {
+		document.addEventListener('astro:before-swap', cleanupRunTrackers)
+		globalWindow.__runTrackerBeforeSwapBound = true
+	}
+
+	if (!globalWindow.__runTrackerPageLoadBound) {
+		document.addEventListener('astro:page-load', initRunTracker)
+		globalWindow.__runTrackerPageLoadBound = true
+	}
+
+	initRunTracker()
+</script>
+
+<style>
+	.run-tracker {
+		--tracker-bg: transparent;
+		--tracker-line: rgba(209, 213, 219, 0.56);
+		--tracker-line-active: rgba(209, 213, 219, 0.95);
+		--tracker-dot: #ff5ff6;
+		--tracker-text: #9ca3af;
+		--tracker-height: 56px;
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		min-height: var(--tracker-height);
+		background: var(--tracker-bg);
+		border: 0;
+		font-family:
+			'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+			'Courier New', monospace;
+	}
+
+	.run-tracker__inner {
+		position: relative;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		max-width: none;
+		min-height: var(--tracker-height);
+		margin: 0 auto;
+		padding: 0 82px 0 52px;
+	}
+
+	.run-tracker__track {
+		position: relative;
+		width: 100%;
+		height: 44px;
+	}
+
+	.run-tracker__line,
+	.run-tracker__line-progress {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		border-radius: 999px;
+		transform: translateY(-50%);
+	}
+
+	.run-tracker__line {
+		background: var(--tracker-line);
+	}
+
+	.run-tracker__line-progress {
+		background: var(--tracker-line-active);
+		transform: translateY(-50%) scaleX(1);
+		transform-origin: left center;
+	}
+
+	.run-tracker__track-endcap {
+		position: absolute;
+		top: 50%;
+		z-index: 2;
+		width: 2px;
+		height: 13px;
+		background: var(--tracker-line-active);
+		border-radius: 999px;
+		transform: translate(-50%, -50%);
+	}
+
+	.run-tracker__track-endcap--start {
+		left: 0;
+	}
+
+	.run-tracker__track-endcap--end {
+		left: 100%;
+	}
+
+	.run-tracker__edge,
+	.run-tracker__label {
+		position: absolute;
+		color: var(--tracker-text);
+		font-size: clamp(0.68rem, 0.58vw, 0.78rem);
+		font-weight: 600;
+		line-height: 1;
+		letter-spacing: 0;
+		white-space: nowrap;
+	}
+
+	.run-tracker__edge {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.run-tracker__edge--start {
+		left: 12px;
+	}
+
+	.run-tracker__edge--end {
+		right: 16px;
+		text-align: right;
+	}
+
+	.run-tracker__year {
+		position: absolute;
+		top: 50%;
+		left: calc(var(--position) * 1%);
+		width: 0;
+		height: 0;
+	}
+
+	.run-tracker__label {
+		left: 0;
+		text-align: center;
+		transform: translateX(-50%);
+	}
+
+	.run-tracker__label--year {
+		bottom: 13px;
+	}
+
+	.run-tracker__label--km {
+		top: 13px;
+	}
+
+	.run-tracker__dot {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 11px;
+		height: 11px;
+		background: var(--tracker-dot);
+		border: 2px solid #fff;
+		border-radius: 999px;
+		box-shadow: 0 2px 9px rgba(255, 95, 246, 0.28);
+		transform: translate(-50%, -50%);
+	}
+
+	.run-tracker__runner {
+		position: absolute;
+		top: 50%;
+		left: calc(var(--current-position) * 1%);
+		z-index: 2;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 34px;
+		height: 34px;
+		margin-left: 24px;
+		font-size: 1.45rem;
+		line-height: 1;
+		transform: translate(-50%, -50%);
+		filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.12));
+	}
+
+	.run-tracker__runner-icon {
+		display: block;
+		transform: rotateY(180deg);
+	}
+
+	@media (max-width: 1120px) {
+		.run-tracker__year--narrow-hidden .run-tracker__label {
+			display: none;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.run-tracker {
+			display: none;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.run-tracker {
+			--tracker-height: 52px;
+		}
+
+		.run-tracker__inner {
+			padding: 0 80px 0 52px;
+		}
+
+		.run-tracker__track {
+			height: 36px;
+		}
+
+		.run-tracker__label {
+			display: none;
+		}
+
+		.run-tracker__dot {
+			width: 9px;
+			height: 9px;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.run-tracker {
+			--tracker-height: 48px;
+		}
+
+		.run-tracker__inner {
+			padding: 0 68px 0 46px;
+		}
+
+		.run-tracker__year .run-tracker__label {
+			display: none;
+		}
+
+		.run-tracker__runner {
+			width: 20px;
+			height: 20px;
+			margin-left: 12px;
+			font-size: 0.95rem;
+		}
+	}
+</style>
