@@ -11,21 +11,31 @@ Before moving fully into development I worked in **graphic design and advertisin
 ## 🧰 Tech I work with
 
 **Frontend**
+
 - React
 - JavaScript / TypeScript
 - HTML / CSS
 - Tailwind CSS
 - Astro
 
+**Backend & Data**
+
+- Supabase (Postgres, Auth, Storage, RLS)
+- Node.js
+
 **UI & Interaction**
+
 - GSAP
 - Three.js
+- Recharts
 - Design systems
 - UI architecture
 
 **Design**
+
 - Figma
 - Adobe Creative Suite
+- Affinity Designer
 
 ---
 
@@ -33,11 +43,12 @@ Before moving fully into development I worked in **graphic design and advertisin
 
 Some of the things you'll find in my repositories:
 
+- full-stack web applications with auth and persistent data
 - frontend applications and UI components
 - small tools and experiments
 - interactive web graphics
 - game prototypes
-- side projects exploring APIs and hardware
+- side projects exploring APIs and automation
 
 ---
 
