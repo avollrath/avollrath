@@ -10,6 +10,7 @@ import drumMachineImg from '../images/projects/drum-machine.jpg'
 import ctcImg from '../images/projects/ctc.jpg'
 import hypertypeImg from '../images/projects/hypertype.jpg'
 import flipsiteImg from '../images/projects/flipsite.jpg'
+import marathonImg from '../images/projects/marathon.jpg'
 import Project from '../components/Project.astro'
 ---
 
@@ -36,6 +37,41 @@ import Project from '../components/Project.astro'
 		projectImageSrc={flipsiteImg}
 		altProp="FlipSite inventory and resale tracker"
 		techStackLogos={['React.svg', 'TypeScript.svg', 'Tailwind.svg', 'Supabase.svg']}
+	/>
+	<Project
+		title="Marathon Control Center"
+		htmlText={`
+		<strong class='font-semibold text-dark-text'>Marathon Control Center</strong> is a focused dashboard I built to manage the final <strong class='font-semibold text-dark-text'>21-day taper</strong> before my first marathon.<br><br>
+
+		After a long break from consistent running — <strong class='font-semibold text-dark-text'>travel</strong>, <strong class='font-semibold text-dark-text'>winter</strong>, <strong class='font-semibold text-dark-text'>sickness</strong>, <strong class='font-semibold text-dark-text'>holidays</strong>, and life in general — I needed something more concrete than a training note or spreadsheet.<br><br>
+
+		The app turns the last weeks into a clear system with <strong class='font-semibold text-dark-text'>runs</strong>, <strong class='font-semibold text-dark-text'>gym sessions</strong>, <strong class='font-semibold text-dark-text'>shoe testing</strong>, and <strong class='font-semibold text-dark-text'>actual kilometre tracking</strong> in one place.<br><br>
+
+		It works like a compact <strong class='font-semibold text-dark-text'>habit tracker</strong> for a high-stakes training block, with persistent progress, backup/export, and optional <strong class='font-semibold text-dark-text'>Supabase sync</strong>.<br><br>
+
+		The interface follows a <strong class='font-semibold text-dark-text'>dark, geometric, industrial</strong> design language with neon accent states, built with <strong class='font-semibold text-dark-text'>React</strong>, <strong class='font-semibold text-dark-text'>TypeScript</strong>, and <strong class='font-semibold text-dark-text'>Tailwind CSS</strong>.<br><br>
+
+		View the app: <a class='font-semibold underline text-magenta' href='https://avollrath.github.io/marathon/'>Marathon Control Center</a>
+	`}
+		projectImageSrc={marathonImg}
+		altProp="Marathon Control Center marathon training dashboard"
+		techStackLogos={['React.svg', 'TypeScript.svg', 'Tailwind.svg', 'Supabase.svg']}
+	/>
+
+	<Project
+		title="HyperType"
+		buttonText="Play the game"
+		htmlText={`
+        <strong class='font-semibold text-dark-text'>HyperType</strong> is a neon arcade typing game I built to make practicing touch typing actually enjoyable.<br><br>
+        I wanted something that feels fast, responsive, and satisfying, where every correct keypress has clear visual and audio feedback. The game turns typing into a simple combat loop, words come in, you type them, and they disappear in a burst of light and sound.<br><br>
+        Along the way I explored <strong class='font-semibold text-dark-text'>game feel</strong>, <strong class='font-semibold text-dark-text'>timing and feedback</strong>, and how small details like sound effects, particles, and UI responsiveness can make a big difference.<br><br>
+        The game includes multiple difficulty modes, achievements, and score tracking to make it something you can come back to and gradually improve at.<br><br>
+        Try it here: <a class='font-semibold underline text-magenta' href='https://avollrath.github.io/HyperType/'>Play HyperType</a>
+    `}
+		projectImageSrc={hypertypeImg}
+		altProp="HyperType neon arcade typing game"
+		iframeSrc="https://avollrath.github.io/HyperType/"
+		techStackLogos={['Godot.svg']}
 	/>
 	<Project
 		title="CTC - Chess.com Trading Card"
