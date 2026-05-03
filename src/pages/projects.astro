@@ -9,6 +9,7 @@ import taMobileImg from '../images/projects/ta-mobile.jpg'
 import drumMachineImg from '../images/projects/drum-machine.jpg'
 import ctcImg from '../images/projects/ctc.jpg'
 import hypertypeImg from '../images/projects/hypertype.jpg'
+import flipsiteImg from '../images/projects/flipsite.jpg'
 import Project from '../components/Project.astro'
 ---
 
@@ -22,23 +23,19 @@ import Project from '../components/Project.astro'
 	}}
 >
 	<Project
-		title="HyperType"
-		buttonText="Play the game"
+		title="FlipSite - Inventory and Resale Tracker"
 		htmlText={`
-			<strong class='font-semibold text-dark-text'>HyperType</strong> is a neon arcade typing game I built to make practicing touch typing actually enjoyable.<br><br>
+		<strong class='font-semibold text-dark-text'>FlipSite</strong> is a personal inventory and resale tracker I built to replace a spreadsheet that was getting hard to maintain.<br><br>
 
-			I wanted something that feels fast, responsive, and satisfying, where every correct keypress has clear visual and audio feedback. The game turns typing into a simple combat loop, words come in, you type them, and they disappear in a burst of light and sound.<br><br>
+		It tracks what I own, what I paid, and where I bought it — with photos, receipts, and files attached per item so everything related to a purchase stays in one place. When I sell something, it calculates the actual profit, including across <strong class='font-semibold text-dark-text'>bundles</strong> where one purchase splits into multiple items sold separately.<br><br>
 
-			Along the way I explored <strong class='font-semibold text-dark-text'>game feel</strong>, <strong class='font-semibold text-dark-text'>timing and feedback</strong>, and how small details like sound effects, particles, and UI responsiveness can make a big difference.<br><br>
+		The backend runs on <strong class='font-semibold text-dark-text'>Supabase</strong> for auth, file storage, and per-user data isolation. The frontend uses <strong class='font-semibold text-dark-text'>React</strong> and <strong class='font-semibold text-dark-text'>TanStack Query</strong> for data fetching, with a table view, photo gallery, dashboard analytics, and eight color themes with light and dark mode.<br><br>
 
-			The game includes multiple difficulty modes, achievements, and score tracking to make it something you can come back to and gradually improve at.<br><br>
-
-			Try it here: <a class='font-semibold underline text-magenta' href='https://avollrath.github.io/HyperType/'>Play HyperType</a>
-		`}
-		projectImageSrc={hypertypeImg}
-		altProp="HyperType neon arcade typing game"
-		iframeSrc="https://avollrath.github.io/HyperType/"
-		techStackLogos={['Godot.svg']}
+		Check it out: <a class='font-semibold underline text-magenta' href='https://flipsite-three.vercel.app/'>FlipSite live app</a>
+	`}
+		projectImageSrc={flipsiteImg}
+		altProp="FlipSite inventory and resale tracker"
+		techStackLogos={['React.svg', 'TypeScript.svg', 'Tailwind.svg', 'Supabase.svg']}
 	/>
 	<Project
 		title="CTC - Chess.com Trading Card"
