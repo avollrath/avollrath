@@ -1,48 +1,29 @@
 ---
+import { getCollection, type CollectionEntry } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
 import ProjectCard from '../components/ProjectCard.astro'
-import { projectCategories, projects } from '../data/projects'
 
-const previewProject = projects[0]
+const allProjects = await getCollection('projects')
+const projects = allProjects.sort(
+	(a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) =>
+		(a.data.order ?? 99) - (b.data.order ?? 99)
+)
+
+const projectCategories = ['All', 'Apps', 'Games', 'Websites', 'Design'] as const
 ---
 
 <Layout
-	title="Projects by AndrÃ© Vollrath"
+	title="Projects by André Vollrath"
 	description="A collection of my frontend and game development projects."
 	seo={{
-		ogImage: previewProject.projectImageSrc,
-		ogImageAlt: 'Projects page preview image',
 		siteName: 'Andre Vollrath'
 	}}
 >
-	<div class="col-span-3 flex flex-col xl:col-span-1 2xl:col-span-3">
+	<div class="col-span-3 flex flex-col gap-4 xl:col-span-1 2xl:col-span-3">
 		<div
-			class="long-transition flex flex-col items-center rounded-md bg-about-gradient p-6 text-xs text-white shadow-lg sm:rounded-lg sm:p-12 sm:text-base 3xl:text-lg"
+			class="flex flex-wrap justify-center gap-2 rounded-lg bg-white p-3 shadow-lg"
+			aria-label="Project filters"
 		>
-			<h1
-				class="long-transition mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-white px-8 py-3 font-header text-4xl tracking-wide"
-			>
-				Projects
-			</h1>
-
-			<p class="my-3 leading-relaxed">
-				A collection of <strong class="font-semibold">web apps</strong>, games, websites, and
-				design work I have built across frontend development, product design, and creative tooling.
-			</p>
-
-			<p class="my-3 leading-relaxed">
-				This overview stays compact so the page can grow. Each card links to a dedicated project page
-				with the fuller write-up, image, stack, and live demo links where available.
-			</p>
-
-			<p class="my-3 leading-relaxed">
-				Use the filters to narrow the list by project type.
-			</p>
-		</div>
-	</div>
-
-	<div class="col-span-3 xl:col-span-2 2xl:col-span-9">
-		<div class="mb-4 flex flex-wrap gap-2 rounded-lg bg-white p-3 shadow-lg" aria-label="Project filters">
 			{
 				projectCategories.map((category, index) => (
 					<button
@@ -61,6 +42,30 @@ const previewProject = projects[0]
 			}
 		</div>
 
+		<div
+			class="long-transition flex flex-col items-center rounded-md bg-about-gradient p-6 text-xs text-white shadow-lg sm:rounded-lg sm:p-12 sm:text-base 3xl:text-lg"
+		>
+			<h1
+				class="long-transition mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-white px-8 py-3 font-header text-4xl tracking-wide"
+			>
+				Projects
+			</h1>
+
+			<p class="my-3 leading-relaxed">
+				A collection of <strong class="font-semibold">web apps</strong>, games, websites, and design
+				work I have built across frontend development, product design, and creative tooling.
+			</p>
+
+			<p class="my-3 leading-relaxed">
+				This overview stays compact so the page can grow. Each card links to a dedicated project
+				page with the fuller write-up, image, stack, and live demo links where available.
+			</p>
+
+			<p class="my-3 leading-relaxed">Use the filters to narrow the list by project type.</p>
+		</div>
+	</div>
+
+	<div class="col-span-3 xl:col-span-2 2xl:col-span-9">
 		<div class="project-grid grid gap-4 md:grid-cols-2 xl:grid-cols-3">
 			{projects.map((project) => <ProjectCard project={project} />)}
 		</div>

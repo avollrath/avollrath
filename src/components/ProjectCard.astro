@@ -1,20 +1,26 @@
 ---
 import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+	project: CollectionEntry<'projects'>
+}
 
 const { project } = Astro.props
+const { title, summary, category, heroImage, heroImageAlt, techStackLogos } = project.data
 
-const techStack = project.techStackLogos.map((logo) => logo.replace(/\.svg$/i, '').replace(/-/g, ' '))
+const techStack = techStackLogos.map((logo) => logo.replace(/\.svg$/i, '').replace(/-/g, ' '))
 ---
 
 <a
-	href={`/projects/${project.slug}`}
+	href={`/projects/${project.id}`}
 	class="project-card group block overflow-hidden rounded-lg bg-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
-	data-category={project.category}
+	data-category={category}
 >
 	<div class="aspect-[16/10] overflow-hidden bg-gray-100">
 		<Image
-			src={project.projectImageSrc}
-			alt={project.altProp}
+			src={heroImage}
+			alt={heroImageAlt}
 			class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
 			loading="lazy"
 			decoding="async"
@@ -25,16 +31,16 @@ const techStack = project.techStackLogos.map((logo) => logo.replace(/\.svg$/i, '
 
 	<div class="flex min-h-48 flex-col p-4">
 		<p class="mb-2 text-[0.65rem] font-semibold uppercase tracking-wide text-magenta">
-			{project.category}
+			{category}
 		</p>
 		<h2
 			class="mb-3 font-header text-base leading-tight text-dark-text transition group-hover:text-magenta lg:text-lg"
 		>
-			{project.title}
+			{title}
 		</h2>
-		<p class="mb-4 text-xs leading-relaxed text-gray-500">{project.summary}</p>
+		<p class="mb-4 text-xs leading-relaxed text-gray-500">{summary}</p>
 
-		<div class="mt-auto flex flex-wrap gap-1.5">
+		<div class="mt-auto flex flex-wrap justify-center gap-1.5">
 			{
 				techStack.map((tech) => (
 					<span class="rounded-full bg-gray-100 px-2 py-1 text-[0.65rem] font-semibold leading-none text-gray-500">
