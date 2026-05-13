@@ -813,79 +813,45 @@ function initNowAnimations() {
 }
 
 function initProjectAnimations() {
-	const projectTextContainers = document.querySelectorAll('.project-text-container')
+	document.documentElement.classList.remove('project-detail-intro-pending')
 
-	if (projectTextContainers.length) {
-		const projectTextContainersAnim = gsap.from(projectTextContainers, {
-			scrollTrigger: {
-				trigger: projectTextContainers[0],
-				start: 'top bottom 60%',
-				toggleActions: 'play none none none'
-			},
-			opacity: 0,
-			x: -300,
-			duration: 1,
+	const breadcrumb = document.querySelector('.project-detail-breadcrumb')
+	const card = document.querySelector('.project-detail-card')
+
+	if (breadcrumb) {
+		gsap.set(breadcrumb, { opacity: 0, y: -20 })
+		const breadcrumbAnim = gsap.to(breadcrumb, {
+			opacity: 1,
+			y: 0,
+			duration: 0.5,
 			ease: 'expo.out',
-			delay: 0.1,
-			stagger: 0.3
+			delay: 0.1
 		})
-		animations.push(projectTextContainersAnim)
+		animations.push(breadcrumbAnim)
 	}
 
-	const projectImageContainers = document.querySelectorAll('.project-image-container')
-
-	if (projectImageContainers.length) {
-		const projectImageContainersAnim = gsap.from(projectImageContainers, {
-			scrollTrigger: {
-				trigger: projectImageContainers[0],
-				start: 'top bottom 60%',
-				toggleActions: 'play none none none'
-			},
-			opacity: 0,
-			x: 300,
-			duration: 1,
+	if (card) {
+		gsap.set(card, { opacity: 0, y: 60 })
+		const cardAnim = gsap.to(card, {
+			opacity: 1,
+			y: 0,
+			duration: 0.8,
 			ease: 'expo.out',
-			delay: 0.3,
-			stagger: 0.3
+			delay: 0.2
 		})
-		animations.push(projectImageContainersAnim)
+		animations.push(cardAnim)
 	}
 
 	const projectButtons = document.querySelectorAll('.project-button')
-
 	if (projectButtons.length) {
-		const projectsBtnAnim = gsap.from(projectButtons, {
-			scrollTrigger: {
-				trigger: projectTextContainers[0],
-				start: 'top bottom 60%',
-				toggleActions: 'play none none none'
-			},
-			opacity: 0,
-			scale: 0,
-			duration: 1,
-			ease: 'expo.out',
-			delay: 0.5,
-			stagger: 0.3
-		})
-		animations.push(projectsBtnAnim)
-
 		projectButtons.forEach((btn) => {
 			const handleMouseEnter = () => {
 				gsap.killTweensOf(btn)
-				gsap.to(btn, {
-					scale: 1.1,
-					ease: 'elastic(0.8)',
-					duration: 1
-				})
+				gsap.to(btn, { scale: 1.1, ease: 'elastic(0.8)', duration: 1 })
 			}
 			const handleMouseLeave = () => {
 				gsap.killTweensOf(btn)
-				gsap.to(btn, {
-					scale: 1,
-					ease: 'elastic(0.6)',
-					delay: 0.1,
-					duration: 0.6
-				})
+				gsap.to(btn, { scale: 1, ease: 'elastic(0.6)', delay: 0.1, duration: 0.6 })
 			}
 			addManagedListener(btn, 'mouseenter', handleMouseEnter)
 			addManagedListener(btn, 'mouseleave', handleMouseLeave)
