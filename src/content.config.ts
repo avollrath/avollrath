@@ -15,7 +15,8 @@ const projects = defineCollection({
 			iframeSrc: z.string().optional(),
 			iframeLayout: z.enum(['drum-machine']).optional(),
 			buttonText: z.string().optional(),
-			order: z.number().optional()
+			order: z.number().optional(),
+			mockup: z.enum(['laptop']).optional()
 		})
 })
 

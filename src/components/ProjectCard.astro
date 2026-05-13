@@ -1,15 +1,25 @@
 ---
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
+import laptopMockup from '../images/laptop-mockup.png'
 
 interface Props {
 	project: CollectionEntry<'projects'>
 }
 
 const { project } = Astro.props
-const { title, summary, category, heroImage, heroImageAlt, techStackLogos } = project.data
+const { title, summary, category, heroImage, heroImageAlt, techStackLogos, mockup } = project.data
 
 const techStack = techStackLogos.map((logo) => logo.replace(/\.svg$/i, '').replace(/-/g, ' '))
+
+// Screen cutout position within the 1000×643 laptop mockup (measured pixel coords)
+// left: 127px, right: 876px, top: 55px, bottom: 546px — expanded 2px each side to bleed under frame border
+const screen = {
+	left: '12.5%',
+	top: '8.24%',
+	width: '75.3%',
+	height: '76.98%',
+}
 ---
 
 <a
@@ -17,17 +27,44 @@ const techStack = techStackLogos.map((logo) => logo.replace(/\.svg$/i, '').repla
 	class="project-card group block overflow-hidden rounded-lg bg-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
 	data-category={category}
 >
-	<div class="aspect-[16/10] overflow-hidden bg-gray-100">
-		<Image
-			src={heroImage}
-			alt={heroImageAlt}
-			class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
-			loading="lazy"
-			decoding="async"
-			widths={[320, 480, 640]}
-			sizes="(min-width: 1280px) 24vw, (min-width: 768px) 42vw, 92vw"
-		/>
-	</div>
+	{mockup === 'laptop' ? (
+		<div class="relative bg-gray-100" style="aspect-ratio: 1000/643;">
+			<!-- App screenshot fills the screen cutout area -->
+			<Image
+				src={heroImage}
+				alt={heroImageAlt}
+				class="absolute object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+				style={`left: ${screen.left}; top: ${screen.top}; width: ${screen.width}; height: ${screen.height};`}
+				loading="lazy"
+				decoding="async"
+				widths={[320, 480, 640]}
+				sizes="(min-width: 1280px) 24vw, (min-width: 768px) 42vw, 92vw"
+			/>
+			<!-- Laptop frame overlaid on top -->
+			<Image
+				src={laptopMockup}
+				alt=""
+				class="absolute inset-0 h-full w-full pointer-events-none"
+				style="z-index: 1;"
+				loading="lazy"
+				decoding="async"
+				widths={[320, 480, 640]}
+				sizes="(min-width: 1280px) 24vw, (min-width: 768px) 42vw, 92vw"
+			/>
+		</div>
+	) : (
+		<div class="aspect-[16/10] overflow-hidden bg-gray-100">
+			<Image
+				src={heroImage}
+				alt={heroImageAlt}
+				class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
+				loading="lazy"
+				decoding="async"
+				widths={[320, 480, 640]}
+				sizes="(min-width: 1280px) 24vw, (min-width: 768px) 42vw, 92vw"
+			/>
+		</div>
+	)}
 
 	<div class="flex min-h-48 flex-col p-4">
 		<p class="mb-2 text-[0.65rem] font-semibold uppercase tracking-wide text-magenta">
