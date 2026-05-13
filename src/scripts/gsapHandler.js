@@ -851,7 +851,7 @@ function initProjectsOverviewAnimations() {
 		const cardsAnim = gsap.from(projectCards, {
 			scrollTrigger: {
 				trigger: projectCards[0],
-				start: 'top bottom 60%',
+				start: 'top 110%',
 				toggleActions: 'play none none none'
 			},
 			opacity: 0,
