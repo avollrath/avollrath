@@ -57,9 +57,9 @@ const {
 			style={`max-width: min(100%, ${heroImage.width}px)`}
 			decoding="async"
 			loading="eager"
-			quality={90}
-			widths={[640, 960, 1280, 1600, 1920, heroImage.width].filter((w, i, a) => w <= heroImage.width && a.indexOf(w) === i).sort((a, b) => a - b)}
-			sizes="(min-width: 1280px) 80vw, 100vw"
+			quality={95}
+			width={heroImage.width}
+			height={heroImage.height}
 		/>
 		{
 			buttonText && (
