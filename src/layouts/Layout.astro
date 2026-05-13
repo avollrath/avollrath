@@ -7,6 +7,7 @@ import '../styles/marquee.css'
 import '../styles/main.css'
 const { title, description, seo = {} } = Astro.props
 import faviconSrc from '../images/favicon.svg'
+import primaryFont from '../assets/fonts/jetbrains-mono-400.ttf'
 const pathname = Astro.url.pathname
 const initialHomeIntro = pathname === '/'
 const initialAboutIntro = pathname === '/about' || pathname === '/about/'
@@ -28,12 +29,7 @@ const initialRenderIntro = pathname === '/renders' || pathname === '/renders/'
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href={faviconSrc.src} type="image/svg+xml" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
-		/>
+		<link rel="preload" href={primaryFont} as="font" type="font/ttf" crossorigin />
 		<SEO title={title} description={description} {...seo} />
 		<script
 			data-goatcounter="https://vollrath.goatcounter.com/count"
@@ -92,8 +88,6 @@ const initialRenderIntro = pathname === '/renders' || pathname === '/renders/'
 				opacity: 0;
 				visibility: hidden;
 			}
-
-
 		</style>
 		<ClientRouter />
 	</head>

@@ -47,7 +47,7 @@ export default {
 			},
 
 			fontFamily: {
-				header: ['Poppins', 'sans-serif'], // For headers, using Montserrat with weight 700
+				header: ['Instrument Serif', 'serif'],
 				body: ['JetBrains Mono, serif']
 			},
 			fontWeight: {
