@@ -45,6 +45,7 @@ export function applyLiteModeStyles() {
 	document.documentElement.classList.remove('home-intro-pending')
 	document.documentElement.classList.remove('about-intro-pending')
 	document.documentElement.classList.remove('projects-intro-pending')
+	document.documentElement.classList.remove('render-intro-pending')
 
 	const keySections = document.querySelectorAll(
 		'.nav-bar, .nav-item, .nav-logo, .hero-container, .hero-badge, .hero-header, .intro-text, .cta-button, .avatar-wrapper, .now-container, .now-content, .blog-container, .blog-content, .about-container, .about-content, .render-container, .render-content, .spotify-container'

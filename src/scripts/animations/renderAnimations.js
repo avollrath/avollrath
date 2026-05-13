@@ -4,6 +4,7 @@ const animations = { push: trackAnimation }
 
 export function initRenderAnimations() {
 	const renderTextContainers = document.querySelectorAll('.render-text-container')
+	const renderImageContainers = document.querySelectorAll('.render-image-container')
 
 	if (renderTextContainers.length) {
 		const projectTextContainersAnim = gsap.from(renderTextContainers, {
@@ -22,8 +23,6 @@ export function initRenderAnimations() {
 		animations.push(projectTextContainersAnim)
 	}
 
-	const renderImageContainers = document.querySelectorAll('.render-image-container')
-
 	if (renderImageContainers.length) {
 		const renderImageContainerAnim = gsap.from(renderImageContainers, {
 			scrollTrigger: {
@@ -40,4 +39,8 @@ export function initRenderAnimations() {
 		})
 		animations.push(renderImageContainerAnim)
 	}
+
+	requestAnimationFrame(() => {
+		document.documentElement.classList.remove('render-intro-pending')
+	})
 }

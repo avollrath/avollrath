@@ -11,6 +11,7 @@ const pathname = Astro.url.pathname
 const initialHomeIntro = pathname === '/'
 const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 const initialProjectsIntro = pathname === '/projects' || pathname === '/projects/'
+const initialRenderIntro = pathname === '/renders' || pathname === '/renders/'
 ---
 
 <!doctype html>
@@ -19,7 +20,8 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 	class:list={[
 		initialHomeIntro && 'home-intro-pending',
 		initialAboutIntro && 'about-intro-pending',
-		initialProjectsIntro && 'projects-intro-pending'
+		initialProjectsIntro && 'projects-intro-pending',
+		initialRenderIntro && 'render-intro-pending'
 	]}
 >
 	<head>
@@ -81,6 +83,12 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 			}
 
 			html.projects-intro-pending .project-card {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			html.render-intro-pending .render-text-container,
+			html.render-intro-pending .render-image-container {
 				opacity: 0;
 				visibility: hidden;
 			}
@@ -148,7 +156,8 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 				const hasPendingIntro =
 					documentElement.classList.contains('home-intro-pending') ||
 					documentElement.classList.contains('about-intro-pending') ||
-					documentElement.classList.contains('projects-intro-pending')
+					documentElement.classList.contains('projects-intro-pending') ||
+					documentElement.classList.contains('render-intro-pending')
 
 				if (!reducedMotion && document.querySelector('[title]')) {
 					preloadTooltipModule().then(({ initializeTooltips }) => {
@@ -184,7 +193,8 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 			if (
 				document.documentElement.classList.contains('home-intro-pending') ||
 				document.documentElement.classList.contains('about-intro-pending') ||
-				document.documentElement.classList.contains('projects-intro-pending')
+				document.documentElement.classList.contains('projects-intro-pending') ||
+				document.documentElement.classList.contains('render-intro-pending')
 			) {
 				preloadAnimationModule()
 			} else if ('requestIdleCallback' in window) {
