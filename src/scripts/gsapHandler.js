@@ -162,7 +162,7 @@ function initFooterAnimations(reducedMotion = false) {
 	const footerAnim = gsap.from(footer, {
 		scrollTrigger: {
 			trigger: 'footer',
-			start: 'top 90%',
+			start: 'top 100%',
 			toggleActions: 'play none none none',
 			once: true
 		},
@@ -173,6 +173,16 @@ function initFooterAnimations(reducedMotion = false) {
 		delay: 0.2
 	})
 	animations.push(footerAnim)
+
+	// If the footer is already in the viewport on init (e.g. short pages or view transitions),
+	// the ScrollTrigger may never fire — force it visible after a tick.
+	requestAnimationFrame(() => {
+		const rect = footer.getBoundingClientRect()
+		if (rect.top < window.innerHeight) {
+			gsap.set(footer, { clearProps: 'opacity,y' })
+			footerAnim.kill()
+		}
+	})
 }
 
 // Home page animations
@@ -886,6 +896,8 @@ function initProjectAnimations() {
 			addManagedListener(btn, 'mouseleave', handleMouseLeave)
 		})
 	}
+
+	scheduleScrollTriggerRefresh()
 }
 
 function initRenderAnimations() {
