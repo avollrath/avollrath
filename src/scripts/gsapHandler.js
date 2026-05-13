@@ -901,9 +901,10 @@ function initProjectsOverviewAnimations() {
 	const projectCards = document.querySelectorAll('.project-card')
 
 	if (filterBar) {
-		const filterAnim = gsap.from(filterBar, {
-			opacity: 0,
-			x: -300,
+		gsap.set(filterBar, { opacity: 0, x: -300 })
+		const filterAnim = gsap.to(filterBar, {
+			opacity: 1,
+			x: 0,
 			duration: 1,
 			ease: 'expo.out',
 			delay: 0.1
@@ -912,9 +913,10 @@ function initProjectsOverviewAnimations() {
 	}
 
 	if (textContainer) {
-		const textAnim = gsap.from(textContainer, {
-			opacity: 0,
-			x: -300,
+		gsap.set(textContainer, { opacity: 0, x: -300 })
+		const textAnim = gsap.to(textContainer, {
+			opacity: 1,
+			x: 0,
 			duration: 1,
 			ease: 'expo.out',
 			delay: 0.3
@@ -923,14 +925,15 @@ function initProjectsOverviewAnimations() {
 	}
 
 	if (projectCards.length) {
-		const cardsAnim = gsap.from(projectCards, {
+		gsap.set(projectCards, { opacity: 0, y: 60 })
+		const cardsAnim = gsap.to(projectCards, {
 			scrollTrigger: {
 				trigger: projectCards[0],
 				start: 'top bottom',
 				toggleActions: 'play none none none'
 			},
-			opacity: 0,
-			y: 60,
+			opacity: 1,
+			y: 0,
 			duration: 0.6,
 			ease: 'back.out',
 			delay: 0.2,
