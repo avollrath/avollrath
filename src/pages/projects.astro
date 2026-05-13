@@ -11,6 +11,7 @@ import ctcImg from '../images/projects/ctc.jpg'
 import hypertypeImg from '../images/projects/hypertype.jpg'
 import flipsiteImg from '../images/projects/flipsite.jpg'
 import marathonImg from '../images/projects/marathon.jpg'
+import woltRatingsImg from '../images/projects/wolt-ratings.jpg'
 import Project from '../components/Project.astro'
 ---
 
@@ -23,6 +24,22 @@ import Project from '../components/Project.astro'
 		siteName: 'Andre Vollrath'
 	}}
 >
+	<Project
+		title="Wolt Ratings - Order History Tracker"
+		htmlText={`
+    <strong class='font-semibold text-dark-text'>Wolt Ratings</strong> is a local-first tool I built to track, rate, and annotate my <strong class='font-semibold text-dark-text'>Wolt</strong> food delivery history — replacing the default order history with something actually useful.<br><br>
+
+    It consists of a <strong class='font-semibold text-dark-text'>Chrome extension</strong> that captures your session token and syncs your full order history to a local <strong class='font-semibold text-dark-text'>Flask</strong> backend, and a dashboard where you can search, filter, sort, rate orders with stars, and attach personal notes. Clicking a venue opens a modal with per-restaurant stats, your most ordered items, and a full visit history.<br><br>
+
+    Everything stays <strong class='font-semibold text-dark-text'>local</strong> — no accounts, no cloud, no tracking. Orders are stored in a plain JSON file you can import and export freely.
+	
+	<br><br>Check it out: <a class='font-semibold underline text-magenta' href='https://github.com/avollrath/wolt-ratings'>Wolt Ratings on GitHub</a>
+`}
+		projectImageSrc={woltRatingsImg}
+		altProp="Wolt Ratings order history dashboard"
+		techStackLogos={['Python.svg', 'Flask.svg', 'JavaScript.svg', 'Chrome.svg']}
+	/>
+
 	<Project
 		title="FlipSite - Inventory and Resale Tracker"
 		htmlText={`
