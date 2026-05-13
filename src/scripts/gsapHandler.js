@@ -896,6 +896,8 @@ function initProjectAnimations() {
 }
 
 function initProjectsOverviewAnimations() {
+	document.documentElement.classList.remove('projects-intro-pending')
+
 	const filterBar = document.querySelector('.projects-filter-bar')
 	const textContainer = document.querySelector('.projects-text-container')
 	const projectCards = document.querySelectorAll('.project-card')
