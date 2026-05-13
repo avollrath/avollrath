@@ -159,30 +159,15 @@ function initFooterAnimations(reducedMotion = false) {
 
 	if (reducedMotion) return
 
-	const footerAnim = gsap.from(footer, {
-		scrollTrigger: {
-			trigger: 'footer',
-			start: 'top 100%',
-			toggleActions: 'play none none none',
-			once: true
-		},
-		opacity: 0,
-		y: -100,
+	gsap.set(footer, { opacity: 0, y: -100 })
+	const footerAnim = gsap.to(footer, {
+		opacity: 1,
+		y: 0,
 		ease: 'back.out',
 		duration: 1,
-		delay: 0.2
+		delay: 0.3
 	})
 	animations.push(footerAnim)
-
-	// If the footer is already in the viewport on init (e.g. short pages or view transitions),
-	// the ScrollTrigger may never fire — force it visible after a tick.
-	requestAnimationFrame(() => {
-		const rect = footer.getBoundingClientRect()
-		if (rect.top < window.innerHeight) {
-			gsap.set(footer, { clearProps: 'opacity,y' })
-			footerAnim.kill()
-		}
-	})
 }
 
 // Home page animations
