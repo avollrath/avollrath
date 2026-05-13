@@ -5,7 +5,7 @@ category: 'Apps'
 heroImage: './flipsite.jpg'
 heroImageAlt: 'FlipSite inventory and resale tracker'
 techStackLogos: ['React.svg', 'TypeScript.svg', 'Tailwind.svg', 'Supabase.svg']
-order: 2
+order: 3
 liveUrl: 'https://flipsite-three.vercel.app/'
 ---
 

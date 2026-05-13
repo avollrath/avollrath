@@ -7,7 +7,7 @@ heroImageAlt: 'HyperType neon arcade typing game'
 techStackLogos: ['Godot.svg']
 iframeSrc: 'https://avollrath.github.io/HyperType/'
 buttonText: 'Play the game'
-order: 3
+order: 4
 liveUrl: 'https://avollrath.github.io/HyperType/'
 ---
 

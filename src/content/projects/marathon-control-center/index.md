@@ -5,7 +5,7 @@ category: 'Apps'
 heroImage: './marathon.jpg'
 heroImageAlt: 'Marathon Control Center marathon training dashboard'
 techStackLogos: ['React.svg', 'TypeScript.svg', 'Tailwind.svg', 'Supabase.svg']
-order: 4
+order: 5
 liveUrl: 'https://avollrath.github.io/marathon/'
 ---
 

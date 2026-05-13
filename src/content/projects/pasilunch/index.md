@@ -5,7 +5,7 @@ category: 'Apps'
 heroImage: './pasilunch.jpg'
 heroImageAlt: 'PasiLunch website'
 techStackLogos: ['HTML5.svg', 'JavaScript.svg', 'CSS 3.svg', 'Node.js.svg', 'Cheerio.svg', 'Express.js.svg']
-order: 6
+order: 7
 liveUrl: 'https://lunchbot-btnu.onrender.com/'
 ---
 

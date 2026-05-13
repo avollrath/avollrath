@@ -7,7 +7,7 @@ heroImageAlt: 'Jurassic Jump Game'
 techStackLogos: ['Godot.svg']
 iframeSrc: 'https://avollrath.github.io/jurassic-jump/'
 buttonText: 'Click to load game'
-order: 7
+order: 8
 liveUrl: 'https://avollrath.github.io/jurassic-jump/'
 ---
 

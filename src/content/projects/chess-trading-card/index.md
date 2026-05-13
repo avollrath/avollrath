@@ -5,7 +5,7 @@ category: 'Apps'
 heroImage: './ctc.jpg'
 heroImageAlt: 'CTC Chess.com Trading Card app'
 techStackLogos: ['Next.js.svg', 'TypeScript.svg', 'Tailwind.svg']
-order: 5
+order: 6
 liveUrl: 'https://chess-trading-card.vercel.app/'
 ---
 
