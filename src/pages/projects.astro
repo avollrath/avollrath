@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Project from '../components/Project.astro'
-import { projects } from '../data/projects'
+import ProjectCard from '../components/ProjectCard.astro'
+import { projectCategories, projects } from '../data/projects'
 
 const previewProject = projects[0]
 ---
@@ -15,18 +15,80 @@ const previewProject = projects[0]
 		siteName: 'Andre Vollrath'
 	}}
 >
-	{
-		projects.map((project) => (
-			<Project
-				title={project.title}
-				htmlText={project.htmlText}
-				projectImageSrc={project.projectImageSrc}
-				altProp={project.altProp}
-				iframeSrc={project.iframeSrc}
-				iframeLayout={project.iframeLayout}
-				buttonText={project.buttonText}
-				techStackLogos={project.techStackLogos}
-			/>
-		))
-	}
+	<div class="col-span-3 flex flex-col xl:col-span-1 2xl:col-span-3">
+		<div
+			class="long-transition flex flex-col items-center rounded-md bg-about-gradient p-6 text-xs text-white shadow-lg sm:rounded-lg sm:p-12 sm:text-base 3xl:text-lg"
+		>
+			<h1
+				class="long-transition mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-white px-8 py-3 font-header text-4xl tracking-wide"
+			>
+				Projects
+			</h1>
+
+			<p class="my-3 leading-relaxed">
+				A collection of <strong class="font-semibold">web apps</strong>, games, websites, and
+				design work I have built across frontend development, product design, and creative tooling.
+			</p>
+
+			<p class="my-3 leading-relaxed">
+				This overview stays compact so the page can grow. Each card links to a dedicated project page
+				with the fuller write-up, image, stack, and live demo links where available.
+			</p>
+
+			<p class="my-3 leading-relaxed">
+				Use the filters to narrow the list by project type.
+			</p>
+		</div>
+	</div>
+
+	<div class="col-span-3 xl:col-span-2 2xl:col-span-9">
+		<div class="mb-4 flex flex-wrap gap-2 rounded-lg bg-white p-3 shadow-lg" aria-label="Project filters">
+			{
+				projectCategories.map((category, index) => (
+					<button
+						type="button"
+						class:list={[
+							'project-filter rounded-full px-4 py-2 text-xs font-semibold transition',
+							index === 0
+								? 'is-active bg-magenta text-white shadow'
+								: 'bg-gray-100 text-gray-500 hover:bg-magenta hover:text-white'
+						]}
+						data-filter={category}
+					>
+						{category}
+					</button>
+				))
+			}
+		</div>
+
+		<div class="project-grid grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+			{projects.map((project) => <ProjectCard project={project} />)}
+		</div>
+	</div>
+
+	<script>
+		const buttons = [...document.querySelectorAll('.project-filter')]
+		const cards = [...document.querySelectorAll('.project-card')]
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const filter = button.getAttribute('data-filter')
+
+				buttons.forEach((filterButton) => {
+					const isActive = filterButton === button
+					filterButton.classList.toggle('is-active', isActive)
+					filterButton.classList.toggle('bg-magenta', isActive)
+					filterButton.classList.toggle('text-white', isActive)
+					filterButton.classList.toggle('shadow', isActive)
+					filterButton.classList.toggle('bg-gray-100', !isActive)
+					filterButton.classList.toggle('text-gray-500', !isActive)
+				})
+
+				cards.forEach((card) => {
+					const shouldShow = filter === 'All' || card.getAttribute('data-category') === filter
+					card.classList.toggle('hidden', !shouldShow)
+				})
+			})
+		})
+	</script>
 </Layout>
