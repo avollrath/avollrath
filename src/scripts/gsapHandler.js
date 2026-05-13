@@ -835,48 +835,35 @@ function initProjectAnimations() {
 function initProjectsOverviewAnimations() {
 	document.documentElement.classList.remove('projects-intro-pending')
 
-	const filterBar = document.querySelector('.projects-filter-bar')
-	const textContainer = document.querySelector('.projects-text-container')
+	const leftCol = document.querySelector('.projects-left-col')
 	const projectCards = document.querySelectorAll('.project-card')
 
-	if (filterBar) {
-		gsap.set(filterBar, { opacity: 0, x: -300 })
-		const filterAnim = gsap.to(filterBar, {
+	if (leftCol) {
+		gsap.set(leftCol, { opacity: 0, x: -300 })
+		const leftAnim = gsap.to(leftCol, {
 			opacity: 1,
 			x: 0,
 			duration: 1,
 			ease: 'expo.out',
 			delay: 0.1
 		})
-		animations.push(filterAnim)
-	}
-
-	if (textContainer) {
-		gsap.set(textContainer, { opacity: 0, x: -300 })
-		const textAnim = gsap.to(textContainer, {
-			opacity: 1,
-			x: 0,
-			duration: 1,
-			ease: 'expo.out',
-			delay: 0.3
-		})
-		animations.push(textAnim)
+		animations.push(leftAnim)
 	}
 
 	if (projectCards.length) {
-		gsap.set(projectCards, { opacity: 0, y: 60 })
+		gsap.set(projectCards, { opacity: 0, x: 300 })
 		const cardsAnim = gsap.to(projectCards, {
 			scrollTrigger: {
 				trigger: projectCards[0],
-				start: 'top bottom',
+				start: 'top bottom 60%',
 				toggleActions: 'play none none none'
 			},
 			opacity: 1,
-			y: 0,
+			x: 0,
 			duration: 0.6,
 			ease: 'back.out',
-			delay: 0.2,
-			stagger: 0.07
+			delay: 0.3,
+			stagger: 0.2
 		})
 		animations.push(cardsAnim)
 	}
