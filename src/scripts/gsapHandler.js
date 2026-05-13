@@ -813,35 +813,8 @@ function initNowAnimations() {
 }
 
 function initProjectAnimations() {
-	document.documentElement.classList.remove('project-detail-intro-pending')
-
-	const breadcrumb = document.querySelector('.project-detail-breadcrumb')
-	const card = document.querySelector('.project-detail-card')
-
-	if (breadcrumb) {
-		gsap.set(breadcrumb, { opacity: 0, y: -20 })
-		const breadcrumbAnim = gsap.to(breadcrumb, {
-			opacity: 1,
-			y: 0,
-			duration: 0.5,
-			ease: 'expo.out',
-			delay: 0.1
-		})
-		animations.push(breadcrumbAnim)
-	}
-
-	if (card) {
-		gsap.set(card, { opacity: 0, y: 60 })
-		const cardAnim = gsap.to(card, {
-			opacity: 1,
-			y: 0,
-			duration: 0.8,
-			ease: 'expo.out',
-			delay: 0.2
-		})
-		animations.push(cardAnim)
-	}
-
+	// Let Astro's view transition handle the page entrance (same as blog posts).
+	// Only wire up interactive button hover effects here.
 	const projectButtons = document.querySelectorAll('.project-button')
 	if (projectButtons.length) {
 		projectButtons.forEach((btn) => {
@@ -857,8 +830,6 @@ function initProjectAnimations() {
 			addManagedListener(btn, 'mouseleave', handleMouseLeave)
 		})
 	}
-
-	scheduleScrollTriggerRefresh()
 }
 
 function initProjectsOverviewAnimations() {

@@ -11,7 +11,6 @@ const pathname = Astro.url.pathname
 const initialHomeIntro = pathname === '/'
 const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 const initialProjectsIntro = pathname === '/projects' || pathname === '/projects/'
-const initialProjectDetailIntro = pathname.startsWith('/projects/') && pathname !== '/projects/'
 ---
 
 <!doctype html>
@@ -20,8 +19,7 @@ const initialProjectDetailIntro = pathname.startsWith('/projects/') && pathname 
 	class:list={[
 		initialHomeIntro && 'home-intro-pending',
 		initialAboutIntro && 'about-intro-pending',
-		initialProjectsIntro && 'projects-intro-pending',
-		initialProjectDetailIntro && 'project-detail-intro-pending'
+		initialProjectsIntro && 'projects-intro-pending'
 	]}
 >
 	<head>
@@ -83,11 +81,6 @@ const initialProjectDetailIntro = pathname.startsWith('/projects/') && pathname 
 				visibility: hidden;
 			}
 
-			html.project-detail-intro-pending .project-detail-breadcrumb,
-			html.project-detail-intro-pending .project-detail-card {
-				opacity: 0;
-				visibility: hidden;
-			}
 		</style>
 		<ClientRouter />
 	</head>
@@ -148,8 +141,7 @@ const initialProjectDetailIntro = pathname.startsWith('/projects/') && pathname 
 				const hasPendingIntro =
 					documentElement.classList.contains('home-intro-pending') ||
 					documentElement.classList.contains('about-intro-pending') ||
-					documentElement.classList.contains('projects-intro-pending') ||
-					documentElement.classList.contains('project-detail-intro-pending')
+					documentElement.classList.contains('projects-intro-pending')
 
 				if (!reducedMotion && document.querySelector('[title]')) {
 					preloadTooltipModule().then(({ initializeTooltips }) => {
@@ -185,8 +177,7 @@ const initialProjectDetailIntro = pathname.startsWith('/projects/') && pathname 
 			if (
 				document.documentElement.classList.contains('home-intro-pending') ||
 				document.documentElement.classList.contains('about-intro-pending') ||
-				document.documentElement.classList.contains('projects-intro-pending') ||
-				document.documentElement.classList.contains('project-detail-intro-pending')
+				document.documentElement.classList.contains('projects-intro-pending')
 			) {
 				preloadAnimationModule()
 			} else if ('requestIdleCallback' in window) {
