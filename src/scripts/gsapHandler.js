@@ -849,17 +849,12 @@ function initProjectsOverviewAnimations() {
 
 	if (projectCards.length) {
 		const cardsAnim = gsap.from(projectCards, {
-			scrollTrigger: {
-				trigger: projectCards[0],
-				start: 'top 110%',
-				toggleActions: 'play none none none'
-			},
 			opacity: 0,
 			x: 300,
-			duration: 1,
-			ease: 'expo.out',
+			duration: 0.6,
+			ease: 'back.out',
 			delay: 0.3,
-			stagger: 0.08
+			stagger: 0.2
 		})
 		animations.push(cardsAnim)
 	}
