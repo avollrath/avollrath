@@ -7,6 +7,7 @@ heroImageAlt: 'PasiLunch website'
 techStackLogos: ['HTML5.svg', 'JavaScript.svg', 'CSS 3.svg', 'Node.js.svg', 'Cheerio.svg', 'Express.js.svg']
 order: 7
 liveUrl: 'https://lunchbot-btnu.onrender.com/'
+mockup: 'laptop'
 ---
 
 The Pasila office district in Helsinki has a decent spread of lunch spots, but checking five different restaurant websites every morning to figure out what's on gets old fast. **PasiLunch** collects all of them into one page and a Slack command so the decision takes ten seconds instead of five minutes.

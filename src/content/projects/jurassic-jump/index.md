@@ -9,6 +9,7 @@ iframeSrc: 'https://avollrath.github.io/jurassic-jump/'
 buttonText: 'Click to load game'
 order: 8
 liveUrl: 'https://avollrath.github.io/jurassic-jump/'
+mockup: 'laptop'
 ---
 
 **Jurassic Jump** started as a JavaScript experiment — a canvas-based platformer I was building to understand how game loops work at a low level. Collision detection, frame-independent movement, gravity simulation. At some point the project outgrew what was comfortable to maintain in vanilla JS and I rebuilt it from scratch in **Godot** using **GDScript**, which turned out to be a much better fit for what it was becoming.

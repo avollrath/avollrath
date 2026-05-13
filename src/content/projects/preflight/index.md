@@ -7,6 +7,7 @@ heroImageAlt: 'PreFlight lock screen with neon corridor background'
 techStackLogos: ['JavaScript.svg', 'Three.js.svg']
 liveUrl: 'https://github.com/avollrath/preflight'
 order: 0
+mockup: 'laptop'
 ---
 
 I kept sitting down at my computer and immediately opening Slack, email, or YouTube before doing anything I actually meant to do. The things I needed to handle — laundry, groceries, cleaning, whatever tomorrow-me had left for today-me — just quietly didn't happen because the computer was right there and it was easier not to think about them.

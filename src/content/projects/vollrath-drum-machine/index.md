@@ -10,6 +10,7 @@ iframeLayout: 'drum-machine'
 buttonText: 'Launch drum machine'
 order: 9
 liveUrl: 'https://avollrath.github.io/drum-machine/'
+mockup: 'laptop'
 ---
 
 I've always been interested in how classic hardware drum machines work — the physicality of the interface, the way a 16-step grid makes pattern-making immediately intuitive, the satisfying click of toggling a beat on or off. This project was an attempt to recreate that experience in the browser using no frameworks, just **vanilla JavaScript**, **HTML**, and **CSS**.

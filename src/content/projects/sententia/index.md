@@ -7,6 +7,7 @@ heroImageAlt: 'Sententia quote display with full-screen background'
 techStackLogos: ['React.svg', 'TypeScript.svg', 'Vite.svg', 'Express.js.svg']
 liveUrl: 'https://avollrath.github.io/supernote-quote/'
 order: 2
+mockup: 'laptop'
 ---
 
 I read on a Supernote Nomad e-ink reader, which has a nice built-in feature: every highlighted passage from any ebook gets collected into a digest page automatically. It's a great idea, but browsing highlights on e-ink is slow and a bit cumbersome — the format isn't really made for skimming. I wanted those quotes somewhere faster, cleaner, and accessible on any screen.

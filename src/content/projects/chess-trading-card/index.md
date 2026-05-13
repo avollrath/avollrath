@@ -7,6 +7,7 @@ heroImageAlt: 'CTC Chess.com Trading Card app'
 techStackLogos: ['Next.js.svg', 'TypeScript.svg', 'Tailwind.svg']
 order: 6
 liveUrl: 'https://chess-trading-card.vercel.app/'
+mockup: 'laptop'
 ---
 
 I play chess badly and often. At some point I thought it would be fun to turn a Chess.com profile into something you could actually hold — a collectible trading card that captures your playing style as stats and lore, like a Pokémon card but for your embarrassing blunder rate.

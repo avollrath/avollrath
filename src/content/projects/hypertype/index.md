@@ -9,6 +9,7 @@ iframeSrc: 'https://avollrath.github.io/HyperType/'
 buttonText: 'Play the game'
 order: 4
 liveUrl: 'https://avollrath.github.io/HyperType/'
+mockup: 'laptop'
 ---
 
 I wanted a typing game that actually felt good to play. Not a drill, not a lesson — something with stakes, momentum, and the kind of satisfying feedback loop that makes you want one more run. So I built one.

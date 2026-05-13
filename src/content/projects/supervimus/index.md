@@ -9,6 +9,7 @@ iframeSrc: 'https://avollrath.github.io/superVIMus/'
 buttonText: 'Click to load game'
 order: 12
 liveUrl: 'https://avollrath.github.io/superVIMus/'
+mockup: 'laptop'
 ---
 
 Learning Vim's movement keys is mostly a matter of repetition until the muscle memory takes over. The problem is that drilling `hjkl` in a text editor is boring enough that most people give up before it clicks. **superVIMus** is an attempt to make that repetition worth doing.

@@ -7,6 +7,7 @@ heroImageAlt: 'Marathon Control Center marathon training dashboard'
 techStackLogos: ['React.svg', 'TypeScript.svg', 'Tailwind.svg', 'Supabase.svg']
 order: 5
 liveUrl: 'https://avollrath.github.io/marathon/'
+mockup: 'laptop'
 ---
 
 My first full marathon was three weeks away and I had a problem. After months of inconsistent training — travel, winter, a stretch of illness, general life — I needed to be honest with myself about what the taper block actually looked like. A note in my phone wasn't going to cut it. A spreadsheet felt like the wrong tool. So I did what any developer does when they want to avoid confronting a hard reality: I built an app about it.

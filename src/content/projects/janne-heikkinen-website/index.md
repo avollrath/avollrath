@@ -7,6 +7,7 @@ heroImageAlt: 'Janne Heikkinen Website'
 techStackLogos: ['React.svg', 'SASS.svg', 'JavaScript.svg', 'GraphQL.svg', 'Gatsby.svg']
 order: 10
 liveUrl: 'https://janneheikkinen.fi/'
+
 ---
 
 This was a real client project — a website for **Janne Heikkinen**, a Finnish member of parliament, built as part of a team of three. My role started as design lead and expanded into frontend development once the prototype was signed off.

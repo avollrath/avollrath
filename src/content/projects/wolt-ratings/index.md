@@ -7,6 +7,7 @@ heroImageAlt: 'Wolt Ratings order history dashboard'
 techStackLogos: ['Python.svg', 'Flask.svg', 'JavaScript.svg', 'Chrome.svg']
 order: 1
 liveUrl: 'https://github.com/avollrath/wolt-ratings'
+mockup: 'laptop'
 ---
 
 I order food through Wolt a lot. At some point I started noticing a familiar frustration — I couldn't remember whether that ramen place was actually great or just good-enough-at-midnight, or how much I'd spent at my favorite sushi spot across all the times I'd been there. Wolt's order history gives you a reverse-chronological list of receipts and nothing else. No ratings, no notes, no stats. It's a graveyard of decisions with no lessons attached.

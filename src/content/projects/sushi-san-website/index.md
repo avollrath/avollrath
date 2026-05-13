@@ -6,6 +6,7 @@ heroImage: './sushi.jpg'
 heroImageAlt: 'Sushi-san Website'
 techStackLogos: ['HTML5.svg', 'CSS 3.svg']
 order: 11
+
 ---
 
 **Sushi-san** is a sushi restaurant in Helsinki. They had a logo, a colour palette, and no website. I handled both the design and the build.

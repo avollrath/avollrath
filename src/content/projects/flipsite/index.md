@@ -7,6 +7,7 @@ heroImageAlt: 'FlipSite inventory and resale tracker'
 techStackLogos: ['React.svg', 'TypeScript.svg', 'Tailwind.svg', 'Supabase.svg']
 order: 3
 liveUrl: 'https://flipsite-three.vercel.app/'
+mockup: 'laptop'
 ---
 
 I was tracking my resale items in a spreadsheet and it kept falling apart in exactly the ways spreadsheets fall apart. Bundle math was unreliable, receipts lived in my email, photos were scattered across my phone, and the profit numbers always felt slightly off. At some point I decided fixing the spreadsheet wasn't worth it and building a proper tool was.
