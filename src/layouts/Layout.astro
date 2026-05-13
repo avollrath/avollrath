@@ -10,6 +10,7 @@ import faviconSrc from '../images/favicon.svg'
 const pathname = Astro.url.pathname
 const initialHomeIntro = pathname === '/'
 const initialAboutIntro = pathname === '/about' || pathname === '/about/'
+const initialProjectsIntro = pathname === '/projects' || pathname === '/projects/'
 ---
 
 <!doctype html>
@@ -17,7 +18,8 @@ const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 	lang="en"
 	class:list={[
 		initialHomeIntro && 'home-intro-pending',
-		initialAboutIntro && 'about-intro-pending'
+		initialAboutIntro && 'about-intro-pending',
+		initialProjectsIntro && 'projects-intro-pending'
 	]}
 >
 	<head>
@@ -68,6 +70,11 @@ const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 			}
 
 			html.about-intro-pending .about-image {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			html.projects-intro-pending .project-card {
 				opacity: 0;
 				visibility: hidden;
 			}
@@ -132,7 +139,8 @@ const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 				const reducedMotion = documentElement.classList.contains('reduced-motion')
 				const hasPendingIntro =
 					documentElement.classList.contains('home-intro-pending') ||
-					documentElement.classList.contains('about-intro-pending')
+					documentElement.classList.contains('about-intro-pending') ||
+					documentElement.classList.contains('projects-intro-pending')
 
 				if (!reducedMotion && document.querySelector('[title]')) {
 					preloadTooltipModule().then(({ initializeTooltips }) => {
@@ -167,7 +175,8 @@ const initialAboutIntro = pathname === '/about' || pathname === '/about/'
 
 			if (
 				document.documentElement.classList.contains('home-intro-pending') ||
-				document.documentElement.classList.contains('about-intro-pending')
+				document.documentElement.classList.contains('about-intro-pending') ||
+				document.documentElement.classList.contains('projects-intro-pending')
 			) {
 				preloadAnimationModule()
 			} else if ('requestIdleCallback' in window) {

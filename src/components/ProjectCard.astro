@@ -24,8 +24,8 @@ const screen = {
 
 <a
 	href={`/projects/${project.id}`}
-	class="project-card group block overflow-hidden rounded-lg bg-white shadow-lg transition hover:-translate-y-1 hover:shadow-xl"
-	data-category={category}
+    class="project-card group block overflow-hidden rounded-lg bg-white shadow-lg hover:-translate-y-1 hover:shadow-xl"
+    data-category={category}
 >
 	{mockup === 'laptop' ? (
 		<div class="relative bg-gray-100" style="aspect-ratio: 1000/643;">
@@ -44,7 +44,7 @@ const screen = {
 			<Image
 				src={laptopMockup}
 				alt=""
-				class="absolute inset-0 h-full w-full pointer-events-none"
+				class="absolute inset-0 w-full h-full pointer-events-none"
 				style="z-index: 1;"
 				loading="lazy"
 				decoding="async"
@@ -57,7 +57,7 @@ const screen = {
 			<Image
 				src={heroImage}
 				alt={heroImageAlt}
-				class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-105"
+				class="object-cover w-full h-full transition duration-500 ease-out group-hover:scale-105"
 				loading="lazy"
 				decoding="async"
 				widths={[320, 480, 640]}
@@ -66,12 +66,12 @@ const screen = {
 		</div>
 	)}
 
-	<div class="flex min-h-48 flex-col p-4">
+	<div class="flex flex-col p-4 min-h-48">
 		<p class="mb-2 text-[0.65rem] font-semibold uppercase tracking-wide text-magenta">
 			{category}
 		</p>
 		<h2
-			class="mb-3 font-header text-base leading-tight text-dark-text transition group-hover:text-magenta lg:text-lg"
+			class="mb-3 text-base leading-tight transition font-header text-dark-text group-hover:text-magenta lg:text-lg"
 		>
 			{title}
 		</h2>
@@ -88,3 +88,9 @@ const screen = {
 		</div>
 	</div>
 </a>
+
+<style>
+.project-card {
+	transition: box-shadow 0.2s ease, translate 0.2s ease;
+}
+</style>

@@ -27,6 +27,7 @@ function isLiteMotionMode() {
 function applyLiteModeStyles() {
 	document.documentElement.classList.remove('home-intro-pending')
 	document.documentElement.classList.remove('about-intro-pending')
+	document.documentElement.classList.remove('projects-intro-pending')
 
 	const keySections = document.querySelectorAll(
 		'.nav-bar, .nav-item, .nav-logo, .hero-container, .hero-badge, .hero-header, .intro-text, .cta-button, .avatar-wrapper, .now-container, .now-content, .blog-container, .blog-content, .about-container, .about-content, .render-container, .render-content, .spotify-container'
@@ -73,8 +74,6 @@ async function initializeGSAP() {
 		await initHomeAnimations(runId)
 	} else if (currentPath === '/projects' || currentPath === '/projects/') {
 		initProjectsOverviewAnimations()
-	} else if (currentPath.startsWith('/projects')) {
-		initProjectAnimations()
 	} else if (currentPath.startsWith('/renders')) {
 		initRenderAnimations()
 	} else if (currentPath.startsWith('/blog')) {
@@ -812,26 +811,6 @@ function initNowAnimations() {
 	}
 }
 
-function initProjectAnimations() {
-	// Let Astro's view transition handle the page entrance (same as blog posts).
-	// Only wire up interactive button hover effects here.
-	const projectButtons = document.querySelectorAll('.project-button')
-	if (projectButtons.length) {
-		projectButtons.forEach((btn) => {
-			const handleMouseEnter = () => {
-				gsap.killTweensOf(btn)
-				gsap.to(btn, { scale: 1.1, ease: 'elastic(0.8)', duration: 1 })
-			}
-			const handleMouseLeave = () => {
-				gsap.killTweensOf(btn)
-				gsap.to(btn, { scale: 1, ease: 'elastic(0.6)', delay: 0.1, duration: 0.6 })
-			}
-			addManagedListener(btn, 'mouseenter', handleMouseEnter)
-			addManagedListener(btn, 'mouseleave', handleMouseLeave)
-		})
-	}
-}
-
 function initProjectsOverviewAnimations() {
 	const leftCol = document.querySelector('.projects-left-col')
 	const projectCards = document.querySelectorAll('.project-card')
@@ -849,24 +828,18 @@ function initProjectsOverviewAnimations() {
 
 	if (projectCards.length) {
 		const cardsAnim = gsap.from(projectCards, {
-			scrollTrigger: {
-				trigger: projectCards[0],
-				start: 'top bottom',
-				toggleActions: 'play none none none'
-			},
 			opacity: 0,
-			y: 20,
+			x: 300,
+			duration: 0.6,
 			ease: 'back.out',
-			delay: 0.4,
-			stagger: {
-				amount: 1,
-				from: 'end'
+			delay: 0.3,
+			stagger: 0.2,
+			onStart: () => {
+				document.documentElement.classList.remove('projects-intro-pending')
 			}
 		})
 		animations.push(cardsAnim)
 	}
-
-	scheduleScrollTriggerRefresh()
 }
 
 function initRenderAnimations() {
