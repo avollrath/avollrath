@@ -27,15 +27,15 @@ const isVideo = /\.mp4($|\?)/i.test(renderMediaSrc ?? '')
 		{
 			isVideo ? (
 				<video
-					src={renderMediaSrc}
+					data-video-src={renderMediaSrc}
 					transition:name={transitionName}
-					class="render-video rounded-md"
+					class="js-lazy-render-video render-video rounded-md"
 					autoplay
 					muted
 					loop
 					playsinline
 					controls
-					preload="metadata"
+					preload="none"
 					aria-label={altProp}
 				/>
 			) : (
@@ -112,3 +112,9 @@ const isVideo = /\.mp4($|\?)/i.test(renderMediaSrc ?? '')
 		}
 	}
 </style>
+
+<script>
+	import { bindLazyRenderVideosPageLoad } from '../scripts/lazyRenderVideos.js'
+
+	bindLazyRenderVideosPageLoad()
+</script>
