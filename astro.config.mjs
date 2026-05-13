@@ -7,5 +7,10 @@ export default defineConfig({
 	outDir: './docs',
 	build: {
 		assets: 'astro'
+	},
+	vite: {
+		optimizeDeps: {
+			exclude: ['split-type']
+		}
 	}
 })
