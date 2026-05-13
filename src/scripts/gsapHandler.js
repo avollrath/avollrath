@@ -71,6 +71,8 @@ async function initializeGSAP() {
 		initNowAnimations()
 	} else if (currentPath === '/' || currentPath === '') {
 		await initHomeAnimations(runId)
+	} else if (currentPath === '/projects' || currentPath === '/projects/') {
+		initProjectsOverviewAnimations()
 	} else if (currentPath.startsWith('/projects')) {
 		initProjectAnimations()
 	} else if (currentPath.startsWith('/renders')) {
@@ -888,6 +890,53 @@ function initProjectAnimations() {
 			addManagedListener(btn, 'mouseenter', handleMouseEnter)
 			addManagedListener(btn, 'mouseleave', handleMouseLeave)
 		})
+	}
+
+	scheduleScrollTriggerRefresh()
+}
+
+function initProjectsOverviewAnimations() {
+	const filterBar = document.querySelector('.projects-filter-bar')
+	const textContainer = document.querySelector('.projects-text-container')
+	const projectCards = document.querySelectorAll('.project-card')
+
+	if (filterBar) {
+		const filterAnim = gsap.from(filterBar, {
+			opacity: 0,
+			x: -300,
+			duration: 1,
+			ease: 'expo.out',
+			delay: 0.1
+		})
+		animations.push(filterAnim)
+	}
+
+	if (textContainer) {
+		const textAnim = gsap.from(textContainer, {
+			opacity: 0,
+			x: -300,
+			duration: 1,
+			ease: 'expo.out',
+			delay: 0.3
+		})
+		animations.push(textAnim)
+	}
+
+	if (projectCards.length) {
+		const cardsAnim = gsap.from(projectCards, {
+			scrollTrigger: {
+				trigger: projectCards[0],
+				start: 'top bottom',
+				toggleActions: 'play none none none'
+			},
+			opacity: 0,
+			y: 60,
+			duration: 0.6,
+			ease: 'back.out',
+			delay: 0.2,
+			stagger: 0.07
+		})
+		animations.push(cardsAnim)
 	}
 
 	scheduleScrollTriggerRefresh()
