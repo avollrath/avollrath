@@ -1,18 +1,22 @@
-// Create a new file: src/scripts/navigationHandler.js
 let isNavigationInitialized = false
-let navigationCleanupFns = []
+let pageCleanupFns = []
 
-function addManagedListener(element, eventName, handler, options) {
+function addGlobalListener(element, eventName, handler, options) {
 	if (!element) return
 	element.addEventListener(eventName, handler, options)
-	navigationCleanupFns.push(() => {
+}
+
+function addPageListener(element, eventName, handler, options) {
+	if (!element) return
+	element.addEventListener(eventName, handler, options)
+	pageCleanupFns.push(() => {
 		element.removeEventListener(eventName, handler, options)
 	})
 }
 
-function cleanupNavigationListeners() {
-	navigationCleanupFns.forEach((fn) => fn())
-	navigationCleanupFns = []
+function cleanupPageListeners() {
+	pageCleanupFns.forEach((fn) => fn())
+	pageCleanupFns = []
 }
 
 export function initializeNavigation() {
@@ -173,8 +177,6 @@ export function initializeNavigation() {
 		}
 	}
 
-	// Mobile menu handler
-	// Add this to your initMobileMenu function
 	function initMobileMenu() {
 		const hamburger = document.getElementById('hamburger')
 		const navMenu = document.getElementById('nav-menu')
@@ -182,34 +184,27 @@ export function initializeNavigation() {
 
 		if (!hamburger || !navMenu) return
 
-		if (hamburger.dataset.navBound !== 'true') {
-			const handleHamburgerClick = () => {
-				const isExpanded = hamburger.getAttribute('aria-expanded') === 'true'
-				if (isExpanded) {
-					closeMobileMenu()
-				} else {
-					openMobileMenu()
-				}
+		const handleHamburgerClick = () => {
+			const isExpanded = hamburger.getAttribute('aria-expanded') === 'true'
+			if (isExpanded) {
+				closeMobileMenu()
+			} else {
+				openMobileMenu()
 			}
-			addManagedListener(hamburger, 'click', handleHamburgerClick)
-			hamburger.dataset.navBound = 'true'
+		}
+		addPageListener(hamburger, 'click', handleHamburgerClick)
+
+		if (menuClose) {
+			addPageListener(menuClose, 'click', () => closeMobileMenu())
 		}
 
-		if (menuClose && menuClose.dataset.navBound !== 'true') {
-			addManagedListener(menuClose, 'click', () => closeMobileMenu())
-			menuClose.dataset.navBound = 'true'
-		}
-
-		if (navMenu.dataset.navLinksBound !== 'true') {
-			navMenu.querySelectorAll('a').forEach((link) => {
-				addManagedListener(link, 'click', () => {
-					if (navMenu.classList.contains('mobile-menu-active')) {
-						closeMobileMenu(true)
-					}
-				})
+		navMenu.querySelectorAll('a').forEach((link) => {
+			addPageListener(link, 'click', () => {
+				if (navMenu.classList.contains('mobile-menu-active')) {
+					closeMobileMenu(true)
+				}
 			})
-			navMenu.dataset.navLinksBound = 'true'
-		}
+		})
 	}
 
 	// Project iframe handler
@@ -231,15 +226,14 @@ export function initializeNavigation() {
 
 		const clickableImages = document.querySelectorAll('.iframe-trigger')
 		clickableImages.forEach((img) => {
-			if (img.dataset.iframeBound === 'true') return
 			const onImageClick = () => handleImageClick(img)
-			addManagedListener(img, 'click', onImageClick)
-			img.dataset.iframeBound = 'true'
+			addPageListener(img, 'click', onImageClick)
 		})
 	}
 
 	// Initialize all handlers
 	function initializeAll() {
+		cleanupPageListeners()
 		updateActiveNavItem()
 		initMobileMenu()
 		initializeProjectIframes()
@@ -249,14 +243,13 @@ export function initializeNavigation() {
 	const handleBeforeSwap = () => {
 		closeMobileMenu(true)
 	}
-	addManagedListener(document, 'astro:before-swap', handleBeforeSwap)
-	addManagedListener(document, 'astro:after-swap', initializeAll)
-	addManagedListener(window, 'resize', updateActiveNavItem)
-	addManagedListener(window, 'pagehide', cleanupNavigationListeners)
+	addGlobalListener(document, 'astro:before-swap', handleBeforeSwap)
+	addGlobalListener(document, 'astro:after-swap', initializeAll)
+	addGlobalListener(window, 'resize', updateActiveNavItem)
 
 	// Initial setup
 	if (document.readyState === 'loading') {
-		addManagedListener(document, 'DOMContentLoaded', initializeAll)
+		addGlobalListener(document, 'DOMContentLoaded', initializeAll)
 	} else {
 		initializeAll()
 	}

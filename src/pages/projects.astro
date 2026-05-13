@@ -73,6 +73,7 @@ const projectCategories = ['All', 'Apps', 'Games', 'Websites', 'Design'] as cons
 
 	<script>
 		function initProjectFilters() {
+			const filterBar = document.querySelector('.projects-filter-bar')
 			const buttons = [...document.querySelectorAll('.project-filter')]
 			const cards = [...document.querySelectorAll('.project-card')]
 			if (!buttons.length) return
@@ -97,12 +98,16 @@ const projectCategories = ['All', 'Apps', 'Games', 'Websites', 'Design'] as cons
 			const savedFilter = sessionStorage.getItem('projectFilter') || 'All'
 			applyFilter(savedFilter)
 
-			buttons.forEach((button) => {
-				button.addEventListener('click', () => {
-					const filter = button.getAttribute('data-filter') || 'All'
-					sessionStorage.setItem('projectFilter', filter)
-					applyFilter(filter)
-				})
+			if (!filterBar || filterBar.dataset.projectFiltersBound === 'true') return
+
+			filterBar.dataset.projectFiltersBound = 'true'
+			filterBar.addEventListener('click', (event) => {
+				const button = event.target instanceof Element ? event.target.closest('.project-filter') : null
+				if (!button) return
+
+				const filter = button.getAttribute('data-filter') || 'All'
+				sessionStorage.setItem('projectFilter', filter)
+				applyFilter(filter)
 			})
 		}
 
