@@ -377,7 +377,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 		<div class="flex w-full flex-row flex-wrap justify-center gap-2">
 			{
 				topTracks.map((track) =>
-					track && track.external_urls && track.album && track.album.images[0] ? (
+					track && track.external_urls && track.album && track.album.images[2] ? (
 						<div key={track.id} class="spotify-track">
 							<a
 								href={track.external_urls.spotify}
@@ -385,10 +385,14 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 								rel="noopener noreferrer"
 								title={`<strong class="font-semibold">${track.name}</strong> - ${track.artists.map((artist) => artist.name).join(', ')}`}
 							>
-								<img
-									src={track.album.images[0].url}
+								<Image
+									src={track.album.images[2].url}
 									alt={`Cover art for ${track.name}`}
+									width={96}
+									height={96}
 									class="h-auto w-24 rounded-md shadow-lg transition-transform duration-300 hover:scale-105 3xl:w-32"
+									decoding="async"
+									loading="lazy"
 								/>
 							</a>
 						</div>

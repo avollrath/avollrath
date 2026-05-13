@@ -1,74 +1,107 @@
 ---
-import { getTopTracks, getCurrentPlayingTrack } from "../scripts/getTopTracks.js";
-import AudioWave from '../components/AudioWave.astro';
-const refreshToken = import.meta.env.SPOTIFY_REFRESH_TOKEN;
-const colSpan = Astro.props.colSpan || '2xl:col-span-12 col-span-3'; // Default value if colSpan prop is not passed
-const coverWidth = Astro.props.coverWidth || 'w-32'; // Default cover width
+import { getTopTracks, getCurrentPlayingTrack } from '../scripts/getTopTracks.js'
+import AudioWave from '../components/AudioWave.astro'
+import { Image } from 'astro:assets'
+const refreshToken = import.meta.env.SPOTIFY_REFRESH_TOKEN
+const colSpan = Astro.props.colSpan || '2xl:col-span-12 col-span-3' // Default value if colSpan prop is not passed
+const coverWidth = Astro.props.coverWidth || 'w-32' // Default cover width
 
 function getPrimaryArtistKey(track) {
-  const primaryArtist = track?.artists?.[0];
-  if (!primaryArtist) return null;
-  return primaryArtist.id || primaryArtist.name?.toLowerCase() || null;
+	const primaryArtist = track?.artists?.[0]
+	if (!primaryArtist) return null
+	return primaryArtist.id || primaryArtist.name?.toLowerCase() || null
 }
 
 function prioritizeUniqueArtists(tracks, limit = 10) {
-  const seen = new Set();
-  const uniqueFirst = [];
-  const leftovers = [];
+	const seen = new Set()
+	const uniqueFirst = []
+	const leftovers = []
 
-  tracks.forEach((track) => {
-    const artistKey = getPrimaryArtistKey(track);
-    if (!artistKey || seen.has(artistKey)) {
-      leftovers.push(track);
-      return;
-    }
+	tracks.forEach((track) => {
+		const artistKey = getPrimaryArtistKey(track)
+		if (!artistKey || seen.has(artistKey)) {
+			leftovers.push(track)
+			return
+		}
 
-    seen.add(artistKey);
-    uniqueFirst.push(track);
-  });
+		seen.add(artistKey)
+		uniqueFirst.push(track)
+	})
 
-  if (uniqueFirst.length >= limit) return uniqueFirst.slice(0, limit);
+	if (uniqueFirst.length >= limit) return uniqueFirst.slice(0, limit)
 
-  return uniqueFirst.concat(leftovers).slice(0, limit);
+	return uniqueFirst.concat(leftovers).slice(0, limit)
 }
 
-let topTracks = [];
+let topTracks = []
 try {
-  topTracks = await getTopTracks(refreshToken);
-  topTracks = prioritizeUniqueArtists(topTracks, 10);
+	topTracks = await getTopTracks(refreshToken)
+	topTracks = prioritizeUniqueArtists(topTracks, 10)
 } catch (error) {
-  console.error("Error fetching top tracks:", error);
+	console.error('Error fetching top tracks:', error)
 }
 
-let currentPlayingTrack = null;
+let currentPlayingTrack = null
 try {
-  currentPlayingTrack = await getCurrentPlayingTrack(refreshToken);
+	currentPlayingTrack = await getCurrentPlayingTrack(refreshToken)
 } catch (error) {
-  console.error("Error fetching currently playing track:", error);
+	console.error('Error fetching currently playing track:', error)
 }
 ---
 
 <!-- Spotify Section -->
-<div class={`${colSpan} dark:bg-gradient-to-r from-dark-card to-darker-card bg-white p-12 rounded-lg border-gradient h-full flex flex-col items-center overflow-visible`}>
-  <h2 class="font-header tracking-wide self-start mb-8 text-4xl long-transition">Spotify Top 10 <span class="text-gray-500 text-2xl whitespace-nowrap">last 6 months</span></h2>
-  <div class="flex flex-wrap justify-center gap-4 w-full">
-    {topTracks.map((track) => (
-      track && track.external_urls && track.album && track.album.images[0] ? (
-        <div key={track.id} class={`${coverWidth}`}>
-          <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer" title={`${track.name} - ${track.artists.map((artist) => artist.name).join(", ")}`}>
-            <img src={track.album.images[0].url} alt={`Cover art for ${track.name}`} class="w-full h-auto rounded-md shadow-lg transition-transform duration-300 hover:scale-105" />
-          </a>
-        </div>
-      ) : null
-    ))}
-  </div>
-  {currentPlayingTrack && currentPlayingTrack.is_playing && currentPlayingTrack.item && currentPlayingTrack.item.external_urls ? (
-    <div class="currently-playing self-start mt-8">
-      <a href={currentPlayingTrack.item.external_urls.spotify} target="_blank" rel="noopener noreferrer" class="flex items-center">
-        <span class="mr-4 text-gray-500 dark:text-white">Playing right now: <strong class="text-dark-text">{currentPlayingTrack.item.name}</strong> by {currentPlayingTrack.item.artists.map(artist => artist.name).join(", ")}</span>  <AudioWave />
-      </a>
-    </div>
-  ) : null}
+<div
+	class={`${colSpan} dark:bg-gradient-to-r from-dark-card to-darker-card bg-white p-12 rounded-lg border-gradient h-full flex flex-col items-center overflow-visible`}
+>
+	<h2 class="long-transition mb-8 self-start font-header text-4xl tracking-wide">
+		Spotify Top 10 <span class="whitespace-nowrap text-2xl text-gray-500">last 6 months</span>
+	</h2>
+	<div class="flex w-full flex-wrap justify-center gap-4">
+		{
+			topTracks.map((track) =>
+				track && track.external_urls && track.album && track.album.images[2] ? (
+					<div key={track.id} class={`${coverWidth}`}>
+						<a
+							href={track.external_urls.spotify}
+							target="_blank"
+							rel="noopener noreferrer"
+							title={`${track.name} - ${track.artists.map((artist) => artist.name).join(', ')}`}
+						>
+							<Image
+								src={track.album.images[2].url}
+								alt={`Cover art for ${track.name}`}
+								width={96}
+								height={96}
+								class="h-auto w-full rounded-md shadow-lg transition-transform duration-300 hover:scale-105"
+								decoding="async"
+								loading="lazy"
+							/>
+						</a>
+					</div>
+				) : null
+			)
+		}
+	</div>
+	{
+		currentPlayingTrack &&
+		currentPlayingTrack.is_playing &&
+		currentPlayingTrack.item &&
+		currentPlayingTrack.item.external_urls ? (
+			<div class="currently-playing mt-8 self-start">
+				<a
+					href={currentPlayingTrack.item.external_urls.spotify}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center"
+				>
+					<span class="mr-4 text-gray-500 dark:text-white">
+						Playing right now:{' '}
+						<strong class="text-dark-text">{currentPlayingTrack.item.name}</strong> by{' '}
+						{currentPlayingTrack.item.artists.map((artist) => artist.name).join(', ')}
+					</span>{' '}
+					<AudioWave />
+				</a>
+			</div>
+		) : null
+	}
 </div>
-
-  
