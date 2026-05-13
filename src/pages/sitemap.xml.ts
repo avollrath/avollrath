@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro'
+import { projects } from '../data/projects'
 
 const staticRoutes = ['/', '/about/', '/blog/', '/now/', '/projects/', '/renders/']
 
@@ -27,7 +28,11 @@ export const GET: APIRoute = async ({ site }) => {
 		loc: new URL(route, site).toString()
 	}))
 
-	const entries = [...staticEntries, ...postEntries]
+	const projectEntries = projects.map((project) => ({
+		loc: new URL(`/projects/${project.slug}/`, site).toString()
+	}))
+
+	const entries = [...staticEntries, ...postEntries, ...projectEntries]
 
 	const urlset = entries
 		.map(
