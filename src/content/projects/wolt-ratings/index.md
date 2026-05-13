@@ -1,5 +1,5 @@
 ---
-title: 'Wolt Ratings - Order History Tracker'
+title: 'Wolt Ratings'
 summary: 'Local-first Chrome extension for rating and searching past Wolt orders.'
 category: 'Apps'
 heroImage: './wolt-ratings.jpg'

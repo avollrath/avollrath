@@ -1,5 +1,5 @@
 ---
-title: 'FlipSite - Inventory and Resale Tracker'
+title: 'FlipSite'
 summary: 'Inventory and resale tracker with profit analytics, files, and themes.'
 category: 'Apps'
 heroImage: './flipsite.jpg'
