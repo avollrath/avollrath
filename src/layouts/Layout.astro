@@ -10,7 +10,6 @@ import faviconSrc from '../images/favicon.svg'
 const pathname = Astro.url.pathname
 const initialHomeIntro = pathname === '/'
 const initialAboutIntro = pathname === '/about' || pathname === '/about/'
-const initialProjectsIntro = pathname === '/projects' || pathname === '/projects/'
 ---
 
 <!doctype html>
@@ -18,8 +17,7 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 	lang="en"
 	class:list={[
 		initialHomeIntro && 'home-intro-pending',
-		initialAboutIntro && 'about-intro-pending',
-		initialProjectsIntro && 'projects-intro-pending'
+		initialAboutIntro && 'about-intro-pending'
 	]}
 >
 	<head>
@@ -74,11 +72,6 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 				visibility: hidden;
 			}
 
-			html.projects-intro-pending .projects-left-col,
-			html.projects-intro-pending .project-card {
-				opacity: 0;
-				visibility: hidden;
-			}
 
 		</style>
 		<ClientRouter />
@@ -139,8 +132,7 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 				const reducedMotion = documentElement.classList.contains('reduced-motion')
 				const hasPendingIntro =
 					documentElement.classList.contains('home-intro-pending') ||
-					documentElement.classList.contains('about-intro-pending') ||
-					documentElement.classList.contains('projects-intro-pending')
+					documentElement.classList.contains('about-intro-pending')
 
 				if (!reducedMotion && document.querySelector('[title]')) {
 					preloadTooltipModule().then(({ initializeTooltips }) => {
@@ -175,8 +167,7 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 
 			if (
 				document.documentElement.classList.contains('home-intro-pending') ||
-				document.documentElement.classList.contains('about-intro-pending') ||
-				document.documentElement.classList.contains('projects-intro-pending')
+				document.documentElement.classList.contains('about-intro-pending')
 			) {
 				preloadAnimationModule()
 			} else if ('requestIdleCallback' in window) {

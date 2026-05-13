@@ -833,16 +833,13 @@ function initProjectAnimations() {
 }
 
 function initProjectsOverviewAnimations() {
-	document.documentElement.classList.remove('projects-intro-pending')
-
 	const leftCol = document.querySelector('.projects-left-col')
 	const projectCards = document.querySelectorAll('.project-card')
 
 	if (leftCol) {
-		gsap.set(leftCol, { opacity: 0, x: -300 })
-		const leftAnim = gsap.to(leftCol, {
-			opacity: 1,
-			x: 0,
+		const leftAnim = gsap.from(leftCol, {
+			opacity: 0,
+			x: -300,
 			duration: 1,
 			ease: 'expo.out',
 			delay: 0.1
@@ -851,19 +848,18 @@ function initProjectsOverviewAnimations() {
 	}
 
 	if (projectCards.length) {
-		gsap.set(projectCards, { opacity: 0, x: 300 })
-		const cardsAnim = gsap.to(projectCards, {
+		const cardsAnim = gsap.from(projectCards, {
 			scrollTrigger: {
 				trigger: projectCards[0],
 				start: 'top bottom 60%',
 				toggleActions: 'play none none none'
 			},
-			opacity: 1,
-			x: 0,
-			duration: 0.6,
-			ease: 'back.out',
+			opacity: 0,
+			x: 300,
+			duration: 1,
+			ease: 'expo.out',
 			delay: 0.3,
-			stagger: 0.2
+			stagger: 0.08
 		})
 		animations.push(cardsAnim)
 	}
