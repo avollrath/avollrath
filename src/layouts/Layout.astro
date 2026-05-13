@@ -132,7 +132,9 @@ const initialProjectsIntro = pathname === '/projects' || pathname === '/projects
 						link.querySelector?.('.arrow-link')?.getAttribute?.('href')
 
 					if (!href || href.startsWith('http') || href.startsWith('mailto:')) return
-					preloadAnimationModule()
+					preloadAnimationModule().then(({ preloadGSAPForPath }) => {
+						preloadGSAPForPath(new URL(href, window.location.href).pathname)
+					})
 				}
 
 				document.addEventListener('pointerenter', warmAnimations, true)
