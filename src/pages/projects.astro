@@ -72,28 +72,40 @@ const projectCategories = ['All', 'Apps', 'Games', 'Websites', 'Design'] as cons
 	</div>
 
 	<script>
-		const buttons = [...document.querySelectorAll('.project-filter')]
-		const cards = [...document.querySelectorAll('.project-card')]
+		function initProjectFilters() {
+			const buttons = [...document.querySelectorAll('.project-filter')]
+			const cards = [...document.querySelectorAll('.project-card')]
+			if (!buttons.length) return
 
-		buttons.forEach((button) => {
-			button.addEventListener('click', () => {
-				const filter = button.getAttribute('data-filter')
-
-				buttons.forEach((filterButton) => {
-					const isActive = filterButton === button
-					filterButton.classList.toggle('is-active', isActive)
-					filterButton.classList.toggle('bg-magenta', isActive)
-					filterButton.classList.toggle('text-white', isActive)
-					filterButton.classList.toggle('shadow', isActive)
-					filterButton.classList.toggle('bg-gray-100', !isActive)
-					filterButton.classList.toggle('text-gray-500', !isActive)
+			function applyFilter(filter: string) {
+				buttons.forEach((btn) => {
+					const isActive = btn.getAttribute('data-filter') === filter
+					btn.classList.toggle('is-active', isActive)
+					btn.classList.toggle('bg-magenta', isActive)
+					btn.classList.toggle('text-white', isActive)
+					btn.classList.toggle('shadow', isActive)
+					btn.classList.toggle('bg-gray-100', !isActive)
+					btn.classList.toggle('text-gray-500', !isActive)
 				})
-
 				cards.forEach((card) => {
 					const shouldShow = filter === 'All' || card.getAttribute('data-category') === filter
 					card.classList.toggle('hidden', !shouldShow)
 				})
+			}
+
+			// Restore filter from URL hash on navigation back
+			const savedFilter = sessionStorage.getItem('projectFilter') || 'All'
+			applyFilter(savedFilter)
+
+			buttons.forEach((button) => {
+				button.addEventListener('click', () => {
+					const filter = button.getAttribute('data-filter') || 'All'
+					sessionStorage.setItem('projectFilter', filter)
+					applyFilter(filter)
+				})
 			})
-		})
+		}
+
+		document.addEventListener('astro:page-load', initProjectFilters)
 	</script>
 </Layout>
