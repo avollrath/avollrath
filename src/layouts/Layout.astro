@@ -8,6 +8,7 @@ import '../styles/main.css'
 const { title, description, seo = {} } = Astro.props
 import faviconSrc from '../images/favicon.svg'
 import primaryFont from '../assets/fonts/jetbrains-mono-400.ttf'
+import headerFont from '../assets/fonts/poppins-700.ttf'
 const pathname = Astro.url.pathname
 const initialHomeIntro = pathname === '/'
 const initialAboutIntro = pathname === '/about' || pathname === '/about/'
@@ -29,6 +30,7 @@ const initialRenderIntro = pathname === '/renders' || pathname === '/renders/'
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href={faviconSrc.src} type="image/svg+xml" />
+		<link rel="preload" href={headerFont} as="font" type="font/ttf" crossorigin />
 		<link rel="preload" href={primaryFont} as="font" type="font/ttf" crossorigin />
 		<SEO title={title} description={description} {...seo} />
 		<script

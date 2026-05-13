@@ -47,7 +47,7 @@ export default {
 			},
 
 			fontFamily: {
-				header: ['Instrument Serif', 'serif'],
+				header: ['Poppins', 'sans-serif'],
 				body: ['JetBrains Mono, serif']
 			},
 			fontWeight: {
