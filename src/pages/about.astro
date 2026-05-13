@@ -2,21 +2,30 @@
 import Layout from '../layouts/Layout.astro'
 import FavoriteBooks from '../components/FavoriteBooks.astro'
 import TechStack from '../components/TechStack.astro'
+import { Image } from 'astro:assets'
+import aboutImage from '../images/about2.jpg'
 ---
 
 <Layout
 	title="About André Vollrath"
 	description="Frontend developer passionate about great user experiences."
 	seo={{
-		ogImage: '/about2.jpg',
+		ogImage: aboutImage,
 		ogImageAlt: 'Portrait themed preview of the About page',
 		siteName: 'Andre Vollrath'
 	}}
 >
 	<div
-		class="about-image border-gradient col-span-1 hidden flex-col items-center rounded-lg from-dark-card to-darker-card bg-cover bg-center bg-no-repeat shadow-lg dark:bg-gradient-to-r xl:col-span-1 xl:flex 2xl:col-span-4"
-		style="background-image: url('/about2.jpg');"
+		class="about-image border-gradient relative col-span-1 hidden overflow-hidden rounded-lg from-dark-card to-darker-card shadow-lg dark:bg-gradient-to-r xl:col-span-1 xl:flex 2xl:col-span-4"
 	>
+		<Image
+			src={aboutImage}
+			alt=""
+			class="h-full w-full object-cover"
+			loading="lazy"
+			decoding="async"
+			format="avif"
+		/>
 	</div>
 	<div
 		class="long-transition border-gradient col-span-3 flex flex-col items-center rounded-md bg-white px-4 py-8 text-xs text-gray-400 shadow-lg sm:rounded-lg sm:p-12 sm:text-base xl:col-span-2 2xl:col-span-8 3xl:text-lg"

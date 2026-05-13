@@ -1,10 +1,10 @@
 ---
+import { Image } from 'astro:assets'
+
 const { logos: selectedLogos, excludeLogos = [] } = Astro.props
 
 // Fetch all logo images
-const allImages = Object.values(
-	import.meta.glob('/src/images/logos/*.svg', { eager: true })
-)
+const allImages = Object.values(import.meta.glob('/src/images/logos/*.svg', { eager: true }))
 
 const getFilename = (src) => {
 	// Remove the path and any query parameters
@@ -31,7 +31,7 @@ const logos = allImages
 		// Now just remove the .svg extension for display
 		const formattedName = filename.replace(/\.svg$/i, '').replace(/-/g, ' ')
 		return {
-			src: image.default.src,
+			src: image.default,
 			title: formattedName
 		}
 	})
@@ -42,11 +42,13 @@ const logos = allImages
 		{
 			logos.map((logo) => (
 				<div class="tech-stack-icon flex flex-col items-center space-y-2" key={logo.title}>
-					<img
+					<Image
 						src={logo.src}
 						title={logo.title}
 						class="tech-stack-logo h-7 w-7 rounded sm:h-10 sm:w-10"
 						alt={logo.title}
+						loading="lazy"
+						decoding="async"
 					/>
 				</div>
 			))
@@ -56,7 +58,9 @@ const logos = allImages
 
 <style>
 	.tech-stack-logo {
-		transition: transform 250ms ease, opacity 250ms ease;
+		transition:
+			transform 250ms ease,
+			opacity 250ms ease;
 	}
 
 	.tech-stack-logo:hover {

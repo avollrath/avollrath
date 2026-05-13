@@ -20,6 +20,7 @@ const shuffledLogos = shuffleDeterministic(logos, baseSeed)
 							class="client-logo"
 							loading="lazy"
 							decoding="async"
+							format="webp"
 						/>
 					</li>
 				))
@@ -35,6 +36,7 @@ const shuffledLogos = shuffleDeterministic(logos, baseSeed)
 							class="client-logo"
 							loading="lazy"
 							decoding="async"
+							format="webp"
 						/>
 					</li>
 				))
@@ -74,7 +76,9 @@ const shuffledLogos = shuffleDeterministic(logos, baseSeed)
 		height: auto;
 		opacity: 0.9;
 		filter: grayscale(20%);
-		transition: transform 250ms ease, opacity 250ms ease;
+		transition:
+			transform 250ms ease,
+			opacity 250ms ease;
 		display: block;
 	}
 
