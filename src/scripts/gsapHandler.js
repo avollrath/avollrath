@@ -53,8 +53,9 @@ async function initializeGSAP() {
 	window.ScrollTrigger = ScrollTrigger
 	const reducedMotion = isLiteMotionMode()
 
-	// Initialize footer animations
-	initFooterAnimations(reducedMotion)
+	// Initialize footer animations after layout settles (deferred so ScrollTrigger
+	// measures the correct page height after view transitions paint new content)
+	requestAnimationFrame(() => requestAnimationFrame(() => initFooterAnimations(reducedMotion)))
 
 	if (reducedMotion) {
 		applyLiteModeStyles()
@@ -161,11 +162,18 @@ function initFooterAnimations(reducedMotion = false) {
 
 	gsap.set(footer, { opacity: 0, y: -100 })
 	const footerAnim = gsap.to(footer, {
+		scrollTrigger: {
+			trigger: 'footer',
+			start: 'top 95%',
+			toggleActions: 'play none none none',
+			once: true
+		},
 		opacity: 1,
 		y: 0,
 		ease: 'back.out',
 		duration: 1,
-		delay: 0.3
+		delay: 0.2,
+		immediateRender: false
 	})
 	animations.push(footerAnim)
 }
