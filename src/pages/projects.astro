@@ -10,13 +10,29 @@ const projects = allProjects.sort(
 )
 
 const projectCategories = ['All', 'Apps', 'Games', 'Websites', 'Design'] as const
+const projectsStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	name: 'Projects by André Vollrath',
+	description:
+		'Frontend apps, design work, games, dashboards, and creative tools built by André Vollrath.',
+	url: new URL('/projects/', Astro.site ?? Astro.url).toString(),
+	itemListElement: projects.map((project, index) => ({
+		'@type': 'ListItem',
+		position: index + 1,
+		url: new URL(`/projects/${project.id}/`, Astro.site ?? Astro.url).toString(),
+		name: project.data.title,
+		description: project.data.summary
+	}))
+}
 ---
 
 <Layout
 	title="Projects by André Vollrath"
 	description="Explore frontend apps, design work, games, dashboards, and creative tools built by André Vollrath with Astro, React, Godot, and JavaScript."
 	seo={{
-		siteName: 'André Vollrath'
+		siteName: 'André Vollrath',
+		structuredData: [projectsStructuredData]
 	}}
 >
 	<div class="projects-left-col col-span-3 flex flex-col gap-4 xl:col-span-1 2xl:col-span-3">

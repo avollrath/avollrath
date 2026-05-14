@@ -13,6 +13,25 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props
 const { Content } = await render(project)
+const projectUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()
+const projectImageUrl = new URL(project.data.heroImage.src, Astro.site ?? Astro.url).toString()
+const projectStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'CreativeWork',
+	name: project.data.title,
+	description: project.data.summary,
+	url: projectUrl,
+	image: projectImageUrl,
+	creator: {
+		'@type': 'Person',
+		name: 'André Vollrath',
+		url: new URL('/', Astro.site ?? Astro.url).toString()
+	},
+	about: project.data.category,
+	keywords: project.data.techStackLogos
+		.map((logo) => logo.replace(/\.svg$/i, '').replace(/-/g, ' '))
+		.join(', ')
+}
 ---
 
 <Layout
@@ -21,7 +40,8 @@ const { Content } = await render(project)
 	seo={{
 		ogImage: project.data.heroImage,
 		ogImageAlt: project.data.heroImageAlt,
-		siteName: 'André Vollrath'
+		siteName: 'André Vollrath',
+		structuredData: [projectStructuredData]
 	}}
 >
 	<div class="project-detail-breadcrumb col-span-3 flex justify-center py-3 2xl:col-span-12">
