@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { Image } from 'astro:assets'
+import { getResolvedPosts } from '../../scripts/getResolvedPosts'
+
+export async function getStaticPaths() {
+	const slugifyTag = (tag: string) =>
+		tag
+			.toLowerCase()
+			.trim()
+			.replace(/[^a-z0-9]+/g, '-')
+			.replace(/^-|-$/g, '')
+	const allPosts = await getResolvedPosts()
+	const tags = new Map<string, { label: string; posts: typeof allPosts }>()
+
+	allPosts.forEach((post) => {
+		;(post.frontmatter.tags ?? []).forEach((tag: string) => {
+			const slug = slugifyTag(tag)
+			if (!tags.has(slug)) {
+				tags.set(slug, { label: tag, posts: [] })
+			}
+			tags.get(slug)?.posts.push(post)
+		})
+	})
+
+	return [...tags.entries()].map(([slug, data]) => ({
+		params: { tag: slug },
+		props: data
+	}))
+}
+
+const { label, posts } = Astro.props
+const description = `Blog posts by André Vollrath tagged with ${label}, covering related frontend development, design, automation, and personal project notes.`
+---
+
+<Layout title={`${label} Posts by André Vollrath`} description={description}>
+	<div class="blog-text-container col-span-3 flex flex-col xl:col-span-1 2xl:col-span-3">
+		<div
+			class="long-transition flex flex-col items-center rounded-md bg-about-gradient p-6 text-xs text-white shadow-lg sm:rounded-lg sm:p-12 sm:text-base 3xl:text-lg"
+		>
+			<h1
+				class="long-transition mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-white px-8 py-3 text-center font-header text-4xl tracking-wide"
+			>
+				{label}
+			</h1>
+
+			<p class="my-3 leading-relaxed">
+				Posts tagged with <strong class="font-semibold">{label}</strong>.
+			</p>
+
+			<a href="/blog/" class="my-3 font-semibold underline">All blog posts</a>
+		</div>
+	</div>
+
+	<div class="col-span-3 xl:col-span-2 2xl:col-span-9">
+		{
+			posts.map((post) => (
+				<div class="blog-post-container border-gradient group mb-4 block cursor-pointer rounded-md bg-white shadow-xl hover:shadow-2xl sm:rounded-lg">
+					<a
+						href={post.url}
+						class="flex items-stretch overflow-hidden rounded-t-md sm:rounded-t-lg md:rounded-l-lg"
+					>
+						<div class="w-full max-w-7xl flex-1 overflow-hidden">
+							<Image
+								src={post.frontmatter.image.src}
+								alt={post.frontmatter.image.alt}
+								class="h-full w-full transform object-cover transition duration-500 ease-out group-hover:scale-110"
+								loading="lazy"
+								decoding="async"
+							/>
+						</div>
+
+						<div class="flex w-full flex-1 flex-col items-center justify-center p-6 sm:p-12">
+							<div>
+								<h2 class="md:text-md mb-4 origin-bottom-left font-header text-sm tracking-wide transition duration-500 ease-in-out group-hover:-translate-y-2 group-hover:text-magenta lg:text-lg xl:text-xl 2xl:text-2xl">
+									{post.frontmatter.title}
+								</h2>
+								<p class="text-xs text-gray-400 lg:text-base">{post.frontmatter.description}</p>
+							</div>
+						</div>
+					</a>
+				</div>
+			))
+		}
+	</div>
+</Layout>
