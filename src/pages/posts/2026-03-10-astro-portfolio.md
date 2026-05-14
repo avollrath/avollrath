@@ -3,7 +3,7 @@ title: 'How I Built My Frontend Developer Portfolio with Astro'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2026-03-10'
 description: 'A walkthrough of how I built my frontend developer portfolio with Astro, combining static performance, reusable content sections, image optimization, and a design-led UI.'
-author: 'Andre Vollrath'
+author: 'André Vollrath'
 image:
   src: '../images/blog/portfolio.jpg'
   alt: 'A screenshot of my frontend developer portfolio homepage built with Astro.'

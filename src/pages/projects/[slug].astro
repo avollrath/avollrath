@@ -21,12 +21,12 @@ const { Content } = await render(project)
 	seo={{
 		ogImage: project.data.heroImage,
 		ogImageAlt: project.data.heroImageAlt,
-		siteName: 'Andre Vollrath'
+		siteName: 'André Vollrath'
 	}}
 >
-	<div class="project-detail-breadcrumb col-span-3 2xl:col-span-12 flex justify-center py-3">
+	<div class="project-detail-breadcrumb col-span-3 flex justify-center py-3 2xl:col-span-12">
 		<nav class="flex items-center gap-2 text-xs text-gray-400">
-			<a href="/projects" class="hover:text-magenta transition-colors">Projects</a>
+			<a href="/projects" class="transition-colors hover:text-magenta">Projects</a>
 			<span>›</span>
 			<span class="text-gray-600">{project.data.title}</span>
 		</nav>

@@ -13,7 +13,7 @@ const { frontmatter } = Astro.props
 resolveImage(frontmatter)
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()
-const authorName = frontmatter.author || 'Andre Vollrath'
+const authorName = frontmatter.author || 'André Vollrath'
 const showFavoriteBooks = frontmatter.showFavoriteBooks === true
 const showSpotifyComponent = frontmatter.showSpotifyComponent === true
 const articleStructuredData = {
@@ -50,7 +50,7 @@ const articleStructuredData = {
 		tags: frontmatter.tags ?? [],
 		ogImage: frontmatter.image?.src,
 		ogImageAlt: frontmatter.image?.alt ?? frontmatter.title,
-		siteName: 'Andre Vollrath',
+		siteName: 'André Vollrath',
 		structuredData: [articleStructuredData]
 	}}
 >
