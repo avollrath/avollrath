@@ -100,6 +100,14 @@ More importantly, it turned out to be genuinely useful. Once it was running, it 
 
 ## What Came Next
 
+The original LunchBot was useful because it solved one narrow workplace problem without asking anyone to change habits. People were already in Slack, so Slack was the right interface. That is a good lesson for automation projects: meet the workflow where it already happens instead of forcing a new destination.
+
+It also showed where the first version was limited. Scraping raw menu text was enough for a small bot, but it was not consistent enough for a polished web dashboard. Different restaurant formats, languages, and missing prices made the output uneven. Those constraints are what eventually pushed the project toward PasiLunch, where menu normalization became a core feature rather than an afterthought.
+
+That made LunchBot a useful prototype rather than a dead-end script.
+
+It proved the workflow before I invested more time in a richer version.
+
 Over time I started thinking about improving the project with things like:
 
 - caching menus

@@ -81,6 +81,10 @@ Fetching multiple websites at once means dealing with asynchronous code. Using <
 <p>More importantly, it turned out to be genuinely useful. Once it was running, it quickly became part of the daily workflow in our office.</p>
 <hr>
 <h2 id="what-came-next">What Came Next</h2>
+<p>The original LunchBot was useful because it solved one narrow workplace problem without asking anyone to change habits. People were already in Slack, so Slack was the right interface. That is a good lesson for automation projects: meet the workflow where it already happens instead of forcing a new destination.</p>
+<p>It also showed where the first version was limited. Scraping raw menu text was enough for a small bot, but it was not consistent enough for a polished web dashboard. Different restaurant formats, languages, and missing prices made the output uneven. Those constraints are what eventually pushed the project toward PasiLunch, where menu normalization became a core feature rather than an afterthought.</p>
+<p>That made LunchBot a useful prototype rather than a dead-end script.</p>
+<p>It proved the workflow before I invested more time in a richer version.</p>
 <p>Over time I started thinking about improving the project with things like:</p>
 <ul>
 <li>caching menus</li>

@@ -34,6 +34,14 @@ The part that finally made the spreadsheet unusable: buying a collection for one
 
 The analytics page lets you filter by date range and platform, and every number on the page responds. The hold time vs profit scatter makes it immediately obvious whether flipping fast or sitting on things is working better for you. A cumulative profit line compared against a steady-pace baseline shows whether your returns are accelerating or leveling off. Useful for questions like "how did camera gear do last quarter" or "is this platform actually worth the fees."
 
+## Why it stuck
+
+The next useful improvements would be CSV export, bulk import, and price history notes. Those would make it easier to move from an existing spreadsheet and track listing changes over time.
+
+The main success metric for FlipSite is simple: I still use it. That shaped a lot of small decisions. Adding an item has to be fast enough that I will actually do it after buying something. Sold items need to remain visible because past flips are often the best reference for pricing future ones. Files and notes sit directly on the item record because separating receipts from the thing they describe is how the old spreadsheet became unreliable.
+
+The Supabase backend is intentionally modest. Authentication, rows, file storage, and enough relational structure to keep bundles and items connected. I avoided turning it into accounting software because the value is in keeping resale decisions clear, not modelling every possible edge case.
+
 ## The personal touches
 
 Eight color themes, each with independent light and dark mode — from Midnight Drop and Cold Brew to Neon Petal and Colorful 80s. Six font options. None of this is necessary for a resale tracker, but it made it considerably more enjoyable to open every day.

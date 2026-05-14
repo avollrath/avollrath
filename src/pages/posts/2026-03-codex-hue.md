@@ -120,6 +120,14 @@ The full implementation, including the script and setup instructions, is availab
 
 ## Final result
 
+The best part is that the feedback is ambient. I do not need another notification sound, badge, or popup. The light changes in the room, I notice it, and I can decide whether to return to the task. That makes the automation feel calmer than another screen-level alert.
+
+It also keeps the integration easy to reason about. Codex emits a completion event, PowerShell runs a local script, the Hue Bridge receives a request, and the lamp flashes. Each piece is replaceable. I could swap the light, adjust the colors, or trigger a different local action without changing the whole workflow.
+
+That is exactly the kind of small, local automation I like: visible, reversible, and easy to understand when something needs changing later.
+
+The same pattern could work for other local signals too: a keyboard LED, a desktop notification, a sound, or a webhook into another personal tool. The important part is keeping the trigger narrow and the response obvious.
+
 A tiny script and one configuration line were enough to turn Codex into something that doesn’t just work on screen, but also reacts in the room around me.
 
 Probably unnecessary.

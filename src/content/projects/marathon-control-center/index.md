@@ -26,6 +26,18 @@ The app is **offline-first** by default — all progress lives in localStorage a
 
 Editing is protected by a password gate — public visitors can view the dashboard but can't mark sessions complete or reset progress without the password. It's a frontend convenience lock, not real auth, and I was intentional about documenting that distinction in the README. Real protection would need Supabase Auth and server-side validation. For a personal taper dashboard shared with a few people, the password gate was the right call.
 
+## Why a custom dashboard helped
+
+It was also useful as a design exercise because the audience was one person under pressure: me, three weeks before race day. That made prioritisation brutally clear. Anything that did not help me decide what to do today was unnecessary. The finished dashboard is narrow, but that narrowness is why it worked.
+
+The dashboard also made progress visible to other people without giving them edit access. Sharing the page was a small accountability mechanism during the final weeks.
+
+If I turned it into a reusable product, I would separate the training plan from the UI and let people load their own taper templates. I would also add proper authentication, optional Garmin or Strava imports, and a safer way to compare planned and completed sessions.
+
+The value of the app was not that it knew more than a spreadsheet. It was that it removed ambiguity. Each day had a clear status, each run had a target, and every incomplete item was visible. During a taper block, that clarity matters because the plan is partly physical and partly psychological. I needed a calm place to see whether I was still on track.
+
+Building it also forced me to define the plan. A vague training idea can survive in a note. A dashboard needs actual days, distances, and decisions. That made the app useful before I had written much code.
+
 ## Design
 
 The visual language is dark, geometric, and industrial — thin borders, matte panels, neon green-yellow accent states. The kind of interface that looks like it belongs in a control room rather than a wellness app. Glow is used sparingly: active controls, completed days, focus states. The restraint matters — a dashboard you stare at every morning needs to be readable first.

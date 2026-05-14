@@ -28,6 +28,16 @@ Secondary monitors are blocked too, with an option to leave them usable for thin
 
 Some things genuinely can't be blocked from user space — `Ctrl+Alt+Del`, `Win+L`, firmware keys. That's fine and intentional. This is a tool for honest self-accountability, not a prison. If I really want out, I can sign out of Windows. That's enough friction for the use case.
 
+## Safety boundaries
+
+That recovery thinking affects the UI copy too. The lock screen has to be firm, but not hostile. It should feel like a tool you set up for yourself, not like malware.
+
+The next version would add profiles for different days, a calmer reduced-motion mode for the Three.js background, and a more explicit recovery screen. I would also like to package it properly with signed Windows releases so setup feels less like a developer tool and more like a small utility.
+
+Because PreFlight interferes with the desktop, I treated failure states as part of the design. The app needs to be annoying enough to create friction, but never dangerous. That is why Explorer restoration is handled from multiple exits, why the data file stays plain JSON, and why the lock is honest about what it cannot block. A productivity tool should not leave the user fighting their own machine.
+
+The checklist is also intentionally manual. It does not try to prove that you went outside or cleaned the kitchen. It asks you to make a commitment and then adds enough friction that ignoring it is inconvenient. For this kind of personal workflow, that is a better fit than surveillance or over-engineered validation.
+
 ## Setup mode
 
 The settings panel looks visually distinct from the lock screen so it's always obvious which mode you're in. Add, edit, and remove checklist items, toggle secondary screen blocking, configure auto-start on boot and wake from sleep. Completion state resets daily so the list is fresh each morning without any manual clearing.

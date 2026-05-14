@@ -67,6 +67,11 @@
 <p>Testing was done both in the <strong>Garmin simulator</strong> and on the actual device.</p>
 <hr>
 <h2 id="final-thoughts">Final Thoughts</h2>
+<p>The interesting constraint was glanceability. A watch face has to communicate in a fraction of a second, often while moving. The VS Code theme could not come at the cost of legibility. That meant keeping the number of fields limited, using predictable alignment, and making sure the most important values still stood out even though everything looked like code.</p>
+<p>Battery life was another practical concern. Decorative redraws and unnecessary updates are not free on a wearable device. The implementation needed to update live data without treating the watch screen like a constantly animated web page. That limitation made the project a better design exercise because every visual decision had to justify itself.</p>
+<p>If I revisited it, I would test a few more color themes based on popular editor palettes and make the data fields configurable. The core idea works because it is personal; letting the wearer choose which metrics appear would make it more useful without losing the code-editor identity.</p>
+<p>I would also document the Connect IQ setup more clearly, because getting from idea to device is the least obvious part for anyone building their first Garmin watch face.</p>
+<p>That setup friction is easy to forget after the project works, but it matters for anyone trying to repeat it. A future write-up could include the SDK install steps, simulator workflow, device transfer process, and the small limitations I only noticed once the face was running on real hardware.</p>
 <p>This was a small but fun side project that combines two things I spend a lot of time with: writing code and going for runs.</p>
 <p>It’s also a nice reminder that not every project needs to be serious or complicated. Sometimes it’s enough to build something that simply makes you smile when you look at your watch.</p>
 <hr>

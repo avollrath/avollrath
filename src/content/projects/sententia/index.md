@@ -24,6 +24,18 @@ Highlights come off the Supernote as a plain-text export. I manually clean them 
 
 The JSON lives in version control alongside the app. Every push to `main` triggers a **GitHub Actions** build that publishes to GitHub Pages — no server in production, just static files.
 
+## Design constraints
+
+The project is deliberately private in tone even though the deployed page is public. These are not generic inspirational quotes scraped from the web; they are passages I personally highlighted while reading. That makes provenance important. Book title and author have to stay attached to each quote so the display never separates a thought from its source.
+
+Because the public app is static, it also becomes a small personal archive. I can change the source data, rebuild, and publish without needing a database or account system.
+
+The most useful next feature would be a language toggle, because the data already contains German and English passages. I would also like to add a gentle shuffle mode and a better import flow from Supernote exports. The current parser works, but a guided import would make the workflow less manual and reduce formatting mistakes.
+
+Quote displays can become overdesigned quickly. I wanted Sententia to feel quiet, so the interface avoids visible controls unless they are needed. The quote is the object. Navigation should stay in the background, typography should stay readable, and the background image should support the text rather than compete with it.
+
+That constraint influenced the data model too. Quotes need book, author, language, and display length, but not a heavy tagging system or social features. This is a personal reading tool, not a publishing platform. Keeping the data small makes it easier to maintain and keeps the static deployment simple.
+
 ## The local editor
 
 Editing quotes from a text file by hand gets tedious. There's a local admin UI that runs when you start the Express backend alongside the frontend — search and filter by text, author, or book, edit metadata, delete entries, and set a max display length so the public view doesn't get swamped by very long passages. Changes write directly back to the JSON source files, which you then commit. The admin route is hash-based so it's completely inert on the static deployment — it just shows a friendly message if the backend isn't running.
