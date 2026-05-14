@@ -48,6 +48,8 @@ const shuffledFavoriteBooks = shuffleDeterministic(favoriteBooks, shuffleSeed)
 									class={`${bookWidth} h-auto w-20 rounded shadow-lg transition-transform duration-300 ease-in-out hover:scale-110`}
 									loading="lazy"
 									decoding="async"
+									width="160"
+									height="240"
 									referrerpolicy="no-referrer"
 									onError={(e) => (e.currentTarget.src = placeholderCover.src)}
 								/>
