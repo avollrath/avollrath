@@ -28,6 +28,7 @@ const articleStructuredData = {
 	headline: frontmatter.title,
 	description: frontmatter.description,
 	datePublished: new Date(frontmatter.pubDate).toISOString(),
+	dateModified: new Date(frontmatter.updatedDate ?? frontmatter.pubDate).toISOString(),
 	author: {
 		'@type': 'Person',
 		name: authorName

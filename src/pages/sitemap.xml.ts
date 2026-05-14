@@ -22,15 +22,16 @@ export const GET: APIRoute = async ({ site }) => {
 
 	const postModules = import.meta.glob('./posts/*.md', { eager: true }) as Record<
 		string,
-		{ frontmatter?: { pubDate?: string; tags?: string[] } }
+		{ frontmatter?: { pubDate?: string; updatedDate?: string; tags?: string[] } }
 	>
 
-	const postEntries = Object.entries(postModules).map(([filePath, module]) => ({
-		loc: new URL(`/posts/${getSlugFromPath(filePath)}/`, site).toString(),
-		lastmod: module.frontmatter?.pubDate
-			? new Date(module.frontmatter.pubDate).toISOString()
-			: undefined
-	}))
+	const postEntries = Object.entries(postModules).map(([filePath, module]) => {
+		const lastmod = module.frontmatter?.updatedDate ?? module.frontmatter?.pubDate
+		return {
+			loc: new URL(`/posts/${getSlugFromPath(filePath)}/`, site).toString(),
+			lastmod: lastmod ? new Date(lastmod).toISOString() : undefined
+		}
+	})
 
 	const tagEntries = [
 		...new Set(
