@@ -106,7 +106,7 @@ Over time I started thinking about improving the project with things like:
 - a web interface
 - better formatting and error handling
 
-That eventually led to a rebuilt version of the project called **PasiLunch**, which I wrote about in a later post.
+That eventually led to a rebuilt version of the project called [**PasiLunch**](/posts/2025-03-pasilunch/), with a fuller [project page for the PasiLunch web app](/projects/pasilunch/).
 
 ---
 

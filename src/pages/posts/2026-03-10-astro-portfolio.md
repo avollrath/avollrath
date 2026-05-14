@@ -41,7 +41,7 @@ Not just "professional" in the generic portfolio-template sense.
 
 For this version of my site, **Astro** ended up being the right fit.
 
-It gives me the simplicity of a static site, but still leaves room for interactive sections, reusable components, and content-driven pages like the blog, projects page, reading lists, and Now page.
+It gives me the simplicity of a static site, but still leaves room for interactive sections, reusable components, and content-driven pages like the [blog](/blog/), [projects page](/projects/), reading lists, and [Now page](/now/).
 
 This post is a walkthrough of how I approached the portfolio and why Astro works so well for this kind of frontend developer website.
 
@@ -55,9 +55,9 @@ Most of the site is content-first:
 
 - homepage sections
 - project writeups
-- blog posts
+- [blog posts](/blog/)
 - an About page
-- a Now page
+- a [Now page](/now/)
 - image-heavy presentation
 
 That makes Astro a very natural choice.
@@ -82,9 +82,9 @@ The portfolio is split into a few main content areas:
 
 - a modular homepage
 - a dedicated projects page
-- a blog
+- a [blog](/blog/)
 - a personal About page
-- a Now page for current interests and experiments
+- a [Now page](/now/) for current interests and experiments
 - a renders page for visual work
 
 Instead of building the whole homepage as one giant block, I broke it into reusable Astro components and section-level content blocks.
@@ -160,8 +160,8 @@ One of the things I like most about Astro is that it lets me keep the site mostl
 
 A few examples from my site:
 
-- a **Spotify Top 10** section fed by API data and cached locally
-- **Favorite Books** and **Now reading** sections driven by JSON data
+- a [**Spotify Top 10** section](/posts/2024-02-spotify/) fed by API data and cached locally
+- [**Favorite Books** and **Now reading** sections](/posts/2024-02-book-covers/) driven by JSON data
 - a **latest blog post** block that resolves post metadata automatically
 - interactive homepage details like hover states, lazy-loaded media, and animated elements
 

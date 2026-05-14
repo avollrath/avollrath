@@ -29,7 +29,7 @@
 	  prose-a:font-bold
 	  prose-a:text-dark-text
 	   prose-strong:text-dark-text
-	   prose-img:rounded-xl">  <p>While working on my personal website, I wanted to display a small digital bookshelf: some of my <strong>favorite books</strong> on the homepage and my <strong>currently reading</strong> list on the Now page.</p>
+	   prose-img:rounded-xl">  <p>While working on my personal website, I wanted to display a small digital bookshelf: some of my <strong>favorite books</strong> on the <a href="/">homepage</a> and my <strong>currently reading</strong> list on the <a href="/now/">Now page</a>.</p>
 <p>The natural place to start was the <strong>Google Books API</strong>.</p>
 <p>It gives access to book metadata like:</p>
 <ul>
@@ -57,8 +57,8 @@
 <h2 id="what-i-use-it-for-on-my-site">What I use it for on my site</h2>
 <p>The API-powered book data is used in two places:</p>
 <ul>
-<li>the <strong>Favorite Books</strong> section on the homepage</li>
-<li>the <strong>Now page</strong>, where I list the books I am currently reading</li>
+<li>the <strong>Favorite Books</strong> section on the <a href="/">homepage</a></li>
+<li>the <a href="/now/"><strong>Now page</strong></a>, where I list the books I am currently reading</li>
 </ul>
 <p>Both sections display book covers and basic metadata, creating a small digital bookshelf that adds a more personal layer to the site.</p>
 <p>Because the content is stored as JSON after fetching, I can reuse the same book structure across multiple components.</p>
@@ -213,8 +213,8 @@ Astro solves the presentation and performance problem.</p>
 <h2 id="where-this-workflow-is-used-on-my-site">Where this workflow is used on my site</h2>
 <p>The same book-cover pipeline powers:</p>
 <ul>
-<li>the <strong>Favorite Books</strong> section on the homepage</li>
-<li>the <strong>Now page</strong> reading list</li>
+<li>the <strong>Favorite Books</strong> section on the <a href="/">homepage</a></li>
+<li>the <a href="/now/"><strong>Now page</strong></a> reading list</li>
 <li>any future bookshelf-style content that reuses the same JSON format</li>
 </ul>
 <p>Because the image cache is generated once and committed as part of the site source, those sections become very cheap to render on every build.</p>

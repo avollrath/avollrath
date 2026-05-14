@@ -24,7 +24,7 @@ showFavoriteBooks: true
 teaser: 'I use the <strong class="font-semibold text-dark-text">Google Books API</strong> to power the book sections on my website, from titles and authors to cover images. This post covers the original API-driven approach and the later improvement of downloading and caching covers locally for <strong class="font-semibold text-dark-text">Astro image optimization</strong>.'
 ---
 
-While working on my personal website, I wanted to display a small digital bookshelf: some of my **favorite books** on the homepage and my **currently reading** list on the Now page.
+While working on my personal website, I wanted to display a small digital bookshelf: some of my **favorite books** on the [homepage](/) and my **currently reading** list on the [Now page](/now/).
 
 The natural place to start was the **Google Books API**.
 
@@ -64,8 +64,8 @@ Instead of manually maintaining a folder of covers and typing everything by hand
 
 The API-powered book data is used in two places:
 
-- the **Favorite Books** section on the homepage
-- the **Now page**, where I list the books I am currently reading
+- the **Favorite Books** section on the [homepage](/)
+- the [**Now page**](/now/), where I list the books I am currently reading
 
 Both sections display book covers and basic metadata, creating a small digital bookshelf that adds a more personal layer to the site.
 
@@ -289,8 +289,8 @@ That split ended up working better than trying to force one tool to do everythin
 
 The same book-cover pipeline powers:
 
-- the **Favorite Books** section on the homepage
-- the **Now page** reading list
+- the **Favorite Books** section on the [homepage](/)
+- the [**Now page**](/now/) reading list
 - any future bookshelf-style content that reuses the same JSON format
 
 Because the image cache is generated once and committed as part of the site source, those sections become very cheap to render on every build.

@@ -13,7 +13,7 @@ teaser: 'What started as a small Slack lunch bot turned into a smarter daily ser
 
 ## Introduction
 
-A few years ago I built a small Slack bot that fetched lunch menus from restaurants near my office. It worked, but it was basically just a quick script.
+A few years ago I built a [small Slack lunch bot](/posts/2024-03-lunchbot/) that fetched lunch menus from restaurants near my office. It worked, but it was basically just a quick script.
 
 Over time I wanted more from it. I wanted the menus to load faster, I wanted a simple web interface outside Slack, and I wanted a cleaner and more consistent result across restaurants whose menu formats were all over the place.
 
