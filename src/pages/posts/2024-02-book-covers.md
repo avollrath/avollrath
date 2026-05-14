@@ -24,8 +24,6 @@ showFavoriteBooks: true
 teaser: 'I use the <strong class="font-semibold text-dark-text">Google Books API</strong> to power the book sections on my website, from titles and authors to cover images. This post covers the original API-driven approach and the later improvement of downloading and caching covers locally for <strong class="font-semibold text-dark-text">Astro image optimization</strong>.'
 ---
 
-# Using the Google Books API for Book Covers in Astro
-
 While working on my personal website, I wanted to display a small digital bookshelf: some of my **favorite books** on the homepage and my **currently reading** list on the Now page.
 
 The natural place to start was the **Google Books API**.

@@ -12,8 +12,6 @@ tags: ['spotify', 'api', 'javascript', 'node.js', 'project', 'web']
 showSpotifyComponent: true
 ---
 
-# Building a Spotify Top Tracks Section for My Website
-
 While working on my personal website, I wanted to add a small dynamic section that reflects something a bit more personal than just projects and tech stacks.
 
 Music felt like a good fit.

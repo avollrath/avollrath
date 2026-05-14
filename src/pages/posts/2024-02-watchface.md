@@ -10,8 +10,6 @@ teaser: 'A small experiment combining two hobbies: coding and running. This cust
 description: 'Designing a custom Garmin watch face inspired by the Visual Studio Code interface using the Connect IQ SDK.'
 ---
 
-# A VS Code–Inspired Watch Face for Garmin Forerunner 55
-
 Sometimes the most fun projects come from combining unrelated interests.
 
 In this case it was **running and coding**.

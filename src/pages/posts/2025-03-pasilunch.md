@@ -11,8 +11,6 @@ tags: ['node.js', 'express', 'slack', 'gemini', 'web scraping', 'seo', 'automati
 teaser: 'What started as a small Slack lunch bot turned into a smarter daily service. <strong class="font-semibold text-dark-text">PasiLunch</strong> scrapes restaurant menus in Pasila, translates and normalizes them with <strong class="font-semibold text-dark-text">Gemini</strong>, caches the result once per day, and serves it through both a <strong class="font-semibold text-dark-text">Slack command</strong> and a clean <strong class="font-semibold text-dark-text">web dashboard</strong>.'
 ---
 
-# Building PasiLunch, AI-Normalized Lunch Menus for Slack and the Web
-
 ## Introduction
 
 A few years ago I built a small Slack bot that fetched lunch menus from restaurants near my office. It worked, but it was basically just a quick script.

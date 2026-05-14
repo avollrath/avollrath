@@ -11,8 +11,6 @@ tags: ['node.js', 'cheerio', 'slack', 'bot', 'project', 'workplace']
 teaser: 'A small side project that scrapes restaurant menus and posts them to Slack. <strong class="font-semibold text-dark-text">LunchBot</strong> was built with <strong class="font-semibold text-dark-text">Node.js</strong>, <strong class="font-semibold text-dark-text">Cheerio</strong>, and the <strong class="font-semibold text-dark-text">Slack API</strong> to make the daily lunch decision a little easier.'
 ---
 
-# Building LunchBot: A Simple Slack Bot for Lunch Menus
-
 Lunch is a surprisingly frequent topic in office Slack channels.
 
 Someone asks where to eat, someone else checks a restaurant website, and a few minutes later the whole discussion starts again the next day.

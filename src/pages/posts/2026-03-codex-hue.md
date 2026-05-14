@@ -21,8 +21,6 @@ tags:
 teaser: 'While working with <strong class="font-semibold text-dark-text">Codex</strong> in VS Code I often start a task and then look away from the screen. So I connected the Codex <strong class="font-semibold text-dark-text">notify hook</strong> to a <strong class="font-semibold text-dark-text">Philips Hue lamp</strong> and turned it into a tiny AI status light that flashes whenever Codex finishes.'
 ---
 
-# Turning My Desk Lamp into a Codex Status Light
-
 Sometimes the most satisfying projects are the tiny ones.
 
 While working with the Codex extension in VS Code, I noticed that I often start a task and then immediately look away from the screen. Maybe I'm reading something else, maybe I'm grabbing coffee, maybe I'm just waiting.

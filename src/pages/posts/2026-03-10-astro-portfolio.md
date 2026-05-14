@@ -21,8 +21,6 @@ tags:
 teaser: 'My portfolio site is built with <strong class="font-semibold text-dark-text">Astro</strong> to keep it fast, flexible, and easy to evolve. This post breaks down how I structured the site, why Astro fits a <strong class="font-semibold text-dark-text">frontend developer portfolio</strong> so well, and the features I chose to make it feel personal without sacrificing performance.'
 ---
 
-# How I Built My Frontend Developer Portfolio with Astro
-
 At some point every frontend developer ends up rebuilding their portfolio.
 
 That was definitely true for me.
