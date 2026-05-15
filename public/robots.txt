@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /_astro/
+Disallow: /dist/
 
 Sitemap: https://vollrath.dev/sitemap.xml

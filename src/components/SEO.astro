@@ -118,6 +118,10 @@ const mergedStructuredData = [...defaultStructuredData, ...structuredData]
 {twitterCreator && <meta name="twitter:creator" content={twitterCreator} />}
 {resolvedOgImage && <meta name="twitter:image" content={resolvedOgImage} />}
 {resolvedOgImage && <meta name="twitter:image:alt" content={ogImageAlt} />}
+<meta name="twitter:label1" content="Written by" />
+<meta name="twitter:data1" content={author ?? siteName} />
+<meta name="twitter:label2" content="Location" />
+<meta name="twitter:data2" content="Helsinki, Finland" />
 
 {
 	mergedStructuredData.map((entry) => (

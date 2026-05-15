@@ -1,7 +1,7 @@
 ---
 title: 'superVIMus'
-seoTitle: 'superVIMus Vim Movement Game Built in Godot for Web'
-summary: 'superVIMus is a Godot Vim movement game for practicing hjkl navigation through compact puzzle levels, keyboard repetition, and browser play.'
+seoTitle: 'superVIMus: A Vim Navigation Game to Build Muscle Memory'
+summary: 'Stop the awkward repetition of learning Vim keys. A puzzle game built in Godot that turns hjkl practice into a browser-playable challenge.'
 category: 'Games'
 heroImage: './supervimus.jpg'
 heroImageAlt: 'superVIMus Game'
@@ -13,10 +13,48 @@ liveUrl: 'https://avollrath.github.io/superVIMus/'
 mockup: 'laptop'
 ---
 
-A **Vim movement game** is a better way to practice `hjkl` than staring at a text editor and pretending drills are fun. superVIMus turns movement-key repetition into small puzzle levels where the player navigates with Vim-style directions until the muscle memory starts to feel automatic.
+**superVIMus** is an attempt to make the "learning curve" of Vim feel a little less steep. I love Vim, but the first stage of internalizing the `hjkl` movement keys is often a grim exercise in repetition. I decided to turn that repetition into a browser-playable puzzle game.
 
-The external folder is named `vimto-the-hole` and contains the playable superVIMus project, including a README, exported web build, fantasy tile and sprite assets, UI art, coins, buttons, and a preview image. The implementation uses Godot because grid movement, level scenes, collisions, collectible behavior, and browser export fit naturally in a game engine.
+## The Goal: Muscle Memory Through Play
 
-The interesting design constraint is that the controls are the lesson. The game cannot hide `h`, `j`, `k`, and `l` behind normal arrow-key habits; it has to make those inputs useful enough that repetition happens through play. Recent commits include README and GPU warmup work, which suggests the project is already playable and the remaining work has been around presentation and launch smoothness. The current version is a focused browser game for making Vim navigation less abstract.
+The game’s philosophy is simple: the controls *are* the mechanic. By stripping away complex RPG systems and focusing on short, punchy levels, superVIMus forces you to make directional decisions until the keys start to feel like an extension of your hand.
 
-![superVIMus Vim movement game preview](/projects/supervimus/supervimus.webp)
+The design focuses on:
+- **Intentional Level Design**: Corridors and obstacles that specifically punish arrow-key muscle memory.
+- **Short Feedback Loops**: Quick resets and small rooms to keep the focus on movement rather than exploration.
+- **Tactile Learning**: Turning directional translation into a physical, game-based response.
+
+## The Build: Godot and Web Export
+
+I built superVIMus in **Godot** to take advantage of its robust grid-movement and collision systems. The challenge was ensuring a smooth browser export; if the first few seconds of a movement game stutter, the player’s rhythm is immediately broken.
+
+
+Good levels for this kind of thing need:
+
+- Corridors that force horizontal movement
+- Vertical movement that makes `j` and `k` feel natural
+- Turns that punish arrow-key muscle memory
+- Short resets so mistakes do not become annoying
+
+That short-loop structure matters because the control scheme is the lesson. If a level takes too long, the player starts thinking about the level instead of the movement keys. Small rooms keep the focus where it belongs.
+
+## Technical highlights
+
+The external folder is named `vimto-the-hole`, which is a fair warning about the project’s origin. It contains a `Godot` project, browser export, preview art, tile sheets, fantasy sprites, coins, buttons, and level assets.
+
+`Godot` was the obvious choice once the idea became a real game instead of an `HTML` keyboard toy. Grid movement, collisions, level scenes, collectables, sound, and web export all fit naturally in the engine.
+
+The git log shows small-game polish rather than product expansion:
+
+- Start screen work
+- Level sound
+- GPU warmup
+- README cleanup
+
+The GPU warmup note is a good example of browser-export reality. If the first few seconds stutter, the whole game feels cheaper than it is.
+
+## Status
+
+The current version is focused and playable. If I rebuilt it, I would add a clearer difficulty ramp and maybe track mistakes per level. I would not make it much bigger. The point is muscle memory, not an overwrought Vim curriculum.
+
+The rough edge is balance. It teaches the keys, but a longer version would need more careful sequencing so repetition stays useful instead of becoming noise.

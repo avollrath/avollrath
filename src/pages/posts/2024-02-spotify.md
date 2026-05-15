@@ -1,26 +1,24 @@
 ---
-title: 'Building a Spotify Top Tracks Section for My Website'
+title: 'Building a Smarter Spotify Top 10 Component with Unique Artist Logic'
 pubDate: 2022-08-08
 author: 'André Vollrath'
 layout: ../../layouts/BlogPost.astro
 image:
   src: '../images/blog/spotify.jpg'
   alt: 'Spotify top tracks section displayed on a website'
-teaser: 'A small feature for my personal website that fetches my <strong class="font-semibold text-dark-text">Spotify top tracks</strong>, filters them by <strong class="font-semibold text-dark-text">unique artists</strong>, and displays a more visually varied top 10 section.'
-description: 'Building a Spotify-powered homepage section that fetches my top tracks, filters duplicate artists, and caches the results for a cleaner visual presentation.'
+teaser: 'Your "Top Tracks" list shouldn’t be a row of duplicate covers. I developed a custom <strong class="font-semibold text-dark-text">Node.js</strong> filtering layer that curates my listening habits into a visually diverse showcase, ensuring every slot in the grid represents a <strong class="font-semibold text-dark-text">unique artist</strong> for a cleaner visual identity.'
+description: 'Standard "Top Tracks" lists are often full of duplicate artists from a single album. I wrote a custom Node.js filter that curates my listening habits into a visually diverse showcase, ensuring every slot in the grid represents a unique artist.'
 tags: ['spotify', 'api', 'javascript', 'node.js', 'project', 'web']
 showSpotifyComponent: true
 ---
 
-While working on my personal website, I wanted to add a small dynamic section that reflects something a bit more personal than just projects and tech stacks.
+While building my portfolio, I wanted to include a dynamic section that felt more personal than just a list of tech stacks. Music is a huge part of my daily flow, so displaying my most-listened-to tracks felt like a natural choice. However, I didn't just want a raw data dump from the Spotify API; I wanted a **curated visual row** that accurately reflected my musical identity.
 
-Music felt like a good fit.
+The problem with most "now playing" or "top tracks" components is repetition. If I've been looping a single album all week, the top 10 list becomes a row of identical covers. That might be statistically accurate, but it’s visually boring. I wanted to build a component that was smart enough to filter for **unique artists**, ensuring that the resulting display felt as varied as my actual taste.
 
-So I built a feature that fetches my **most listened-to Spotify tracks from the last six months** and displays them directly on the homepage as a row of album covers.
+## The Goal: Curation Over Raw Data
 
-At first glance the idea is simple, but there was one detail I wanted to handle differently: I didn’t want the section to be filled with multiple tracks from the same artist.
-
-## The Goal
+I set out to build a homepage section that felt dynamic and personal without being repetitive. By fetching a larger sample size (my top 50 tracks) and then applying a filtering layer, I was able to generate a "Top 10 Unique Artists" row. This approach preserves the feeling of my current heavy rotation while providing much better visual diversity.
 
 The goal was to create a homepage section that feels:
 

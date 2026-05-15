@@ -1,9 +1,9 @@
 ---
-title: 'Using the Google Books API for Book Covers in Astro'
+title: 'Connecting the Google Books API to Astro with Local Image Caching'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2024-02-08'
 updatedDate: '2026-03-28'
-description: 'How I use the Google Books API to fetch book metadata and cover images for my Astro site, and why I later added local caching and build-time image optimization.'
+description: 'Don’t let slow third-party APIs ruin your site’s performance. I developed a workflow to fetch book metadata via ISBN and sync covers to my local assets folder, ensuring my digital bookshelf loads instantly with optimized Astro images.'
 author: 'André Vollrath'
 image:
   src: '../images/blog/books.jpg'
@@ -21,34 +21,16 @@ tags:
     'project'
   ]
 showFavoriteBooks: true
-teaser: 'I use the <strong class="font-semibold text-dark-text">Google Books API</strong> to power the book sections on my website, from titles and authors to cover images. This post covers the original API-driven approach and the later improvement of downloading and caching covers locally for <strong class="font-semibold text-dark-text">Astro image optimization</strong>.'
+teaser: 'I wanted to display a small digital bookshelf on my site without turning content entry into a manual chore. This post explores my workflow for using the <strong class="font-semibold text-dark-text">Google Books API</strong> to look up metadata, while maintaining a high-performance <strong class="font-semibold text-dark-text">Astro image pipeline</strong> through local caching and build-time optimization.'
 ---
 
-While working on my personal website, I wanted to display a small digital bookshelf: some of my **favorite books** on the [homepage](/) and my **currently reading** list on the [Now page](/now/).
+While working on my personal website, I wanted to display a small digital bookshelf: a curated selection of my **favorite books** on the [homepage](/) and a **currently reading** list on the [Now page](/now/). I didn't want to turn content entry into a manual chore of hunting down covers and typing out metadata—I wanted a bridge between a massive database and my own local assets.
 
-The natural place to start was the **Google Books API**.
+The **Google Books API** was the obvious starting point. It provides instant access to titles, authors, and cover images via ISBN. However, I quickly learned that for a high-performance static site like mine, a "naive" API-only implementation wasn't enough. I needed a workflow that combined the convenience of an API with the speed of local, optimized assets.
 
-It gives access to book metadata like:
+## The Goal: Convenience Without Compromise
 
-- title
-- authors
-- cover images
-- identifiers like ISBN
-
-That made it a really convenient way to power the book sections of the site without having to manually collect every cover and detail myself.
-
-The first version of the feature pulled cover images directly from the API response. It worked, but over time I refined the implementation to fit Astro better.
-
-This post is mainly about that broader workflow:
-
-1. using the **Google Books API** to look up books
-2. storing the resulting metadata in JSON
-3. rendering the data in Astro components
-4. later improving the setup with local caching and image optimization
-
----
-
-## Why I used the Google Books API
+I wanted a data source that would let me build a bookshelf-style feature without sacrificing web performance. The strategy I eventually settled on involves three main steps: using the API for lookup, storing the results in JSON, and later downloading and caching those covers locally so Astro can optimize them at build time.
 
 I wanted a data source that would let me build a bookshelf-style feature without turning content entry into a manual chore.
 

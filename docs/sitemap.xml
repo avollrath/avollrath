@@ -2,246 +2,402 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>https://vollrath.dev/</loc>
+  <changefreq>weekly</changefreq>
+  <priority>1</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/about/</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/blog/</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/now/</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/renders/</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2024-02-book-covers/</loc>
   <lastmod>2026-03-28T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2024-02-pixoo/</loc>
   <lastmod>2024-01-30T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2024-02-spotify/</loc>
   <lastmod>2022-08-08T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2024-02-watchface/</loc>
   <lastmod>2022-08-08T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2024-03-lunchbot/</loc>
   <lastmod>2024-03-30T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2025-01-nas/</loc>
   <lastmod>2025-01-03T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2025-03-pasilunch/</loc>
   <lastmod>2025-03-02T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2025-06-16-75-hard/</loc>
   <lastmod>2025-06-16T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2026-03-10-astro-portfolio/</loc>
   <lastmod>2026-03-10T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/posts/2026-03-codex-hue/</loc>
   <lastmod>2026-03-12T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/astro/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/google-books-api/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/book-covers/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/astro-image/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/image-optimization/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/javascript/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/web-performance/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/static-site/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/project/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/python/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/chess/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/pixoo/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/api/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/hardware/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/spotify/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/node-js/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/web/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/cheerio/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/slack/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/bot/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/workplace/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/nas/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/unraid/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/home-server/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/docker/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/plex/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/self-hosting/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/express/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/gemini/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/web-scraping/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/seo/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/automation/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/75-hard/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/discipline/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/fitness/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/running/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/strength-training/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/mindset/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/portfolio/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/frontend-developer/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/personal-website/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/ui-design/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/codex/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/vscode/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/philips-hue/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/powershell/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/smart-home/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/tags/developer-tools/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/chess-trading-card/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/flipsite/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/hypertype/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/janne-heikkinen-website/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/jurassic-jump/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/marathon-control-center/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/pasilunch/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/preflight/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/sententia/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/supervimus/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/sushi-san-website/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/talentadore-mobile-app/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/vollrath-drum-machine/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 <url>
   <loc>https://vollrath.dev/projects/wolt-ratings/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
 </url>
 </urlset>

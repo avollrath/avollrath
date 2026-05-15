@@ -1,7 +1,7 @@
 ---
 title: 'Wolt Ratings'
-seoTitle: 'Wolt Ratings Local Chrome Extension Order Dashboard'
-summary: 'Wolt Ratings is a local Chrome extension dashboard for rating Wolt order history, searching venues, adding private notes, and spotting spending patterns.'
+seoTitle: 'Wolt Ratings: A Privacy-First Chrome Extension for Foodies'
+summary: 'Remember what was actually good. A local-first dashboard for rating Wolt orders, adding private notes, and tracking your tastes.'
 category: 'Apps'
 heroImage: './wolt-ratings.jpg'
 heroImageAlt: 'Wolt Ratings order history dashboard'
@@ -11,13 +11,46 @@ liveUrl: 'https://github.com/avollrath/wolt-ratings'
 mockup: 'laptop'
 ---
 
-A **Wolt order history dashboard** fixes a surprisingly specific problem: Wolt remembers every order, but it does not help you learn from them. Wolt Ratings pulls that history into a local-first Chrome extension so restaurants, dishes, ratings, notes, search, and spending patterns become useful again.
+**Wolt Ratings** solves a problem that is too specific to buy but too annoying to ignore. Wolt knows what I ordered, but it doesn’t help me remember if a restaurant was actually good, which dish was the standout, or how often I’ve made the same lazy delivery decision.
 
-The project is split between a browser extension and a small Python/Flask backend used for local data work. The README is explicit about the privacy model: no accounts, no cloud, no tracking. Screenshots show the extension entry point, the dashboard, venue modal, ratings, filters, notes, and order history. Recent commits include performance work to skip redundant storage writes and badge updates, plus local startup tooling.
+## The Goal: Ownership of Taste
 
-The important technical decision is keeping the data local. Food history is personal enough that a SaaS account would make the project worse, not better. JavaScript handles the extension UI and browser storage flow, while Python and Flask support local processing. The result is a practical dashboard for finding places worth reordering from, remembering what was good, and seeing spending patterns that the original app keeps buried.
+I built this Chrome extension to turn a buried order history into a meaningful personal dashboard. It’s about more than just data—it’s about having a private space to track your own culinary hits and misses.
 
-![Wolt Ratings dashboard](/projects/wolt-ratings/wolt-ratings.jpg)
-![Wolt Ratings extension popup](/projects/wolt-ratings/extension.jpg)
-![Wolt Ratings venue modal](/projects/wolt-ratings/venue_modal.jpg)
+Key features include:
+- **Venue Search & Filtering**: Quickly finding that one place you liked six months ago.
+- **Private Ratings & Notes**: Storing your honest thoughts without them being part of a public review system.
+- **Spending Context**: Seeing the reality of your delivery habits in a local-only environment.
+
+## The Strategy: Privacy-First by Design
+
+The workflow is intentionally disconnected from the cloud. The extension pulls order history into **Local Storage**, providing a dashboard that is entirely private. No accounts, no sync, and no tracking—just your food history, kept on your machine.
+
+There are no accounts, no cloud sync, and no tracking. Food history is not deeply sensitive, but it is personal enough that I did not want to turn this into a hosted service.
+
+![Wolt Ratings extension popup for opening the local dashboard](/projects/wolt-ratings/extension.jpg)
+
+## Technical highlights
+
+The important decision was resisting the obvious product shape. A web app with login, backend database, and sync would have been easier to explain but worse for the actual use case.
+
+The project is split between:
+
+- Browser-extension `JavaScript`
+- Local browser storage
+- A small `Python` and `Flask` side for local data work
+- Local-first dashboard views
+
+Recent commits include a performance fix to skip redundant storage writes and badge updates. That is exactly the kind of issue browser extensions run into. Too much background work makes the extension feel sloppy even if the UI looks fine.
+
+![Wolt Ratings venue modal with previous orders and spending context](/projects/wolt-ratings/venue_modal.jpg)
+
+## Stack
+
+The stack is plain `JavaScript` for the extension, `Python` and `Flask` for local support tooling, and browser storage for persistence. There is no large frontend framework because the interaction model does not need one.
+
+## Status
+
+The current version works for reviewing my own order history and remembering which places are worth repeating. If I rebuilt it, I would define the import/update pipeline more rigorously and add better handling for Wolt UI changes. Any extension that depends on another product’s pages is living on borrowed stability.
+
 ![Wolt Ratings order dashboard view](/projects/wolt-ratings/dashboard.jpg)

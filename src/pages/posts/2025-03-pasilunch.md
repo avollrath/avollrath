@@ -1,23 +1,23 @@
 ---
-title: 'PasiLunch – AI-Normalized Lunch Menus for Slack and the Web'
+title: 'Rebuilding PasiLunch: Using Gemini AI to Normalize Messy Menu Data'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2025-03-02'
-description: 'A lunch menu service for Pasila that scrapes local restaurant menus, translates and normalizes them with Gemini, caches the result once per day, and serves it through both Slack and a web dashboard.'
+description: 'Traditional web scraping is fragile and inconsistent. I rebuilt my lunch bot into a full web service that uses Gemini AI to translate and structure messy restaurant menus into a clean, unified JSON feed that works every time.'
 author: 'André Vollrath'
 image:
   src: '../images/blog/pasilunch.jpg'
   alt: 'Illustration of PasiLunch fetching and displaying restaurant menus in Slack and on a web dashboard.'
 tags: ['node.js', 'express', 'slack', 'gemini', 'web scraping', 'seo', 'automation', 'project']
-teaser: 'What started as a small Slack lunch bot turned into a smarter daily service. <strong class="font-semibold text-dark-text">PasiLunch</strong> scrapes restaurant menus in Pasila, translates and normalizes them with <strong class="font-semibold text-dark-text">Gemini</strong>, caches the result once per day, and serves it through both a <strong class="font-semibold text-dark-text">Slack command</strong> and a clean <strong class="font-semibold text-dark-text">web dashboard</strong>.'
+teaser: 'Restaurant sites redesign constantly, making traditional scrapers brittle. By integrating <strong class="font-semibold text-dark-text">Gemini AI</strong>, I transformed PasiLunch from a simple script into a robust service that translates and normalizes inconsistent menu data into a predictable <strong class="font-semibold text-dark-text">JSON API</strong> and web dashboard.'
 ---
 
-## Introduction
+A few years ago I built [LunchBot](/posts/2024-03-lunchbot/), a simple Slack utility that fetched local restaurant menus. It was a useful prototype, but it was limited by the inherent messiness of the web. Restaurant sites redesign constantly, menus arrive in inconsistent formats, and prices are often buried in obscure HTML structures.
 
-A few years ago I built a [small Slack lunch bot](/posts/2024-03-lunchbot/) that fetched lunch menus from restaurants near my office. It worked, but it was basically just a quick script.
+I realized that to build a truly reliable service, I needed more than just better selectors—I needed a system that could "understand" the menus. So I rebuilt the project into **PasiLunch**, a service that uses **Gemini AI** to normalize, translate, and structure Pasila’s lunch menus into a consistent, predictable daily feed.
 
-Over time I wanted more from it. I wanted the menus to load faster, I wanted a simple web interface outside Slack, and I wanted a cleaner and more consistent result across restaurants whose menu formats were all over the place.
+## The Evolution: From Script to Service
 
-So I rebuilt the project into **PasiLunch**, a small service that collects lunch menus from restaurants in Pasila, normalizes and translates them into consistent English with **Gemini**, and makes them available both in Slack and through a web dashboard.
+PasiLunch represents a shift from raw scraping to intelligent data normalization. I wanted the menus to load instantly, look identical across different sources, and be available wherever the team was making decisions—whether that was a Slack channel or a dedicated web dashboard.
 
 ## Features
 

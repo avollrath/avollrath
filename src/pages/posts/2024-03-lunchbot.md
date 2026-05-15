@@ -1,35 +1,27 @@
 ---
-title: 'Building LunchBot: A Simple Slack Bot for Lunch Menus'
+title: 'Building a Slack Lunch Bot with Node.js and Cheerio'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2024-03-30'
-description: 'A small Node.js project that scrapes restaurant menus and posts them to Slack so our team can quickly see what’s available for lunch.'
+description: 'Stop the daily "where are we eating?" Slack spiral. I built a custom Node.js scraper that aggregates local restaurant menus into a single Slack command, saving the team from opening dozens of browser tabs every morning.'
 author: 'André Vollrath'
 image:
   src: '../images/blog/lunchbot.jpg'
   alt: 'Illustration of a lunch table with various dishes, representing LunchBot project.'
 tags: ['node.js', 'cheerio', 'slack', 'bot', 'project', 'workplace']
-teaser: 'A small side project that scrapes restaurant menus and posts them to Slack. <strong class="font-semibold text-dark-text">LunchBot</strong> was built with <strong class="font-semibold text-dark-text">Node.js</strong>, <strong class="font-semibold text-dark-text">Cheerio</strong>, and the <strong class="font-semibold text-dark-text">Slack API</strong> to make the daily lunch decision a little easier.'
+teaser: 'Lunch is a surprisingly frequent topic in office Slack channels. From a daily office annoyance to a functional Slack bot, <strong class="font-semibold text-dark-text">LunchBot</strong> uses <strong class="font-semibold text-dark-text">Node.js</strong> and <strong class="font-semibold text-dark-text">Cheerio</strong> to automate menu scraping, making the daily decision process as simple as a single slash command.'
 ---
 
 Lunch is a surprisingly frequent topic in office Slack channels.
 
-Someone asks where to eat, someone else checks a restaurant website, and a few minutes later the whole discussion starts again the next day.
+Someone asks where to eat, someone else checks a restaurant website, and a few minutes later the whole discussion starts again the next day. I built **LunchBot** because I wanted to kill that cycle of daily office friction with a bit of simple automation.
 
-I thought it would be fun to automate that process.
+## The Goal: One Command, All the Menus
 
-So I built **LunchBot**, a small Slack bot that fetches lunch menus from nearby restaurants and posts them directly into Slack.
+The idea was to take the friction out of the "where are we eating?" debate. Instead of opening multiple browser tabs every day, I wanted the team to be able to type a single command and see every nearby option instantly.
 
----
-
-## The Idea
-
-The idea was simple:
-
-1. Fetch lunch menus from restaurant websites.
-2. Extract the relevant menu information.
-3. Post the results into Slack.
-
-Instead of opening multiple websites every day, the whole team could just type a command and instantly see the available options.
+1. **Scrape** lunch menus from local restaurant websites.
+2. **Normalize** the data into a clean, readable format.
+3. **Post** the results directly into Slack where the conversation is already happening.
 
 ---
 
@@ -118,6 +110,6 @@ That eventually led to a rebuilt version of the project called [**PasiLunch**](/
 
 ---
 
-![LunchBot](../../images/blog/lunchbot.jpg)
+![LunchBot Slack command interface - Automating office lunch menu search](../../images/blog/lunchbot.jpg)
 
 _The original LunchBot fetching daily menus and posting them to Slack._

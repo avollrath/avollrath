@@ -1,7 +1,7 @@
 ---
 title: 'Janne Heikkinen Website'
-seoTitle: 'Janne Heikkinen Political Website Design and Frontend'
-summary: 'Janne Heikkinen website project covers political campaign design, Gatsby frontend work, GraphQL content, Sass styling, and responsive public UI.'
+seoTitle: 'Designing and Building a High-Performance Site for a Member of Parliament'
+summary: 'Turning a political identity into a usable public website. Built with Gatsby and GraphQL for speed, clarity, and content flexibility.'
 category: 'Websites'
 heroImage: './janne.jpg'
 heroImageAlt: 'Janne Heikkinen Website'
@@ -11,8 +11,36 @@ liveUrl: 'https://janneheikkinen.fi/'
 
 ---
 
-A **political website design** has to communicate trust quickly without turning into a generic campaign template. This project was a website for Janne Heikkinen, a Finnish member of parliament, built as a real client project with a small team.
+The **Janne Heikkinen Website** was a design and frontend challenge for a Finnish Member of Parliament. Political websites have a narrow, critical job: make a public figure’s positions and identity legible instantly, without turning the experience into "campaign-template" wallpaper.
 
-My role started with design direction and moved into frontend implementation after the prototype was approved. The portfolio archive in the external project folder still references the Janne case study alongside the original visual work, while the active portfolio entry captures the production stack: Gatsby, React, JavaScript, Sass, and GraphQL. That setup made sense for a content-driven public website where performance, responsive layout, reusable sections, and maintainable content queries mattered more than heavy application state.
+## The Strategy: Clarity Over Decoration
 
-The work covered visual structure, page composition, responsive behavior, and the practical details that client sites need: clear navigation, recognisable political identity, content sections that can be scanned quickly, and a frontend that another developer could continue working with. It is one of the earlier projects in the portfolio, but it remains useful because it shows the handoff point between UI design and production frontend work: the design was not only mocked up, it was translated into a real public site.
+For this project, my role spanned from initial design direction to final frontend implementation. The goal was to create a visual structure that felt authoritative yet accessible.
+
+The site focused on three pillars:
+- **Instant Legibility**: Clearly communicating who Janne is and what he stands for.
+- **Content Flexibility**: Ensuring the site could handle shifting political priorities and real-time news updates.
+- **Performance**: Using **Gatsby** to ensure static output and lightning-fast page loads, even on mobile devices.
+
+## The Implementation: Design-to-Code Continuity
+
+By handling both the design and the frontend, I was able to ensure that the visual rhythm survived the transition from mockup to production. I used **React** and **GraphQL** to build repeatable, content-driven sections that remained flexible enough to accommodate copy changes and varying image shapes without breaking the layout.
+
+Client sites have a specific kind of friction. Copy changes, images arrive in the wrong shape, and placeholder assumptions usually break. The page rhythm, navigation, responsive behavior, and content sections needed enough flexibility to handle that without redesigning every block.
+
+## Technical highlights
+
+The production stack was `Gatsby`, `React`, `JavaScript`, `Sass`, and `GraphQL`. For a content-driven public site, that made sense at the time:
+
+- Static output for fast page loads
+- `React` components for repeatable sections
+- `GraphQL` queries for content access
+- `Sass` for styling and responsive structure
+
+The external source evidence is partly archival. The older portfolio source references the Janne section, image, animation hooks, and live demo link, while the current portfolio metadata captures the stack. There is not a clean standalone repository with a modern commit history, so this case study is also about a stage of my work: moving from design files into shipped client-facing frontend.
+
+The main implementation tradeoff was keeping the page flexible without overbuilding it. Public political content changes often enough that components need to tolerate imperfect copy and image lengths, but not so often that the site needs application-level complexity.
+
+## Status
+
+If I built the same site now, I would probably use `Astro` and keep the content model simpler unless a CMS requirement demanded more. Still, the project did what it needed to do: turn a political identity into a usable public website, not just a polished mockup.

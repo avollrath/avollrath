@@ -53,8 +53,8 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 ---
 
 <Layout
-	title="André Vollrath – Frontend Developer | React & UI Engineer"
-	description="André Vollrath is a Helsinki-based frontend developer and UI/UX designer building fast web apps, interfaces, portfolios, and creative tools."
+	title="André Vollrath – Frontend Developer | React & UI Engineer in Helsinki"
+	description="André Vollrath is a Helsinki-based frontend developer and UI/UX designer building fast web apps, interfaces, and creative digital products."
 	seo={{
 		ogImage: latestRenderImageClay,
 		ogImageAlt: 'Latest render preview from André Vollrath portfolio',
@@ -62,7 +62,8 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 	}}
 >
 	<!-- Intro Section -->
-	<div
+	<section
+		aria-labelledby="hero-title"
 		class="hero-container border-gradient relative z-10 flex flex-col items-center rounded-md bg-white px-4 py-8 shadow-lg sm:flex-row sm:rounded-lg sm:px-12 sm:py-24 xl:col-span-3 2xl:col-span-9"
 	>
 		<div class="z-10 flex-1">
@@ -76,6 +77,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 			</p>
 
 			<h1
+				id="hero-title"
 				class="hero-header text-gradient text-center font-header text-5xl sm:text-6xl md:mr-4 lg:text-left lg:text-8xl"
 			>
 				Hi, I’m André.
@@ -115,7 +117,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 		<div class="avatar-wrapper max-lg:hidden" id="face">
 			<Image
 				src={profileImage}
-				alt="André's Avatar"
+				alt="André Vollrath - Portrait Avatar"
 				class="avatar-image"
 				decoding="async"
 				loading="eager"
@@ -123,44 +125,48 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 				format="avif"
 			/>
 			<div class="eye-container">
-				<Image src={eyeImage} alt="Left Eye" class="eye-left" decoding="async" loading="lazy" />
-				<Image src={eyeImage} alt="Right Eye" class="eye-right" decoding="async" loading="lazy" />
+				<Image src={eyeImage} alt="" class="eye-left" decoding="async" loading="lazy" />
+				<Image src={eyeImage} alt="" class="eye-right" decoding="async" loading="lazy" />
 				<Image
 					src={sunglassesImage}
-					alt="sunglasses"
+					alt=""
 					class="sunglasses"
 					decoding="async"
 					loading="lazy"
 				/>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<!-- Client logos marquee -->
-	<div
+	<section
+		aria-labelledby="worked-with-title"
 		class="client-logos-container border-gradient h-full rounded-md bg-white py-6 shadow-lg sm:rounded-lg sm:py-8 xl:col-span-3 xl:row-start-2 2xl:col-span-12 2xl:row-start-2"
 	>
 		<h2
+			id="worked-with-title"
 			class="mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
 		>
 			Worked with
 		</h2>
 		<ClientLogoMarquee logos={clientLogos} speed="32s" />
-	</div>
+	</section>
 
 	<!-- Now Section -->
-	<div
+	<section
+		aria-labelledby="now-title"
 		class="now-container border-gradient clickable-section flex h-full flex-col justify-between rounded-md bg-white px-4 py-8 text-xs shadow-lg sm:rounded-lg sm:p-12 sm:px-12 sm:text-base xl:col-span-1 xl:row-start-3 2xl:col-span-3 2xl:col-start-10 2xl:row-start-1"
 	>
 		<div class="now-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
+				id="now-title"
 				class="long-transition rounded-lg border-2 border-solid border-dark-text px-8 py-3 font-header text-xl tracking-wide sm:text-4xl"
 				transition:name="now-header"
 			>
 				Now
 			</h2>
-			<a href="/now" class="arrow-link">
+			<a href="/now" class="arrow-link" aria-label="Visit Now page">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-6 w-6 stroke-dark-text"
@@ -205,20 +211,22 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 		<p class="now-content text-center text-xs text-gray-400 sm:text-sm">
 			Last Updated: March 8, 2026
 		</p>
-	</div>
+	</section>
 
 	<!-- Latest Blog Section -->
-	<div
+	<section
+		aria-labelledby="blog-title"
 		class="blog-container border-gradient clickable-section group h-full rounded-md bg-white px-4 py-8 shadow-lg sm:rounded-lg sm:p-12 sm:text-base xl:col-span-2 xl:col-start-2 xl:row-span-2 xl:row-start-3 2xl:col-span-3 2xl:row-start-3"
 	>
 		<div class="blog-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
+				id="blog-title"
 				class="long-transition rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
 			>
 				Blog
 			</h2>
-			<a href={latestPost.url} class="arrow-link">
+			<a href={latestPost.url} class="arrow-link" aria-label="Read latest blog post">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-6 w-6 stroke-dark-text"
@@ -243,10 +251,12 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 			<div class="mb-6 w-full overflow-hidden rounded-md">
 				<Image
 					src={latestPost.frontmatter.image.src}
-					alt={latestPost.frontmatter.image.alt}
+					alt={latestPost.frontmatter.image.alt || 'Latest blog post cover'}
 					class="aspect-video w-full transform object-cover transition duration-1000 group-hover:scale-125"
 					decoding="async"
 					loading="lazy"
+					width={600}
+					height={337}
 				/>
 			</div>
 			<p
@@ -254,27 +264,30 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 				set:html={latestPost.frontmatter.teaser}
 			/>
 			<div class="flex justify-center">
-				<button
+				<a
+					href={latestPost.url}
 					class="mt-12 rounded-full bg-magenta px-10 py-4 text-lg font-semibold text-white transition-transform hover:scale-105"
-					>Read blog post</button
+					>Read blog post</a
 				>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<!-- About Section -->
-	<div
+	<section
+		aria-labelledby="about-title"
 		class="about-container clickable-section bright-section h-full rounded-md bg-about-gradient px-4 py-8 text-xs text-white shadow-lg sm:rounded-lg sm:p-12 xl:col-span-1 xl:row-start-4 2xl:col-span-3 2xl:col-start-4 2xl:row-start-3"
 	>
 		<div class="about-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
+				id="about-title"
 				class="long-transition rounded-lg border-2 border-solid border-white px-8 py-3 font-header text-xl tracking-wide sm:text-4xl"
 				transition:name="about-header"
 			>
 				About
 			</h2>
-			<a href="/about" class="arrow-link white">
+			<a href="/about" class="arrow-link white" aria-label="Visit About page">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-6 w-6 stroke-white"
@@ -302,20 +315,22 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 			closely with engineers and ensure that ideas translate smoothly from concept to working
 			software.
 		</p>
-	</div>
+	</section>
 
 	<!-- Latest Render Section -->
-	<div
+	<section
+		aria-labelledby="render-title"
 		class="render-container border-gradient clickable-section latest-render-section h-full rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-3 xl:row-start-5 2xl:col-span-6 2xl:col-start-7 2xl:row-start-3"
 	>
 		<div class="render-content mb-6 flex items-center justify-between">
 			<span class="arrow invisible"> </span>
 			<h2
+				id="render-title"
 				class="latest-render-header long-transition rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-left sm:text-4xl"
 			>
 				Latest render
 			</h2>
-			<a href="/renders" class="arrow-link">
+			<a href="/renders" class="arrow-link" aria-label="Visit Renders page">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-6 w-6 stroke-dark-text"
@@ -343,31 +358,39 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 						playsinline
 						controls
 						preload="none"
-						aria-label="Latest Render"
+						aria-label="Latest 3D Render Video"
 					/>
 				) : (
 					<>
 						<Image
 							src={latestRenderImage}
-							alt="Latest Render"
+							alt="Latest 3D Render"
 							transition:name="latest-render"
 							class="render-image rounded-md"
 							densities={[1, 1.5, 2]}
 							decoding="async"
 							loading="lazy"
 						/>
-						<Image src={latestRenderImageClay} alt="Wireframe Render" class="wireframe-image" />
+						<Image
+							src={latestRenderImageClay}
+							alt="Wireframe Render"
+							class="wireframe-image"
+							width={800}
+							height={450}
+						/>
 					</>
 				)
 			}
 		</div>
-	</div>
+	</section>
 
 	<!-- Spotify Section -->
-	<div
+	<section
+		aria-labelledby="spotify-title"
 		class="spotify-container border-gradient flex h-full flex-col items-center overflow-visible rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-2 xl:row-start-6 2xl:col-span-9 2xl:row-start-4"
 	>
 		<h2
+			id="spotify-title"
 			class="long-transition mb-8 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
 		>
 			Spotify Top 10 <span
@@ -375,7 +398,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 				>(last 6 months)</span
 			>
 		</h2>
-		<div class="flex w-full flex-row flex-wrap justify-center gap-2">
+		<div class="flex min-h-[120px] w-full flex-row flex-wrap justify-center gap-2">
 			{
 				topTracks.map((track) =>
 					track && track.external_urls && track.album && track.album.images[2] ? (
@@ -385,6 +408,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 								target="_blank"
 								rel="noopener noreferrer"
 								title={`<strong class="font-semibold">${track.name}</strong> - ${track.artists.map((artist) => artist.name).join(', ')}`}
+								aria-label={`Listen to ${track.name} by ${track.artists[0].name} on Spotify`}
 							>
 								<Image
 									src={track.album.images[2].url}
@@ -401,13 +425,15 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 				)
 			}
 		</div>
-	</div>
+	</section>
 
 	<!-- Tech stack -->
-	<div
+	<section
+		aria-labelledby="tech-stack-title"
 		class="techstack-container border-gradient z-10 h-full overflow-hidden rounded-md bg-white from-dark-card to-darker-card pt-12 shadow-lg dark:bg-gradient-to-r sm:rounded-lg xl:col-span-3 xl:row-start-8 2xl:col-span-9 2xl:row-start-5"
 	>
 		<h2
+			id="tech-stack-title"
 			class="mx-auto mb-8 w-fit rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
 		>
 			Tech stack
@@ -430,13 +456,15 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 				'Git'
 			]}
 		/>
-	</div>
+	</section>
 
 	<!-- Links Section -->
-	<div
+	<section
+		aria-labelledby="links-title"
 		class="links-container border-gradient flex h-full flex-col items-center rounded-md bg-white from-dark-card to-darker-card px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-6 2xl:col-span-3 2xl:row-start-5"
 	>
 		<h2
+			id="links-title"
 			class="long-transition mb-4 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
 		>
 			Links
@@ -448,6 +476,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 					target="_blank"
 					rel="noopener noreferrer"
 					title="GitHub"
+					aria-label="André Vollrath on GitHub"
 				>
 					<Image
 						src={githubLogo}
@@ -455,6 +484,8 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 						class="h-auto w-24 rounded-md transition-transform duration-300 hover:scale-105 3xl:w-32"
 						decoding="async"
 						loading="lazy"
+						width={128}
+						height={128}
 					/>
 				</a>
 				<a
@@ -462,6 +493,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 					target="_blank"
 					rel="noopener noreferrer"
 					title="Instagram"
+					aria-label="André Vollrath on Instagram"
 				>
 					<Image
 						src={instagramLogo}
@@ -469,6 +501,8 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 						class="h-auto w-24 rounded-md transition-transform duration-300 hover:scale-105 3xl:w-32"
 						decoding="async"
 						loading="lazy"
+						width={128}
+						height={128}
 					/>
 				</a>
 				<a
@@ -476,6 +510,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 					target="_blank"
 					rel="noopener noreferrer"
 					title="LinkedIn"
+					aria-label="André Vollrath on LinkedIn"
 				>
 					<Image
 						src={linkedinLogo}
@@ -483,6 +518,8 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 						class="h-auto w-24 rounded-md transition-transform duration-300 hover:scale-105 3xl:w-32"
 						decoding="async"
 						loading="lazy"
+						width={128}
+						height={128}
 					/>
 				</a>
 				<a
@@ -490,6 +527,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 					target="_blank"
 					rel="noopener noreferrer"
 					title="Spotify"
+					aria-label="André Vollrath on Spotify"
 				>
 					<Image
 						src={spotifyLogo}
@@ -497,17 +535,21 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 						class="h-auto w-24 rounded-md transition-transform duration-300 hover:scale-105 3xl:w-32"
 						decoding="async"
 						loading="lazy"
+						width={128}
+						height={128}
 					/>
 				</a>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<!-- Contact Section -->
-	<div
+	<section
+		aria-labelledby="contact-title"
 		class="contact-container border-gradient z-10 flex h-full flex-col justify-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-1 xl:col-start-3 xl:row-start-7 2xl:col-span-4 2xl:col-start-1 2xl:row-start-6"
 	>
 		<h2
+			id="contact-title"
 			class="long-transition mx-auto mb-6 w-fit rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl tracking-wide sm:text-4xl"
 		>
 			Get in touch
@@ -515,34 +557,32 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 		<div id="contact" class="flex flex-1 items-center justify-center">
 			<ContactForm />
 		</div>
-	</div>
+	</section>
 
 	<!-- Based in Section -->
-	<div
+	<section
+		aria-labelledby="location-title"
 		class="based-in-container border-gradient z-10 flex h-full flex-col items-center rounded-md bg-white px-4 py-8 shadow-lg dark:bg-gradient-to-r sm:rounded-lg sm:p-12 xl:col-span-2 xl:col-start-1 xl:row-start-7 2xl:col-span-8 2xl:row-start-6"
 	>
 		<h2
+			id="location-title"
 			class="long-transition mb-12 rounded-lg border-2 border-solid border-dark-text px-8 py-3 text-center font-header text-xl sm:text-4xl"
 		>
 			Based in
 		</h2>
 		<div class="flex flex-col items-center justify-center xl:flex-row 2xl:flex-row">
-			<!-- <img
-				src={`basedin.svg`}
-				alt="Globe"
-				class="mb-12 mr-0 h-auto w-72 invert-[.5] md:py-12 xl:mr-12 2xl:w-96"
-			/> -->
 			<div class="mb-12 mr-0 h-auto w-72 opacity-60 xl:mb-0 xl:mr-12 2xl:w-96">
 				<lottie-player
 					src="https://lottie.host/e08917be-738c-4d39-b834-a4302a5a93c0/5zKSJTrRJ7.json"
-					background="#FFFFFF"
+					background="transparent"
 					speed="1"
 					style="width: 100%; height: 100%"
 					loop
 					autoplay
 					direction="1"
 					mode="normal"
-					id="lottie-player"></lottie-player>
+					id="lottie-player"
+					aria-label="Animated spinning globe"></lottie-player>
 			</div>
 			<div class="grid grid-flow-row gap-2">
 				<p
@@ -552,7 +592,7 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 				</p>
 			</div>
 		</div>
-	</div>
+	</section>
 </Layout>
 
 <script>

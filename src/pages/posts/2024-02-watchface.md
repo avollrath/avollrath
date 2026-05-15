@@ -1,26 +1,22 @@
 ---
-title: 'A VS Code–Inspired Watch Face for Garmin Forerunner 55'
+title: 'Designing a VS Code-Inspired Watch Face for Garmin (Monkey C)'
 pubDate: 2022-08-08
 author: 'André Vollrath'
 layout: ../../layouts/BlogPost.astro
 image:
   src: '../images/blog/garmin.jpg'
   alt: 'Garmin watch face inspired by the VS Code editor interface.'
-teaser: 'A small experiment combining two hobbies: coding and running. This custom Garmin watch face displays fitness data using a layout inspired by the <strong class="font-semibold text-dark-text">Visual Studio Code editor</strong>.'
-description: 'Designing a custom Garmin watch face inspired by the Visual Studio Code interface using the Connect IQ SDK.'
+teaser: 'I combined my love for coding and running by building a custom watch face for my <strong class="font-semibold text-dark-text">Garmin Forerunner</strong>. It displays my fitness metrics as properties of a <strong class="font-semibold text-dark-text">JavaScript object</strong>, complete with monospaced typography and editor-style syntax highlighting.'
+description: 'I combined my love for coding and running by building a custom watch face for my Garmin Forerunner. It displays my fitness metrics as properties of a JavaScript object, complete with monospaced typography and editor-style syntax highlighting.'
 ---
 
-Sometimes the most fun projects come from combining unrelated interests.
+Sometimes the most satisfying projects come from combining entirely unrelated interests. In this case, it was **running and coding**. I wanted to build a custom watch face for my **Garmin Forerunner 55** that moved beyond standard gauges and numbers. I wanted it to look like a code editor—specifically, like a snippet of JavaScript running on my wrist.
 
-In this case it was **running and coding**.
+The result is a watch face that frames your daily life as a structured object. Your heart rate, step count, and sunrise times aren't just numbers; they're properties of a `WatchInfo` instance, complete with monospaced typography and syntax highlighting that any developer would recognize.
 
-I wanted to build a custom watch face for my **Garmin Forerunner 55** that looked like a code editor. The idea was simple: display fitness data as if it were properties inside a JavaScript object.
+## The Goal: Syntax Highlighting for the Soul
 
-The result is a watch face that feels a bit like having **VS Code running on your wrist**.
-
----
-
-## The Idea
+The goal was to build an interface that sells the "code editor" illusion without sacrificing glanceability. A watch face has to communicate in a fraction of a second, often while you're mid-stride on a run. By using a monospaced font and a strict color palette, I was able to create a layout that feels technically dense but remains surprisingly easy to read.
 
 Instead of the usual watch layout with large numbers and icons, the interface mimics a small code snippet.
 

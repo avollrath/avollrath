@@ -1,8 +1,8 @@
 ---
-title: 'How I Built My Frontend Developer Portfolio with Astro'
+title: 'How I Built My Frontend Portfolio with Astro, Tailwind, and GSAP'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2026-03-10'
-description: 'A walkthrough of how I built my frontend developer portfolio with Astro, combining static performance, reusable content sections, image optimization, and a design-led UI.'
+description: 'A walkthrough of the tech stack and design decisions behind this website. I explain why I chose Astro for its speed and content-first approach, and how I used GSAP and a bento-grid layout to make the site feel tactile and unique.'
 author: 'André Vollrath'
 image:
   src: '../images/blog/portfolio.jpg'
@@ -18,28 +18,16 @@ tags:
     'static site',
     'project'
   ]
-teaser: 'My portfolio site is built with <strong class="font-semibold text-dark-text">Astro</strong> to keep it fast, flexible, and easy to evolve. This post breaks down how I structured the site, why Astro fits a <strong class="font-semibold text-dark-text">frontend developer portfolio</strong> so well, and the features I chose to make it feel personal without sacrificing performance.'
+teaser: 'Every portfolio rebuild is an opportunity to experiment. This version of my site uses <strong class="font-semibold text-dark-text">Astro</strong> for static performance, <strong class="font-semibold text-dark-text">Tailwind CSS</strong> for styling, and <strong class="font-semibold text-dark-text">GSAP</strong> for interactive details, all tied together in a playful, bento-grid layout.'
 ---
 
-At some point every frontend developer ends up rebuilding their portfolio.
+At some point, every frontend developer ends up rebuilding their portfolio. It’s an occupational hazard. But for this iteration, I wanted to move beyond the standard "engineering resume" and build something that felt as visually playful as it was technically sharp.
 
-That was definitely true for me.
+I wanted a site that could handle multiple identities: a project showcase, a technical blog, and a personal playground for music and books. **Astro** ended up being the perfect backbone for this "meta-portfolio," allowing me to ship zero-JavaScript by default while still having the power to sprinkle in interactive GSAP animations where they added real personality.
 
-I wanted a site that could do a few things at once:
+## The Strategy: Design-Led Engineering
 
-- present my work clearly
-- feel personal rather than template-driven
-- stay fast and lightweight
-- give me room to experiment with small dynamic features
-- be easy to maintain without turning into a full CMS project
-
-I also wanted the site to feel **visually playful and immediately recognizable**.
-
-Not just fast.  
-Not just clean.  
-Not just "professional" in the generic portfolio-template sense.
-
-For this version of my site, **Astro** ended up being the right fit.
+The goal was to build a site that felt **visually alive and immediately recognizable**. Not just fast, but opinionated. I wanted to avoid the "generic grayscale" look of modern dev portfolios and instead lean into bold typography, vibrant accents, and a non-linear bento-grid layout that invites exploration.
 
 It gives me the simplicity of a static site, but still leaves room for interactive sections, reusable components, and content-driven pages like the [blog](/blog/), [projects page](/projects/), reading lists, and [Now page](/now/).
 

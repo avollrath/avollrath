@@ -44,12 +44,16 @@ export const GET: APIRoute = async ({ site }) => {
 	}))
 
 	const staticEntries = staticRoutes.map((route) => ({
-		loc: new URL(route, site).toString()
+		loc: new URL(route, site).toString(),
+		priority: route === '/' ? 1.0 : 0.8,
+		changefreq: 'weekly'
 	}))
 
 	const projects = await getCollection('projects')
 	const projectEntries = projects.map((project) => ({
-		loc: new URL(`/projects/${project.id}/`, site).toString()
+		loc: new URL(`/projects/${project.id}/`, site).toString(),
+		priority: 0.7,
+		changefreq: 'monthly'
 	}))
 
 	const entries = [...staticEntries, ...postEntries, ...tagEntries, ...projectEntries]
@@ -59,6 +63,8 @@ export const GET: APIRoute = async ({ site }) => {
 			(entry) => `<url>
   <loc>${entry.loc}</loc>${entry.lastmod ? `
   <lastmod>${entry.lastmod}</lastmod>` : ''}
+  <changefreq>${entry.changefreq || 'monthly'}</changefreq>
+  <priority>${entry.priority || 0.5}</priority>
 </url>`
 		)
 		.join('\n')

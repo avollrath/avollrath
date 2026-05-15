@@ -1,8 +1,8 @@
 ---
-title: 'Codex Hue Notifier – Turning My Desk Lamp into an AI Status Light'
+title: 'Using Philips Hue as a Status Light for VS Code AI Tasks'
 layout: ../../layouts/BlogPost.astro
 pubDate: '2026-03-12'
-description: 'A tiny automation that connects Codex in VS Code with a Philips Hue lamp so my desk light flashes whenever Codex finishes a task.'
+description: 'I connected the Codex notify hook in VS Code to my Philips Hue desk lamps using a simple PowerShell script. Now, my lights flash whenever a long-running AI task is complete, giving me a subtle ambient signal to return to my terminal.'
 author: 'André Vollrath'
 image:
   src: '../images/blog/codex-hue.jpg'
@@ -18,20 +18,16 @@ tags:
     'developer tools',
     'project'
   ]
-teaser: 'While working with <strong class="font-semibold text-dark-text">Codex</strong> in VS Code I often start a task and then look away from the screen. So I connected the Codex <strong class="font-semibold text-dark-text">notify hook</strong> to a <strong class="font-semibold text-dark-text">Philips Hue lamp</strong> and turned it into a tiny AI status light that flashes whenever Codex finishes.'
+teaser: 'Sometimes the most satisfying projects are the tiny ones. I connected the <strong class="font-semibold text-dark-text">Codex notify hook</strong> in <strong class="font-semibold text-dark-text">VS Code</strong> to my <strong class="font-semibold text-dark-text">Philips Hue lights</strong> using a simple PowerShell script to create an ambient status indicator for AI tasks.'
 ---
 
-Sometimes the most satisfying projects are the tiny ones.
+While working with the Codex extension in VS Code, I noticed a recurring habit: I would start a complex task and then immediately look away from the screen. Whether I was grabbing a coffee or reading documentation, I found myself tethered to the screen just to see when the agent was done. I wanted a way to "feel" the completion without having to watch the progress bar.
 
-While working with the Codex extension in VS Code, I noticed that I often start a task and then immediately look away from the screen. Maybe I'm reading something else, maybe I'm grabbing coffee, maybe I'm just waiting.
+Since I already have Philips Hue lights on my desk, the solution was obvious: when Codex finishes a task, my desk lamp should flash. No intrusive notifications, no extra app windows—just a subtle, physical signal in the room that tells me it’s time to head back to the terminal.
 
-I wanted a simple signal that tells me when Codex is done.
+## The Goal: Ambient Feedback for AI
 
-Since I already had Philips Hue lights on my desk, the solution was obvious: when Codex finishes a task, my desk lamp should flash.
-
-No notifications.  
-No extra apps.  
-Just a small physical signal in the room.
+This project is a small exercise in ambient feedback. By connecting the Codex `notify hook` to a local PowerShell script, I turned my desk lamp into a dedicated AI status indicator. It’s a tiny bit of automation that makes the workspace feel more reactive and interactive, moving the feedback loop off the screen and into the physical environment.
 
 <div class="my-8">
   <video
