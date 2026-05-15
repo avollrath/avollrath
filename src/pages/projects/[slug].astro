@@ -15,6 +15,7 @@ const { project } = Astro.props
 const { Content } = await render(project)
 const projectUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString()
 const projectImageUrl = new URL(project.data.heroImage.src, Astro.site ?? Astro.url).toString()
+const pageTitle = project.data.seoTitle ?? `${project.data.title} by André Vollrath`
 const projectStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'CreativeWork',
@@ -35,7 +36,7 @@ const projectStructuredData = {
 ---
 
 <Layout
-	title={`${project.data.title} by André Vollrath`}
+	title={pageTitle}
 	description={project.data.summary}
 	seo={{
 		ogImage: project.data.heroImage,

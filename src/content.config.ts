@@ -6,6 +6,7 @@ const projects = defineCollection({
 	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
+			seoTitle: z.string().optional(),
 			summary: z.string(),
 			category: z.enum(['Apps', 'Games', 'Websites', 'Design']),
 			heroImage: image(),
