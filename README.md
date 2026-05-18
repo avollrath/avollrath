@@ -1,8 +1,10 @@
 ## Hi 👋 I'm André
 
-I'm a **frontend developer with a background in design**, currently building interfaces for a recruitment SaaS platform at TalentAdore.
+I'm a **Design Engineer at Mainmatter** with a background in design and front-end development.
 
-I enjoy working at the intersection of **design and implementation** — turning product ideas into clean, usable interfaces.
+I enjoy working at the intersection of **design and implementation** — taking web projects from early UI/UX concepts, flows, wireframes, and prototypes through to responsive HTML/CSS interfaces.
+
+My work spans **design systems, component libraries, technical design guidelines, stakeholder collaboration, and product UI**, with some marketing and business development visuals along the way.
 
 Before moving fully into development I worked in **graphic design and advertising**, which heavily influences how I approach UI and product design today.
 
