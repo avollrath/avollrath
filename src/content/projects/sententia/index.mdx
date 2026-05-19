@@ -1,0 +1,34 @@
+---
+title: 'Sententia'
+seoTitle: 'Sententia: Building a Minimalist Quote Display for Supernote'
+summary: 'Give your highlights a second home. A minimalist React app for browsing Supernote reading highlights on a clean, full-screen display.'
+category: 'Apps'
+heroImage: './hero.jpg'
+heroImageAlt: 'Sententia quote display with full-screen background'
+techStackLogos: ['React.svg', 'TypeScript.svg', 'Vite.svg', 'Express.js.svg']
+liveUrl: 'https://avollrath.github.io/supernote-quote/'
+order: 2
+mockup: 'laptop'
+---
+
+**Sententia** is a full-screen quote browser for reading highlights exported from the Supernote Nomad. The Supernote is great for deep reading, but browsing through hundreds of saved passages on an e-ink display is slow when you're looking for something specific or just want to stumble across something useful.
+
+<div className="my-8">
+  ![Sententia quote display with full-screen background](./hero.jpg)
+</div>
+
+## What it does
+
+You export highlights from the device, drop them in, and browse. Individual quotes show up in a clean typographic layout — no dashboard, no tagging system, no organisation overhead. The interaction is close to passive: move through saved passages without deciding whether you're "managing your knowledge."
+
+The display is intentionally minimal. Quotes need typography, spacing, and enough controls to browse. They don't need a productivity layer around them.
+
+## The technical shape
+
+<span class="text-magenta">**Express**</span> and `cors` handle the small server side for parsing and normalization. <span class="text-magenta">**React**</span> and <span class="text-magenta">**Vite**</span> handle the frontend. <span class="text-magenta">**TypeScript**</span> keeps quote shapes explicit so the parser and the display stay in agreement.
+
+The narrow Supernote support is intentional. Generalizing too early would mostly mean collecting edge cases for devices I don't use.
+
+## Where it stands
+
+The main fragility is the export format — if Supernote changes it, the parser changes too. If I rebuilt it I'd make the import format more explicit and keep fixture files around for testing. For now the boundedness is what keeps it pleasant to use.
