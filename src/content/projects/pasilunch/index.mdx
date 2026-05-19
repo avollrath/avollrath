@@ -1,0 +1,32 @@
+---
+title: 'PasiLunch'
+seoTitle: 'PasiLunch: Scaping and Normalizing Menus with Node.js and AI'
+summary: 'Aggregate messy Pasila lunch menus into a clean Slack command and API. Uses Gemini AI to parse even the most brittle restaurant sites.'
+category: 'Apps'
+heroImage: './pasilunch.jpg'
+heroImageAlt: 'PasiLunch website'
+techStackLogos: ['HTML5.svg', 'JavaScript.svg', 'CSS 3.svg', 'Node.js.svg', 'Cheerio.svg', 'Express.js.svg']
+order: 7
+liveUrl: 'https://lunchbot-btnu.onrender.com/'
+mockup: 'laptop'
+---
+
+**PasiLunch** aggregates the local Pasila lunch menus into a single readable view. I built it because checking half a dozen restaurant websites every morning to find a decent office lunch was a waste of ten minutes, especially when every menu is published in a different format.
+
+## The scraping problem
+
+Restaurant sites are messy. Some publish clean HTML lists; others mix Finnish and English, bury prices in odd places, or include weekly notes and dietary labels that are useful to humans but awkward for parsers. Building a strict scraper means collecting one-off exceptions until you give up.
+
+The flow is: scrape each restaurant source, parse HTML with <span class="text-magenta">**Cheerio**</span>, parse structured sources with <span class="text-magenta">**xml2js**</span> where needed, then normalize names, prices, language, and categories. For the cases where scraping alone is too brittle, I use <span class="text-magenta">**Gemini**</span> via `@google/genai` to normalize the output. I wouldn't reach for an LLM for a deterministic problem, but lunch menus are messy enough that it earns its place here.
+
+## Where decisions land
+
+Slack support was an obvious addition — a lunch app is only useful if it appears where the decision happens. The Slack command means the team can ask for menus without leaving chat; the web view is there for browsing.
+
+## Stack
+
+The stack is <span class="text-magenta">**Express**</span>, <span class="text-magenta">**JavaScript**</span>, <span class="text-magenta">**Cheerio**</span>, <span class="text-magenta">**xml2js**</span>, <span class="text-magenta">**dotenv**</span>, Slack's Web API package, and <span class="text-magenta">**Gemini**</span> through `@google/genai`.
+
+## Where it stands
+
+The main limitation is that PasiLunch is only as stable as the restaurant sites it reads. If they redesign, selectors break. If I rebuilt it I'd make source health more visible and add better diagnostics for stale or failed menus.
