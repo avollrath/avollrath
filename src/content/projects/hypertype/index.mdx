@@ -1,0 +1,36 @@
+---
+title: 'HyperType'
+seoTitle: 'HyperType: A Fast-Paced Godot Typing Game with Arcade Combat'
+summary: 'Typing practice doesn't have to be admin work. Stay alive through enemy waves in this neon arcade typing loop built in Godot.'
+category: 'Games'
+heroImage: './hypertype.jpg'
+heroImageAlt: 'HyperType neon arcade typing game'
+techStackLogos: ['Godot.svg']
+iframeSrc: 'https://avollrath.github.io/HyperType/'
+buttonText: 'Play the game'
+order: 4
+liveUrl: 'https://avollrath.github.io/HyperType/'
+mockup: 'laptop'
+---
+
+**HyperType** is a typing game where words are targets and enemies are the deadline. You type to shoot — type fast enough and you survive; hesitate and you don't. The framing turns what's usually a self-improvement exercise into something that actually creates pressure.
+
+## The mechanic
+
+Most typing practice measures your accuracy in a calm, consequence-free box. HyperType frames the same input as the only thing between you and dying. It sounds minor, but the difference in focus is noticeable. The neon aesthetic reinforces it: high contrast, no visual noise, everything legible under pressure.
+
+The loop is: enemies spawn with words above them, you type the word to fire, waves escalate. That's it. Simple enough that the game doesn't get in its own way.
+
+## Why Godot
+
+I chose <span class="text-magenta">**Godot**</span> because input timing, enemy state management, and particle-heavy animations are a lot more tractable in a game engine than in a web framework. The source folder is asset-heavy in the way small games tend to be — sprite sheets, enemy animations, UI textures, and web export assets.
+
+The biggest challenge was input feel. A typing game can be technically correct and still feel bad if feedback lands late, prompts are hard to read, or the restart flow is slow. The boring parts matter: prompt readability, hit feedback timing, enemy animation pacing, sound triggering without stutter, and fast recovery after a failed run.
+
+## Stack
+
+The stack is <span class="text-magenta">**Godot**</span> for the game and a browser export for distribution. There's no interface layer outside the game itself, so there was no reason to wrap it in anything else.
+
+## Where it stands
+
+The current version is playable and represents the idea well. If I spent another round on it I'd tune progression and difficulty scaling more carefully. The mechanics work; long-term balance is where small arcade games either become sticky or start to feel repetitive.
