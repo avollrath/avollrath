@@ -1,0 +1,39 @@
+---
+title: 'Wolt Ratings'
+seoTitle: 'Wolt Ratings: A Privacy-First Chrome Extension for Foodies'
+summary: 'Remember what was actually good. A local-first dashboard for rating Wolt orders, adding private notes, and tracking your tastes.'
+category: 'Apps'
+heroImage: './wolt-ratings.jpg'
+heroImageAlt: 'Wolt Ratings order history dashboard'
+techStackLogos: ['Python.svg', 'Flask.svg', 'JavaScript.svg']
+order: 1
+liveUrl: 'https://github.com/avollrath/wolt-ratings'
+mockup: 'laptop'
+---
+
+**Wolt Ratings** is a Chrome extension that turns your Wolt order history into a private ratings dashboard. Wolt knows what you ordered, but it doesn't help you remember whether the restaurant was worth repeating, which dish was the standout, or how often you've made the same lazy delivery decision.
+
+## What it does
+
+- **Venue search and filtering**: Find that one place you liked six months ago
+- **Private ratings and notes**: Your honest opinion, not a public review
+- **Spending context**: A view of your delivery habits that doesn't leave your machine
+
+The extension pulls order history into browser local storage, so the data stays on your machine. No accounts, no cloud sync.
+
+<div className="grid grid-cols-2 gap-4 my-8">
+  ![Wolt Ratings extension popup for opening the local dashboard](./extension.jpg)
+  ![Wolt Ratings venue modal with previous orders and spending context](./venue_modal.jpg)
+</div>
+
+## The key decision
+
+The obvious product shape would have been a web app with login, a backend database, and sync. That would have been easier to explain but worse for the actual use case. Food history isn't sensitive data, but it's personal enough that I didn't want to host it. Browser storage is the right boundary here.
+
+## Stack
+
+The extension is <span class="text-magenta">**JavaScript**</span> with browser storage for persistence. A small <span class="text-magenta">**Python**</span> and <span class="text-magenta">**Flask**</span> side handles local data work. There's no large frontend framework because the interaction model doesn't need one.
+
+## Where it stands
+
+The current version works for reviewing order history and remembering which places are worth repeating. The fragile part is that any extension depending on another product's page structure is living on borrowed stability — if Wolt changes their UI, the scraping breaks. If I rebuilt it I'd define the import and update pipeline more rigorously and build in better handling for Wolt UI changes.
