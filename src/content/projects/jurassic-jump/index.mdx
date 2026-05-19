@@ -1,0 +1,30 @@
+---
+title: 'Jurassic Jump'
+seoTitle: 'Building a Godot Platformer with Claymation-Style Visuals'
+summary: 'From a hand-rolled JS prototype to a polished Godot platformer. Features tuned physics and a distinct claymation-inspired art style.'
+category: 'Games'
+heroImage: './jurassic-jump.jpg'
+heroImageAlt: 'Jurassic Jump Game'
+techStackLogos: ['Godot.svg']
+iframeSrc: 'https://avollrath.github.io/jurassic-jump/'
+buttonText: 'Click to load game'
+order: 8
+liveUrl: 'https://avollrath.github.io/jurassic-jump/'
+mockup: 'laptop'
+---
+
+**Jurassic Jump** is a dinosaur-themed platformer that started as a JavaScript exercise where I was hand-rolling gravity and collision physics, and ended up as a <span class="text-magenta">**Godot**</span> project once it became clear I was spending more time on the engine than on the game.
+
+## Moving to Godot
+
+Writing your own physics loop is a useful exercise up to the point where you actually want to make a game. Switching to <span class="text-magenta">**Godot**</span> meant I could stop worrying about the plumbing — scene composition, collision shapes, sprite animation, level iteration — and start tuning the things that affect how the game feels.
+
+The hard part was never the mechanic. It was getting the standard pieces to feel acceptable: jump height, acceleration, collision boundaries, camera framing, level spacing. These things matter more than they look like they should.
+
+## The claymation constraint
+
+The visual direction was claymation-style sprites with layered parallax backgrounds. That wasn't just aesthetic — once the art had that much visual weight, the movement model had to be slower and more readable than a twitch platformer. The art and mechanics had to agree with each other, which made both more constrained and more intentional.
+
+## Where it stands
+
+Jurassic Jump is a small learning game, not a commercial platformer. It made platformer physics concrete, moved a prototype into a real engine, and produced a browser-playable export. If I rebuilt it I'd define the movement model and level progression before producing too many visual assets.
