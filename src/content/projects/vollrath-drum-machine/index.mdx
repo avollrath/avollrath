@@ -1,0 +1,35 @@
+---
+title: 'Vollrath Drum Machine'
+seoTitle: 'Browser Drum Machine: Building a High-Performance Sequencer with GSAP'
+summary: 'A tactile 16-step sequencer built for the browser. Focuses on immediate feedback, timing precision, and polished GSAP animations.'
+category: 'Apps'
+heroImage: './drum-machine.jpg'
+heroImageAlt: 'Vollrath Drum Machine browser sequencer'
+techStackLogos: ['HTML5.svg', 'JavaScript.svg', 'CSS 3.svg', 'GSAP.svg']
+iframeSrc: 'https://avollrath.github.io/drum-machine/'
+iframeLayout: 'drum-machine'
+buttonText: 'Launch drum machine'
+order: 9
+liveUrl: 'https://avollrath.github.io/drum-machine/'
+mockup: 'laptop'
+---
+
+**Vollrath Drum Machine** is a 16-step browser sequencer. I built it to find out whether a drum machine could feel immediate and tactile using only browser primitives — no native app, no Web Audio framework, just plain <span class="text-magenta">**JavaScript**</span> and <span class="text-magenta">**GSAP**</span>.
+
+## Timing is the whole project
+
+A sequencer UI can look fine in a screenshot and still feel wrong if the playhead drifts or step toggles lag. The visual and audio state have to line up. Getting that right in the browser — with tab throttling, autoplay rules, and varying device behaviour — is more annoying than it sounds.
+
+<span class="text-magenta">**GSAP**</span> handles the interface motion because a drum machine benefits from physical feedback. The lights change, active steps read clearly, controls respond quickly, and presets switch without confusing the grid. That feel was worth spending time on.
+
+## No framework by choice
+
+I avoided adding a large framework. It would have mostly moved the interesting timing problems behind an abstraction rather than solving them. The mental model is small enough to hold in your head: a pattern is sixteen steps, a channel owns its active steps and volume, the transport owns tempo and playhead position, and presets are named starting states.
+
+## Stack
+
+<span class="text-magenta">**JavaScript**</span>, <span class="text-magenta">**HTML**</span>, <span class="text-magenta">**CSS**</span>, and <span class="text-magenta">**GSAP**</span>. Pattern persistence uses `localStorage`.
+
+## Where it stands
+
+The current version is embedded in the portfolio as an interactive demo. If I rebuilt it I'd isolate the timing engine more cleanly and add text-based pattern export. I wouldn't make it much bigger. Browser audio always deserves more testing than it gets — different devices and tab states can make a small instrument feel less deterministic than the code suggests.
