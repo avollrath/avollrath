@@ -1,0 +1,30 @@
+---
+title: 'Janne Heikkinen Website'
+seoTitle: 'Designing and Building a High-Performance Site for a Member of Parliament'
+summary: 'Turning a political identity into a usable public website. Built with Gatsby and GraphQL for speed, clarity, and content flexibility.'
+category: 'Websites'
+heroImage: './janne.jpg'
+heroImageAlt: 'Janne Heikkinen Website'
+techStackLogos: ['React.svg', 'SASS.svg', 'JavaScript.svg', 'GraphQL.svg', 'Gatsby.svg']
+order: 10
+liveUrl: 'https://janneheikkinen.fi/'
+
+---
+
+**Janne Heikkinen Website** is a public-facing site for a Finnish Member of Parliament. Political websites have a narrow job: make a person's positions and identity legible quickly, without the page feeling like a campaign template from 2012.
+
+## Design and frontend, same hands
+
+My role covered initial design direction through to final frontend implementation. Handling both meant the visual rhythm from the mockup actually survived into production — there was no handoff gap where spacing decisions get quietly abandoned.
+
+The main challenge was making the layout flexible enough for a political content cycle. Copy changes on short notice, images arrive in the wrong shape, and the page needs to handle all of that without breaking. I used <span class="text-magenta">**React**</span> components and <span class="text-magenta">**GraphQL**</span> queries to build repeatable, content-driven sections that could absorb those changes.
+
+## The tradeoff
+
+The stack at the time was <span class="text-magenta">**Gatsby**</span>, <span class="text-magenta">**React**</span>, <span class="text-magenta">**JavaScript**</span>, <span class="text-magenta">**Sass**</span>, and <span class="text-magenta">**GraphQL**</span>. Static output for fast page loads, component-driven sections for repetition, GraphQL for content access. That made sense for the use case. The main implementation decision was keeping the page flexible without overbuilding it — political content changes often enough that components need to tolerate imperfect copy, but not so often that the site needs application-level complexity.
+
+There's no clean standalone repository with a modern commit history. This write-up is partly archival — it marks a stage of work where design files became shipped client-facing frontend.
+
+## Where it stands
+
+If I built the same site now I'd probably reach for <span class="text-magenta">**Astro**</span> and simplify the content model unless a CMS requirement demanded more. The project did what it needed to do: a political identity turned into a usable page.
