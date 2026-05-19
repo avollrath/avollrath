@@ -1,0 +1,37 @@
+---
+title: 'Chess Trading Card (CTC)'
+seoTitle: 'Building a Chess.com Trading Card Generator with Next.js & AI'
+summary: 'Turn dry player stats into collectible fantasy-style cards. Features procedural art generation, AI-driven lore, and a robust Next.js backend.'
+category: 'Apps'
+heroImage: './ctc.jpg'
+heroImageAlt: 'CTC Chess.com Trading Card app'
+techStackLogos: ['Next.js.svg', 'React.svg', 'TypeScript.svg', 'Tailwind.svg', 'Three.js.svg']
+order: 6
+liveUrl: 'https://chess-trading-card.vercel.app/'
+mockup: 'laptop'
+---
+
+**CTC (Chess Trading Card)** turns your Chess.com profile into a fantasy trading card. It pulls public stats, maps them to card attributes, generates a lore snippet, and produces a collectible you can screenshot. If you're going to tilt on a Tuesday night, you might as well have a legendary-tier card to show for it.
+
+## What it does
+
+Chess.com exposes a decent amount of public profile data, but it's dry and context-free. CTC remaps it into something more interesting:
+
+- **Chess-derived attributes**: Power, speed, tactics, and prestige mapped from your real stats
+- **AI-generated lore**: A title and flavour text generated from your playstyle
+- **Procedural artwork**: Dynamic portraits with local fallbacks when the API is unavailable
+- **Visual polish**: Rarity styling, shine effects, tilt interactions, particle glows
+
+## The card as a snapshot
+
+The first decision that mattered was treating the card as a derived object rather than a live profile dump. Chess.com data isn't real-time anyway, so mapping stats into a stable card model made more sense than pretending it was a live ranking display. It also means cards are shareable and consistent across sessions.
+
+The second decision was making generation optional. The app can use Pollinations and Google generative APIs, but it doesn't depend on them. Fallback artwork lives in `public/creatures/` and the lore degrades gracefully when keys are missing or calls fail.
+
+## Stack
+
+The app is built with <span class="text-magenta">**Next.js**</span>, <span class="text-magenta">**React**</span>, <span class="text-magenta">**TypeScript**</span>, and <span class="text-magenta">**Tailwind CSS**</span>. Visual effects use <span class="text-magenta">**@tsparticles/react**</span>, <span class="text-magenta">**OGL**</span>, and <span class="text-magenta">**Three.js**</span>. PNG export runs through <span class="text-magenta">**html-to-image**</span>.
+
+## Where it stands
+
+The current version works as an MVP and is more resilient than it looks. If I rebuilt it I'd separate the stat model from the presentation layer earlier and write more tests around Chess.com response shapes. The fun part is polished; the data contracts could be stricter.
