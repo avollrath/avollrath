@@ -1,4 +1,4 @@
-const blogImages = import.meta.glob('../images/blog/*', { eager: true })
+const blogImages = import.meta.glob('../images/blog/**/*', { eager: true })
 
 export function resolveImage(frontmatter) {
 	if (!frontmatter || !frontmatter.image) return
@@ -6,8 +6,7 @@ export function resolveImage(frontmatter) {
 	const { image } = frontmatter
 
 	if (typeof image.src === 'string' && !image.src.startsWith('http')) {
-		const imageFilename = image.src.split('/').pop()
-		const imagePath = `../images/blog/${imageFilename}`
+		const imagePath = image.src.replace(/^.*?images\/blog\//, '../images/blog/')
 		const resolvedImage = blogImages[imagePath]
 		if (resolvedImage) {
 			frontmatter.image.src = resolvedImage.default || resolvedImage.src || ''

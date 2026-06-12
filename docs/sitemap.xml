@@ -91,6 +91,12 @@
   <priority>0.5</priority>
 </url>
 <url>
+  <loc>https://vollrath.dev/posts/2026-06-12-piphone/</loc>
+  <lastmod>2026-06-12T00:00:00.000Z</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
   <loc>https://vollrath.dev/tags/astro/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
@@ -327,6 +333,31 @@
 </url>
 <url>
   <loc>https://vollrath.dev/tags/developer-tools/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://vollrath.dev/tags/raspberry-pi/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://vollrath.dev/tags/i2s/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://vollrath.dev/tags/alsa/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://vollrath.dev/tags/mpv/</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+<url>
+  <loc>https://vollrath.dev/tags/3d-printing/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>

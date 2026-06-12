@@ -1,7 +1,7 @@
 import { resolveImage } from './resolveImage'
 
 export async function getResolvedPosts() {
-	const blogImages = import.meta.glob('../images/blog/*', { eager: true })
+	const blogImages = import.meta.glob('../images/blog/**/*', { eager: true })
 	const allPosts = await import.meta.glob('../pages/posts/*.md')
 	const postEntries = Object.values(allPosts).map((postModule) => postModule())
 	const posts = await Promise.all(postEntries)
