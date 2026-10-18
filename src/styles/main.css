@@ -399,16 +399,6 @@ input[type='reset'],
 	}
 }
 
-@media (min-width: 1024px) and (max-width: 1535px) {
-	.avatar-wrapper {
-		right: 0;
-		width: 40%;
-	}
-
-	.avatar-image {
-		width: 100%;
-	}
-}
 
 @keyframes float {
 	0% {
