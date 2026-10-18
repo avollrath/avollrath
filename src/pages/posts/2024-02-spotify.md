@@ -1,99 +1,33 @@
 ---
-title: 'Building a Smarter Spotify Top 10 Component with Unique Artist Logic'
+title: 'Making a Spotify Top 10 Less Repetitive'
 pubDate: 2022-08-08
 author: 'André Vollrath'
 layout: ../../layouts/BlogPost.astro
 image:
   src: '../images/blog/spotify.jpg'
   alt: 'Spotify top tracks section displayed on a website'
-teaser: 'Your "Top Tracks" list shouldn’t be a row of duplicate covers. I developed a custom <strong class="font-semibold text-dark-text">Node.js</strong> filtering layer that curates my listening habits into a visually diverse showcase, ensuring every slot in the grid represents a <strong class="font-semibold text-dark-text">unique artist</strong> for a cleaner visual identity.'
-description: 'Standard "Top Tracks" lists are often full of duplicate artists from a single album. I wrote a custom Node.js filter that curates my listening habits into a visually diverse showcase, ensuring every slot in the grid represents a unique artist.'
+teaser: 'A small <strong class="font-semibold text-dark-text">Node.js</strong> filter that keeps one track per artist in my Spotify Top 10.'
+description: 'I fetch my Spotify top tracks, then keep one track per primary artist so the homepage does not show the same album cover five times.'
 tags: ['spotify', 'api', 'javascript', 'node.js', 'project', 'web']
 showSpotifyComponent: true
 ---
 
-While building my portfolio, I wanted to include a dynamic section that felt more personal than just a list of tech stacks. Music is a huge part of my daily flow, so displaying my most-listened-to tracks felt like a natural choice. However, I didn't just want a raw data dump from the Spotify API; I wanted a **curated visual row** that accurately reflected my musical identity.
+I wanted a music section on the homepage, but Spotify's raw Top Tracks list often looked silly. Listen to one album too much and the first ten entries can be the same artist with nearly identical covers.
 
-The problem with most "now playing" or "top tracks" components is repetition. If I've been looping a single album all week, the top 10 list becomes a row of identical covers. That might be statistically accurate, but it’s visually boring. I wanted to build a component that was smart enough to filter for **unique artists**, ensuring that the resulting display felt as varied as my actual taste.
+## The small fix
 
-## The Goal: Curation Over Raw Data
+I fetch my top 50 tracks for Spotify's `medium_term` range, then loop through them in order and keep the first track from each primary artist. The loop stops when it has ten tracks.
 
-I set out to build a homepage section that felt dynamic and personal without being repetitive. By fetching a larger sample size (my top 50 tracks) and then applying a filtering layer, I was able to generate a "Top 10 Unique Artists" row. This approach preserves the feeling of my current heavy rotation while providing much better visual diversity.
+That still reflects what I have been listening to. It just does not make the page look like I only own one album.
 
-The goal was to create a homepage section that feels:
+## API and fallback
 
-- personal
-- dynamic
-- visually clean
+The data comes from Spotify's Top Tracks endpoint with `time_range=medium_term` and `limit=50`. If Spotify responds with a `401`, the app refreshes its token and retries.
 
-Spotify’s API can return your top tracks directly, but if you just take the first 10 results, there’s a good chance several of them come from the same artist. That may be accurate, but it usually doesn’t make for the most interesting layout.
+Successful results are written to a local cache. If the API is unavailable later, the site can still show the last good list. This is decorative data, so it should not be able to break the page.
 
-Instead, I decided to fetch a larger list and then filter it down to **10 tracks with unique primary artists**.
+## Why bother
 
-That way the section still reflects my listening habits, but the visuals feel more varied.
+It is a tiny filter, but it makes the component more pleasant to look at and requires no manual updates. I like that it changes with my listening without taking over the homepage.
 
-## How It Works
-
-The feature fetches my **top 50 tracks** from Spotify using the `medium_term` time range, which roughly represents the last six months.
-
-From there, I filter the list so only the first track from each primary artist is kept.
-
-That means the logic is roughly:
-
-1. request the top 50 tracks
-2. loop through them in order
-3. keep only the first track for each primary artist
-4. stop once 10 unique artists have been collected
-
-This gives me a top 10 that feels more balanced and avoids repeated album artwork from the same artist.
-
-## Why Filter by Unique Artists?
-
-If one artist dominates my top tracks, the raw API response can easily produce a section with several near-identical covers in a row.
-
-That may be statistically correct, but visually it feels repetitive.
-
-Filtering by unique artists makes the section:
-
-- more visually diverse
-- easier to scan
-- more interesting as a homepage element
-
-It also better reflects the broader range of what I’ve been listening to, rather than just the heaviest rotation from one artist.
-
-## API Integration
-
-The data comes from the **Spotify Web API**, specifically the endpoint for a user’s top tracks.
-
-I use the following query settings:
-
-- `time_range=medium_term`
-- `limit=50`
-
-The authentication flow includes refreshing the access token when needed. If Spotify returns a `401`, the token is refreshed and the request is retried automatically.
-
-## Caching and Fallbacks
-
-Because this data doesn’t need to be fetched constantly, I also added a simple cache layer.
-
-When the request succeeds, the filtered track list is written to a local cache. If the API request fails later, for example due to a network issue or an unavailable token, the site can fall back to the cached data instead of breaking completely.
-
-That makes the feature more reliable and avoids unnecessary failures for something that is mostly decorative.
-
-## A Small Detail I Like
-
-I like that this section adds a bit of personality without needing any manual updates.
-
-It changes over time, reflects what I’ve actually been listening to, and makes the homepage feel a little more alive. It’s a small feature, but those kinds of details are often the most fun to build.
-
-## Final Thoughts
-
-This was a small project, but a satisfying one.
-
-It combines API integration, token refresh handling, caching, and a tiny bit of custom filtering logic to create something that feels personal and polished.
-
-Sometimes a good feature isn’t about showing as much data as possible, but about shaping the data into something that works better for the experience.
-
----
-
-_The Spotify Top 10 section on my homepage, built from my top tracks and filtered to avoid repeated artists:_
+_The Spotify Top 10 section on my homepage, filtered to avoid repeated artists:_
