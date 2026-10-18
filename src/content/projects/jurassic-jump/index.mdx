@@ -1,7 +1,7 @@
 ---
 title: 'Jurassic Jump'
 seoTitle: 'Building a Godot Platformer with Claymation-Style Visuals'
-summary: 'From a hand-rolled JS prototype to a polished Godot platformer. Features tuned physics and a distinct claymation-inspired art style.'
+summary: 'A small dinosaur platformer that started as a JavaScript physics exercise and moved to Godot.'
 category: 'Games'
 heroImage: './jurassic-jump.jpg'
 heroImageAlt: 'Jurassic Jump Game'
@@ -12,18 +12,18 @@ liveUrl: 'https://avollrath.github.io/jurassic-jump/'
 mockup: 'laptop'
 ---
 
-**Jurassic Jump** is a dinosaur-themed platformer that started as a JavaScript exercise where I was hand-rolling gravity and collision physics, and ended up as a <span class="text-magenta">**Godot**</span> project once it became clear I was spending more time on the engine than on the game.
+**Jurassic Jump** is a dinosaur platformer. It started as a JavaScript exercise where I wrote gravity and collision myself, then moved to <span class="text-magenta">**Godot**</span> when I realised I was building an engine instead of a game.
 
 ## Moving to Godot
 
-Writing your own physics loop is a useful exercise up to the point where you actually want to make a game. Switching to <span class="text-magenta">**Godot**</span> meant I could stop worrying about the plumbing — scene composition, collision shapes, sprite animation, level iteration — and start tuning the things that affect how the game feels.
+Writing a physics loop taught me plenty, but it was not helping the game. <span class="text-magenta">**Godot**</span> gave me scenes, collisions, animation, and easier level editing, so I could spend time on the actual feel of it.
 
-The hard part was never the mechanic. It was getting the standard pieces to feel acceptable: jump height, acceleration, collision boundaries, camera framing, level spacing. These things matter more than they look like they should.
+The hard part was the familiar platformer stuff: jump height, acceleration, collision edges, camera framing, and level spacing. None of it is flashy, but it is why a platformer feels good or bad.
 
 ## The claymation constraint
 
-The visual direction was claymation-style sprites with layered parallax backgrounds. That wasn't just aesthetic — once the art had that much visual weight, the movement model had to be slower and more readable than a twitch platformer. The art and mechanics had to agree with each other, which made both more constrained and more intentional.
+I went for claymation-style sprites and layered parallax backgrounds. That look needed slower, clearer movement than a twitchy platformer, otherwise the art and controls fought each other.
 
 ## Where it stands
 
-Jurassic Jump is a small learning game, not a commercial platformer. It made platformer physics concrete, moved a prototype into a real engine, and produced a browser-playable export. If I rebuilt it I'd define the movement model and level progression before producing too many visual assets.
+This is a learning project, not a commercial platformer. It got me from a prototype to a browser-playable game. Next time I would lock down movement and level progression before making too many visual assets.

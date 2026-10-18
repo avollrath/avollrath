@@ -1,7 +1,7 @@
 ---
 title: 'HyperType'
 seoTitle: 'HyperType: A Fast-Paced Godot Typing Game with Arcade Combat'
-summary: "Typing practice doesn't have to be admin work. Stay alive through enemy waves in this neon arcade typing loop built in Godot."
+summary: 'A small Godot typing game where you type words to shoot enemies before they reach you.'
 category: 'Games'
 heroImage: './hypertype.jpg'
 heroImageAlt: 'HyperType neon arcade typing game'
@@ -12,24 +12,24 @@ liveUrl: 'https://avollrath.github.io/HyperType/'
 mockup: 'laptop'
 ---
 
-**HyperType** is a typing game where words are targets and enemies are the deadline. You type to shoot — type fast enough and you survive; hesitate and you don't. The framing turns what's usually a self-improvement exercise into something that actually creates pressure.
+**HyperType** is a typing game where words sit above incoming enemies. Type a word, shoot the enemy. Type slowly, get overrun. It is typing practice with a bit more pressure than a speed test.
 
 ## The mechanic
 
-Most typing practice measures your accuracy in a calm, consequence-free box. HyperType frames the same input as the only thing between you and dying. It sounds minor, but the difference in focus is noticeable. The neon aesthetic reinforces it: high contrast, no visual noise, everything legible under pressure.
+Most typing tools give you a paragraph and a score. Here, the input is the game. Enemies spawn with words, you type them to fire, and waves get faster. That is the whole loop.
 
-The loop is: enemies spawn with words above them, you type the word to fire, waves escalate. That's it. Simple enough that the game doesn't get in its own way.
+I kept the visuals high contrast and uncluttered so the words are easy to read when the screen gets busy.
 
 ## Why Godot
 
-I chose <span class="text-magenta">**Godot**</span> because input timing, enemy state management, and particle-heavy animations are a lot more tractable in a game engine than in a web framework. The source folder is asset-heavy in the way small games tend to be — sprite sheets, enemy animations, UI textures, and web export assets.
+I used <span class="text-magenta">**Godot**</span> because it is a much better fit for input timing, enemy state, animation, and browser export than trying to force a web framework into being a game engine.
 
-The biggest challenge was input feel. A typing game can be technically correct and still feel bad if feedback lands late, prompts are hard to read, or the restart flow is slow. The boring parts matter: prompt readability, hit feedback timing, enemy animation pacing, sound triggering without stutter, and fast recovery after a failed run.
+The difficult part was making input feel immediate. A typing game falls apart if the prompt is hard to read, feedback lands late, or restarting takes too long. Those boring details made more difference than the enemy art.
 
 ## Stack
 
-The stack is <span class="text-magenta">**Godot**</span> for the game and a browser export for distribution. There's no interface layer outside the game itself, so there was no reason to wrap it in anything else.
+<span class="text-magenta">**Godot**</span> for the game and a browser export for sharing it.
 
 ## Where it stands
 
-The current version is playable and represents the idea well. If I spent another round on it I'd tune progression and difficulty scaling more carefully. The mechanics work; long-term balance is where small arcade games either become sticky or start to feel repetitive.
+It is playable and the core idea works. I would spend another pass on progression and difficulty; that is what stops a small arcade game becoming repetitive.

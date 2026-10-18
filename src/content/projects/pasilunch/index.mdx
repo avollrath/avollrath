@@ -1,7 +1,7 @@
 ---
 title: 'PasiLunch'
-seoTitle: 'PasiLunch: Scaping and Normalizing Menus with Node.js and AI'
-summary: 'Aggregate messy Pasila lunch menus into a clean Slack command and API. Uses Gemini AI to parse even the most brittle restaurant sites.'
+seoTitle: 'PasiLunch: Scraping and Normalizing Menus with Node.js and AI'
+summary: 'A small app that gathers Pasila lunch menus, cleans them up, and makes them available in Slack and on the web.'
 category: 'Apps'
 heroImage: './pasilunch.jpg'
 heroImageAlt: 'PasiLunch website'
@@ -11,22 +11,22 @@ liveUrl: 'https://lunchbot-btnu.onrender.com/'
 mockup: 'laptop'
 ---
 
-**PasiLunch** aggregates the local Pasila lunch menus into a single readable view. I built it because checking half a dozen restaurant websites every morning to find a decent office lunch was a waste of ten minutes, especially when every menu is published in a different format.
+**PasiLunch** puts local Pasila lunch menus in one place. I built it because checking several restaurant sites every morning was a boring way to spend ten minutes, and every menu was formatted differently.
 
 ## The scraping problem
 
-Restaurant sites are messy. Some publish clean HTML lists; others mix Finnish and English, bury prices in odd places, or include weekly notes and dietary labels that are useful to humans but awkward for parsers. Building a strict scraper means collecting one-off exceptions until you give up.
+Restaurant sites are messy. Some have tidy HTML lists. Others mix Finnish and English, hide prices in strange places, or turn weekly notes and dietary labels into a parsing problem. A strict scraper quickly becomes a pile of exceptions.
 
-The flow is: scrape each restaurant source, parse HTML with <span class="text-magenta">**Cheerio**</span>, parse structured sources with <span class="text-magenta">**xml2js**</span> where needed, then normalize names, prices, language, and categories. For the cases where scraping alone is too brittle, I use <span class="text-magenta">**Gemini**</span> via `@google/genai` to normalize the output. I wouldn't reach for an LLM for a deterministic problem, but lunch menus are messy enough that it earns its place here.
+The app scrapes each source, uses <span class="text-magenta">**Cheerio**</span> for HTML and <span class="text-magenta">**xml2js**</span> where a source is structured, then normalises names, prices, language, and categories. When selectors are not enough, <span class="text-magenta">**Gemini**</span> via `@google/genai` cleans up the result. I would not use an LLM for a clean, deterministic input. Restaurant menus are neither.
 
 ## Where decisions land
 
-Slack support was an obvious addition — a lunch app is only useful if it appears where the decision happens. The Slack command means the team can ask for menus without leaving chat; the web view is there for browsing.
+Slack was the obvious place for it. The command lets the team check menus where the lunch decision already happens. The web view is there when someone wants to browse.
 
 ## Stack
 
-The stack is <span class="text-magenta">**Express**</span>, <span class="text-magenta">**JavaScript**</span>, <span class="text-magenta">**Cheerio**</span>, <span class="text-magenta">**xml2js**</span>, <span class="text-magenta">**dotenv**</span>, Slack's Web API package, and <span class="text-magenta">**Gemini**</span> through `@google/genai`.
+<span class="text-magenta">**Express**</span>, <span class="text-magenta">**JavaScript**</span>, <span class="text-magenta">**Cheerio**</span>, <span class="text-magenta">**xml2js**</span>, <span class="text-magenta">**dotenv**</span>, Slack's Web API package, and <span class="text-magenta">**Gemini**</span> through `@google/genai`.
 
 ## Where it stands
 
-The main limitation is that PasiLunch is only as stable as the restaurant sites it reads. If they redesign, selectors break. If I rebuilt it I'd make source health more visible and add better diagnostics for stale or failed menus.
+PasiLunch is only as stable as the sites it reads. A redesign can break a selector. I would make source health more visible and add better diagnostics for missing or stale menus.

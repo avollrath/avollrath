@@ -1,7 +1,7 @@
 ---
 title: 'FlipSite'
 seoTitle: 'FlipSite: A Full-Stack Inventory Tracker for Resellers (Supabase & React)'
-summary: 'Solve the "spreadsheet drift" problem for resellers. Handles complex bundle math and profit analytics with Supabase and React.'
+summary: 'A personal resale inventory tracker built to replace a spreadsheet that had become too hard to trust.'
 category: 'Apps'
 heroImage: './flipsite.jpg'
 heroImageAlt: 'FlipSite inventory and resale tracker'
@@ -11,13 +11,13 @@ liveUrl: 'https://flipsite-three.vercel.app/'
 mockup: 'laptop'
 ---
 
-**FlipSite** is a resale inventory tracker I built because my spreadsheet started lying to me. Entering data is the easy part — keeping it connected to receipts, photos, and cost splits across months of history is where spreadsheets quietly fall apart.
+**FlipSite** is a resale inventory tracker I built after my spreadsheet became too annoying to maintain. Adding an item was fine. Keeping photos, receipts, sale status, and split costs connected months later was not.
 
 ## The bundle math problem
 
-The thing I cared most about was handling items that don't map cleanly to a single transaction. If I buy a camera kit for one price and sell the body, lens, and accessories separately, each piece needs its own sale state while still sharing the original purchase cost. A spreadsheet can fake this until one edit corrupts three months of history.
+The main problem was bundles. If I buy a camera kit and sell the body, lens, and accessories separately, each part needs its own status and sale price while sharing the original cost. That is possible in a spreadsheet, until one edit breaks the maths somewhere else.
 
-Beyond that, the core actions are what you'd expect: add items with photos, prices, platform, and condition; attach receipts; mark things as holding, listed, sold, or keeping; and review profit, ROI, and hold time against a rough pace line.
+The rest is straightforward: add photos, prices, platform, and condition; attach receipts; mark items as holding, listed, sold, or keeping; then look at profit, ROI, and how long things have been sitting around.
 
 <div className="grid grid-cols-2 gap-4 my-8">
   ![FlipSite gallery view with item cards and photos](./gallery_view.jpg)
@@ -26,7 +26,7 @@ Beyond that, the core actions are what you'd expect: add items with photos, pric
 
 ## Under the hood
 
-<span class="text-magenta">**Supabase**</span> handles auth, Postgres, file storage, and row-level security. <span class="text-magenta">**TanStack Query**</span> keeps data loading predictable, and <span class="text-magenta">**Recharts**</span> powers the analytics views.
+<span class="text-magenta">**Supabase**</span> handles auth, Postgres, storage, and row-level security. <span class="text-magenta">**TanStack Query**</span> manages server state, while <span class="text-magenta">**Recharts**</span> draws the analytics.
 
 <div className="my-8">
   ![FlipSite list view with profit and status columns](./list_view.jpg)
@@ -34,8 +34,8 @@ Beyond that, the core actions are what you'd expect: add items with photos, pric
 
 ## Stack
 
-The frontend is <span class="text-magenta">**React**</span>, <span class="text-magenta">**TypeScript**</span>, <span class="text-magenta">**Vite**</span>, and <span class="text-magenta">**Tailwind CSS**</span>, with <span class="text-magenta">**Supabase**</span> behind the data layer. UI components use Radix-style primitives, <span class="text-magenta">**lucide-react**</span>, <span class="text-magenta">**sonner**</span>, and some <span class="text-magenta">**GSAP**</span> on the landing page.
+Frontend is <span class="text-magenta">**React**</span>, <span class="text-magenta">**TypeScript**</span>, <span class="text-magenta">**Vite**</span>, and <span class="text-magenta">**Tailwind CSS**</span>. The data layer is <span class="text-magenta">**Supabase**</span>. I used Radix-style primitives, <span class="text-magenta">**lucide-react**</span>, <span class="text-magenta">**sonner**</span>, and a little <span class="text-magenta">**GSAP**</span> on the landing page.
 
 ## Where it stands
 
-FlipSite replaced my spreadsheet, which is the only success metric that matters here. If I rebuilt it I'd move some analytics closer to the database and tighten import/export earlier, but I'd keep the scope personal. It works because it's shaped around how I actually buy, keep, and sell things.
+It replaced my spreadsheet, so it did its job. If I revisit it, I would move more analytics into the database and sort out import and export sooner. It is deliberately personal, not a marketplace or a reselling SaaS.

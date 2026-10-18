@@ -1,7 +1,7 @@
 ---
 title: 'superVIMus'
 seoTitle: 'superVIMus: A Vim Navigation Game to Build Muscle Memory'
-summary: 'Stop the awkward repetition of learning Vim keys. A puzzle game built in Godot that turns hjkl practice into a browser-playable challenge.'
+summary: 'A small Godot puzzle game for practising Vim movement keys without staring at a text editor.'
 category: 'Games'
 heroImage: './supervimus.jpg'
 heroImageAlt: 'superVIMus Game'
@@ -12,25 +12,22 @@ liveUrl: 'https://avollrath.github.io/superVIMus/'
 mockup: 'laptop'
 ---
 
-**superVIMus** is a browser puzzle game where the controls are `hjkl`. The idea is that if you make someone move through short levels using only Vim keys, the keys start to feel natural faster than any drill-based repetition would manage.
+**superVIMus** is a browser puzzle game controlled with `hjkl`. The idea is straightforward: make the player use Vim movement through short levels until the keys stop feeling strange.
 
 ## Why a game
 
-The first stage of learning Vim movement is genuinely awkward. You know what `h`, `j`, `k`, `l` do, but your hands don't know it yet. Practicing in a text editor is slow feedback — you make a mistake, correct it, move on. A game gives you immediate consequences and a fast reset loop.
+At first, Vim movement is awkward. You know what `h`, `j`, `k`, and `l` do, but your hands still reach for the arrows. A game gives you quick feedback and an immediate reset instead of making you practise inside a text editor.
 
-Good levels for this need specific shapes: corridors that force horizontal movement, turns that punish arrow-key muscle memory, vertical sections that make `j` and `k` feel natural, and short resets so mistakes stay cheap. If a level takes too long, you start thinking about the level instead of the keys. Small rooms keep the focus where it belongs.
+The levels are built around that. Corridors force horizontal movement, turns punish arrow-key muscle memory, vertical sections make `j` and `k` useful, and resets stay short. If a level takes too long, the focus shifts from the keys to solving the level.
 
 ## The build
 
-<span class="text-magenta">**Godot**</span> was the obvious choice once this became a real game
-rather than an HTML keyboard toy. Grid movement, collisions, level scenes, collectables, sound, and
-browser export all fit naturally in the engine. The project lives in a folder called
-`vimto-the-hole`, which tells you something about how it started.
+I moved from an HTML keyboard toy to <span class="text-magenta">**Godot**</span> once it became a real game. Grid movement, collisions, level scenes, collectables, sound, and browser export all fitted the engine. The project folder is still called `vimto-the-hole`, which is about right for its early state.
 
 ## Stack
 
-<span class="text-magenta">**Godot**</span> for the game, browser export for distribution.
+<span class="text-magenta">**Godot**</span> for the game and a browser export for sharing it.
 
 ## Where it stands
 
-The current version is focused and playable. If I rebuilt it I'd add a clearer difficulty ramp and maybe track mistakes per level, but I wouldn't make it much larger. The point is muscle memory, not an overwrought Vim curriculum.
+It is focused and playable. I would add a clearer difficulty curve and perhaps track mistakes per level, but I would not turn it into a full Vim course. The point is getting `hjkl` into your hands.
