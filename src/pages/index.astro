@@ -152,67 +152,6 @@ const clientLogos = Object.entries(clientLogoModules).map(([filePath, mod]) => {
 		<ClientLogoMarquee logos={clientLogos} speed="32s" />
 	</section>
 
-	<!-- Now Section -->
-	<section
-		aria-labelledby="now-title"
-		class="now-container border-gradient clickable-section flex h-full flex-col justify-between rounded-md bg-white px-4 py-8 text-xs shadow-lg sm:rounded-lg sm:p-12 sm:px-12 sm:text-base xl:col-span-1 xl:row-start-3 2xl:col-span-3 2xl:col-start-10 2xl:row-start-1"
-	>
-		<div class="now-content mb-6 flex items-center justify-between">
-			<span class="arrow invisible"> </span>
-			<h2
-				id="now-title"
-				class="long-transition rounded-lg border-2 border-solid border-dark-text px-8 py-3 font-header text-xl tracking-wide sm:text-4xl"
-				transition:name="now-header"
-			>
-				Now
-			</h2>
-			<a href="/now" class="arrow-link" aria-label="Visit Now page">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-6 w-6 stroke-dark-text"
-					fill="none"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="3"
-						d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-				</svg>
-			</a>
-		</div>
-
-		<ul
-			class="bullets now-content mb-4 list-disc pl-5 text-xs text-gray-400 sm:text-base 3xl:text-lg"
-		>
-			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Studying the <strong class="font-semibold text-dark-text"
-					>UX Design Institute Diploma</strong
-				>
-			</li>
-
-			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Building <strong class="font-semibold text-dark-text"
-					>mobile apps with React Native & Expo</strong
-				>
-			</li>
-
-			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Training for my first <strong class="font-semibold text-dark-text">full marathon</strong> this
-				spring
-			</li>
-
-			<li class="mb-4 text-xs sm:text-base 3xl:text-lg">
-				Practicing <strong class="font-semibold text-dark-text">Rocket League</strong> and aiming for
-				the Grand Champion rank
-			</li>
-		</ul>
-
-		<p class="now-content text-center text-xs text-gray-400 sm:text-sm">
-			Last Updated: March 8, 2026
-		</p>
-	</section>
-
 	<!-- Latest Blog Section -->
 	<section
 		aria-labelledby="blog-title"
