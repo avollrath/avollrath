@@ -2,7 +2,7 @@
 
 I'm a **Design Engineer at Mainmatter** with a background in design and front-end development.
 
-I enjoy working at the intersection of **design and implementation** — taking web projects from early UI/UX concepts, flows, wireframes, and prototypes through to responsive HTML/CSS interfaces.
+I enjoy working at the intersection of **design and implementation** - taking web projects from early UI/UX concepts, flows, wireframes, and prototypes through to responsive HTML/CSS interfaces.
 
 My work spans **design systems, component libraries, technical design guidelines, stakeholder collaboration, and product UI**, with some marketing and business development visuals along the way.
 
